@@ -1,11 +1,9 @@
 <!-- Sidebar Column -->
 <div class="col-xl-4 col-sm-12 col-md-12 col-lg-12 sidebar-list">
 
-
   <div class="reklama-sidebar">
     <div class="reklama">Reklama 400x700px</div>
   </div>
-
 
   <div class="reportaze  sticky">
     <?php
@@ -38,8 +36,6 @@
       ?>
 
     </ul>
-
-
 
   </div>
   <!-- /Będzie się działo-->

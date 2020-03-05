@@ -1,11 +1,13 @@
 <?php
   session_start();
-  if( !isset( $_SESSION['sprytne'] ) and !isset( $_GET['sprytne'] ) ){
+
+  // blokada dostępu
+  if( !isset( $_COOKIE['sprytne'] ) and !isset( $_GET['sprytne'] ) ){
     echo "strona w budowie...";
     exit;
   }
   else{
-    $_SESSION['sprytne'] = 1;
+    setcookie( 'sprytne', 1, 0, '/' );
   }
 
   // wykrywanie urządzenia
@@ -30,6 +32,7 @@
   global $fp;
   $fp = new Facepalm();
 
+  the_post();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -44,7 +47,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Nowy Targ 24 tv</title>
+  <title><?php wp_title( '|', true, 'right' ); echo bloginfo('name'); ?></title>
 
   <!-- Custom styles -->
   <?php
@@ -106,51 +109,55 @@
         <span class="circle"></span>
         <span class="circle"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <?php
-          // wp_nav_menu(array(
-          //   'theme_location' => 'main',
-          //   'menu_class'     => 'navbar-nav mr-auto',
-          //   'container'      => 'ul',
-          // ));
-        ?>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link red-link" href="">Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="<?php echo get_option('siteurl') . "/" ?>kategoria">Aktualności
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Taśmy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Sport</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Kultura</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Przegląd</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Reportaże</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Będzie się działo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Na żywo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Tablice</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link red-link" href="#">Odeszli</a>
-          </li>
-        </ul>
+      <div class="">
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link red-link" href="">Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="<?php echo get_option('siteurl') . "/" ?>kategoria">Aktualności
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Taśmy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Sport</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Kultura</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Przegląd</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Reportaże</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Będzie się działo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Na żywo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Tablice</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link red-link" href="#">Odeszli</a>
+            </li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="">
+          <?php
+            wp_nav_menu(array(
+              'theme_location' => 'main',
+              'menu_class'     => 'navbar-nav mr-auto',
+              'container'      => 'ul',
+            ));
+          ?>
+        </div>
       </div>
     </div>
   </nav>

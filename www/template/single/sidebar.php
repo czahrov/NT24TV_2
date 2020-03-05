@@ -12,10 +12,28 @@
 
     <ul class="image-sidebar-section">
       <?php
+        $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
+        $sql = "Select
+          nttv_posts.ID
+        From
+          nttv_post_views Inner Join
+          nttv_posts On nttv_posts.ID = nttv_post_views.id
+        Where
+          nttv_post_views.period = 'total' And
+          nttv_posts.post_type = 'post'
+        Order By
+          nttv_post_views.count Desc
+        Limit 4";
+        $query = mysqli_query( $con, $sql );
+        $res = mysqli_fetch_all( $query, MYSQLI_ASSOC );
+        $ids = array_map( function( $arg ){
+          return $arg['ID'];
+        }, $res );
+        mysqli_free_result( $res );
+        mysqli_close( $con );
+
         $items = get_posts(array(
-          'numberposts' => 4,
-          'orderby'     => 'post_views',
-          'order'       => 'DESC',
+          'include' => $ids,
         ));
       ?>
       <!-- single post -->

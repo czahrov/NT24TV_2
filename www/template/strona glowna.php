@@ -2,12 +2,12 @@
   /*Template Name: Strona główna*/
 ?>
 <?php
-  require_once( get_template_directory() . '/header.php');
-  include( get_template_directory() . '/template/home/aktualnosci.php' );
-  include( get_template_directory() . '/template/home/przeglad-tygodniowy.php' );
-  include( get_template_directory() . '/template/home/sport.php' );
-  include( get_template_directory() . '/template/home/popularne.php' );
-  include( get_template_directory() . '/template/home/wskrocie.php' );
-  include( get_template_directory() . '/template/home/sponsorowane.php' );
-  require_once( get_template_directory() . '/footer.php' );
+  get_header();
+  get_template_part( 'template/home/aktualnosci' );
+  get_template_part( 'template/home/przeglad-tygodniowy' );
+  get_template_part( 'template/home/sport' );
+  get_template_part( 'template/home/popularne' );
+  get_template_part( 'template/home/wskrocie' );
+  get_template_part( 'template/home/sponsorowane' );
+  get_footer();
 ?>

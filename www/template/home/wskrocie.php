@@ -6,93 +6,33 @@
     <div class="col-md-12 col-lg-8">
       <h5 class="title-sidebar">Będzie się działo</h5>
 
-
       <div class="slider">
-
+        <?php
+          $items = get_posts( array(
+            'numberposts' => 7,
+            'category_name' => 'bedzie-sie-dzialo',
+          ) );
+        ?>
         <!-- post -->
-        <div class="slide-content">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="cover_img img25"></div>
-              </div>
-              <span>Strzelecki festiwal "Szarotek" na lodowisku outsidera
-              </span>
-            </div>
-          </a>
-        </div>
-        <!-- post -->
-        <div class="slide-content">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img26 "></div>
-              </div>
-              <span>Cenny punkt pingpongistek Gorców (video)</span>
-            </div>
-          </a>
-        </div>
-
-        <!-- post -->
-        <div class="slide-content  ">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="cover_img img27"></div>
-              </div>
-              <span>Kullisy meczu KH Podhale - GKS Katowice</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="slide-content  ">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="cover_img img25"></div>
-              </div>
-              <span>Strzelecki festiwal "Szarotek" na lodowisku outsidera
-              </span>
-            </div>
-          </a>
-        </div>
-        <!-- post -->
-        <div class="slide-content  ">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img26 "></div>
-              </div>
-              <span>Cenny punkt pingpongistek Gorców (video)</span>
-            </div>
-          </a>
-        </div>
-        <!-- post -->
-        <div class="slide-content  ">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img26 "></div>
-              </div>
-              <span>Cenny punkt pingpongistek Gorców (video)</span>
-            </div>
-          </a>
-        </div>
-        <!-- post -->
-        <div class="slide-content  ">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img26 "></div>
-              </div>
-              <span>Cenny punkt pingpongistek Gorców (video)</span>
-            </div>
-          </a>
-        </div>
+        <?php
+          foreach ($items as $item) {
+            printf(
+              '<div class="slide-content">
+                <a href="%1$s" class="link_post_small">
+                  <div class="small-post">
+                    <div class="post_news_small">
+                      <div class="cover_img img25" style="background-image:url(%3$s)"></div>
+                    </div>
+                    <span>%2$s</span>
+                  </div>
+                </a>
+              </div>',
+              get_permalink( $item->ID ),
+              $item->post_title,
+              get_the_post_thumbnail_url( $item->ID, 'medium' )
+            );
+          }
+        ?>
       </div>
 
       <div class="button-line slider-arrows">
@@ -110,94 +50,43 @@
 
         <div class="col-md-12">
           <h5 class="title-sidebar">Najnowsze video</h5>
-
-
+          <?php
+            $items = get_posts(array(
+              'numberposts' => 7,
+              'tax_query' => array(
+        				array(
+        					'taxonomy' => 'post_format',
+        					'field' => 'slug',
+        					'terms' => array( 'post-format-video' ),
+        				),
+        			),
+            ));
+          ?>
+          <div class="">
+            <!-- <?php print_r( $items ); ?> -->
+          </div>
           <div class="slider">
+            <!-- post -->
+            <?php
+              foreach ($items as $item) {
+                printf(
+                  '<div class="slide-content">
+                    <a href="%1$s" class="link_post_small">
+                      <div class="small-post">
+                        <div class="post_news_small">
+                          <div class="cover_img img25" style="background-image:url(%3$s)"></div>
+                        </div>
+                        <span>%2$s</span>
+                      </div>
+                    </a>
+                  </div>',
+                  get_permalink( $item->ID ),
+                  $item->post_title,
+                  get_the_post_thumbnail_url( $item->ID, 'medium')
+                );
+              }
+            ?>
 
-            <!-- post -->
-            <div class="slide-content">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="cover_img img25"></div>
-                  </div>
-                  <span>Strzelecki festiwal "Szarotek" na lodowisku outsidera
-                  </span>
-                </div>
-              </a>
-            </div>
-            <!-- post -->
-            <div class="slide-content">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="video-icon"></div>
-                    <div class="cover_img img26 "></div>
-                  </div>
-                  <span>Cenny punkt pingpongistek Gorców (video)</span>
-                </div>
-              </a>
-            </div>
-
-            <!-- post -->
-            <div class="slide-content  ">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="cover_img img27"></div>
-                  </div>
-                  <span>Kullisy meczu KH Podhale - GKS Katowice</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="slide-content  ">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="cover_img img25"></div>
-                  </div>
-                  <span>Strzelecki festiwal "Szarotek" na lodowisku outsidera
-                  </span>
-                </div>
-              </a>
-            </div>
-            <!-- post -->
-            <div class="slide-content  ">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="video-icon"></div>
-                    <div class="cover_img img26 "></div>
-                  </div>
-                  <span>Cenny punkt pingpongistek Gorców (video)</span>
-                </div>
-              </a>
-            </div>
-            <!-- post -->
-            <div class="slide-content  ">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="video-icon"></div>
-                    <div class="cover_img img26 "></div>
-                  </div>
-                  <span>Cenny punkt pingpongistek Gorców (video)</span>
-                </div>
-              </a>
-            </div>
-            <!-- post -->
-            <div class="slide-content  ">
-              <a href="" class="link_post_small">
-                <div class="small-post">
-                  <div class="post_news_small">
-                    <div class="video-icon"></div>
-                    <div class="cover_img img26 "></div>
-                  </div>
-                  <span>Cenny punkt pingpongistek Gorców (video)</span>
-                </div>
-              </a>
-            </div>
           </div>
 
           <div class="button-line slider-arrows">
@@ -220,17 +109,12 @@
     </div>
     <!-- /col-8 -->
 
-
-
-
     <!-- Sidebar Column -->
     <div class="col-lg-4 col-md-12 sidebar-list">
       <div class="reportaze ogloszenia-urzedowe">
         <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
 
-
         <ul class="image-sidebar-section">
-
 
           <!-- single post -->
           <a href="#">

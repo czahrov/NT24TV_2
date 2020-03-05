@@ -9,8 +9,9 @@
   }
 
   // wykrywanie urządzenia
-  include( get_template_directory() . '/php/Mobile_Detect.php' );
+  include_once( get_template_directory() . '/php/Mobile_Detect.php' );
   $detect = new Mobile_Detect();
+  global $devType;
   $devType = '';
   if ( $detect->isMobile() ) {
     if ( $detect->isTablet() ) {
@@ -24,6 +25,10 @@
     $devType = 'desktop';
   }
 
+  // Facepalm
+  include_once( get_template_directory() . '/php/Facepalm.php' );
+  global $fp;
+  $fp = new Facepalm();
 
 ?>
 <!DOCTYPE html>
@@ -47,20 +52,19 @@
     wp_enqueue_style( 'bootsrap-core-css', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css' );
     wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css' );
     wp_enqueue_style( 'slick', 'https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css' );
-    wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
+    wp_enqueue_style( 'style', get_template_directory_uri() . '/css/main.css' );
   ?>
   <?php wp_head(); ?>
 </head>
 
 <body class='<?php echo $devType; ?>'>
-
   <!-- Navigation -->
 
   <section class="head-menu">
     <div class="container">
       <div class="head-items">
         <div class="logo mr-auto">
-            <a href="">
+            <a href="<?php echo get_option('siteurl') ?>">
               <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
             </a>
           </div>
@@ -103,13 +107,20 @@
         <span class="circle"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+        <?php
+          // wp_nav_menu(array(
+          //   'theme_location' => 'main',
+          //   'menu_class'     => 'navbar-nav mr-auto',
+          //   'container'      => 'ul',
+          // ));
+        ?>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link red-link" href="index.php">Home
-                </a>
-              </li>
+          <li class="nav-item active">
+            <a class="nav-link red-link" href="">Home
+            </a>
+          </li>
           <li class="nav-item">
-            <a class="nav-link red-link" href="kategoria.php">Aktualności
+            <a class="nav-link red-link" href="<?php echo get_option('siteurl') . "/" ?>kategoria">Aktualności
             </a>
           </li>
           <li class="nav-item">

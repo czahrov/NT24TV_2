@@ -8,58 +8,34 @@
 
 
   <div class="reportaze  sticky">
+    <?php
+      $items = get_posts(array(
+        'numberposts'   => 4,
+        'category_name' => 'bedzie-sie-dzialo',
+      ));
+    ?>
     <h5 class="title-sidebar line">Będzie się działo</h5>
-
 
     <ul class="image-sidebar-section">
 
-
       <!-- single post -->
-      <a href="#">
-        <li>
-          <div class="image-container">
-            <div class="image pop_1"></div>
-          </div>
-          <span>Dawid Kubacki zwycięzcą Turnieju Czterech Skoczni!!! </span>
-        </li>
-      </a>
-
-      <!-- single post -->
-      <a href="#">
-        <li>
-          <div class="image-container">
-            <div class="image pop_2">
-              <div class="video-icon"></div>
-
-            </div>
-          </div>
-          <span>Orszak Trzech Króli w Nowym Targu</span>
-        </li>
-      </a>
-
-      <!-- single post -->
-      <a href="#">
-        <li>
-          <div class="image-container">
-            <div class="image pop_3"></div>
-          </div>
-          <span>Koncert Noworoczny, aż zapierał dech...</span>
-        </li>
-      </a>
-
-
-
-      <!-- single post -->
-      <a href="#">
-        <li>
-          <div class="image-container">
-            <div class="image pop_4"></div>
-          </div>
-          <span>Winter Classic - zagrali po raz szósty.
-          </span>
-        </li>
-      </a>
-
+      <?php
+        foreach ($items as $item) {
+          printf(
+            '<a href="%1$s">
+              <li>
+                <div class="image-container">
+                  <div class="image" style="background-image:url(%2$s)"></div>
+                </div>
+                <span>%3$s</span>
+              </li>
+            </a>',
+            get_permalink( $item->ID ),
+            get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
+            $item->post_title
+          );
+        }
+      ?>
 
     </ul>
 

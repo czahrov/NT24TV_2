@@ -1,22 +1,22 @@
 <?php require_once('header.php'); ?>
-
+<?php
+  the_post();
+?>
 <!-- Page Content -->
-<div class="container">
-
+<div id='post' class="container">
   <div class="row no-gutters">
-
     <!-- Blog Entries Column -->
     <div class="col-xl-8 col-sm-12 col-md-12 col-lg-12 single-post">
 
       <!-- Title -->
 
-      <h2>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczczeni</h2>
+      <h2><?php the_title(); ?></h2>
 
       <div class="before-content">
         <div class="author_date_tags">
-          <span class="author">Aleksandra Sadowicz</span>
+          <span class="author"><?php the_author(); ?></span>
           <span class="separator"></span>
-          <span class="date">14.01.2020</span>
+          <span class="date"><?php the_date("d.m.Y"); ?></span>
           <span class="separator"></span>
           <span class="tag">Pilne</span>
         </div>
@@ -25,22 +25,23 @@
 
           <div class="social_share">
             <span class="fb">
-              <img src=<img src="<?php echo get_template_directory_uri() . "/" ?>"images/fb.svg" onerror="this.onerror=null; this.src='#'" alt="Facebook">
+              <a href="<?php echo $fp->getSocialLink( 'facebook', get_the_permalink() ); ?>">
+                <img src="<?php echo get_template_directory_uri() . "/" ?>images/fb.svg" alt="Facebook">
+              </a>
             </span>
             <span class="twitter">
-              <img src=<img src="<?php echo get_template_directory_uri() . "/" ?>"images/twit.svg" onerror="this.onerror=null; this.src='#'" alt="Twitter">
-            </span>
-            <span class="googleplus">
-              <img src=<img src="<?php echo get_template_directory_uri() . "/" ?>"images/googleplus.svg" onerror="this.onerror=null; this.src='#'" alt="Google plus">
+              <a href="<?php echo $fp->getSocialLink( 'twitter', get_the_permalink() ); ?>">
+                <img src="<?php echo get_template_directory_uri() . "/" ?>images/twit.svg" alt="Twitter">
+              </a>
             </span>
             <span class="share">
-              <img src=<img src="<?php echo get_template_directory_uri() . "/" ?>"images/sh.svg" onerror="this.onerror=null; this.src='#'" alt="Udostępnij">
+              <img src="<?php echo get_template_directory_uri() . "/" ?>images/sh.svg" alt="Udostępnij">
             </span>
           </div>
 
           <div class="comment">
             <i class="icon">
-              <img src=<img src="<?php echo get_template_directory_uri() . "/" ?>"images/message.svg" onerror="this.onerror=null; this.src='#'" alt="komentarz">
+              <img src="<?php echo get_template_directory_uri() . "/" ?>images/message.svg" onerror="this.onerror=null; this.src='#'" alt="komentarz">
             </i>
             <span class="comment_value">Super artykuł. Pozdrawiam
               <span class="author_comment">Sylwia</span>
@@ -56,40 +57,12 @@
       <div class="content">
 
         <div class="zajawka">
-          <p>Zabytkowa, unikatowa XIX-wieczna maszyna drukarska – główny eksponat Muzeum Drukarstwa w Nowym Targu – już wkrótce
-            zostanie uruchomiona, dzięki dofinansowaniu w ramach programu współpracy transgranicznej. To jeden z sześciu
-            mikroprojektów dotyczących Nowego Targu, jaki otrzymał dofinansowanie z ostatniej puli wniosków. Inny dotyczy
-            m.in. tematu uczczenia pamięci nowotarskich olimpijczyków. </p>
+          <?php the_excerpt(); ?>
         </div>
 
-        <img class="img-fluid" src="<img src="<?php echo get_template_directory_uri() . "/" ?>images/single1.jpg">
+        <img class="img-fluid" src="<?php the_post_thumbnail_url('full'); ?>">
 
-        <p>Do dofinansowania z Europejskiego Funduszu Rozwoju Regionalnego wybrano 33 mikroprojekty. Beneficjentami są tutaj
-          polskie i słowackie gminy, miasta, instytucje kultury, stowarzyszenia oraz organizacje pozarządowe, w tym Miejski
-          Ośrodek Kultury, czy Miejskie Centrum Sportu i Rekreacji w Nowym Targu. Łączna wartość dofinansowania wynosi
-          2,3 mln euro. Nowotarski MOK wspólnie z gminą Ludrova otrzymał dofinansowanie w wysokości blisko 100 tys. euro
-          na zadanie „Łączą nas zabytki techniki Muzeum Drukarstwa w Nowym Targu i Muzeum Papieru Czerpanego w Ludrovej”.
-          Głównym założeniem projektu jest uruchomienie XIX wiecznej maszyny drukarskiej. Słowacy będą chcieli z kolei
-          dać drugie życie zabytkowej sikawki strażackiej. </p>
-
-        <br>
-
-        <p class="quote">" Do dofinansowania z Europejskiego Funduszu Rozwoju Regionalnego wybrano 33 mikroprojekty. Beneficjentami są tutaj
-          polskie i słowackie gminy, miasta, instytucje kultury, stowarzyszenia oraz organizacje pozarządowe, w tym Miejski
-          Ośrodek Kultury, czy Miejskie Centrum Sportu i Rekreacji w Nowym Targu. Łączna wartość dofinansowania wynosi
-          2,3 mln euro. Nowotarski MOK wspólnie z gminą Ludrova otrzymał dofinansowanie w wysokości blisko 100 tys. euro
-          na zadanie „Łączą nas zabytki techniki Muzeum Drukarstwa w Nowym Targu i Muzeum Papieru Czerpanego w Ludrovej”.
-          Głównym założeniem projektu jest uruchomienie XIX wiecznej maszyny drukarskiej. Słowacy będą chcieli z kolei
-          dać drugie życie zabytkowej sikawki strażackiej." </p>
-
-
-        <img class="img-fluid" src="<img src="<?php echo get_template_directory_uri() . "/" ?>images/single2.jpg">
-
-        <p>Prawie 50 tys. euro przypadło Miejskiemu Centrum Sportu i Rekreacji w Nowym Targu wraz z partnerami – Nowotarskim
-          Klubem Olimpijczyka i Olimpijskim Klubem Wysokie Tatry. Dofinansowanie dotyczy zadania „W blasku olimpijskiego
-          znicza”, które byłoby realizowane w obiekcie Miejskiej Hali Lodowej – w hali głównej umieszczone zostaną wizerunki
-          nowotarskich olimpijczyków, a w jednym z pomieszczeń ma powstać miejsce pamięci poświęcone historii klubu i właśnie
-          nowotarskim olimpijczykom. </p>
+        <?php the_content(); ?>
 
 
       </div>
@@ -111,140 +84,120 @@
   <div class="row no-gutters">
     <div class="col-xl-8 col-sm-12 col-md-12 col-lg-12 single-post">
       <div class="row no-gutters komentarze">
-        <div class="col-md-12">
+        <div id="comments" class="col-md-12">
           <div class="clear-top"></div>
           <h5 class="title-sidebar">Komentarze</h5>
 
           <div class="comments">
-
-            <p>Napisz komentarz</p>
-            <span>Komentarze muszą najpierw zostać zaakceptowane przez administratora. Twój adres e-mail nie zostani opublikowany.</span>
-
-            <div class="comment-content">
-              <textarea placeholder="Napisz komentarz"></textarea>
-            </div>
-
-            <div class="comment-sign">
-              <input type="text" placeholder="Twój podpis">
-            </div>
-
-
-            <div class="button-line">
-              <a href="#" class="">Dodaj komentarz</a>
-            </div>
-
+            <?php
+              comment_form(array(
+                'fields' => array(
+                  // 'email'   => '',
+                  // 'url'     => '',
+                  'author' => sprintf(
+                      '<p class="comment-form-author">%s %s</p>',
+                      sprintf(
+                          '<label for="author">%s</label>',
+                          ( $req ? ' <span class="required">*</span>' : '' )
+                      ),
+                      sprintf(
+                          '<input id="author" name="author" type="text" value="%s" size="30" maxlength="245" placeholder="Twój podpis"%s />',
+                          esc_attr( $commenter['comment_author'] ),
+                          $html_req
+                      )
+                  ),
+                  'cookies' => '',
+                ),
+                'comment_notes_before'  => 'Komentarze muszą najpierw zostać zaakceptowane przez administratora. Twój adres e-mail nie zostani opublikowany.',
+                'comment_field' => '<p class="comment-form-comment">
+                  <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required" placeholder="Napisz komentarz"></textarea>
+                </p>',
+                'title_reply'   => 'Napisz komentarz',
+                'label_submit'  => 'Dodaj komentarz',
+                'submit_button' => '<input name="%1$s" type="submit" id="%2$s" class="%3$s" value="%4$s" />',
+                // 'submit_field'  => '<p class="form-submit">%1$s %2$s</p>',
+                'submit_field'  => '<div class="button-line">%1$s %2$s</div>',
+              ));
+            ?>
           </div>
 
-
           <div class="que">
-            <span>5</span> komentarzy</div>
+            <?php
+              $comments_num = get_comments_number();
+              if ($comments_num > 0) {
+                printf(
+                  '<span>%u</span> %s',
+                  $comments_num,
+                  $comments_num == 1?( 'komentarz' ):( $comments_num < 5?( 'komentarze' ):( 'komentarzy' ) )
+                );
+              }
+            ?>
+          </div>
 
           <div class="users-comments">
+            <?php
+              $comments = get_comments(array(
+                'post_id'       => get_the_ID(),
+                'status'        => 'approve',
+                'hierarchical'  => 'threaded',
+              ) );
 
-            <div class="single-comment">
+              function comment_printer( $comms, $level = 0 ){
+                foreach ($comms as $comm) {
+                  if ( $comm->user_id > 0 ) {
+                    $avatar = '<div class="user-image">
+                      <div class="user-avatar">
+                        <div class="image"></div>
+                      </div>
+                    </div>';
+                  } else {
+                    $avatar = '';
+                  }
 
-              <div class="comment">
+                  printf(
+                    '<div id="comment-%5$u" class="single-comment">
+                      <div class="comment">
+                        %6$s
+                        <div class="comment-contents">
+                          <div class="user-data">
+                            <span class="author">%1$s</span>
+                            <span class="separator"></span>
+                            <span class="date">%2$s</span>
+                          </div>
+                          <p class="text">%3$s</p>
+                        </div>
+                      </div>
+                      <div class="answer-btn">
+                        <button> %4$s </button>
+                      </div>
+                    </div>',
+                    empty($comm->comment_author)?( '*ANONIM*' ):( $comm->comment_author ),
+                    $comm->comment_date,
+                    $comm->comment_content,
+                    get_comment_reply_link( array(
+                      'reply_text'  => 'Odpowiedz',
+                      'reply_to_text'  => 'Odpowiedź do %s',
+                      'max_depth'   => get_option('thread_comments_depth'),
+                      'depth'       => $level+1,
+                    ), $comm->comment_ID, $comm->comment_post_ID ),
+                    $comm->comment_ID,
+                    $avatar
+                  );
 
+                  $children = $comm->get_children(array(
+                    'status' => 'approve',
+                  ));
+                  if( !empty( $children ) ){
+                    echo "<div class='answer-comment'>";
+                    comment_printer( $children, $level+1 );
+                    echo "</div>";
+                  }
 
-                <div class="comment-contents">
-                  <div class="user-data">
+                }
+              }
 
-                    <span class="author">Sylwia</span>
-                    <span class="separator"></span>
-                    <span class="date">14.01.2020</span>
-                  </div>
-                  <p class="text">Super artykuł. Pozdrawiam</p>
-
-                </div>
-              </div>
-
-              <div class="answer-btn">
-                <button>Odpowiedz</button>
-              </div>
-
-            </div>
-            <!-- /single comment -->
-
-            <div class="single-comment">
-
-              <div class="comment">
-
-
-                <div class="comment-contents">
-                  <div class="user-data">
-
-                    <span class="author">Andrzej</span>
-                    <span class="separator"></span>
-                    <span class="date">14.01.2020</span>
-                  </div>
-                  <p class="text">Świetnia inicjatywa. Ciekawe, czy będzie więcej takich...</p>
-
-                </div>
-              </div>
-
-              <div class="answer-btn">
-                <button>Odpowiedz</button>
-              </div>
-
-            </div>
-            <!-- /single comment -->
-
-            <div class="single-comment answer-comment">
-
-              <div class="comment">
-
-                <div class="user-image">
-                  <div class="user-avatar">
-                    <div class="image"></div>
-                  </div>
-
-                </div>
-
-                <div class="comment-contents">
-                  <div class="user-data">
-
-                    <span class="author">Nowy Targ 24 TV</span>
-                    <span class="separator"></span>
-                    <span class="date">14.01.2020</span>
-                  </div>
-                  <p class="text">Panie Andrzeju. Jesteśmy przekonani, że tak! :)</p>
-
-                </div>
-              </div>
-
-              <div class="answer-btn">
-                <button>Odpowiedz</button>
-              </div>
-
-            </div>
-            <!-- /single comment -->
-
-
-            <div class="single-comment">
-
-              <div class="comment">
-
-
-                <div class="comment-contents">
-                  <div class="user-data">
-
-                    <span class="author">Albert</span>
-                    <span class="separator"></span>
-                    <span class="date">14.01.2020</span>
-                  </div>
-                  <p class="text">Poproszę o więcej takich artykułów! :)</p>
-
-                </div>
-              </div>
-
-              <div class="answer-btn">
-                <button>Odpowiedz</button>
-              </div>
-
-            </div>
-            <!-- /single comment -->
-
-
+              comment_printer( $comments );
+            ?>
           </div>
 
         </div>

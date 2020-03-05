@@ -1,5 +1,13 @@
+<?php
+  $items = get_posts( array(
+    'numberposts'     => 4,
+    'category_name'   => 'popularne',
+    'orderby'         => 'date',
+    'order'           => 'DESC',
+  ) );
+?>
 <!-- Page Content -->
-<div class="container">
+<div id='popularne' class="container">
 
   <div class="row no-gutters">
 
@@ -11,61 +19,34 @@
       <!-- Post -->
       <div class="row no-gutters najbardziej-popularne">
         <!-- single post -->
-        <div class="col-sm-12 col-12 col-lg-6 col-md-6">
-          <a href="" class="link_post_small">
-            <div class="small-post popular-post">
-              <span>Dawid Kubacki zwycięzcą Turnieju Czterech Skoczni!!!</span>
-              <div class="post_news_small">
-                <div class="mask-popular"></div>
-                <div class="cover_img pop1"></div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-12 col-12 col-lg-6 col-md-6">
-          <a href="" class="link_post_small">
-            <div class="small-post popular-post">
-              <div class="video-icon"></div>
-
-              <span>Orszak Trzech Króli w Nowym Targu</span>
-              <div class="post_news_small">
-                <div class="mask-popular"></div>
-                <div class="cover_img pop2"></div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-12 col-12 col-lg-6 col-md-6">
-          <a href="" class="link_post_small">
-            <div class="small-post popular-post">
-              <span>Koncert Noworoczny, aż zapierał dech.</span>
-              <div class="post_news_small">
-                <div class="mask-popular"></div>
-                <div class="cover_img pop3"></div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-sm-12 col-12 col-lg-6 col-md-6">
-          <a href="" class="link_post_small">
-            <div class="small-post popular-post">
-              <span>Winter Classic - zagrali po raz szósty.</span>
-              <div class="post_news_small">
-                <div class="mask-popular"></div>
-                <div class="cover_img pop4"></div>
-              </div>
-            </div>
-          </a>
-        </div>
-
+        <?php
+          foreach ($items as $item) {
+            $format = get_post_format( $item );
+            printf(
+              '<div class="col-sm-12 col-12 col-lg-6 col-md-6">
+                <a href="%2$s" class="link_post_small">
+                  <div class="small-post popular-post">
+                    %4$s
+                    <span>%1$s</span>
+                    <div class="post_news_small">
+                      <div class="mask-popular"></div>
+                      <div class="cover_img" style="background-image:url(%3$s);"></div>
+                    </div>
+                  </div>
+                </a>
+              </div>',
+              $item->post_title,
+              get_permalink( $item->ID ),
+              get_the_post_thumbnail_url( $item->ID, 'full' ),
+              $format == 'video'?( '<div class="video-icon"></div>' ):( $format == 'gallery'?( '<div class="gallery-icon"></div>' ):( '' ) )
+            );
+          }
+        ?>
 
       </div>
 
     </div>
     <!-- /col-8 -->
-
-
-
 
     <!-- Sidebar Column -->
     <div class="col-md-12 col-lg-4 sidebar-list">
@@ -74,10 +55,7 @@
         <div class="reklama">Reklama 400x700px</div>
       </div>
 
-
     </div>
-
-
 
   </div>
   <!-- /.row -->

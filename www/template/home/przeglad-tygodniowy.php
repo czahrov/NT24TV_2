@@ -1,114 +1,77 @@
+<?php
+  $items = get_posts(array(
+    'numberposts'     => 7,
+    'category_name'   => 'przeglad-tygodniowy',
+  ));
+?>
 <!-- Page Content -->
-<div class="container">
-
+<div id='przeglad_tygodnia' class="container">
+  <div class="">
+    <!-- <?php
+      // print_r( $items );
+    ?> -->
+  </div>
   <div class="row no-gutters">
 
     <!-- Blog Entries Column -->
     <div class="col-md-6 col-lg-8">
       <h5 class="title-sidebar">Przegląd tygodniowy</h5>
 
-      <!-- Post -->
-      <a class="link_post big" href="#">
+      <!-- BIG Post -->
+        <?php
+          $item = $items[0];
+          $format = get_post_format( $item );
 
-        <div class="big-post">
-          <div class="cover_img"></div>
-
-          <div class="post_news_big  img12">
-            <div class="video-icon"></div>
-
-            <span>"Przegląd Tygodniowy" 15.01.2020</span>
-          </div>
-
-        </div>
-      </a>
+          printf(
+            '<a class="link_post big" href="%4$s">
+              <div class="big-post">
+                <div class="cover_img"></div>
+                <div class="post_news_big  img12" style="background-image:url(%1$s)">
+                  %3$s
+                  <span>%2$s</span>
+                </div>
+              </div>
+            </a>',
+            get_the_post_thumbnail_url( $item->ID, 'full' ),
+            $item->post_title,
+            $format == 'video'?('<div class="video-icon"></div>'):( $format == 'gallery'?('<div class="gallery-icon"></div>'):('') ),
+            get_permalink( $item->ID )
+          );
+        ?>
 
       <div class="clear-top"></div>
 
       <div class="row no-gutters">
 
-        <!-- post -->
-        <div class="col-md-6 col-6 col-lg-4">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img13"></div>
-              </div>
-              <span>"Przegląd Tygodniowy" 08.01.2020</span>
-            </div>
-          </a>
-        </div>
-        <!-- post -->
-        <div class="col-md-6 col-6 col-lg-4">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img14 "></div>
-              </div>
-              <span>"Przegląd Tygodniowy" 25.12.2019</span>
-            </div>
-          </a>
-        </div>
-
-        <!-- post -->
-        <div class="col-md-6 col-6 col-lg-4">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img15"></div>
-              </div>
-              <span>"Przegląd Tygodniowy" 18.12.2019</span>
-            </div>
-          </a>
-        </div>
-
-
-        <!-- post -->
-        <div class="col-md-6 col-6 col-lg-4">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img16"></div>
-              </div>
-              <span>"Przegląd Tygodniowy" 11.12.2019</span>
-            </div>
-          </a>
-        </div>
-        <!-- post -->
-        <div class="col-md-6 col-6 col-lg-4">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img17"></div>
-              </div>
-              <span>"Przegląd Tygodniowy" 04.12.20190</span>
-            </div>
-          </a>
-        </div>
-
-        <!-- post -->
-        <div class="col-md-6 col-6 col-lg-4">
-          <a href="" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="video-icon"></div>
-                <div class="cover_img img18"></div>
-              </div>
-              <span>"Przegląd Tygodniowy" 27.12.2019</span>
-            </div>
-          </a>
-        </div>
-
+        <!-- MID post -->
+        <?php
+          foreach ( array_slice( $items, 1 ) as $item ) {
+            $format = get_post_format( $item );
+            printf(
+              '<div class="col-md-6 col-6 col-lg-4">
+                <a href="%1$s" class="link_post_small">
+                  <div class="small-post">
+                    <div class="post_news_small">
+                      %3$s
+                      <div class="cover_img img13" style="background-image:url(%2$s)"></div>
+                    </div>
+                    <span>%4$s</span>
+                  </div>
+                </a>
+              </div>',
+              get_permalink( $item->ID ),
+              get_the_post_thumbnail_url( $item->ID, 'large' ),
+              $format == 'video'?( '<div class="video-icon"></div>' ):( $format == 'gallery'?( '<div class="gallery-icon"></div>' ):( '' ) ),
+              $item->post_title
+            );
+          }
+        ?>
 
       </div>
       <!-- /row-->
       <div class="clear-top"></div>
       <div class="button-line">
-        <a href="#" class="">Więcej Przeglądów</a>
+        <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>" class="">Więcej Przeglądów</a>
       </div>
 
 
@@ -138,84 +101,37 @@
       <div class="reportaze sticky">
         <div class="clear-top"></div>
         <h5 class="title-sidebar line">Reportaże</h5>
-
-
+        <?php
+          $items = get_posts(array(
+            'numberposts'     => 7,
+            'category_name'   => 'reportaze',
+          ));
+        ?>
         <ul class="image-sidebar-section">
 
-
           <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img5"></div>
-              </div>
-              <span>Pomóc Naturze 2019 - W Nowym Targu - pierwszy pasywny kościół w Europie</span>
-            </li>
-          </a>
+          <?php
+            foreach ( $items as $item ) {
+              $format = get_post_format( $item );
+              printf(
+                '<a href="%1$s">
+                  <li>
+                    <div class="image-container">
+                      <div class="image img5" style="background-image:url(%2$s)">
+                      %4$s
+                      </div>
+                    </div>
+                    <span>%3$s</span>
+                  </li>
+                </a>',
+                get_permalink( $item->ID ),
+                get_the_post_thumbnail_url( $item->ID, 'medium' ),
+                $item->post_title,
+                $format == 'video'?( '<div class="video-icon"></div>' ):( $format == 'gallery'?( '<div class="gallery-icon"></div>' ):( '' ) )
+              );
+            }
+          ?>
 
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img6">
-                  <div class="video-icon"></div>
-                </div>
-              </div>
-              <span>Kandydat do tytułu Mister Polski - rodem z Nowego Targu (video)</span>
-            </li>
-          </a>
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img7"></div>
-              </div>
-              <span>Śwarni - z trzecią Złotą Ciupagą (video)</span>
-            </li>
-          </a>
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img8"></div>
-              </div>
-              <span>Wspomnienie po kultowej piekarni</span>
-            </li>
-          </a>
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img9"></div>
-              </div>
-              <span>Zawody Jeździeckie w Łopusznej i Rogoźniku - filmowo-muzyczne wspomnienia (video)</span>
-            </li>
-          </a>
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img10">
-                  <div class="video-icon"></div>
-                </div>
-              </div>
-              <span>Dziś początek emisji medycznego cyklu</span>
-            </li>
-          </a>
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img11"></div>
-              </div>
-              <span>Pomóc Naturze 2019 - W Nowym Targu - pierwszy pasywny kościół w Europie</span>
-            </li>
-          </a>
         </ul>
 
       </div>

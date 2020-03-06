@@ -1,5 +1,4 @@
 <?php
-  $post = get_the_post();
   $comments = get_comments(array(
     'post_id'       => get_the_ID(),
     'status'        => 'approve',
@@ -7,9 +6,6 @@
   ));
 ?>
 <div id="comments" class="col-md-12">
-  <div class="">
-    <?php print_r( $post ); ?>
-  </div>
   <div class="clear-top"></div>
   <h5 class="title-sidebar">Komentarze</h5>
 
@@ -120,7 +116,7 @@
           }
         }
 
-        // comment_printer($comments);
+        comment_printer($comments);
       ?>
     </div>
   <?php endif; ?>

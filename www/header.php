@@ -31,8 +31,6 @@
   include_once( get_template_directory() . '/php/Facepalm.php' );
   global $fp;
   $fp = new Facepalm();
-
-  the_post();
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -47,7 +45,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title><?php wp_title( '|', true, 'right' ); echo bloginfo('name'); ?></title>
+  <title>
+    <?php
+      wp_title( '|', true, 'right' ); echo bloginfo('name');
+    ?>
+  </title>
 
   <!-- Custom styles -->
   <?php
@@ -151,11 +153,11 @@
         </div>
         <div class="collapse navbar-collapse" id="">
           <?php
-            wp_nav_menu(array(
-              'theme_location' => 'main',
-              'menu_class'     => 'navbar-nav mr-auto',
-              'container'      => 'ul',
-            ));
+            // wp_nav_menu(array(
+            //   'theme_location' => 'main',
+            //   'menu_class'     => 'navbar-nav mr-auto',
+            //   'container'      => 'ul',
+            // ));
           ?>
         </div>
       </div>

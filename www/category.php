@@ -1,273 +1,65 @@
-<?php require_once( get_template_directory() . "/header.php" ); ?>
+<?php get_header(); ?>
+<?php
+  $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
+  $posts = get_posts(array(
+    'numberposts'   => 22,
+    'cat'           => $category->cat_ID,
+  ));
+?>
 <!-- Page Content -->
 <div id="category" class="container">
-
+    <!-- <?php
+      print_r( $category );
+      print_r( $posts );
+    ?> -->
     <div class="row no-gutters">
-
         <!-- Blog Entries Column -->
         <div class="col-sm col-12">
-
             <!-- Title -->
-
-            <h5 class="title-sidebar">Aktualności</h5>
-            <a class="link_post big " href="single.html">
-
-                <div class="big-post">
-                    <div class="cover_img img1"></div>
-
-                    <div class="post_news_big">
-
-                        <div class="tags"></div>
-                        <span class="tag">przed chwilą</span>
-
-                        <span>Wczoraj po południu na Podhale przyjechał premier Mateusz Morawiecki.</span>
+            <h5 class="title-sidebar">
+              <?php echo $category->name; ?>
+            </h5>
+            <!-- BIG POST -->
+            <?php
+              $item = $posts[0];
+              printf(
+                '<a class="link_post big " href="%1$s">
+                    <div class="big-post">
+                        <div class="cover_img img1"></div>
+                        <div class="post_news_big" style="background-image:url(%2$s);">
+                            <div class="tags"></div>
+                            <span class="tag">przed chwilą</span>
+                            <span>%3$s</span>
+                        </div>
                     </div>
-
-                </div>
-            </a>
+                </a>',
+                get_permalink( $item->ID ),
+                get_the_post_thumbnail_url( $item->ID, 'full' ),
+                $item->post_title
+              );
+            ?>
             <div class="clear-top"></div>
             <div class="row no-gutters">
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
+              <?php
+                foreach ( array_slice( $posts, 1 ) as $item) {
+                  printf(
+                    '<div class="col-sm col-6 col-lg-4">
+                      <a href="%1$s" class="link_post_small">
                         <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img2"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
+                          <div class="post_news_small">
+                            <div class="cover_img img2" style="background-image:url(%2$s);"></div>
+                          </div>
+                          <span>%3$s</span>
                         </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img3 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
+                      </a>
+                    </div>',
+                    get_permalink( $item->ID ),
+                    get_the_post_thumbnail_url( $item->ID, 'large' ),
+                    $item->post_title
+                  );
+                }
+              ?>
 
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img4"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img25"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img26 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img27"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img18"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img17 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img16"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img15"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img14 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img13"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img26 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img27"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img18"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img17 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img16"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img15"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img2"></div>
-                            </div>
-                            <span>Uhonorowani za zasługi dla sportu</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img3 "></div>
-                            </div>
-                            <span>130 tys. zł - w Podhalańskim Sztabie WOŚP jest nowy rekord</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- post -->
-                <div class="col-sm col-6 col-lg-4">
-                    <a href="" class="link_post_small">
-                        <div class="small-post">
-                            <div class="post_news_small">
-                                <div class="cover_img img4"></div>
-                            </div>
-                            <span>Maszyna drukarska będzie uruchomiona, a nowotarscy olimpijczycy - uczeni</span>
-                        </div>
-                    </a>
-                </div>
             </div>
             <!-- /row-->
             <!-- /before content -->
@@ -286,4 +78,4 @@
     <!-- /.row -->
 </div>
 <!-- /.container -->
-<?php require_once( get_template_directory() . "/footer.php" ); ?>
+<?php get_footer(); ?>

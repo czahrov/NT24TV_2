@@ -1,0 +1,38 @@
+$font:(
+  'regular':    'open_sansregular',
+  'semibold':   'open_sanssemibold',
+  'bold':       'open_sansbold',
+  'bolder':     'open_sansextrabold',
+  'italic':     'gelasioitalic'
+);
+
+@each $n, $v in $font{
+  .fw-#{$n}{
+    font-family: $v;
+  }
+}
+
+$color:(
+  'white':      #fff,
+  'black':      #000,
+  'grey':       #e3e3e3,
+  'grey-dark':  #c6c4c4,
+  'dark':       #141c1f,
+  'red':        #e3000f
+);
+
+@each $n, $v in $color{
+  .fc-#{$n}{
+    color: $v;
+  }
+
+  .bg-#{$n}{
+    background-color: $v;
+  }
+}
+
+.pointer{
+  &, & *{
+    cursor: pointer;
+  }
+}

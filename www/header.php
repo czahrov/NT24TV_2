@@ -36,29 +36,37 @@
 <html lang="pl">
 
 <head>
-  <META NAME="robots" CONTENT="noindex">
+  <!-- <META NAME="robots" CONTENT="noindex">
   <META NAME="robots" CONTENT="nofollow">
-  <META NAME="robots" CONTENT="noindex,nofollow">
+  <META NAME="robots" CONTENT="noindex,nofollow"> -->
 
   <meta name="theme-color" content="#e3000f" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>
-    <?php
-      wp_title( '|', true, 'right' ); echo bloginfo('name');
-    ?>
-  </title>
+  <title><?php wp_title( '|', true, 'right' ); echo bloginfo('name'); ?></title>
 
   <!-- Custom styles -->
   <?php
     //wp_enqueue_style( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, string $media = 'all' )
     wp_enqueue_style( 'bootsrap-core-css', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css' );
     wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css' );
-    wp_enqueue_style( 'slick', 'https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.css' );
+    wp_enqueue_style( 'slick', get_template_directory_uri() . '/css/slick.css' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/css/main.css' );
+    wp_enqueue_style( 'fp_style', get_template_directory_uri() . '/css/facepalm.css' );
   ?>
+
+  <!-- Bootstrap core JavaScript -->
+  <?php
+    // wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
+    wp_enqueue_script( 'jQuery', get_template_directory_uri().'/vendor/jquery/jquery.min.js', array(), false, true );
+    wp_enqueue_script( 'bootsrap', get_template_directory_uri().'/vendor/bootstrap/js/bootstrap.bundle.min.js', array( 'jQuery' ), false, true );
+    wp_enqueue_script( 'jQuery-slick', get_template_directory_uri().'/js/slick.min.js', array(), false, true );
+    wp_enqueue_script( 'slick', get_template_directory_uri().'/vendor/jquery/slick.js', array( 'jQuery-slick' ), false, true );
+    wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/facepalm.js', array(), false, true );
+  ?>
+
   <?php wp_head(); ?>
 </head>
 
@@ -111,8 +119,7 @@
         <span class="circle"></span>
         <span class="circle"></span>
       </button>
-      <div class="">
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link red-link" href="">Home
@@ -151,16 +158,6 @@
             </li>
           </ul>
         </div>
-        <div class="collapse navbar-collapse" id="">
-          <?php
-            // wp_nav_menu(array(
-            //   'theme_location' => 'main',
-            //   'menu_class'     => 'navbar-nav mr-auto',
-            //   'container'      => 'ul',
-            // ));
-          ?>
-        </div>
-      </div>
     </div>
   </nav>
 

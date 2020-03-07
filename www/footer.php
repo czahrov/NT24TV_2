@@ -62,17 +62,7 @@
       <!-- /.container -->
     </div>
 
-
   </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <?php
-    // wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
-    wp_enqueue_script( 'jQuery', get_template_directory_uri().'/vendor/jquery/jquery.min.js', array(), false, true );
-    wp_enqueue_script( 'bootsrap', get_template_directory_uri().'/vendor/bootstrap/js/bootstrap.bundle.min.js', array( 'jQuery' ), false, true );
-    wp_enqueue_script( 'jQuery-slick', 'https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js', array(), false, true );
-    wp_enqueue_script( 'slick', get_template_directory_uri().'/vendor/jquery/slick.js', array( 'jQuery-slick' ), false, true );
-  ?>
   <?php wp_footer(); ?>
 </body>
 </html>

@@ -1,0 +1,73 @@
+.fw-regular {
+  font-family: "open_sansregular";
+}
+
+.fw-semibold {
+  font-family: "open_sanssemibold";
+}
+
+.fw-bold {
+  font-family: "open_sansbold";
+}
+
+.fw-bolder {
+  font-family: "open_sansextrabold";
+}
+
+.fw-italic {
+  font-family: "gelasioitalic";
+}
+
+.fc-white {
+  color: #fff;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.fc-black {
+  color: #000;
+}
+
+.bg-black {
+  background-color: #000;
+}
+
+.fc-grey {
+  color: #e3e3e3;
+}
+
+.bg-grey {
+  background-color: #e3e3e3;
+}
+
+.fc-grey-dark {
+  color: #c6c4c4;
+}
+
+.bg-grey-dark {
+  background-color: #c6c4c4;
+}
+
+.fc-dark {
+  color: #141c1f;
+}
+
+.bg-dark {
+  background-color: #141c1f;
+}
+
+.fc-red {
+  color: #e3000f;
+}
+
+.bg-red {
+  background-color: #e3000f;
+}
+
+.pointer, .pointer * {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=facepalm.css.map */

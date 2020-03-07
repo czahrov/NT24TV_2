@@ -2,16 +2,12 @@
 <?php
   $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
   $posts = get_posts(array(
-    'numberposts'   => 22,
+    'numberposts'   => 13,
     'cat'           => $category->cat_ID,
   ));
 ?>
 <!-- Page Content -->
 <div id="category" class="container">
-    <!-- <?php
-      print_r( $category );
-      print_r( $posts );
-    ?> -->
     <div class="row no-gutters">
         <!-- Blog Entries Column -->
         <div class="col-sm col-12">
@@ -39,11 +35,28 @@
               );
             ?>
             <div class="clear-top"></div>
-            <div class="row no-gutters">
+            <!-- MID POSTS -->
+            <div id="tiles" class="row no-gutters">
               <?php
-                foreach ( array_slice( $posts, 1 ) as $item) {
+                $export = array();
+                foreach ( array_slice( $posts, 14 ) as $num => $item ) {
+                  $img = get_the_post_thumbnail_url( $item->ID, 'large' );
+                  $permalink = get_permalink( $item->ID );
+                  $title = addslashes( $item->post_title );
+                  $export[] = array(
+                    'title'   => $title,
+                    'img'     => $img,
+                    'url'     => $permalink,
+                  );
+                }
+              ?>
+              <script type="text/javascript">
+                var postsExport = JSON.parse('<?php echo json_encode( $export ); ?>');
+              </script>
+              <?php
+                foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
                   printf(
-                    '<div class="col-sm col-6 col-lg-4">
+                    '<div class="tile col-12 col-sm-6 col-lg-4">
                       <a href="%1$s" class="link_post_small">
                         <div class="small-post">
                           <div class="post_news_small">
@@ -59,7 +72,9 @@
                   );
                 }
               ?>
-
+              <button id="btn_more" type="button" name="button" class="col-12 btn bg-red fc-white fw-bold">
+                Załaduj więcej
+              </button>
             </div>
             <!-- /row-->
             <!-- /before content -->
@@ -67,10 +82,10 @@
         <!-- / col -->
         <!-- Sidebar Column -->
         <div class="col-md-4 sidebar-list">
-            <div class="reklama-sidebar">
-                <div class="reklama">Reklama 400x700px</div>
-            </div>
-            <div class="reklama-sidebar  sticky">
+          <div class="reklama-sidebar">
+              <div class="reklama">Reklama 400x700px</div>
+          </div>
+          <div class="reklama-sidebar sticky">
                     <div class="reklama">Reklama 400x700px</div>
                 </div>
         </div>

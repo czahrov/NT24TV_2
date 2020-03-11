@@ -4,12 +4,18 @@ $('.slider').each(function(){
   slidesToShow: 3,
   responsive: [
       {
-        breakpoint: 500,
+        breakpoint: 560,
         settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
+          slidesToShow: 1,
+          slidesToScroll: 1,
         }
-      }
+      },
+      {
+        breakpoint: 840,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
     ],
   centerPadding: "10px",
   infinite: false,

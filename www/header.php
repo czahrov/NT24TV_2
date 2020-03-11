@@ -81,13 +81,12 @@
               <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
             </a>
           </div>
-        <div class="search-bar">
+        <form class="search-bar" method="get" action="<?php echo home_url('szukaj'); ?>">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Szukaj w portalu Nowy Targ 24 TV ...">
+            <input class="form-control" type="text" name="q" pattern="\S{4,}" title="Szukana fraza musi składać się z co najmniej 4 znaków alfanumerycznych" placeholder="Szukaj w portalu Nowy Targ 24 TV ...">
           </div>
-        </div>
+        </form>
         <div class="weather ml-auto">
-
           <ul>
             <li>
               <img src="<?php echo get_template_directory_uri() . "/" ?>images/cloud.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/cloud.png'" alt="Pogoda">
@@ -121,41 +120,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link red-link" href="">Home
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="<?php echo get_option('siteurl') . "/" ?>kategoria">Aktualności
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Taśmy</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Sport</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Kultura</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Przegląd</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Reportaże</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Będzie się działo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Na żywo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Tablice</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link red-link" href="#">Odeszli</a>
-            </li>
+            <?php
+              $post = get_post();
+              foreach ( wp_get_nav_menu_items('gorne-menu') as $item ){
+                printf(
+                  '<li class="nav-item %3$s">
+                    <a class="nav-link red-link" href="%1$s">
+                      %2$s
+                    </a>
+                  </li>',
+                  $item->url,
+                  $item->title,
+                  $item->guid == $post->guid?( 'active' ):( '' )
+                );
+              }
+            ?>
           </ul>
         </div>
     </div>

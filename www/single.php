@@ -8,6 +8,7 @@
     'orderby'   => 'comment_date',
     'order'     => 'DESC',
   ));
+
   $last_comment = $last_comments[0];
   $comments_num = get_comments(array(
     'post_id'   => get_the_ID(),
@@ -26,16 +27,22 @@
 
       <div class="before-content">
         <div class="author_date_tags">
-          <span class="author"><?php the_author(); ?></span>
-          <span class="separator"></span>
-          <span class="date"><?php the_date("d.m.Y"); ?></span>
-          <span class="separator"></span>
-          <span class="tag">Pilne</span>
+          <?php
+            echo implode(
+              '<span class="separator"></span>',
+              array(
+                "<span class='author'>".get_the_author()."</span>",
+                "<span class='date'>".get_the_date("d.m.Y")."</span>",
+                isImportant( get_the_id() ),
+                isFresh( get_the_id() )
+              )
+            );
+          ?>
         </div>
 
-        <div class="share_comment">
+        <div class="share_comment row justify-content-between">
 
-          <div class="social_share">
+          <div class="social_share col-12 col-md">
             <span class="fb">
               <a href="<?php echo $fp->getSocialLink( 'facebook', get_the_permalink() ); ?>">
                 <img src="<?php echo get_template_directory_uri() . "/" ?>images/fb.svg" alt="Facebook">

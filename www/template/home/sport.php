@@ -15,7 +15,7 @@
   <div class="row no-gutters">
 
     <!-- Blog Entries Column -->
-    <div class="col-md-6 col-lg-8">
+    <div class="col-12 col-lg-8">
       <h5 class="title-sidebar">Sport</h5>
 
       <!-- BIG Post -->
@@ -37,11 +37,11 @@
       ?>
       <div class="clear-top"></div>
       <div class="row no-gutters">
-        <!-- post -->
+        <!-- MID post -->
         <?php
           foreach ( array_slice( $items, 1 ) as $item ) {
             printf(
-              '<div class="col-md-6 col-6 col-lg-4">
+              '<div class="col-12 col-sm-6 col-lg-4">
                 <a href="%1$s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
@@ -69,7 +69,7 @@
     <!-- /col-8 -->
 
     <!-- Sidebar Column -->
-    <div class="col-sm-12 col-md-6 col-lg-4 sidebar-list">
+    <div class="col-12 col-lg-4 sidebar-list">
       <div class="reportaze sticky">
         <h5 class="title-sidebar line">Kultura</h5>
         <?php

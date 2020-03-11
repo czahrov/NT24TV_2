@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div class="container">
+<div id='wskrocie' class="container">
 
   <div class="row no-gutters">
 
@@ -113,57 +113,34 @@
     <div class="col-lg-4 col-md-12 sidebar-list">
       <div class="reportaze ogloszenia-urzedowe">
         <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
-
         <ul class="image-sidebar-section">
-
+          <?php
+            $items = get_posts(array(
+              'numberposts'   => 4,
+              'category_name' => 'ogloszenia-urzedowe',
+            ));
+          ?>
           <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img19"></div>
-              </div>
-              <span>Od 1 lutego - obowiązek segregacji odpadów. Jak robić to prawidłowo? </span>
-            </li>
-          </a>
+          <?php
+            foreach ($items as $item) {
+              printf(
+                '<a href="%1$s">
+                  <li>
+                    <div class="image-container">
+                      <div class="image img19" style="background-image:url(%3$s);"></div>
+                    </div>
+                    <span>%2$s</span>
+                  </li>
+                </a>',
+                get_permalink( $item->ID ),
+                $item->post_title,
+                get_the_post_thumbnail_url( $item->ID, 'thumbnail' )
 
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img20">
-                </div>
-              </div>
-              <span>Harmonogram odbioru odpadów komunalnych z nieruchomości...y</span>
-            </li>
-          </a>
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img21"></div>
-              </div>
-              <span>Zimowe utrzymanie dróg na terenie Nowego Targu</span>
-            </li>
-          </a>
-
-
-
-          <!-- single post -->
-          <a href="#">
-            <li>
-              <div class="image-container">
-                <div class="image img23"></div>
-              </div>
-              <span>Koncert Noworoczny aż zapierał dech…
-              </span>
-            </li>
-          </a>
-
+              );
+            }
+          ?>
 
         </ul>
-
-
 
       </div>
       <!-- /ogłoszenia urzędowe -->
@@ -171,26 +148,27 @@
       <h5 class="title-sidebar">Filmy promocyjne</h5>
 
       <div class="filmy-promocyjne">
-
-        <a href="" class="single">
-          <div class="image-container">
-            <div class="image vid1">
-              <div class="video-icon"></div>
-            </div>
-          </div>
-        </a>
-
-        <a href="" class="single">
-          <div class="image-container">
-            <div class="image vid2">
-              <div class="video-icon"></div>
-            </div>
-          </div>
-        </a>
+        <?php
+          $items = get_posts(array(
+            'category_name' => 'filmy-promocyjne',
+            'numberposts'   => 2,
+          ));
+          foreach ($items as $item) {
+            printf(
+              '<a href="%1$s" class="single">
+                <div class="image-container">
+                  <div class="image vid1" style="background-image:url(%2$s);">
+                    <div class="video-icon"></div>
+                  </div>
+                </div>
+              </a>',
+              get_permalink( $item->ID ),
+              get_the_post_thumbnail_url( $item->ID, 'medium' )
+            );
+          }
+        ?>
 
       </div>
-
-
 
     </div>
     <!-- /.row -->

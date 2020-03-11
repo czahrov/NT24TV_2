@@ -23,15 +23,17 @@
                     <div class="big-post">
                         <div class="cover_img img1"></div>
                         <div class="post_news_big" style="background-image:url(%2$s);">
-                            <div class="tags"></div>
-                            <span class="tag">przed chwilą</span>
+                            <div class="tags">
+                              %4$s
+                            </div>
                             <span>%3$s</span>
                         </div>
                     </div>
                 </a>',
                 get_permalink( $item->ID ),
                 get_the_post_thumbnail_url( $item->ID, 'full' ),
-                $item->post_title
+                $item->post_title,
+                isFresh( $item->ID )
               );
             ?>
             <div class="clear-top"></div>
@@ -47,6 +49,7 @@
                     'title'   => $title,
                     'img'     => $img,
                     'url'     => $permalink,
+                    'hot'     => isHot( $item->ID ),
                   );
                 }
               ?>
@@ -61,6 +64,7 @@
                         <div class="small-post">
                           <div class="post_news_small">
                             <div class="cover_img img2" style="background-image:url(%2$s);"></div>
+                            %4$s
                           </div>
                           <span>%3$s</span>
                         </div>
@@ -68,11 +72,15 @@
                     </div>',
                     get_permalink( $item->ID ),
                     get_the_post_thumbnail_url( $item->ID, 'large' ),
-                    $item->post_title
+                    $item->post_title,
+                    isHot( $item->ID )
                   );
                 }
               ?>
-              <button id="btn_more" type="button" name="button" class="col-12 btn bg-red fc-white fw-bold">
+              <button id="btn_more" type="button" name="button" class="col-12 fp-btn btn-more fw-bold position-relative">
+                <div class="spinner position-absolute">
+                  <div class="box position-absolute"> </div>
+                </div>
                 Załaduj więcej
               </button>
             </div>

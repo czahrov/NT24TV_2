@@ -13,31 +13,23 @@
             </div>
 
           <ul class="menu">
-
-            <li>
-              <a class="red-link" href="#">Regulamin PPV</a>
-            </li>
-            <li>
-              <a class="red-link" href="#">Polityka prywatności</a>
-            </li>
-            <li>
-              <a class="red-link" href="#">Redakcja</a>
-            </li>
-            <li>
-              <a class="red-link" href="#">Dział reklamy</a>
-            </li>
-            <li>
-              <a class="red-link" href="#">Cennik</a>
-            </li>
-            <li>
-              <a class="red-link" href="#">Oferty pracy</a>
-            </li>
-
+            <?php
+            foreach ( wp_get_nav_menu_items('dolne-menu') as $item ){
+              printf(
+                '<li>
+                  <a class="red-link" href="%1$s">
+                    %2$s
+                  </a>
+                </li>',
+                $item->url,
+                $item->title
+              );
+            }
+            ?>
           </ul>
 
         </div>
         <!-- /logo_menu -->
-
 
         <div class="contact-info">
           <span>Informacje z Podhala</span>

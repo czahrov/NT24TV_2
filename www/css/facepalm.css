@@ -26,7 +26,7 @@
   transition: all .3s linear;
 }
 
-.fc-none-hover :hover {
+.fc-none-hover:hover {
   color: transparent;
 }
 
@@ -43,10 +43,11 @@
 }
 
 .br-none {
-  border-color: transparent;
+  border: solid 2px transparent;
 }
 
 .br-none-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
@@ -62,7 +63,7 @@
   transition: all .3s linear;
 }
 
-.fc-white-hover :hover {
+.fc-white-hover:hover {
   color: #fff;
 }
 
@@ -79,10 +80,11 @@
 }
 
 .br-white {
-  border-color: #fff;
+  border: solid 2px #fff;
 }
 
 .br-white-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
@@ -98,7 +100,7 @@
   transition: all .3s linear;
 }
 
-.fc-black-hover :hover {
+.fc-black-hover:hover {
   color: #141c1f;
 }
 
@@ -115,15 +117,53 @@
 }
 
 .br-black {
-  border-color: #141c1f;
+  border: solid 2px #141c1f;
 }
 
 .br-black-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
 .br-black-hover:hover {
   border-color: #141c1f;
+}
+
+.fc-grey-light {
+  color: #fcfafa;
+}
+
+.fc-grey-light-hover {
+  transition: all .3s linear;
+}
+
+.fc-grey-light-hover:hover {
+  color: #fcfafa;
+}
+
+.bg-grey-light {
+  background-color: #fcfafa;
+}
+
+.bg-grey-light-hover {
+  transition: all .3s linear;
+}
+
+.bg-grey-light-hover:hover {
+  background-color: #fcfafa;
+}
+
+.br-grey-light {
+  border: solid 2px #fcfafa;
+}
+
+.br-grey-light-hover {
+  border: solid 2px transparent;
+  transition: all .3s linear;
+}
+
+.br-grey-light-hover:hover {
+  border-color: #fcfafa;
 }
 
 .fc-grey {
@@ -134,7 +174,7 @@
   transition: all .3s linear;
 }
 
-.fc-grey-hover :hover {
+.fc-grey-hover:hover {
   color: #e3e3e3;
 }
 
@@ -151,10 +191,11 @@
 }
 
 .br-grey {
-  border-color: #e3e3e3;
+  border: solid 2px #e3e3e3;
 }
 
 .br-grey-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
@@ -170,7 +211,7 @@
   transition: all .3s linear;
 }
 
-.fc-grey-dark-hover :hover {
+.fc-grey-dark-hover:hover {
   color: #c6c4c4;
 }
 
@@ -187,10 +228,11 @@
 }
 
 .br-grey-dark {
-  border-color: #c6c4c4;
+  border: solid 2px #c6c4c4;
 }
 
 .br-grey-dark-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
@@ -206,7 +248,7 @@
   transition: all .3s linear;
 }
 
-.fc-dark-hover :hover {
+.fc-dark-hover:hover {
   color: #141c1f;
 }
 
@@ -223,10 +265,11 @@
 }
 
 .br-dark {
-  border-color: #141c1f;
+  border: solid 2px #141c1f;
 }
 
 .br-dark-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
@@ -242,7 +285,7 @@
   transition: all .3s linear;
 }
 
-.fc-red-hover :hover {
+.fc-red-hover:hover {
   color: #e3000f;
 }
 
@@ -259,10 +302,11 @@
 }
 
 .br-red {
-  border-color: #e3000f;
+  border: solid 2px #e3000f;
 }
 
 .br-red-hover {
+  border: solid 2px transparent;
   transition: all .3s linear;
 }
 
@@ -288,13 +332,16 @@
   }
 }
 
+a:hover, a:focus {
+  text-decoration: none;
+}
+
 .pointer, .pointer * {
   cursor: pointer;
 }
 
 .fp-btn, .fp-btn:active, .fp-btn:focus {
   padding: 10px 20px;
-  border-radius: 10px;
   text-align: center;
   transition: all .3s ease-in-out;
   background-color: transparent;
@@ -331,14 +378,38 @@
   border-radius: 50%;
 }
 
-a {
-  -webkit-text-decoration: solid underline #e3000f;
-          text-decoration: solid underline #e3000f;
+.video-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background-image: url("../images/play.svg");
+  z-index: 5;
 }
 
-a:hover, a:focus {
-  -webkit-text-decoration: solid underline #e3000f;
-          text-decoration: solid underline #e3000f;
+.gallery-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background-image: url("../images/images.svg");
+  background-size: contain;
+  z-index: 5;
+}
+
+.youtube_video {
+  width: 100%;
+  height: 400px;
+  max-height: 100vh;
+}
+
+#btn_more {
+  margin: 0 auto;
+  width: calc( 100% - 30px);
 }
 
 #btn_more .spinner {
@@ -379,6 +450,10 @@ a:hover, a:focus {
           animation-fill-mode: both;
   -webkit-animation-direction: normal;
           animation-direction: normal;
+}
+
+#post .content a {
+  border-bottom: solid 2px #e3000f;
 }
 
 #search .tile {

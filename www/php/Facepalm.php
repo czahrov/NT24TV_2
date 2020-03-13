@@ -2,11 +2,9 @@
   /**
    *
    */
-  class Facepalm
-  {
+  class Facepalm{
 
-    public function __construct($arg)
-    {
+    public function __construct( $arg ){
       // code...
     }
 
@@ -54,6 +52,13 @@
       }
 
       return $ret;
+    }
+
+    public function genYoutubeVideo( $videoID ){
+      printf(
+        '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+        $videoID
+      );
     }
 
   }

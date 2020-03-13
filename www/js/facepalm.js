@@ -89,4 +89,37 @@ $(function(){
     },
   });
 
+  (function(btn){
+    var oldTitle = btn.attr('title');
+
+    btn
+    .tooltip()
+    .click(function(e){
+      e.preventDefault();
+
+      const el = document.createElement('textarea');
+      el.value = window.location.href;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+
+      btn
+      .attr('title','Skopiowano!')
+      .tooltip('dispose')
+      .tooltip('show');
+
+      setTimeout(function () {
+        btn
+        .attr( 'title', oldTitle )
+        .tooltip( 'dispose' )
+        .tooltip();
+
+      }, 3000);
+    })
+  })
+  (
+    $('#post .clipboard')
+  );
+
 });

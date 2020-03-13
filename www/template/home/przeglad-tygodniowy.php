@@ -48,7 +48,7 @@
           foreach ( array_slice( $items, 1 ) as $item ) {
             $format = get_post_format( $item );
             printf(
-              '<div class="col-12 col-sm-6 col-6 col-lg-4">
+              '<div class="col-6 col-lg-4">
                 <a href="%1$s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">

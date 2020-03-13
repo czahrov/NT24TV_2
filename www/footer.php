@@ -7,7 +7,7 @@
         <div class="logo_menu">
 
           <div class="logo mr-auto">
-              <a href="index.php">
+              <a href="<?php echo home_url(); ?>">
                 <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
               </a>
             </div>

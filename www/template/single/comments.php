@@ -89,7 +89,7 @@
                   <button> %4$s </button>
                 </div>
               </div>',
-              empty($comm->comment_author)?('*ANONIM*'):($comm->comment_author),
+              $comm->user_id > 0?( get_bloginfo('name') ):( empty($comm->comment_author)?('*ANONIM*'):($comm->comment_author) ),
               get_comment_date( 'H:i d.m.Y', $comm->comment_ID ),
               $comm->comment_content,
               get_comment_reply_link(

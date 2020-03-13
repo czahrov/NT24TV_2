@@ -17,6 +17,7 @@ $color:(
   'none':       transparent,
   'white':      #fff,
   'black':      #141c1f,
+  'grey-light': #fcfafa,
   'grey':       #e3e3e3,
   'grey-dark':  #c6c4c4,
   'dark':       #141c1f,
@@ -24,28 +25,21 @@ $color:(
 );
 
 @each $n, $v in $color{
-  .fc-#{$n},
-  %fc-#{$n}{
+  .fc-#{$n}{
     color: $v;
   }
-
-  .fc-#{$n}-hover,
-  %fc-#{$n}-hover{
+  .fc-#{$n}-hover{
     transition: all .3s linear;
 
-    :hover{
+    &:hover{
       color: $v;
     }
   }
 
-  .bg-#{$n},
-  %bg-#{$n}{
+  .bg-#{$n}{
     background-color: $v;
   }
-
-  .bg-#{$n}-hover,
-  %bg-#{$n}-hover
-  {
+  .bg-#{$n}-hover{
     transition: all .3s linear;
 
     &:hover{
@@ -53,14 +47,11 @@ $color:(
     }
   }
 
-  .br-#{$n},
-  %br-#{$n}{
-    border-color: $v;
+  .br-#{$n}{
+    border: solid 2px $v;
   }
-
-  .br-#{$n}-hover,
-  %br-#{$n}-hover
-  {
+  .br-#{$n}-hover{
+    border: solid 2px map-get( $color, 'none' );
     transition: all .3s linear;
 
     &:hover{
@@ -78,6 +69,14 @@ $color:(
   }
 }
 
+a{
+
+  &:hover, &:focus{
+    text-decoration: none;
+  }
+
+}
+
 .pointer{
   &, & *{
     cursor: pointer;
@@ -88,7 +87,6 @@ $color:(
 
   &, &:active, &:focus{
     padding: 10px 20px;
-    border-radius: 10px;
     text-align: center;
     transition: all .3s ease-in-out;
     background-color: transparent;
@@ -131,16 +129,38 @@ $color:(
   border-radius: 50%;
 }
 
-a{
-  text-decoration: solid underline map-get( $color, 'red' );
+.video-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate( -50%, -50% );
+  background-image: url('../images/play.svg');
+  z-index: 5;
+}
 
-  &:hover, &:focus{
-    text-decoration: solid underline map-get( $color, 'red' );
-  }
+.gallery-icon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate( -50%, -50% );
+  background-image: url('../images/images.svg');
+  background-size: contain;
+  z-index: 5;
+}
 
+.youtube_video{
+  width: 100%;
+  height: 400px;
+  max-height: 100vh;
 }
 
 #btn_more{
+  margin: 0 auto;
+  width: calc( 100% - 30px );
 
   .spinner{
     display: none;
@@ -192,6 +212,15 @@ a{
 }
 
 #post{
+
+  .content{
+
+    a{
+      border-bottom: solid 2px map-get( $color, 'red' );
+
+    }
+
+  }
 
 }
 

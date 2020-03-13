@@ -28,21 +28,25 @@
       <div class="before-content">
         <div class="author_date_tags">
           <?php
+            $segments = array(
+              "<span class='author'>".get_the_author()."</span>",
+              "<span class='date'>".get_the_date("d.m.Y")."</span>",
+              isImportant( get_the_id() ),
+              isFresh( get_the_id() )
+            );
+
             echo implode(
               '<span class="separator"></span>',
-              array(
-                "<span class='author'>".get_the_author()."</span>",
-                "<span class='date'>".get_the_date("d.m.Y")."</span>",
-                isImportant( get_the_id() ),
-                isFresh( get_the_id() )
-              )
+              array_filter( $segments, function( $item ){
+                return !empty( $item );
+              } )
             );
           ?>
         </div>
 
         <div class="share_comment row justify-content-between">
 
-          <div class="social_share col-12 col-md">
+          <div class="social_share">
             <span class="fb">
               <a href="<?php echo $fp->getSocialLink( 'facebook', get_the_permalink() ); ?>">
                 <img src="<?php echo get_template_directory_uri() . "/" ?>images/fb.svg" alt="Facebook">
@@ -54,7 +58,9 @@
               </a>
             </span>
             <span class="share">
-              <img src="<?php echo get_template_directory_uri() . "/" ?>images/sh.svg" alt="Udostępnij">
+              <a class="clipboard" href="#" data-toggle="tooltip" title="Kopiuj adres strony do schowka">
+                <img src="<?php echo get_template_directory_uri() . "/" ?>images/sh.svg" alt="Udostępnij">
+              </a>
             </span>
           </div>
 
@@ -87,6 +93,17 @@
         <div class="zajawka">
           <?php the_excerpt(); ?>
         </div>
+
+        <?php
+          $vid_url = get_post_field('youtube');
+          if( !empty( $vid_url ) ):
+            preg_match( '/([^\/]+)$/', $vid_url, $match );
+            $vid = $match[1];
+        ?>
+        <div class="video">
+          <?php $fp->genYoutubeVideo( $vid ); ?>
+        </div>
+        <?php endif; ?>
 
         <img class="img-fluid" src="<?php the_post_thumbnail_url('full'); ?>">
 

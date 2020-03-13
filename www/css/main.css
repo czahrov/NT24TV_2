@@ -796,14 +796,14 @@ footer.bg-footer .copy .copy-content {
 }
 
 .before-content .share_comment .comment .comment_value .content {
-  width: 300px;
-  max-width: 50vw;
+  max-width: 300px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .before-content .share_comment .comment .author_comment {
+  padding-left: 20px;
   color: #8e8e8e;
 }
 
@@ -874,14 +874,14 @@ footer.bg-footer .copy .copy-content {
 
 .komentarze textarea {
   width: 100%;
-  padding: 15px;
+  padding: 10px 15px;
   border: none;
   height: 10rem;
   font-size: 1.2rem;
 }
 
 .komentarze input {
-  padding: 10px;
+  padding: 10px 15px;
   width: 100%;
   font-size: 1.2rem;
   border: none;

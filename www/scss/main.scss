@@ -1111,8 +1111,7 @@ footer.bg-footer{
                 font-family: $font-semibold;
 
                 .content{
-                  width: 300px;
-                  max-width: 50vw;
+                  max-width: 300px;
                   overflow: hidden;
                   text-overflow: ellipsis;
                   white-space: nowrap;
@@ -1121,7 +1120,8 @@ footer.bg-footer{
             }
 
             & .author_comment{
-                color: #8e8e8e;
+              padding-left: 20px;
+              color: #8e8e8e;
             }
 
             & .comments_que{
@@ -1211,14 +1211,14 @@ footer.bg-footer{
 
     & textarea{
         width: 100%;
-        padding:15px;
+        padding: 10px 15px;
         border: none;
         height: 10rem;
         font-size: 1.2rem;
     }
 
     & input{
-        padding:10px;
+        padding:10px 15px;
         width: 100%;
         font-size: 1.2rem;
         border: none;

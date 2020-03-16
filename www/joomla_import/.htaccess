@@ -1,0 +1,2 @@
+RewriteEngine ON
+RewriteRule ^(.+)$ https://nowytarg24.tv/wp-content/themes/NowyTargTV/joomla_import/$1 [R=302,L]

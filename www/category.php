@@ -23,39 +23,24 @@
                     <div class="big-post">
                         <div class="cover_img img1"></div>
                         <div class="post_news_big" style="background-image:url(%2$s);">
-                            <div class="tags">
-                              %4$s
-                            </div>
-                            <span>%3$s</span>
+                            <span>
+                              <div class="post-tags">
+                                %4$s
+                              </div>
+                              %3$s
+                            </span>
                         </div>
                     </div>
                 </a>',
                 get_permalink( $item->ID ),
                 get_the_post_thumbnail_url( $item->ID, 'full' ),
                 $item->post_title,
-                isFresh( $item->ID )
+                printTags( $item->ID, false )
               );
             ?>
             <div class="clear-top"></div>
             <!-- MID POSTS -->
             <div id="tiles" class="row no-gutters">
-              <?php
-                $export = array();
-                foreach ( array_slice( $posts, 14 ) as $num => $item ) {
-                  $img = get_the_post_thumbnail_url( $item->ID, 'large' );
-                  $permalink = get_permalink( $item->ID );
-                  $title = addslashes( $item->post_title );
-                  $export[] = array(
-                    'title'   => $title,
-                    'img'     => $img,
-                    'url'     => $permalink,
-                    'hot'     => isHot( $item->ID ),
-                  );
-                }
-              ?>
-              <script type="text/javascript">
-                var postsExport = JSON.parse('<?php echo json_encode( $export ); ?>');
-              </script>
               <?php
                 foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
                   printf(
@@ -64,16 +49,15 @@
                         <div class="small-post">
                           <div class="post_news_small">
                             <div class="cover_img img2" style="background-image:url(%2$s);"></div>
-                            %4$s
                           </div>
-                          <span>%3$s</span>
+                          <span>%4$s %3$s</span>
                         </div>
                       </a>
                     </div>',
                     get_permalink( $item->ID ),
                     get_the_post_thumbnail_url( $item->ID, 'large' ),
                     $item->post_title,
-                    isHot( $item->ID )
+                    printTags( $item->ID )
                   );
                 }
               ?>
@@ -91,11 +75,13 @@
         <!-- Sidebar Column -->
         <div class="col-md-4 sidebar-list">
           <div class="reklama-sidebar">
-              <div class="reklama">Reklama 400x700px</div>
+              <!-- <div class="reklama">Reklama 400x700px</div> -->
+              <?php echo printAd('pionowa'); ?>
           </div>
           <div class="reklama-sidebar sticky">
-                    <div class="reklama">Reklama 400x700px</div>
-                </div>
+              <!-- <div class="reklama">Reklama 400x700px</div> -->
+              <?php echo printAd('pionowa'); ?>
+          </div>
         </div>
     </div>
     <!-- /.row -->

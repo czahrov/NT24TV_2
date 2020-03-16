@@ -2,7 +2,8 @@
 <div class="col-xl-4 col-sm-12 col-md-12 col-lg-12 sidebar-list">
 
   <div class="reklama-sidebar">
-    <div class="reklama">Reklama 400x700px</div>
+    <!-- <div class="reklama">Reklama 400x700px</div> -->
+    <?php echo printAd('pionowa'); ?>
   </div>
 
   <div class="reportaze  sticky">

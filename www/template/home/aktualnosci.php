@@ -22,15 +22,19 @@
             <div class="big-post">
               <div class="cover_img img1"></div>
               <div class="post_news_big" style="background-image:url(%2$s)">
-                <span>%3$s</span>
-                %4$s
+                <span>
+                  <div class="post-tags">
+                    %4$s
+                  </div>
+                  %3$s
+                </span>
               </div>
             </div>
           </a>',
           get_permalink( $item->ID ),
           get_the_post_thumbnail_url( $item->ID, 'full' ),
           $item->post_title,
-          isFresh( $item->ID )
+          printTags( $item->ID, false )
         );
       ?>
       <div class="clear-top"></div>
@@ -45,16 +49,15 @@
                   <div class="small-post">
                     <div class="post_news_small">
                       <div class="cover_img img2" style="background-image:url(%2$s)"></div>
-                      %4$s
                     </div>
-                    <span>%3$s</span>
+                    <span>%4$s %3$s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'large' ),
               $item->post_title,
-              isImportant( $item->ID )
+              printTags( $item->ID )
             );
           }
         ?>
@@ -73,16 +76,15 @@
           foreach ( array_slice( $items, 4 ) as $item) {
             printf(
               '<a href="%1$s">
-                <li>%2$s
+                <li>%4$s %2$s
                   <span class="data">%3$s</span>
-                  %4$s
                   </span>
                 </li>
               </a>',
               get_permalink( $item->ID ),
               $item->post_title,
               get_the_date( "d.m.Y", $item->ID ),
-              isImportant( $item->ID )
+              printTags( $item->ID )
             );
           }
         ?>
@@ -96,7 +98,8 @@
   </div>
 
   <div class="reklama-full-page">
-    <div class="reklama">Reklama 1200x150px</div>
+    <!-- <div class="reklama">Reklama 1200x150px</div> -->
+    <?php echo printAd('pozioma'); ?>
   </div>
 
 </div>

@@ -3,7 +3,8 @@
 
 
   <div class="reklama-sidebar">
-    <div class="reklama">Reklama 400x700px</div>
+    <!-- <div class="reklama">Reklama 400x700px</div> -->
+    <?php echo printAd( 'pionowa' ); ?>
   </div>
 
   <div class="reportaze  sticky">

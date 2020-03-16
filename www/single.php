@@ -31,8 +31,9 @@
             $segments = array(
               "<span class='author'>".get_the_author()."</span>",
               "<span class='date'>".get_the_date("d.m.Y")."</span>",
-              isImportant( get_the_id() ),
-              isFresh( get_the_id() )
+              printImportant( get_the_id(), false ),
+              printFresh( get_the_id(), false ),
+              printHot( get_the_id(), false )
             );
 
             echo implode(
@@ -105,7 +106,11 @@
         </div>
         <?php endif; ?>
 
-        <img class="img-fluid" src="<?php the_post_thumbnail_url('full'); ?>">
+        <?php
+          $img = get_the_post_thumbnail_url( 'full' );
+          $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+        ?>
+        <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>">
 
         <?php the_content(); ?>
 

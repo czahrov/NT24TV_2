@@ -28,14 +28,15 @@
                 <div class="cover_img"></div>
                 <div class="post_news_big  img12" style="background-image:url(%1$s)">
                   %3$s
-                  <span>%2$s</span>
+                  <span>%5$s %2$s</span>
                 </div>
               </div>
             </a>',
             get_the_post_thumbnail_url( $item->ID, 'full' ),
             $item->post_title,
-            $format == 'video'?('<div class="video-icon"></div>'):( $format == 'gallery'?('<div class="gallery-icon"></div>'):('') ),
-            get_permalink( $item->ID )
+            $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
+            get_permalink( $item->ID ),
+            printTags( $item->ID, false )
           );
         ?>
 
@@ -55,14 +56,15 @@
                       %3$s
                       <div class="cover_img img13" style="background-image:url(%2$s)"></div>
                     </div>
-                    <span>%4$s</span>
+                    <span>%5$s %4$s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'large' ),
-              $format == 'video'?( '<div class="video-icon"></div>' ):( $format == 'gallery'?( '<div class="gallery-icon"></div>' ):( '' ) ),
-              $item->post_title
+              $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
+              $item->post_title,
+              printTags( $item->ID )
             );
           }
         ?>
@@ -77,7 +79,8 @@
 
 
       <div class="reklama-full-page">
-        <div class="reklama">Reklama 840x150px</div>
+        <!-- <div class="reklama">Reklama 840x150px</div> -->
+        <?php echo printAd('pozioma'); ?>
       </div>
 
     </div>
@@ -121,13 +124,14 @@
                       %4$s
                       </div>
                     </div>
-                    <span>%3$s</span>
+                    <span>%5$s %3$s</span>
                   </li>
                 </a>',
                 get_permalink( $item->ID ),
                 get_the_post_thumbnail_url( $item->ID, 'medium' ),
                 $item->post_title,
-                $format == 'video'?( '<div class="video-icon"></div>' ):( $format == 'gallery'?( '<div class="gallery-icon"></div>' ):( '' ) )
+                $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
+                printTags( $item->ID )
               );
             }
           ?>

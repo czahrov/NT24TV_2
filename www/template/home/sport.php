@@ -6,11 +6,6 @@
 ?>
 <!-- Page Content -->
 <div id="sport" class="container">
-  <div class="">
-    <!-- <?php
-      // print_r( $items );
-    ?> -->
-  </div>
 
   <div class="row no-gutters">
 
@@ -26,13 +21,14 @@
             <div class="big-post">
               <div class="cover_img"></div>
               <div class="post_news_big  img24" style="background-image:url(%2$s)">
-                <span>%3$s</span>
+                <span>%4$s %3$s</span>
               </div>
             </div>
           </a>',
           get_permalink( $item->ID ),
           get_the_post_thumbnail_url( $item->ID, 'full' ),
-          $item->post_title
+          $item->post_title,
+          printTags( $item->ID, false )
         );
       ?>
       <div class="clear-top"></div>
@@ -47,13 +43,14 @@
                     <div class="post_news_small">
                       <div class="cover_img img25" style="background-image:url(%3$s)"></div>
                     </div>
-                    <span>%2$s</span>
+                    <span>%4$s %2$s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
               $item->post_title,
-              get_the_post_thumbnail_url( $item->ID, 'large' )
+              get_the_post_thumbnail_url( $item->ID, 'large' ),
+              printTags( $item->ID )
             );
           }
         ?>
@@ -89,12 +86,13 @@
                     <div class="image-container">
                       <div class="image img19" style="background-image:url(%2$s)"></div>
                     </div>
-                    <span>%3$s</span>
+                    <span>%4$s %3$s</span>
                   </li>
                 </a>',
                 get_permalink( $item->ID ),
                 get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
-                $item->post_title
+                $item->post_title,
+                printTags( $item->ID )
               );
             }
           ?>

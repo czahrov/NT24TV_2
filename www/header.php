@@ -71,8 +71,11 @@
 </head>
 
 <body class='<?php echo $devType; ?>'>
-  <!-- Navigation -->
+  <?php do_action( 'get_live' ); ?>
+  <?php do_action( 'get_live_event' ); ?>
+  <?php do_action( 'get_relacja-live-event' ); ?>
 
+  <!-- Navigation -->
   <section class="head-menu">
     <div class="container">
       <div class="head-items">

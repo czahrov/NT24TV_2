@@ -7,8 +7,8 @@
     'numberposts' => 24,
     's'           => $search,
     // 'sentence'    => true,
-    'order'       => 'ASC',
-    'orderby'     => 'title',
+    // 'order'       => 'ASC',
+    // 'orderby'     => 'title',
   ));
 ?>
 <div id="search" class="container">
@@ -23,12 +23,13 @@
           '<a class="tile bg-grey-light-hover br-grey-hover col-12 col-sm-6 col-lg-4" href="%1$s">
             <div class="wrapper d-flex align-items-center">
               <div class="img bg-grey flex-shrink-0" style="%2$s"></div>
-              <div class="title fc-black">%3$s</div>
+              <div class="title fc-black">%4$s %3$s</div>
             </div>
           </a>',
           get_the_permalink( $item->ID ),
           $img !== false?( "background-image:url({$img});" ):( '' ),
-          get_the_title( $item->ID )
+          $item->post_title,
+          printTags( $item->ID )
         );
       ?>
     <?php endforeach; ?>

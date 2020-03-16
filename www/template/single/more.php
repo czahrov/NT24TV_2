@@ -19,13 +19,14 @@
               <div class="post_news_small">
                 <div class="cover_img img2" style="background-image:url(%2$s)"></div>
               </div>
-              <span>%3$s</span>
+              <span>%4$s %3$s</span>
             </div>
           </a>
         </div>',
         get_permalink( $item->ID ),
         get_the_post_thumbnail_url( $item->ID, 'medium' ),
-        $item->post_title
+        $item->post_title,
+        printTags( $item->ID )
       );
     }
   ?>

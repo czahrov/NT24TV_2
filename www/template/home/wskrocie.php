@@ -23,13 +23,14 @@
                     <div class="post_news_small">
                       <div class="cover_img img25" style="background-image:url(%3$s)"></div>
                     </div>
-                    <span>%2$s</span>
+                    <span>%4$s %2$s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
               $item->post_title,
-              get_the_post_thumbnail_url( $item->ID, 'medium' )
+              get_the_post_thumbnail_url( $item->ID, 'medium' ),
+              printTags( $item->ID )
             );
           }
         ?>
@@ -76,13 +77,14 @@
                         <div class="post_news_small">
                           <div class="cover_img img25" style="background-image:url(%3$s)"></div>
                         </div>
-                        <span>%2$s</span>
+                        <span>%4$s %2$s</span>
                       </div>
                     </a>
                   </div>',
                   get_permalink( $item->ID ),
                   $item->post_title,
-                  get_the_post_thumbnail_url( $item->ID, 'medium')
+                  get_the_post_thumbnail_url( $item->ID, 'medium'),
+                  printTags( $item->ID )
                 );
               }
             ?>
@@ -103,7 +105,8 @@
 
       </div>
       <div class="reklama-full-page sticky">
-        <div class="reklama">Reklama 840x150px</div>
+        <!-- <div class="reklama">Reklama 840x150px</div> -->
+        <?php echo printAd('pozioma'); ?>
       </div>
 
     </div>
@@ -129,13 +132,13 @@
                     <div class="image-container">
                       <div class="image img19" style="background-image:url(%3$s);"></div>
                     </div>
-                    <span>%2$s</span>
+                    <span>%4$s %2$s</span>
                   </li>
                 </a>',
                 get_permalink( $item->ID ),
                 $item->post_title,
-                get_the_post_thumbnail_url( $item->ID, 'thumbnail' )
-
+                get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
+                printTags( $item->ID )
               );
             }
           ?>
@@ -158,12 +161,16 @@
               '<a href="%1$s" class="single">
                 <div class="image-container">
                   <div class="image vid1" style="background-image:url(%2$s);">
-                    <div class="video-icon"></div>
+                    <div class="video-post"></div>
+                    <div class="post-tags">
+                      %3$s
+                    </div>
                   </div>
                 </div>
               </a>',
               get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'medium' )
+              get_the_post_thumbnail_url( $item->ID, 'medium' ),
+              printTags( $item->ID, false )
             );
           }
         ?>

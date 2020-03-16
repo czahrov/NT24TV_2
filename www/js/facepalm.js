@@ -1,10 +1,11 @@
 $(function(){
 
+  // obsługa przycisku ładowania kolejnych wpisów w kategorii
   $('#category #btn_more')
   .on({
     click: function(e){
       let items = $('#category #tiles').children('.tile');
-      let start = items.length;
+      let start = items.length + 1;
       let end = start + 12;
 
       $(this).addClass('loading');
@@ -25,9 +26,8 @@ $(function(){
             let t = items.last().clone();
             t.children('a').attr( 'href', item.url );
             t.find('.cover_img')
-            .css( 'background-image', 'url('+item.img+')' )
-            .after( item.hot );
-            t.find('.small-post > span').text( item.title.replace( /\\/g, '' ) );
+            .css( 'background-image', 'url('+item.img+')' );
+            t.find('.small-post > span').html( item.title.replace( /\\/g, '' ) );
             $('#btn_more').before( t );
           } );
 
@@ -45,6 +45,7 @@ $(function(){
     },
   });
 
+  // obsługa przycisku ładowania kolejnych wpisów w wyszukiwarce
   $('#search #btn_more')
   .on({
     click: function(e){
@@ -57,7 +58,7 @@ $(function(){
       $.ajax({
         type: 'GET',
         url: '/api?cmd=search&from='+start+'&to='+end+'&q='+window.location.search.match(/q\=([^+]+)/)[1],
-        success: function( data, status, xhr ) {
+        success: function( data, status, xhr ){
           let posts = JSON.parse( data );
           // console.log( [ status, posts ] );
 
@@ -67,10 +68,13 @@ $(function(){
 
           posts.splice( 0, 12 ).forEach( (item)=>{
             // console.log( [item] );
+
             let t = items.last().clone();
-            t.children('a').attr( 'href', item.url );
-            if ( item.img !== false ) t.find('.img')
-            .css( 'background-image', 'url('+item.img+')' );
+            t.attr( 'href', item.url );
+            if ( item.img !== false ){
+              t.find('.img')
+              .css( 'background-image', 'url('+item.img+')' );
+            }
             t.find('.title').text( item.title.replace( /\\/g, '' ) );
             $('#search #btn_more').before( t );
           } );
@@ -89,6 +93,7 @@ $(function(){
     },
   });
 
+  // dymek do przycisku kopiowania adresu
   (function(btn){
     var oldTitle = btn.attr('title');
 

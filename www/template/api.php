@@ -24,48 +24,49 @@
       ));
 
       $ret = array_map( function( $item ){
-        $title = addslashes( $item->post_title );
+        $title = printTags( $item->ID ) . addslashes( $item->post_title );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
-        $url = get_permalink( $item->ID );
+        $thumb = get_post_field( 'thumb', $item );
+        $url = get_permalink( $item );
         return array(
-          'title' => $title,
+          'title' => trim( $title ),
           'url'   => $url,
-          'img'   => $img,
-          'hot'   => isHot( $item->ID ),
+          'img'   => $img !== false?( $img ):( $thumb ),
         );
       }, $posts );
 
       echo json_encode( $ret );
-    break;
+      break;
     case 'search':
       $start = (int)$_GET['from'];
       $end = (int)$_GET['to'];
       $query = $_GET['q'];
-      if ( strlen($query) < 4 ) break;
+      if ( strlen( $query ) < 4 ) break;
 
       $posts = get_posts(array(
         'offset'      => $start,
         'numberposts' => $end,
         's'           => $query,
-        'order'       => 'ASC',
-        'orderby'     => 'title',
+        // 'order'       => 'ASC',
+        // 'orderby'     => 'title',
       ));
 
       $ret = array_map( function( $item ){
-        $title = addslashes( $item->post_title );
+        $title = printTags( $item->ID) . addslashes( $item->post_title );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
+        $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
         $url = get_permalink( $item->ID );
         return array(
-          'title' => $title,
+          'title' =>  trim( $title ),
           'url'   => $url,
-          'img'   => $img,
+          'img'   => $img !== false?( $img ):( $thumb ),
         );
       }, $posts );
 
       echo json_encode( $ret );
-    break;
+      break;
     default:
       // code...
-    break;
+      break;
   }
 ?>

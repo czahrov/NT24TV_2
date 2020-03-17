@@ -1051,7 +1051,8 @@ footer.bg-footer{
             color: #8e8e8e;
         }
 
-        & span.tag{
+        & span.tag,
+        & .item{
             color: #fff;
             font-family: $font-bold;
             font-size: 0.8rem;

@@ -127,4 +127,17 @@ $(function(){
     $('#post .clipboard')
   );
 
+  // generowanie galerii unitegallery
+  $('#post [id^="fpGallery_"]').each(function(){
+    console.log( $(this) );
+
+    $("#fpGallery_1")
+    .unitegallery({
+      gallery_theme: "tiles",
+			tiles_type: "justified",
+      tile_overlay_color: '#e3000f',
+      
+    });
+  });
+
 });

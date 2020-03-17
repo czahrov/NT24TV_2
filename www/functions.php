@@ -520,3 +520,31 @@
     );
 
   }
+
+  function printGallery( $shortcode = null ){
+    static $num = 1;
+    $ret = "<div id='fpGallery_{$num}' style='display:none'>";
+
+    preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
+    $ids = explode( ',', $found[1] );
+
+    foreach ($ids as $media_id) {
+      $img_thumb = wp_get_attachment_image_url( $media_id, 'thumbnail' );
+      $img_full = wp_get_attachment_image_url( $media_id, 'full' );
+
+      $ret .= sprintf(
+        '<img alt="%1$s"
+        src="%2$s"
+				data-image="%3$s"
+				data-description="%1$s">',
+        get_the_title( $media_id ),
+        $img_thumb,
+        $img_full
+      );
+    }
+
+    $ret .= "</div>";
+    return $ret;
+  }
+
+?>

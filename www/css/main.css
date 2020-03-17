@@ -736,7 +736,8 @@ footer.bg-footer .copy .copy-content {
   color: #8e8e8e;
 }
 
-.before-content .author_date_tags span.tag {
+.before-content .author_date_tags span.tag,
+.before-content .author_date_tags .item {
   color: #fff;
   font-family: "open_sansbold";
   font-size: 0.8rem;

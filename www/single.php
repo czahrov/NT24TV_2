@@ -107,12 +107,22 @@
         <?php endif; ?>
 
         <?php
-          $img = get_the_post_thumbnail_url( 'full' );
+          $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
           $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
         ?>
         <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>">
 
-        <?php the_content(); ?>
+        <?php
+          $content = get_the_content();
+          preg_match_all( '/\[gallery.*?\]/', $content, $found );
+
+          foreach ( $found[0] as $tag ) {
+            $replace = printGallery( $tag );
+            $content = str_replace( $tag, $replace, $content );
+          }
+
+          echo apply_filters( 'the_content', $content );
+        ?>
 
       </div>
       <!-- /content -->

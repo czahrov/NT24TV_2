@@ -61,6 +61,19 @@
       );
     }
 
-  }
+    public function printUGallery( $img_ids = array() ){
 
+      foreach ( $img_ids as $img_id ) {
+        printf(
+          '<img alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s">',
+          get_the_title( $img_id ),
+          wp_get_attachment_image_url( $img_id, 'thumbnail' ),
+          wp_get_attachment_image_url( $img_id, 'full' )
+        );
+
+      }
+
+    }
+
+  }
 ?>

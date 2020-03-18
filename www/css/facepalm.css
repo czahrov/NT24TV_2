@@ -533,6 +533,104 @@ img.tag-icon {
   border-bottom: solid 2px #e3000f;
 }
 
+#post .slickGallery {
+  position: relative;
+}
+
+#post .slickGallery .items {
+  margin: 0;
+  font-size: 0;
+}
+
+#post .slickGallery .items .fpItem {
+  border: none;
+  margin: 0;
+  height: 150px;
+}
+
+#post .slickGallery .items .fpItem > div {
+  width: 100%;
+  height: 100%;
+  background-position: top;
+  background-size: cover;
+  background-color: #e3e3e3;
+}
+
+#post .slickGallery .nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 0px;
+}
+
+#post .slickGallery .nav .arrow {
+  position: absolute;
+  margin: 0;
+  padding: 6px;
+  top: 0;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .3s ease;
+  transform: translateY(-50%);
+}
+
+#post .slickGallery .nav .arrow.prev {
+  left: 0;
+}
+
+#post .slickGallery .nav .arrow.next {
+  right: 0;
+}
+
+#post .slickGallery .slick-dots {
+  margin-top: 20px;
+  top: 100%;
+}
+
+#post .slickGallery .slick-dots li {
+  width: initial;
+  height: initial;
+}
+
+#post .slickGallery .slick-dots li button {
+  padding: 0px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: solid 3px transparent;
+  background-color: #e3000f;
+  background-clip: content-box;
+  transition: all .3s ease;
+}
+
+#post .slickGallery .slick-dots li button::before {
+  content: none;
+}
+
+#post .slickGallery .slick-dots li.slick-active button {
+  border-color: #e3000f;
+  background-color: transparent;
+}
+
+#post .fpGallery {
+  font-size: 0;
+}
+
+#post .fpGallery .fpLink {
+  display: inline-block;
+  margin: 2px;
+  height: 150px;
+  width: 50vw;
+  max-width: 160px;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+}
+
 #search .tile {
   padding: 1.2rem 1rem;
 }

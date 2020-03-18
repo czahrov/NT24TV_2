@@ -128,16 +128,58 @@ $(function(){
   );
 
   // generowanie galerii unitegallery
-  $('#post [id^="fpGallery_"]').each(function(){
-    console.log( $(this) );
-
-    $("#fpGallery_1")
+  $('[id^="UGallery_"]').each(function(){
+    $(this)
     .unitegallery({
       gallery_theme: "tiles",
-			tiles_type: "justified",
+			// tiles_type: "nested",
+      lightbox_type: 'compact',
       tile_overlay_color: '#e3000f',
-      
+      tiles_col_width: 150,
     });
+
   });
+
+  // generowanie galerii slick
+  (function( gallery, items, nav, dots ){
+    items
+    .slick({
+      arrows: true,
+      appendArrows: nav,
+      prevArrow: "<img class='arrow prev' src='/wp-content/themes/NT24TV/images/chevron-left.svg'/>",
+      nextArrow: "<img class='arrow next' src='/wp-content/themes/NT24TV/images/chevron-right.svg'/>",
+      dots: true,
+      appendDots: dots,
+      rows: 3,
+      slidesToScroll: 4,
+      slidesToShow: 4,
+      responsive: [
+        {
+          breakpoint: 576,
+          settings: {
+            slidesToShow: 3,
+          }
+        },
+        {
+          breakpoint: 425,
+          settings: {
+            slidesToShow: 3,
+          }
+        },
+        {
+          breakpoint: 375,
+          settings: {
+            slidesToShow: 2,
+          }
+        },
+      ]
+    });
+
+  })(
+    $('.slickGallery'),
+    $('.slickGallery .items'),
+    $('.slickGallery .nav'),
+    $('.slickGallery .dots')
+  )
 
 });

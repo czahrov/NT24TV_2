@@ -61,16 +61,84 @@
       );
     }
 
-    public function printUGallery( $img_ids = array() ){
+    public function printUGallery( $img_ids = array(), $echo = true ){
+      static $num = 1;
+      $ret = "<div id='UGallery_{$num}' style='display:none'>";
 
       foreach ( $img_ids as $img_id ) {
-        printf(
-          '<img alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s">',
-          get_the_title( $img_id ),
-          wp_get_attachment_image_url( $img_id, 'thumbnail' ),
-          wp_get_attachment_image_url( $img_id, 'full' )
+        $title = get_the_title( $img_id );
+        $img_full = wp_get_attachment_image_url( $img_id, 'full' );
+        $img_thumb = wp_get_attachment_image_url( $img_id, 'thumbnail' );
+
+        $ret .= sprintf(
+          '<img alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" />',
+          $title,
+          $img_thumb,
+          $img_full
         );
 
+      }
+
+      $ret .= "</div>";
+      $num++;
+      if ( $echo ) {
+        echo $ret;
+      }
+      else{
+        return $ret;
+      }
+    }
+
+    public function printSlick( $img_ids = array(), $echo = true ){
+      $items = "";
+      foreach ($img_ids as $img_id) {
+        $items .= sprintf(
+          '<a class="fpItem" href="%2$s" target="_blank" title="%3$s">
+            <div style="background-image:url(%1$s);"></div>
+          </a>',
+          wp_get_attachment_image_url( $img_id, 'medium' ),
+          wp_get_attachment_image_url( $img_id, 'full' ),
+          get_the_title( $img_id )
+        );
+      }
+
+      $ret = sprintf(
+        '<div id="" class="slickGallery">
+          <div class="items">%s</div>
+          <div class="nav"> </div>
+          <div class="dots"></div>
+        </div>',
+        $items
+      );
+
+      if ( $echo ) {
+        echo $ret;
+      } else {
+        return $ret;
+      }
+
+    }
+
+    public function printGallery( $img_ids = array(), $echo = true ){
+      $items = "";
+      foreach ($img_ids as $img_id) {
+        $items .= sprintf(
+          '<a class="fpLink" href="%2$s" target="_blank" style="background-image:url(%1$s);"></a>',
+          wp_get_attachment_image_url( $img_id, 'thumbnail'),
+          wp_get_attachment_image_url( $img_id, 'full')
+        );
+      }
+
+      $ret = sprintf(
+        '<div id="" class="fpGallery row justify-content-center">%s</div>',
+        $items
+      );
+
+      if ( $echo ) {
+        echo $ret;
+      }
+      else {
+        return $ret;
       }
 
     }

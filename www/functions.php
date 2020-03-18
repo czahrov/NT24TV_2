@@ -1,11 +1,19 @@
 <?php
+  // header( "Cache-Control: max-age=2592000" );
+  header( "Cache-Control: max-age=0" );
   date_default_timezone_set('Europe/Warsaw');
+  error_reporting( E_ALL & ~E_WARNING & ~E_NOTICE );
 
   add_theme_support('post-formats', array( 'gallery', 'video' ));
   add_theme_support('post-thumbnails');
   register_nav_menus(array(
     'main' => 'Menu główne, wyświetlane na górze strony',
   ));
+
+  // Facepalm
+  include_once( get_template_directory() . '/php/Facepalm.php' );
+  global $fp;
+  $fp = new Facepalm();
 
   /* generuje komunikat o transmisji live */
   add_action( 'get_live', function( $arg ){
@@ -522,29 +530,15 @@
   }
 
   function printGallery( $shortcode = null ){
-    static $num = 1;
-    $ret = "<div id='fpGallery_{$num}' style='display:none'>";
+    global $fp;
 
     preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
     $ids = explode( ',', $found[1] );
 
-    foreach ($ids as $media_id) {
-      $img_thumb = wp_get_attachment_image_url( $media_id, 'thumbnail' );
-      $img_full = wp_get_attachment_image_url( $media_id, 'full' );
+    return $fp->printUGallery( $ids, false );
+    // return $fp->printSlick( $ids, false );
+    // return $fp->printGallery( $ids, false );
 
-      $ret .= sprintf(
-        '<img alt="%1$s"
-        src="%2$s"
-				data-image="%3$s"
-				data-description="%1$s">',
-        get_the_title( $media_id ),
-        $img_thumb,
-        $img_full
-      );
-    }
-
-    $ret .= "</div>";
-    return $ret;
   }
 
 ?>

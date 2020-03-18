@@ -114,14 +114,23 @@
 
         <?php
           $content = get_the_content();
+          $replace = array();
           preg_match_all( '/\[gallery.*?\]/', $content, $found );
 
-          foreach ( $found[0] as $tag ) {
-            $replace = printGallery( $tag );
-            $content = str_replace( $tag, $replace, $content );
+          foreach ( $found[0] as $k => $tag ) {
+            // $replace = printGallery( $tag );
+            // $content = str_replace( $tag, $replace, $content );
+            $replace[] = printGallery( $tag );
+            $content = str_replace( $tag, "%fp_g{$k}%", $content );
           }
 
-          echo apply_filters( 'the_content', $content );
+          $content = apply_filters( 'the_content', $content );
+
+          foreach ($replace as $k => $v) {
+            $content = str_replace( "%fp_g{$k}%", $replace[$k], $content );
+          }
+
+          echo $content;
         ?>
 
       </div>

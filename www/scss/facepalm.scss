@@ -347,6 +347,128 @@ img.tag-icon{
 
   }
 
+  .slickGallery{
+    position: relative;
+
+    .items{
+      margin: 0;
+      font-size: 0;
+
+      .fpItem{
+        border: none;
+        margin: 0;
+        height: 150px;
+
+        & > div{
+          width: 100%;
+          height: 100%;
+          background:{
+            position: top;
+            size: cover;
+            color: map-get( $color, 'grey' );
+          }
+
+        }
+
+      }
+
+    }
+
+    .nav{
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 0px;
+
+      .arrow{
+        position: absolute;
+        margin: 0;
+        padding: 6px;
+        top: 0;
+        height: 40px;
+        background-color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all .3s ease;
+        transform: translateY(-50%);
+
+        &.prev{
+          left: 0;
+        }
+
+        &.next{
+          right: 0;
+        }
+
+      }
+
+    }
+
+    .slick-dots{
+      margin-top: 20px;
+      top: 100%;
+
+      li{
+        width: initial;
+        height: initial;
+
+        button{
+          padding: 0px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: solid 3px transparent;
+          background-color: map-get( $color, 'red' );
+          background-clip: content-box;
+          transition: all .3s ease;
+
+          &::before{
+            content: none;
+          }
+
+        }
+
+        &.slick-active{
+
+          button{
+            border-color: map-get( $color, 'red' );
+            background-color: transparent;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  [id^="UGallery_"]{
+    // background-color: red;
+
+  }
+
+  .fpGallery{
+    font-size: 0;
+
+    .fpLink{
+      display: inline-block;
+      margin: 2px;
+      height: 150px;
+      width: 50vw;
+      max-width: 160px;
+      background:{
+        position: top;
+        size: cover;
+        repeat: no-repeat;
+      }
+      border: none;
+
+    }
+
+  }
+
 }
 
 #search{
@@ -374,9 +496,5 @@ img.tag-icon{
     }
 
   }
-
-}
-
-[id^="fpGallery_"]{
 
 }

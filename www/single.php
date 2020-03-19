@@ -20,7 +20,7 @@
 <div id='post' class="container">
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
-    <div class="col-xl-8 col-sm-12 col-md-12 col-lg-12 single-post">
+    <div class="col-12 col-lg-8 single-post">
 
       <!-- Title -->
       <h2><?php the_title(); ?></h2>
@@ -139,7 +139,7 @@
     </div>
     <!-- / col -->
 
-    <?php get_template_part('template/single/sidebar'); ?>
+    <?php get_template_part('template/single/sidebar-top'); ?>
   </div>
   <!-- /.row -->
 
@@ -150,7 +150,7 @@
 <!-- Page Content -->
 <div class="container">
   <div class="row no-gutters">
-    <div class="col-xl-8 col-sm-12 col-md-12 col-lg-12 single-post">
+    <div class="col-12 col-lg-8 single-post">
       <div class="row no-gutters komentarze">
         <?php get_template_part('template/single/comments'); ?>
 
@@ -161,7 +161,7 @@
     </div>
     <!-- /col-8 -->
 
-    <?php get_template_part('template/single/reportarze'); ?>
+    <?php get_template_part('template/single/sidebar-bot'); ?>
     <!-- /.row -->
 
   </div>

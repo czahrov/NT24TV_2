@@ -37,10 +37,12 @@ button:active, button:focus {
   background-color: none;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 65px;
+@media (min-width: 992px) {
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 65px;
+  }
 }
 
 .sticky-menu {

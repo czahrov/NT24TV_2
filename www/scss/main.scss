@@ -59,8 +59,12 @@ button:active, button:focus{
 }
 
 .sticky{
-    position: sticky;
-    top: 65px;
+
+    @media( min-width: 992px){
+      position: sticky;
+      top: 65px;
+
+    }
 }
 .sticky-menu{
     position: sticky;

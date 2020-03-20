@@ -97,10 +97,11 @@
     <a href="<?php echo get_category_link( get_category_by_slug('aktualnosci')->cat_ID ); ?>" class="">Więcej Aktualności</a>
   </div>
 
-  <div class="reklama-full-page">
-    <!-- <div class="reklama">Reklama 1200x150px</div> -->
-    <?php echo printAd('pozioma'); ?>
-  </div>
+  <!-- reklama pozioma -->
+  <?php echo printAd('h-l'); ?>
+  <!-- <div class="reklama-full-page">
+    <div class="reklama">Reklama 1200x150px</div>
+  </div> -->
 
 </div>
 <!-- /.container -->

@@ -161,19 +161,19 @@ a{
 .adbox{
   display: flex;
   padding: 0 10px;
-  margin-bottom: 30px;
+  margin: 15px auto;
   align-items: flex-start;
   justify-content: center;
-  width: 100%;
+  // width: 100%;
 
   img{
     display: inline-block;
     max-width: 100%;
-    max-height: 90vh;
     width: 100%;
 
     @media( min-width: 576px ){
       width: initial;
+      max-height: 90vh;
     }
 
   }
@@ -342,6 +342,11 @@ img.tag-icon{
 
 #category{
 
+  #sidebar{
+    margin-top: 45px;
+    top: 50px;
+  }
+
 }
 
 #post{
@@ -503,6 +508,27 @@ img.tag-icon{
       text-decoration: none;
     }
 
+  }
+
+}
+
+#popularne{
+
+  #sidebar{
+    top: 50px;
+    margin-top: 40px;
+  }
+
+}
+
+#sponsorowane{
+
+  #sidebar{
+
+    @media( min-width: 1200px ){
+      margin-top: 50px;
+    }
+    
   }
 
 }

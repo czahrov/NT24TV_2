@@ -410,22 +410,21 @@ a:hover, a:focus {
 .adbox {
   display: flex;
   padding: 0 10px;
-  margin-bottom: 30px;
+  margin: 15px auto;
   align-items: flex-start;
   justify-content: center;
-  width: 100%;
 }
 
 .adbox img {
   display: inline-block;
   max-width: 100%;
-  max-height: 90vh;
   width: 100%;
 }
 
 @media (min-width: 576px) {
   .adbox img {
     width: initial;
+    max-height: 90vh;
   }
 }
 
@@ -537,6 +536,11 @@ img.tag-icon {
 #live > .container > .row > .btn > .icon {
   padding-right: 10px;
   font-size: 20px;
+}
+
+#category #sidebar {
+  margin-top: 45px;
+  top: 50px;
 }
 
 #post .content a {
@@ -660,6 +664,17 @@ img.tag-icon {
 
 #search .tile, #search .tile:hover, #search .tile:focus {
   text-decoration: none;
+}
+
+#popularne #sidebar {
+  top: 50px;
+  margin-top: 40px;
+}
+
+@media (min-width: 1200px) {
+  #sponsorowane #sidebar {
+    margin-top: 50px;
+  }
 }
 
 /*# sourceMappingURL=facepalm.css.map */

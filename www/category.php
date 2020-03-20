@@ -74,14 +74,21 @@
         <!-- / col -->
         <!-- Sidebar Column -->
         <div class="col-md-4 sidebar-list">
-          <div class="reklama-sidebar">
-              <!-- <div class="reklama">Reklama 400x700px</div> -->
+          <div id="sidebar" class="position-sticky row no-gutters d-md-block justify-content-center">
+            <div class="col-12 col-sm-6 col-md">
               <?php echo printAd('pionowa'); ?>
-          </div>
-          <div class="reklama-sidebar sticky">
-              <!-- <div class="reklama">Reklama 400x700px</div> -->
+            </div>
+            <div class="col-12 col-sm-6 col-md">
               <?php echo printAd('pionowa'); ?>
+            </div>
+
           </div>
+          <!-- <div class="reklama-sidebar">
+              <div class="reklama">Reklama 400x700px</div>
+          </div> -->
+          <!-- <div class="reklama-sidebar sticky">
+              <div class="reklama">Reklama 400x700px</div>
+          </div> -->
         </div>
     </div>
     <!-- /.row -->

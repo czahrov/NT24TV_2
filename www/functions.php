@@ -469,37 +469,66 @@
   }
 
   function printAd( $type = null, $promo = false ){
-    if ( $type == null ) return false;
+    // v-s : Pionowy S ( max 400x230 px )
+    // v-m : Pionowy M ( max 400x500 px )
+    // v-l : Pionowy L ( max 400x700 px )
+    // h-s : Poziomy S ( max 400 px szerokości )
+    // h-m : Poziomy M ( max 820 px szerokości )
+    // h-l : Poziomy L ( max 1250 px szerokości )
+    preg_match( '/^(?:v|h)\-(?:s|m|l)$/', $type, $match );
     static $loaded = array();
 
     $std_meta_query = array(
+      'relation'  =>  'AND',
       array(
-        'key'     => 'uklad',
-        'value'   => $type,
+        'key'       => 'uklad',
+        'value'     => $type,
+        'compare'   => '=',
+      ),
+      array(
+        'relation'  => 'OR',
+        array(
+          'key'           => 'sponsorowany',
+          'compare_key'   => 'NOT EXISTS',
+        ),
+        array(
+          'key'      => 'sponsorowany',
+          'value'    => 'promo',
+          'compare'  => '!=',
+        ),
       ),
     );
-
     $promo_meta_query = array(
-      'relation'    => 'AND',
+      'relation'  =>  'AND',
       array(
         'key'     => 'uklad',
         'value'   => $type,
+        'compare' => '=',
       ),
       array(
         'key'     => 'sponsorowany',
         'value'   => 'promo',
+        'compare' => '=',
       ),
+    );
+
+    $query = array(
+      'numberposts' => -1,
+      'category_name' => 'banner-reklamowy',
+      'orderby' => 'rand',
+      'meta_query' => $promo?( $promo_meta_query ):( $std_meta_query ),
+
     );
 
     $found = get_posts(array(
       'numberposts'     => 1,
       'category_name'   => 'banner-reklamowy',
-      'exclude'         => $loaded,
-      'meta_query'      => $promo?( $promo_meta_query ):( $std_meta_query ),
+      // 'exclude'         => $loaded,
+      'meta_query'      => $query,
       'orderby'         => 'rand',
     ));
 
-    if ( empty( $found ) ) return false;
+    if ( empty( $found ) ) return;
 
     $ad = $found[0];
     $loaded[] = $ad->ID;
@@ -515,16 +544,18 @@
       $img = wp_get_attachment_image_url( $imgID, 'full' );
     }
     else{
-      return false;
+      return ;
     }
 
     printf(
-      '<a class="adbox" href="%s" target="%s">
-        <img src="%s"/>
+      '<a class="adbox" href="%1$s" target="%2$s" data-type="%4$s" data-id="%5$u">
+        <img src="%3$s"/>
       </a>',
       $href,
       $target,
-      $img
+      $img,
+      $type,
+      $ad->ID
     );
 
   }

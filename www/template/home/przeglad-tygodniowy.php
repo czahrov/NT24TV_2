@@ -12,33 +12,31 @@
     ?> -->
   </div>
   <div class="row no-gutters">
-
-    <!-- Blog Entries Column -->
+<!-- Blog Entries Column -->
     <div class="col-md-6 col-lg-8">
       <h5 class="title-sidebar">Przegląd tygodniowy</h5>
-
       <!-- BIG Post -->
-        <?php
-          $item = $items[0];
-          $format = get_post_format( $item );
+      <?php
+        $item = $items[0];
+        $format = get_post_format( $item );
 
-          printf(
-            '<a class="link_post big" href="%4$s">
-              <div class="big-post">
-                <div class="cover_img"></div>
-                <div class="post_news_big  img12" style="background-image:url(%1$s)">
-                  %3$s
-                  <span>%5$s %2$s</span>
-                </div>
+        printf(
+          '<a class="link_post big" href="%4$s">
+            <div class="big-post">
+              <div class="cover_img"></div>
+              <div class="post_news_big  img12" style="background-image:url(%1$s)">
+                %3$s
+                <span>%5$s %2$s</span>
               </div>
-            </a>',
-            get_the_post_thumbnail_url( $item->ID, 'full' ),
-            $item->post_title,
-            $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
-            get_permalink( $item->ID ),
-            printTags( $item->ID, false )
-          );
-        ?>
+            </div>
+          </a>',
+          get_the_post_thumbnail_url( $item->ID, 'full' ),
+          $item->post_title,
+          $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
+          get_permalink( $item->ID ),
+          printTags( $item->ID, false )
+        );
+      ?>
 
       <div class="clear-top"></div>
 
@@ -76,21 +74,16 @@
         <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>" class="">Więcej Przeglądów</a>
       </div>
 
-
-
-      <div class="reklama-full-page">
-        <!-- <div class="reklama">Reklama 840x150px</div> -->
-        <?php echo printAd('pozioma'); ?>
-      </div>
+      <!-- reklama pozioma -->
+      <?php echo printAd('h-m'); ?>
+      <!-- <div class="reklama-full-page">
+        <div class="reklama">Reklama 840x150px</div>
+      </div> -->
 
     </div>
     <!-- /col-8 -->
-
-
-
-
-    <!-- Sidebar Column -->
-    <div class="col-sm-12 col-md-6 col-lg-4 sidebar-list">
+<!-- Sidebar Column -->
+    <div id="sidebar" class="col-sm-12 col-md-6 col-lg-4 sidebar-list">
       <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
 
       <div class="weather-widget">
@@ -144,13 +137,6 @@
     </div>
   </div>
   <!-- /.row -->
-
-
-
-
-
-
-
 
 </div>
 <!-- /.container -->

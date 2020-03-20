@@ -51,10 +51,12 @@
 
     <!-- Sidebar Column -->
     <div class="col-md-12 col-lg-4 sidebar-list">
-
-      <div class="reklama-sidebar sticky">
-        <!-- <div class="reklama">Reklama 400x700px</div> -->
-        <?php echo printAd('pionowa'); ?>
+      <div id="sidebar" class="position-sticky">
+        <!-- reklama pionowa -->
+        <?php echo printAd( 'v-l' ); ?>
+        <!-- <div class="reklama-sidebar sticky">
+          <div class="reklama">Reklama 400x700px</div>
+        </div> -->
       </div>
 
     </div>

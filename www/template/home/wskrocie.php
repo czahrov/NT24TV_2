@@ -104,16 +104,19 @@
         </div>
 
       </div>
-      <div class="reklama-full-page sticky">
-        <!-- <div class="reklama">Reklama 840x150px</div> -->
-        <?php echo printAd('pozioma'); ?>
+      <div class="">
+        <!-- reklama pozioma -->
+        <?php echo printAd( 'h-m' ); ?>
+        <!-- <div class="reklama-full-page sticky">
+        <div class="reklama">Reklama 840x150px</div>
+      </div> -->
       </div>
 
     </div>
     <!-- /col-8 -->
 
     <!-- Sidebar Column -->
-    <div class="col-lg-4 col-md-12 sidebar-list">
+    <div id="sidebar" class="col-lg-4 col-md-12 sidebar-list">
       <div class="reportaze ogloszenia-urzedowe">
         <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
         <ul class="image-sidebar-section">
@@ -149,13 +152,13 @@
       <!-- /ogłoszenia urzędowe -->
       <div class="clear-top"></div>
       <h5 class="title-sidebar">Filmy promocyjne</h5>
-
       <div class="filmy-promocyjne">
         <?php
           $items = get_posts(array(
             'category_name' => 'filmy-promocyjne',
             'numberposts'   => 2,
           ));
+
           foreach ($items as $item) {
             printf(
               '<a href="%1$s" class="single">

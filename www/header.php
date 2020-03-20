@@ -69,6 +69,7 @@
     wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/css/main.css' );
     wp_enqueue_style( 'fp_style', get_template_directory_uri() . '/css/facepalm.css' );
+    wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/home_slick.js', array(), false, true );
     wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/facepalm.js', array(), false, true );
 
   ?>

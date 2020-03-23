@@ -76,10 +76,10 @@
         <div class="col-md-4 sidebar-list">
           <div id="sidebar" class="position-sticky row no-gutters d-md-block justify-content-center">
             <div class="col-12 col-sm-6 col-md">
-              <?php echo printAd('pionowa'); ?>
+              <?php echo printAd('v-l'); ?>
             </div>
             <div class="col-12 col-sm-6 col-md">
-              <?php echo printAd('pionowa'); ?>
+              <?php echo printAd('v-l'); ?>
             </div>
 
           </div>

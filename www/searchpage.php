@@ -3,8 +3,9 @@
   get_header();
 
   $search = esc_attr( $_GET['q'] );
+  $post_limit = 12;
   $found = get_posts(array(
-    'numberposts' => 24,
+    'numberposts' => $post_limit,
     's'           => $search,
     // 'sentence'    => true,
     // 'order'       => 'ASC',
@@ -33,7 +34,7 @@
         );
       ?>
     <?php endforeach; ?>
-    <?php if ( count($found) == 24 ): ?>
+    <?php if ( count($found) == $post_limit ): ?>
       <button id="btn_more" type="button" name="button" class="col-12 fp-btn btn-more fw-bold position-relative">
         <div class="spinner position-absolute">
           <div class="box position-absolute"> </div>

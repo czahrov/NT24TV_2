@@ -473,8 +473,8 @@
     // v-m : Pionowy M ( max 400x500 px )
     // v-l : Pionowy L ( max 400x700 px )
     // h-s : Poziomy S ( max 400 px szerokości )
-    // h-m : Poziomy M ( max 820 px szerokości )
-    // h-l : Poziomy L ( max 1250 px szerokości )
+    // h-m : Poziomy M ( max 840 px szerokości )
+    // h-l : Poziomy L ( max 1270 px szerokości )
     preg_match( '/^(?:v|h)\-(?:s|m|l)$/', $type, $match );
     static $loaded = array();
 

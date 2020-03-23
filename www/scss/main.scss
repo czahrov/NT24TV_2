@@ -249,8 +249,8 @@ li.active{
     color: #000;
 }
 
-li.nav-item{
-    padding-right: 3rem;
+li.nav-item:not(:last-child){
+    padding-right: 30px;
 }
 
 .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link {
@@ -396,38 +396,39 @@ a.link_post {
         position: relative;
         background-size: cover;
 
-
-
         & span{
-            z-index: 2;
+          margin: 0 20px;
+          padding: 50px 0;
+          position: absolute;
+          z-index: 2;
+          left: 0;
+          bottom: 0;
+          color: #fff;
+          font-family: $font-extrabold;
+          font-size: 2rem;
+          text-shadow: 0 1px 1.6px $dark;
+          text-shadow: 0 0.0275rem 0.05rem $dark;
+
+          .tag{
             position: absolute;
-            left: 0;
-            bottom: 0;
-            color: #fff;
-            font-family: $font-extrabold;
-            font-size: 2rem;
-            padding: 50px;
-            text-shadow: 0 1px 1.6px $dark;
-            text-shadow: 0 0.0275rem 0.05rem $dark;
-
-        }
-
-
-        & span.tag{
-            position: absolute;
-            left: 50px;
+            padding: 2px 7px;
+            left: 0px;
             bottom: 150px;
             color: #fff;
             font-family: $font-bold;
             font-size: 0.8rem;
             background-color: $red;
-            padding: 5px;
             text-transform: uppercase;
-            padding:2px 7px;
             border-radius: 2px;
 
-        }
+          }
 
+          @media( min-width: 576px){
+            margin: 0 50px;
+
+          }
+
+        }
 
     }
 
@@ -772,17 +773,24 @@ ul.image-sidebar-section{
 .najbardziej-popularne{
     & a.link_post_small{
         & span{
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          padding: 20px 0;
+          margin: 0 20px;
+          color: #fff;
+          font-family: $font-extrabold;
+          font-size: 2rem;
+          text-shadow: 0 1px 1.6px #141c1f;
+          text-shadow: 0 0.0275rem 0.05rem #141c1f;
+          z-index: 5;
 
-            z-index: 5;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            color: #fff;
-            font-family: $font-extrabold;
-            font-size: 2rem;
-            padding: 50px;
-            text-shadow: 0 1px 1.6px #141c1f;
-            text-shadow: 0 0.0275rem 0.05rem #141c1f;
+          @media( min-width: 768){
+            padding: 50px 0;
+            margin: 0 50px;
+
+          }
+
         }
 
         & .post_news_small{
@@ -1116,6 +1124,8 @@ footer.bg-footer{
                 font-family: $font-semibold;
 
                 .content{
+                  padding-left: 20px;
+                  width: 60vw;
                   max-width: 300px;
                   overflow: hidden;
                   text-overflow: ellipsis;
@@ -1619,14 +1629,9 @@ a:focus, span:focus, button:focus {
             & .post_news_big{
 
                 & span{
-                    padding:1rem;
                     font-size: 1.6rem;
                 }
 
-                & span.tag{
-                    left: 1rem;
-                    bottom:130px;
-                }
             }
         }
 
@@ -1985,14 +1990,9 @@ a:focus, span:focus, button:focus {
             & .post_news_big{
 
                 & span{
-                    padding:1rem;
                     font-size: 1.6rem;
                 }
 
-                & span.tag{
-                    left: 1rem;
-                    bottom:130px;
-                }
             }
         }
 
@@ -2369,14 +2369,9 @@ a:focus, span:focus, button:focus {
                & .post_news_big{
 
                    & span{
-                       padding:1rem;
                        font-size: 1.6rem;
                    }
 
-                   & span.tag{
-                       left: 1rem;
-                       bottom:130px;
-                   }
                }
            }
 

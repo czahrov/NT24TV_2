@@ -20,12 +20,14 @@
                 '<p class="comment-form-author">%s %s</p>',
                 sprintf(
                     '<label for="author">%s</label>',
-                    ($req ? ' <span class="required">*</span>' : '')
+                    // ($req ? ' <span class="required">*</span>' : '')
+                    ' <span class="required">*</span>'
                 ),
                 sprintf(
-                    '<input id="author" name="author" type="text" value="%s" size="30" maxlength="245" placeholder="Twój podpis"%s />',
+                    '<input id="author" name="author" type="text" value="%s" size="30" maxlength="245" placeholder="Twój podpis" pattern="(?=\S)." %s />',
                     esc_attr($commenter['comment_author']),
-                    $html_req
+                    // $html_req
+                    'required'
                 )
             ),
             'cookies' => '',

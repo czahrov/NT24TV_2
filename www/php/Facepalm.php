@@ -54,11 +54,16 @@
       return $ret;
     }
 
-    public function genYoutubeVideo( $videoID ){
-      printf(
-        '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-        $videoID
-      );
+    public function genYoutubeVideo( $link = "", $delimiter = "|" ){
+      $videos = array_map( function($arg){
+        // https://www.youtube.com/watch?time_continue=1&v=yvcobYgRB-A
+        preg_match( '~.+/(.+?v=)?([^&]+)?~', $arg, $match );
+        printf(
+          '<iframe class="youtube_video" src="https://www.youtube.com/embed/%s" allowfullscreen></iframe>',
+            end( $match )
+          );
+      }, explode( $delimiter, $link ) );
+
     }
 
     public function printUGallery( $img_ids = array(), $echo = true ){

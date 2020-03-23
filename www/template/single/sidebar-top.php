@@ -4,7 +4,9 @@
     <div class="reklama">Reklama 400x700px</div>
   </div> -->
   <div class="col-12 col-sm-4 col-lg-12 order-0 order-sm-2 order-lg-0">
-    <?php echo printAd( 'pionowa' ); ?>
+    <div class="position-sticky">
+      <?php echo printAd( 'v-l' ); ?>
+    </div>
   </div>
   <div class="reportaze sticky col-12 col-sm-8 col-lg-12">
     <h5 class="title-sidebar line">Najbardziej popularne</h5>

@@ -378,25 +378,22 @@ a:hover, a:focus {
   border-radius: 50%;
 }
 
-.video-post {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  transform: translate(-50%, -50%);
+.popular-post .video-post {
   background-image: url("../images/play.svg");
-  z-index: 5;
 }
 
-.gallery-post {
+.popular-post .gallery-post {
+  background-image: url("../images/images.svg");
+}
+
+.popular-post .video-post,
+.popular-post .gallery-post {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   width: 40px;
   height: 40px;
   transform: translate(-50%, -50%);
-  background-image: url("../images/images.svg");
   background-size: contain;
   z-index: 5;
 }
@@ -409,7 +406,6 @@ a:hover, a:focus {
 
 .adbox {
   display: flex;
-  padding: 0 10px;
   margin: 15px auto;
   align-items: flex-start;
   justify-content: center;
@@ -431,7 +427,7 @@ a:hover, a:focus {
 .post-tags {
   display: flex;
   position: absolute;
-  left: 50px;
+  left: 0px;
   top: 0px;
 }
 
@@ -450,6 +446,14 @@ img.tag-icon {
   display: inline-block;
   height: 1em;
   width: 1em;
+}
+
+.position-sticky {
+  top: 0;
+}
+
+ol, ul {
+  list-style-position: inside;
 }
 
 #btn_more {
@@ -545,6 +549,12 @@ img.tag-icon {
 
 #post .content a {
   border-bottom: solid 2px #e3000f;
+}
+
+@media (max-width: 1200px) {
+  #post .content.main p, #post .content.main img {
+    padding: 1rem;
+  }
 }
 
 #post .slickGallery {
@@ -645,6 +655,34 @@ img.tag-icon {
   border: none;
 }
 
+@media (min-width: 576px) {
+  #post #single_sidebar_top .position-sticky {
+    margin-top: 30px;
+  }
+}
+
+@media (min-width: 992x) {
+  #post #single_sidebar_top .position-sticky {
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 576px) {
+  #post #single_sidebar_bot .position-sticky {
+    margin-top: 30px;
+  }
+}
+
+@media (min-width: 992x) {
+  #post #single_sidebar_bot .position-sticky {
+    margin-top: 0px;
+  }
+}
+
+#post #more {
+  padding: 1rem;
+}
+
 #search .tile {
   padding: 1.2rem 1rem;
 }
@@ -675,6 +713,49 @@ img.tag-icon {
   #sponsorowane #sidebar {
     margin-top: 50px;
   }
+}
+
+#page .banner {
+  height: 50vh;
+  max-height: 300px;
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #e3e3e3;
+}
+
+#page .banner .text {
+  padding: 10px 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 4px #000;
+  font-size: 36px;
+}
+
+#page .content {
+  margin: 30px auto;
+}
+
+#page #sidebar {
+  top: 50px;
+}
+
+#page #kamery .item iframe, #page #kamery .item .img {
+  width: 100%;
+  height: 40vw;
+  max-height: 300px;
+}
+
+#page #kamery .item .img {
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#page #kamery .item .text {
+  padding: 10px 0;
+  font-size: 20px;
 }
 
 /*# sourceMappingURL=facepalm.css.map */

@@ -21,32 +21,28 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-lg-8 single-post">
-
       <!-- Title -->
       <h2><?php the_title(); ?></h2>
-
       <div class="before-content">
         <div class="author_date_tags">
           <?php
-            $segments = array(
-              "<span class='author'>".get_the_author()."</span>",
-              "<span class='date'>".get_the_date("d.m.Y")."</span>",
-              printImportant( get_the_id(), false ),
-              printFresh( get_the_id(), false ),
-              printHot( get_the_id(), false )
-            );
+          $segments = array(
+            "<span class='author'>".get_the_author()."</span>",
+            "<span class='date'>".get_the_date("d.m.Y")."</span>",
+            printImportant( get_the_id(), false ),
+            printFresh( get_the_id(), false ),
+            printHot( get_the_id(), false )
+          );
 
-            echo implode(
-              '<span class="separator"></span>',
-              array_filter( $segments, function( $item ){
-                return !empty( $item );
-              } )
-            );
+          echo implode(
+            '<span class="separator"></span>',
+            array_filter( $segments, function( $item ){
+              return !empty( $item );
+            } )
+          );
           ?>
         </div>
-
         <div class="share_comment row justify-content-between">
-
           <div class="social_share">
             <span class="fb">
               <a href="<?php echo $fp->getSocialLink( 'facebook', get_the_permalink() ); ?>">
@@ -64,18 +60,17 @@
               </a>
             </span>
           </div>
-
           <?php if ( !empty( $last_comment ) ): ?>
             <a class="comment d-flex" href="<?php echo "#comment-{$last_comment->comment_ID}"; ?>">
               <i class="icon">
                 <img src="<?php echo get_template_directory_uri() . "/" ?>images/message.svg" alt="komentarz">
               </i>
-              <span class="comment_value d-flex">
+              <span class="comment_value row justify-content-end">
                 <div class="content">
                   <?php echo $last_comment->comment_content; ?>
                 </div>
                 <span class="author_comment">
-                  <?php echo $last_comment->comment_author; ?>
+                  <?php echo !strlen($last_comment->comment_author)?('*ANONIM*'):($last_comment->comment_author); ?>
                 </span>
               </span>
               <span class="comments_que">
@@ -83,27 +78,18 @@
               </span>
             </a>
           <?php endif; ?>
-
         </div>
-
       </div>
       <!-- /before content -->
-
-      <div class="content">
+      <div class="content main">
 
         <div class="zajawka">
           <?php the_excerpt(); ?>
         </div>
-
-        <?php
-          $vid_url = get_post_field('youtube');
-          if( !empty( $vid_url ) ):
-            preg_match( '/([^\/]+)$/', $vid_url, $match );
-            $vid = $match[1];
-        ?>
-        <div class="video">
-          <?php $fp->genYoutubeVideo( $vid ); ?>
-        </div>
+        <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
+          <div class="video">
+            <?php $fp->genYoutubeVideo( $yt ); ?>
+          </div>
         <?php endif; ?>
 
         <?php
@@ -135,37 +121,34 @@
 
       </div>
       <!-- /content -->
-
     </div>
     <!-- / col -->
-
     <?php get_template_part('template/single/sidebar-top'); ?>
   </div>
   <!-- /.row -->
+  <div class="clear-top"></div>
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row no-gutters">
+      <div class="col-12 col-lg-8 single-post">
+        <div class="row no-gutters komentarze">
+          <?php get_template_part('template/single/comments'); ?>
+
+          <!-- /col-md-12 -->
+        </div>
+        <?php get_template_part('template/single/more'); ?>
+
+      </div>
+      <!-- /col-8 -->
+
+      <?php get_template_part('template/single/sidebar-bot'); ?>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+  </div>
 
 </div>
 <!-- /.container -->
-
-<div class="clear-top"></div>
-<!-- Page Content -->
-<div class="container">
-  <div class="row no-gutters">
-    <div class="col-12 col-lg-8 single-post">
-      <div class="row no-gutters komentarze">
-        <?php get_template_part('template/single/comments'); ?>
-
-        <!-- /col-md-12 -->
-      </div>
-      <?php get_template_part('template/single/more'); ?>
-
-    </div>
-    <!-- /col-8 -->
-
-    <?php get_template_part('template/single/sidebar-bot'); ?>
-    <!-- /.row -->
-
-  </div>
-  <!-- /.container -->
-</div>
 
 <?php get_footer(); ?>

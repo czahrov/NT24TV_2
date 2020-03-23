@@ -6,11 +6,6 @@
 ?>
 <!-- Page Content -->
 <div id='przeglad_tygodniowy' class="container">
-  <div class="">
-    <!-- <?php
-      // print_r( $items );
-    ?> -->
-  </div>
   <div class="row no-gutters">
 <!-- Blog Entries Column -->
     <div class="col-md-6 col-lg-8">
@@ -86,13 +81,7 @@
     <div id="sidebar" class="col-sm-12 col-md-6 col-lg-4 sidebar-list">
       <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
 
-      <div class="weather-widget">
-        <!-- Airly Widget Begin -->
-        <script src="https://airly.eu/map/airly.js" type="text/javascript"></script>
-        <iframe id="airly_850903952" src="https://airly.eu/map/widget.html#lat=49.47437&lng=20.02578&id=11414&w=280&h=380&l=pl&i=true&ah=true&aw=true"
-          style="width:100%;border:none;"></iframe>
-        <!-- Airly Widget End -->
-      </div>
+      <?php get_template_part('template/airly'); ?>
 
       <div class="reportaze sticky">
         <div class="clear-top"></div>

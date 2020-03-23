@@ -69,7 +69,7 @@
     wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/css/main.css' );
     wp_enqueue_style( 'fp_style', get_template_directory_uri() . '/css/facepalm.css' );
-    wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/home_slick.js', array(), false, true );
+    wp_enqueue_script( 'home_slick', get_template_directory_uri().'/js/home_slick.js', array(), false, true );
     wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/facepalm.js', array(), false, true );
 
   ?>
@@ -98,15 +98,14 @@
         <div class="weather ml-auto">
           <ul>
             <li>
-              <img src="<?php echo get_template_directory_uri() . "/" ?>images/cloud.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/cloud.png'" alt="Pogoda">
-              <a href="">Sprawdź pogodę</a>
+              <img src="<?php echo get_template_directory_uri() . "/images/cloud.svg" ?>" alt="Pogoda">
+              <a href="<?php echo home_url('pogoda'); ?>">Sprawdź pogodę</a>
             </li>
             <li>
-              <img src="<?php echo get_template_directory_uri() . "/" ?>images/cctv.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/cloud.png'" alt="Pogoda">
-              <a href="">Kamery na żywo</a>
+              <img src="<?php echo get_template_directory_uri() . "/images/cctv.svg" ?>"alt="Pogoda">
+              <a href="<?php echo home_url('kamery'); ?>">Kamery na żywo</a>
             </li>
           </ul>
-
         </div>
       </div>
     </div>
@@ -133,14 +132,15 @@
               $post = get_post();
               foreach ( wp_get_nav_menu_items('gorne-menu') as $item ){
                 printf(
-                  '<li class="nav-item %3$s">
+                  '<li class="nav-item %3$s %4$s">
                     <a class="nav-link red-link" href="%1$s">
                       %2$s
                     </a>
                   </li>',
                   $item->url,
                   $item->title,
-                  $item->guid == $post->guid?( 'active' ):( '' )
+                  $item->guid == $post->guid?( 'active' ):( '' ),
+                  implode( ' ', $item->classes )
                 );
               }
             ?>

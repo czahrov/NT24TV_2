@@ -475,7 +475,8 @@
     // h-s : Poziomy S ( max 400 px szerokości )
     // h-m : Poziomy M ( max 840 px szerokości )
     // h-l : Poziomy L ( max 1270 px szerokości )
-    preg_match( '/^(?:v|h)\-(?:s|m|l)$/', $type, $match );
+    // preg_match( '/^(?:v|h)\-(?:s|m|l)$/', $type, $match );
+    $parse = sscanf( $type, '%1s-%1s' );
     static $loaded = array();
 
     $std_meta_query = array(
@@ -548,14 +549,15 @@
     }
 
     printf(
-      '<a class="adbox" href="%1$s" target="%2$s" data-type="%4$s" data-id="%5$u">
+      '<a class="adbox %6$s" href="%1$s" target="%2$s" data-type="%4$s" data-id="%5$u">
         <img src="%3$s"/>
       </a>',
       $href,
       $target,
       $img,
       $type,
-      $ad->ID
+      $ad->ID,
+      ( $parse[0] == 'h' and in_array( $parse[1], array( 'l', 'm' ) ) )?( 'no-padding' ):( '' )
     );
 
   }
@@ -569,6 +571,40 @@
     return $fp->printUGallery( $ids, false );
     // return $fp->printSlick( $ids, false );
     // return $fp->printGallery( $ids, false );
+
+  }
+
+  // wykrywanie urządzenia
+  function getDevType( $echo = false ){
+    static $devType = null;
+
+    if ( !class_exists('Mobile_Detect') ) {
+      include_once( get_template_directory() . '/php/Mobile_Detect.php' );
+    }
+
+    if ( $devType == null ) {
+      $detect = new Mobile_Detect();
+
+      if ( $detect->isMobile() ) {
+        if ( $detect->isTablet() ) {
+          $devType = 'tablet';
+        }
+        else{
+          $devType = 'smartphone';
+        }
+      }
+      else {
+        $devType = 'desktop';
+      }
+
+    }
+
+    if ( $echo ) {
+      echo $devType;
+    }
+    else {
+      return $devType;
+    }
 
   }
 

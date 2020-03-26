@@ -3,11 +3,21 @@
 ?>
 <?php get_header(); ?>
 <?php
-  get_template_part( 'template/home/aktualnosci' );
-  get_template_part( 'template/home/przeglad-tygodniowy' );
-  get_template_part( 'template/home/sport' );
-  get_template_part( 'template/home/popularne' );
-  get_template_part( 'template/home/wskrocie' );
-  get_template_part( 'template/home/sponsorowane' );
+  global $devType;
+  $files = array(
+    'template/%s/home/aktualnosci',
+    'template/%s/home/przeglad-tygodniowy',
+    'template/%s/home/sport',
+    'template/%s/home/popularne',
+    'template/%s/home/wskrocie',
+    'template/%s/home/sponsorowane',
+  );
+
+  array_map( function($arg){
+    get_template_part( sprintf(
+      $arg,
+      getDevType()
+      ) );
+  }, $files );
 ?>
 <?php get_footer(); ?>

@@ -13,7 +13,11 @@
       <div class="clear-top"></div>
       <div class="row no-gutters">
         <?php for( $i=0; $i<3; $i++ ): ?>
-          <div class="col-12 col-lg-4">
+          <?php if ($i < 2): ?>
+            <div class="col-12 col-sm-6 col-lg-4">
+          <?php else: ?>
+            <div class="col-12 col-lg-4">
+          <?php endif; ?>
             <!-- reklama pionowa -->
             <?php printAd( 'v-l', true ); ?>
             <!-- <div class="reklama-pion-oferta">

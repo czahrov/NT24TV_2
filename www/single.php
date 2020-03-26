@@ -61,12 +61,12 @@
             </span>
           </div>
           <?php if ( !empty( $last_comment ) ): ?>
-            <a class="comment d-flex" href="<?php echo "#comment-{$last_comment->comment_ID}"; ?>">
+            <a class="comment d-flex ml-auto" href="<?php echo "#comment-{$last_comment->comment_ID}"; ?>">
               <i class="icon">
                 <img src="<?php echo get_template_directory_uri() . "/" ?>images/message.svg" alt="komentarz">
               </i>
               <span class="comment_value row justify-content-end">
-                <div class="content">
+                <div class="content text-right">
                   <?php echo $last_comment->comment_content; ?>
                 </div>
                 <span class="author_comment">
@@ -81,7 +81,7 @@
         </div>
       </div>
       <!-- /before content -->
-      <div class="content main">
+      <div class="content main padding">
 
         <div class="zajawka">
           <?php the_excerpt(); ?>

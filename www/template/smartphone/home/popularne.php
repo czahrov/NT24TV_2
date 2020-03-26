@@ -12,18 +12,18 @@
   <div class="row no-gutters">
 
     <!-- Blog Entries Column -->
-    <div class="col-md-12 col-lg-8">
+    <div class="col-md-12">
 
-      <h5 class="title-sidebar">Najbardziej pupularne</h5>
+      <h5 class="title-sidebar">Najbardziej popularne</h5>
 
       <!-- Post -->
-      <div class="row no-gutters najbardziej-popularne">
+      <div class="slick row no-gutters najbardziej-popularne">
         <!-- single post -->
         <?php
           foreach ($items as $item) {
             $format = get_post_format( $item );
             printf(
-              '<div class="col-sm-12 col-12 col-lg-6 col-md-6">
+              '<div class="col-12 col-md-6 no-padding">
                 <a href="%2$s" class="link_post_small">
                   <div class="small-post popular-post">
                     %4$s
@@ -39,18 +39,18 @@
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'full' ),
               $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
-              printTags( $item->ID, false )
+              printTags( $item->ID )
             );
           }
         ?>
 
       </div>
-
+      <div class="arrows d-flex justify-content-between"> </div>
     </div>
     <!-- /col-8 -->
 
     <!-- Sidebar Column -->
-    <div class="col-md-12 col-lg-4 sidebar-list">
+    <div class="col-12 sidebar-list">
       <div id="sidebar" class="position-sticky">
         <!-- reklama pionowa -->
         <?php echo printAd( 'v-l' ); ?>

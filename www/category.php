@@ -40,11 +40,14 @@
             ?>
             <div class="clear-top"></div>
             <!-- MID POSTS -->
-            <div id="tiles" class="row no-gutters">
+            <div id="" class="mid_post row no-gutters">
               <?php
                 foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
+                  $thumb = get_post_meta( $item->ID, 'thumb', true );
+                  $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
+
                   printf(
-                    '<div class="tile col-6 col-lg-4">
+                    '<div class="item col-6 col-lg-4" data-thumb="%5$s" data-img="%6$s">
                       <a href="%1$s" class="link_post_small">
                         <div class="small-post">
                           <div class="post_news_small">
@@ -55,9 +58,11 @@
                       </a>
                     </div>',
                     get_permalink( $item->ID ),
-                    get_the_post_thumbnail_url( $item->ID, 'large' ),
+                    strlen( $thumb )?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
                     $item->post_title,
-                    printTags( $item->ID )
+                    printTags( $item->ID ),
+                    $thumb,
+                    $img
                   );
                 }
               ?>

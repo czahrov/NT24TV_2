@@ -1,14 +1,15 @@
 <?php
+  $category = get_category_by_slug('przeglad-tygodniowy');
   $items = get_posts(array(
-    'numberposts'     => 7,
-    'category_name'   => 'przeglad-tygodniowy',
+    'numberposts'   => 13,
+    'cat'           => $category->term_id,
   ));
 ?>
 <!-- Page Content -->
 <div id='przeglad_tygodniowy' class="container">
   <div class="row no-gutters">
 <!-- Blog Entries Column -->
-    <div class="col-md-6 col-lg-8">
+    <div class="col-12">
       <h5 class="title-sidebar">Przegląd tygodniowy</h5>
       <!-- BIG Post -->
       <?php
@@ -35,14 +36,14 @@
 
       <div class="clear-top"></div>
 
-      <div class="row no-gutters">
+      <div class="mid_post row no-gutters">
 
         <!-- MID post -->
         <?php
           foreach ( array_slice( $items, 1 ) as $item ) {
             $format = get_post_format( $item );
             printf(
-              '<div class="col-6 col-lg-4">
+              '<div class="item col-6 col-md-4">
                 <a href="%1$s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
@@ -65,9 +66,12 @@
       </div>
       <!-- /row-->
       <div class="clear-top"></div>
-      <div class="button-line">
-        <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>" class="">Więcej Przeglądów</a>
-      </div>
+      <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug ?>">
+        <div class="spinner position-absolute">
+          <div class="box position-absolute"> </div>
+        </div>
+        Załaduj więcej
+      </button>
 
       <!-- reklama pozioma -->
       <?php echo printAd('h-m'); ?>
@@ -78,7 +82,7 @@
     </div>
     <!-- /col-8 -->
 <!-- Sidebar Column -->
-    <div id="sidebar" class="col-sm-12 col-md-6 col-lg-4 sidebar-list">
+    <div id="sidebar" class="col-12 sidebar-list">
       <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
 
       <?php get_template_part('template/airly'); ?>
@@ -88,18 +92,18 @@
         <h5 class="title-sidebar line">Reportaże</h5>
         <?php
           $items = get_posts(array(
-            'numberposts'     => 7,
+            'numberposts'     => 8,
             'category_name'   => 'reportaze',
           ));
         ?>
-        <ul class="image-sidebar-section">
+        <ul class="image-sidebar-section row no-gutters">
 
           <!-- single post -->
           <?php
             foreach ( $items as $item ) {
               $format = get_post_format( $item );
               printf(
-                '<a href="%1$s">
+                '<a class="col-12 col-sm-6" href="%1$s">
                   <li>
                     <div class="image-container">
                       <div class="image img5" style="background-image:url(%2$s)">

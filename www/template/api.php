@@ -14,8 +14,11 @@
     case 'posts':
       $start = (int)$_GET['from'];
       $end = (int)$_GET['to'];
-      preg_match_all( "/[^\/]+/", $_SERVER['HTTP_REFERER'], $match );
-      $catSlug = end( $match[0] );
+      $catSlug = $_GET['cat'];
+      if( empty( $catSlug ) ){
+        preg_match_all( "/[^\/]+/", $_SERVER['HTTP_REFERER'], $match );
+        $catSlug = end( $match[0] );
+      }
 
       $posts = get_posts(array(
         'offset'        => $start,
@@ -41,7 +44,7 @@
       $start = (int)$_GET['from'];
       $end = (int)$_GET['to'];
       $query = $_GET['q'];
-      if ( strlen( $query ) < 4 ) break;
+      if ( strlen( $query ) < 3 ) break;
 
       $posts = get_posts(array(
         'offset'      => $start,

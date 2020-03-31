@@ -402,8 +402,10 @@
   }
 }
 
-body.smartphone {
-  padding-bottom: 50px;
+@media (max-width: 1201px) {
+  body {
+    padding-bottom: 50px;
+  }
 }
 
 a:hover, a:focus {
@@ -534,12 +536,18 @@ img.tag-icon {
   top: 0;
 }
 
+@media (min-width: 1201px) {
+  .position-sticky {
+    top: 50px;
+  }
+}
+
 ol, ul {
   list-style-position: inside;
 }
 
 .mid_post .item {
-  border: solid 2px #fff;
+  border: solid 1px #fff;
 }
 
 @media (max-width: 767px) {
@@ -562,6 +570,54 @@ ol, ul {
 
 iframe.wp-embedded-content {
   max-width: 100%;
+}
+
+[id].special .sidebar-list ul a {
+  color: #fff;
+}
+
+[id].special .sidebar-list ul a li {
+  border: none;
+  border-top: 1px solid #e3e3e3;
+}
+
+[id].special .sidebar-list ul a:hover li {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+[id].special a.link_post_small span {
+  color: #fff;
+}
+
+[id].special h5.title-sidebar {
+  color: #fff;
+}
+
+[id].special .button-line a,
+[id].special .button-line input[type="submit"] {
+  color: #fff;
+}
+
+[id].special.desktop {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+[id].special.smartphone {
+  margin-bottom: 60px;
+}
+
+@media (min-width: 1200px) {
+  [id].special.smartphone h5.title-sidebar {
+    margin: 1rem 0 0;
+  }
+}
+
+[id].special.smartphone #btn_more {
+  position: absolute !important;
+  top: 100%;
+  left: 0;
+  right: 0;
 }
 
 #btn_more {
@@ -654,13 +710,17 @@ iframe.wp-embedded-content {
   width: 100%;
 }
 
-#przeglad_tygodniowy #sidebar .reportaze {
-  top: 50px;
+@media (min-width: 992px) {
+  #popularne .position-sticky {
+    margin-top: 45px;
+  }
 }
 
-#popularne #sidebar {
-  top: 50px;
-  margin-top: 40px;
+@media (min-width: 993px) {
+  #popularne .position-sticky {
+    margin-top: 38.5px;
+    margin-bottom: 30px;
+  }
 }
 
 #popularne .slick + .arrows {
@@ -691,11 +751,11 @@ iframe.wp-embedded-content {
   }
 }
 
-#wskrocie #sidebar .filmy-promocyjne {
+#wskrocie .sidebar .filmy-promocyjne {
   padding: 0 1rem;
 }
 
-#wskrocie #sidebar .filmy-promocyjne .video-post {
+#wskrocie .sidebar .filmy-promocyjne .video-post {
   width: 100%;
   height: 100%;
   display: flex;
@@ -703,9 +763,51 @@ iframe.wp-embedded-content {
   justify-content: center;
 }
 
-#category #sidebar {
-  margin-top: 45px;
-  top: 50px;
+@media (min-width: 992px) {
+  #category .sidebar {
+    margin-top: 32px;
+  }
+}
+
+#category .item {
+  border: solid 1px #fff;
+}
+
+@media (max-width: 991px) {
+  #category .item:nth-child(2n) {
+    border-right-width: 0;
+  }
+  #category .item:nth-child(2n+1) {
+    border-left-width: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  #category .item:nth-child(3n) {
+    border-right-width: 0;
+  }
+  #category .item:nth-child(3n+1) {
+    border-left-width: 0;
+  }
+}
+
+#category.nekrologi .mid_post .item .post_news_small {
+  height: 330px;
+  background-color: transparent;
+}
+
+#category.nekrologi .mid_post .item .post_news_small .cover_img {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#category.nekrologi .sidebar {
+  top: 30px;
+}
+
+#post .video {
+  margin-top: 25px;
 }
 
 #post .content a {
@@ -794,6 +896,10 @@ iframe.wp-embedded-content {
   background-color: transparent;
 }
 
+#post [id^="UGallery_"] {
+  margin: 1rem 0;
+}
+
 #post .fpGallery {
   font-size: 0;
 }
@@ -811,35 +917,41 @@ iframe.wp-embedded-content {
 }
 
 @media (min-width: 576px) {
-  #post #single_sidebar_top .position-sticky {
+  #post .position-sticky {
     margin-top: 30px;
   }
 }
 
 @media (min-width: 992x) {
-  #post #single_sidebar_top .position-sticky {
-    margin-top: 0px;
-  }
-}
-
-@media (min-width: 576px) {
-  #post #single_sidebar_bot .position-sticky {
-    margin-top: 30px;
-  }
-}
-
-@media (min-width: 992x) {
-  #post #single_sidebar_bot .position-sticky {
+  #post .position-sticky {
     margin-top: 0px;
   }
 }
 
 #post #more {
   padding: 1rem 0.75rem;
+  padding: 1rem 0rem;
 }
 
 #post #more .small-post {
   padding: 0 0.25rem;
+}
+
+#post.nekrologi #more .mid_post .item .post_news_small {
+  height: 200px;
+  background-color: transparent;
+}
+
+#post.nekrologi #more .mid_post .item .post_news_small .cover_img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media (min-width: 768px) {
+  #post.nekrologi #more .mid_post .item .post_news_small {
+    height: 400px;
+  }
 }
 
 #search .items .item {
@@ -906,12 +1018,20 @@ iframe.wp-embedded-content {
   font-size: 20px;
 }
 
+@media (min-width: 992px) {
+  #page.kamery .sidebar {
+    padding-top: 15px;
+  }
+}
+
 #bot-bar {
   position: fixed;
+  padding: 5px 0;
   left: 0;
   right: 0;
   bottom: 0;
   height: 40px;
+  border-top: solid 1px #e3e3e3;
   background-color: #fff;
   font-size: 0;
   z-index: 100;
@@ -963,7 +1083,7 @@ iframe.wp-embedded-content {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
 }
 
@@ -981,6 +1101,13 @@ iframe.wp-embedded-content {
 
 #search-popup:not(.show) {
   display: none;
+}
+
+@media (min-width: 1201px) {
+  #bot-bar,
+  #search-bar {
+    display: none !important;
+  }
 }
 
 /*# sourceMappingURL=facepalm.css.map */

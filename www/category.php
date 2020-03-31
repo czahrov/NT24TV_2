@@ -7,93 +7,87 @@
   ));
 ?>
 <!-- Page Content -->
-<div id="category" class="container">
+<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container">
     <div class="row no-gutters">
         <!-- Blog Entries Column -->
-        <div class="col-sm col-12">
-            <!-- Title -->
-            <h5 class="title-sidebar">
-              <?php echo $category->name; ?>
-            </h5>
-            <!-- BIG POST -->
+        <div class="col-12 col-sm">
+          <!-- Title -->
+          <h5 class="title-sidebar">
+            <?php echo $category->name; ?>
+          </h5>
+          <!-- BIG POST -->
+          <?php
+            $item = $posts[0];
+            printf(
+              '<a class="link_post big " href="%1$s">
+                  <div class="big-post">
+                      <div class="cover_img img1"></div>
+                      <div class="post_news_big" style="background-image:url(%2$s);">
+                          <span>
+                            <div class="post-tags">
+                              %4$s
+                            </div>
+                            %3$s
+                          </span>
+                      </div>
+                  </div>
+              </a>',
+              get_permalink( $item->ID ),
+              get_the_post_thumbnail_url( $item->ID, 'full' ),
+              $item->post_title,
+              printTags( $item->ID, false )
+            );
+          ?>
+          <div class="clear-top"></div>
+          <!-- MID POSTS -->
+          <div id="" class="mid_post row no-gutters">
             <?php
-              $item = $posts[0];
-              printf(
-                '<a class="link_post big " href="%1$s">
-                    <div class="big-post">
-                        <div class="cover_img img1"></div>
-                        <div class="post_news_big" style="background-image:url(%2$s);">
-                            <span>
-                              <div class="post-tags">
-                                %4$s
-                              </div>
-                              %3$s
-                            </span>
-                        </div>
-                    </div>
-                </a>',
-                get_permalink( $item->ID ),
-                get_the_post_thumbnail_url( $item->ID, 'full' ),
-                $item->post_title,
-                printTags( $item->ID, false )
-              );
-            ?>
-            <div class="clear-top"></div>
-            <!-- MID POSTS -->
-            <div id="" class="mid_post row no-gutters">
-              <?php
-                foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
-                  $thumb = get_post_meta( $item->ID, 'thumb', true );
-                  $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
+              foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
+                $thumb = get_post_meta( $item->ID, 'thumb', true );
+                $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
 
-                  printf(
-                    '<div class="item col-6 col-lg-4" data-thumb="%5$s" data-img="%6$s">
-                      <a href="%1$s" class="link_post_small">
-                        <div class="small-post">
-                          <div class="post_news_small">
-                            <div class="cover_img img2" style="background-image:url(%2$s);"></div>
-                          </div>
-                          <span>%4$s %3$s</span>
+                printf(
+                  '<div class="item col-6 col-lg-4" data-thumb="%5$s" data-img="%6$s">
+                    <a href="%1$s" class="link_post_small">
+                      <div class="small-post">
+                        <div class="post_news_small">
+                          <div class="cover_img img2" style="background-image:url(%2$s);"></div>
                         </div>
-                      </a>
-                    </div>',
-                    get_permalink( $item->ID ),
-                    strlen( $thumb )?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
-                    $item->post_title,
-                    printTags( $item->ID ),
-                    $thumb,
-                    $img
-                  );
-                }
-              ?>
-              <button id="btn_more" type="button" name="button" class="col-12 fp-btn btn-more fw-bold position-relative">
-                <div class="spinner position-absolute">
-                  <div class="box position-absolute"> </div>
-                </div>
-                Załaduj więcej
-              </button>
-            </div>
-            <!-- /row-->
-            <!-- /before content -->
+                        <span>%4$s %3$s</span>
+                      </div>
+                    </a>
+                  </div>',
+                  get_permalink( $item->ID ),
+                  strlen( $thumb )?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
+                  $item->post_title,
+                  printTags( $item->ID ),
+                  $thumb,
+                  $img
+                );
+              }
+            ?>
+            </button>
+          </div>
+          <?php if ( count($posts) == 13 ): ?>
+            <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
+              <div class="spinner position-absolute">
+                <div class="box position-absolute"> </div>
+              </div>
+              Załaduj więcej
+            </button>
+          <?php endif; ?>
+          <!-- /row-->
+          <!-- /before content -->
         </div>
         <!-- / col -->
         <!-- Sidebar Column -->
-        <div class="col-md-4 sidebar-list">
-          <div id="sidebar" class="position-sticky row no-gutters d-md-block justify-content-center">
-            <div class="col-12 col-sm-6 col-md">
-              <?php echo printAd('v-l'); ?>
-            </div>
-            <div class="col-12 col-sm-6 col-md">
-              <?php echo printAd('v-l'); ?>
-            </div>
-
+        <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+          <div class="col-12 col-sm col-lg-12">
+            <?php echo printAd('v-l'); ?>
           </div>
-          <!-- <div class="reklama-sidebar">
-              <div class="reklama">Reklama 400x700px</div>
-          </div> -->
-          <!-- <div class="reklama-sidebar sticky">
-              <div class="reklama">Reklama 400x700px</div>
-          </div> -->
+          <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+            <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
+          </div>
         </div>
     </div>
     <!-- /.row -->

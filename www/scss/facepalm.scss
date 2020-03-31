@@ -105,8 +105,9 @@ $break:(
 
 body{
 
-  &.smartphone{
+  @media( max-width: map-get($break,'xl') + 1px){
     padding-bottom: 50px;
+
   }
 
 }
@@ -260,6 +261,11 @@ img.tag-icon{
 
 .position-sticky{
   top: 0;
+
+  @media( min-width: map-get( $break,'xl' ) + 1px ){
+    top: 50px;
+  }
+
 }
 
 ol, ul{
@@ -269,7 +275,7 @@ ol, ul{
 .mid_post{
 
   .item{
-    border: solid 2px map-get( $color, 'white' );
+    border: solid 1px map-get( $color, 'white' );
 
     @media( max-width: map-get($break,'md') - 1px){
       &:nth-child(2n){
@@ -299,6 +305,65 @@ ol, ul{
 
 iframe.wp-embedded-content{
   max-width: 100%;
+}
+
+[id].special{
+
+  .sidebar-list ul a{
+    color: #fff;
+
+    li{
+      border: none;
+      border-top: 1px solid map-get($color,'grey');
+    }
+
+    &:hover li{
+      background-color: rgba(0,0,0,0.2);
+    }
+
+  }
+
+  a.link_post_small span{
+    color: #fff;
+  }
+
+  h5.title-sidebar{
+    color: #fff;
+  }
+
+  .button-line a,
+  .button-line input[type="submit"]{
+    color: #fff;
+  }
+
+  &.desktop{
+    padding:{
+      top: 1rem;
+      bottom: 1rem;
+    }
+
+  }
+
+  &.smartphone{
+    margin-bottom: 60px;
+
+    h5.title-sidebar{
+
+      @media( min-width: map-get( $break, 'xl' ) ){
+        margin: 1rem 0 0;
+      }
+
+    }
+
+    #btn_more{
+      position: absolute !important;
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+
+  }
+
 }
 
 #btn_more{
@@ -444,24 +509,19 @@ iframe.wp-embedded-content{
 
 }
 
-#przeglad_tygodniowy{
-
-  #sidebar{
-
-    .reportaze{
-      top: 50px;
-
-    }
-
-  }
-
-}
-
 #popularne{
 
-  #sidebar{
-    top: 50px;
-    margin-top: 40px;
+  .position-sticky{
+
+    @media( min-width: map-get($break,'lg')){
+      margin-top: 45px;
+    }
+
+    @media( min-width: map-get($break,'lg') + 1px){
+      margin-top: 38.5px;
+      margin-bottom: 30px;
+    }
+
   }
 
   .slick{
@@ -508,7 +568,7 @@ iframe.wp-embedded-content{
 
 #wskrocie{
 
-  #sidebar{
+  .sidebar{
 
     .filmy-promocyjne{
       padding: 0 1rem;
@@ -528,16 +588,79 @@ iframe.wp-embedded-content{
 }
 
 #category{
-  // padding: 0 1rem;
 
-  #sidebar{
-    margin-top: 45px;
-    top: 50px;
+  .sidebar{
+
+    @media( min-width: map-get( $break, 'lg' ) ){
+      margin-top: 32px;
+    }
+
+  }
+
+  .item{
+    border: solid 1px map-get( $color, 'white' );
+
+    @media( max-width: map-get($break,'lg') - 1px){
+      &:nth-child(2n){
+        border-right-width: 0;
+      }
+
+      &:nth-child(2n+1){
+        border-left-width: 0;
+      }
+
+    }
+
+    @media( min-width: map-get($break,'lg')){
+      &:nth-child(3n){
+        border-right-width: 0;
+      }
+
+      &:nth-child(3n+1){
+        border-left-width: 0;
+      }
+
+    }
+
+  }
+
+  &.nekrologi{
+
+    .mid_post{
+
+      .item{
+
+        .post_news_small{
+          height: 330px;
+          background-color: transparent;
+
+          .cover_img{
+            background:{
+              position: center;
+              size: contain;
+              repeat: no-repeat;
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+    .sidebar{
+      top: 30px;
+    }
+
   }
 
 }
 
 #post{
+
+  .video{
+    margin-top: 25px;
+  }
 
   .content{
 
@@ -547,6 +670,10 @@ iframe.wp-embedded-content{
     }
 
     &.main{
+
+      .img-fluid{
+        background-color: map-get($color,'gray');
+      }
 
     }
 
@@ -650,7 +777,7 @@ iframe.wp-embedded-content{
   }
 
   [id^="UGallery_"]{
-    // margin: 0 1rem;
+    margin: 1rem 0;
 
   }
 
@@ -674,43 +801,59 @@ iframe.wp-embedded-content{
 
   }
 
-  #single_sidebar_top{
+  .position-sticky{
 
-    .position-sticky{
-
-      @media( min-width: 576px){
-        margin-top: 30px;
-      }
-
-      @media( min-width: 992x){
-        margin-top: 0px;
-      }
-
+    @media( min-width: 576px){
+      margin-top: 30px;
     }
 
-  }
-
-  #single_sidebar_bot{
-
-    .position-sticky{
-
-      @media( min-width: 576px){
-        margin-top: 30px;
-      }
-
-      @media( min-width: 992x){
-        margin-top: 0px;
-      }
-
+    @media( min-width: 992x){
+      margin-top: 0px;
     }
 
   }
 
   #more{
     padding: 1rem 0.75rem;
+    padding: 1rem 0rem;
 
     .small-post{
       padding: 0 0.25rem;
+    }
+
+  }
+
+  &.nekrologi{
+
+    #more{
+
+      .mid_post{
+
+        .item{
+
+          .post_news_small{
+            height: 200px;
+            background-color: transparent;
+
+            .cover_img{
+              background: {
+                position: center;
+                repeat: no-repeat;
+                size: contain;
+              }
+
+            }
+
+            @media( min-width: map-get( $break, 'md') ){
+              height: 400px;
+            }
+
+          }
+
+        }
+
+      }
+
     }
 
   }
@@ -814,14 +957,28 @@ iframe.wp-embedded-content{
 
   }
 
+  &.kamery{
+
+    .sidebar{
+
+      @media( min-width: map-get($break, 'lg')){
+        padding-top: 15px;
+      }
+
+    }
+
+  }
+
 }
 
 #bot-bar{
   position: fixed;
+  padding: 5px 0;
   left: 0;
   right: 0;
   bottom: 0;
   height: 40px;
+  border-top: solid 1px map-get($color,'grey');
   background-color: map-get( $color, 'white' );
   font-size: 0;
   z-index: 100;
@@ -885,7 +1042,7 @@ iframe.wp-embedded-content{
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba( #000, 0.85 );
+  background-color: rgba( #000, 0.7 );
   z-index: 100;
 
   .box{
@@ -903,6 +1060,15 @@ iframe.wp-embedded-content{
 
   &:not(.show){
     display: none;
+  }
+
+}
+
+#bot-bar,
+#search-bar{
+
+  @media( min-width: map-get( $break, 'xl' ) + 1px ){
+    display: none !important;
   }
 
 }

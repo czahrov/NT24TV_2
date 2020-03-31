@@ -10,12 +10,15 @@
 <div id="page" class="">
   <div class="container">
     <div class="row no-gutters">
-      <div class="content padding col-12 col-lg-9">
+      <div class="content padding col-12 col-lg-8">
         <?php the_content(); ?>
       </div>
-      <div class=" col-12 col-lg-3">
-        <div id="sidebar" class="position-sticky">
-          <?php printAd( 'v-l' ); ?>
+      <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+        <div class="col-12 col-sm col-lg-12">
+          <?php echo printAd('v-l'); ?>
+        </div>
+        <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+          <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
         </div>
       </div>
     </div>

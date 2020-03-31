@@ -226,9 +226,14 @@ li.nav-item:not(:last-child) {
   padding-right: 30px;
 }
 
+#navbarResponsive{
+  color: #141c1f;
+}
+
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link {
-  color: #141c1f;
+  // color: #141c1f;
+  color: inherit;
   font-size: 1rem;
   font-family: $font-bold;
   text-transform: uppercase;
@@ -546,7 +551,6 @@ h5.title-sidebar:before {
       & li {
         list-style: none;
         padding: 1.5rem 20px;
-        border-bottom: 1px solid $grey;
         position: relative;
 
         & .data {
@@ -577,6 +581,15 @@ h5.title-sidebar:before {
           background: $red;
           transition: 0.3s;
         }
+      }
+
+      &:not(:last-child){
+
+        li{
+          border-bottom: 1px solid $grey;
+
+        }
+
       }
 
       &:hover {
@@ -832,6 +845,7 @@ footer.bg-footer {
           margin-left: 30px;
 
           & a {
+            display: inline-block;
             color: $dark;
             font-size: 1rem;
             font-family: $font-bold;
@@ -1498,9 +1512,10 @@ footer.bg-footer {
 
         & ul {
           & li {
-            margin-left: 0;
-            margin-bottom: 10px;
             display: block;
+            // margin-left: 0;
+            // margin-bottom: 10px;
+            margin: 10px 0;
           }
         }
       }

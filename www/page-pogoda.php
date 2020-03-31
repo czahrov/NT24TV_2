@@ -6,12 +6,6 @@
   the_post();
 ?>
 <div id="page" class="">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="banner position-relative col-12" style="background-image:url(<?php echo get_template_directory_uri() . "/images/pogoda.jpg"; ?>);">
-      </div>
-    </div>
-  </div>
   <div class="container">
     <div class="row no-gutters">
       <div class="content col-12 col-lg-9">

@@ -1,5 +1,5 @@
 <?php
-  // header( "Cache-Control: max-age=2592000" );
+  // header( "Cache-Control: max-age=31536000" );
   header( "Cache-Control: max-age=0" );
   date_default_timezone_set('Europe/Warsaw');
   error_reporting( E_ALL & ~E_WARNING & ~E_NOTICE );
@@ -484,7 +484,6 @@
       array(
         'key'       => 'uklad',
         'value'     => $type,
-        'compare'   => '=',
       ),
       array(
         'relation'  => 'OR',
@@ -504,30 +503,24 @@
       array(
         'key'     => 'uklad',
         'value'   => $type,
-        'compare' => '=',
       ),
       array(
         'key'     => 'sponsorowany',
         'value'   => 'promo',
-        'compare' => '=',
       ),
     );
 
     $query = array(
-      'numberposts' => -1,
-      'category_name' => 'banner-reklamowy',
-      'orderby' => 'rand',
-      'meta_query' => $promo?( $promo_meta_query ):( $std_meta_query ),
-
-    );
-
-    $found = get_posts(array(
       'numberposts'     => 1,
       'category_name'   => 'banner-reklamowy',
-      // 'exclude'         => $loaded,
-      'meta_query'      => $query,
+      'exclude'         => $loaded,
+      'meta_query'      => $promo?( $promo_meta_query ):( $std_meta_query ),
       'orderby'         => 'rand',
-    ));
+    );
+
+    $found = get_posts($query);
+    // var_dump( $query );
+    // var_dump( $found );
 
     if ( empty( $found ) ) return;
 
@@ -549,15 +542,17 @@
     }
 
     printf(
-      '<a class="adbox %6$s" href="%1$s" target="%2$s" data-type="%4$s" data-id="%5$u">
-        <img src="%3$s"/>
+      '<a %8$s class="adbox %6$s" href="%1$s" target="%2$s" data-type="%4$s">
+        <img src="%3$s" alt="%7$s"/>
       </a>',
       $href,
       $target,
       $img,
       $type,
       $ad->ID,
-      ( $parse[0] == 'h' and in_array( $parse[1], array( 'l', 'm' ) ) )?( 'no-padding' ):( '' )
+      ( $parse[0] == 'h' and in_array( $parse[1], array( 'l', 'm' ) ) )?( 'no-padding' ):( '' ),
+      $ad->post_title,
+      ($target == '_blank')?('rel="noopener"'):('')
     );
 
   }
@@ -567,6 +562,7 @@
 
     preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
     $ids = explode( ',', $found[1] );
+    // var_dump( $ids );
 
     return $fp->printUGallery( $ids, false );
     // return $fp->printSlick( $ids, false );
@@ -587,7 +583,8 @@
 
       if ( $detect->isMobile() ) {
         if ( $detect->isTablet() ) {
-          $devType = 'tablet';
+          // $devType = 'tablet';
+          $devType = 'desktop';
         }
         else{
           $devType = 'smartphone';

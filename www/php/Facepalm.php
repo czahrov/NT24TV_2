@@ -59,8 +59,9 @@
         // https://www.youtube.com/watch?time_continue=1&v=yvcobYgRB-A
         preg_match( '~.+/(.+?v=)?([^&]+)?~', $arg, $match );
         printf(
-          '<iframe class="youtube_video" src="https://www.youtube.com/embed/%s" allowfullscreen></iframe>',
-            end( $match )
+          '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" title="%2$s" allowfullscreen></iframe>',
+            end( $match ),
+            'Zobacz film'
           );
       }, explode( $delimiter, $link ) );
 
@@ -76,7 +77,7 @@
         $img_thumb = wp_get_attachment_image_url( $img_id, 'thumbnail' );
 
         $ret .= sprintf(
-          '<img alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" />',
+          '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" />',
           $title,
           $img_thumb,
           $img_full

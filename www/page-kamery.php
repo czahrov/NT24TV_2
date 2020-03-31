@@ -11,17 +11,11 @@
 
 	) );
 ?>
-<div id="page" class="">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="banner position-relative col-12" style="background-image:url(<?php echo get_template_directory_uri() . "/images/kamery.jpg" ?>);">
-      </div>
-    </div>
-  </div>
+<div id="page" class="<?php echo get_post()->post_name; ?>">
   <div class="container">
     <div class="row no-gutters">
-      <div class="content col-12 col-lg-9">
-        <div id="kamery" class="row no-gutters align-items-start jutify-content-center">
+      <div class="content col-12 col-lg-8">
+        <div id="kamery" class="<?php echo getDevType(); ?> row no-gutters align-items-start jutify-content-center">
           <?php
           foreach( $kamery as $item ):
             // $title = get_post_meta( $item->ID, 'title', true );
@@ -65,9 +59,12 @@
           <?php the_content(); ?>
         </div>
       </div>
-      <div class=" col-12 col-lg-3">
-        <div id="sidebar" class="position-sticky">
-          <?php printAd( 'v-l' ); ?>
+      <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+        <div class="col-12 col-sm col-lg-12">
+          <?php echo printAd('v-l'); ?>
+        </div>
+        <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+          <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
         </div>
       </div>
     </div>

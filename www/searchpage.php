@@ -16,7 +16,7 @@
   <h5 class="title-sidebar">
     <?php echo "Wyszukiwana fraza: '{$search}'"; ?>
   </h5>
-  <div class="items row no-gutters">
+  <div class="mid_post items row no-gutters">
     <?php foreach ( $found as $item ): ?>
       <?php
         $img = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );

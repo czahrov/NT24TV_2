@@ -6,7 +6,7 @@ $(function(){
     let _ = $(this);
     _.on({
       click: function(e){
-        let items = _.prev().find('.item');
+        let items = _.prevAll('.mid_post').find('.item');
         let root = items.first().parent();
 
         let query_parts = {
@@ -92,7 +92,7 @@ $(function(){
           },
           complete: function( xhr, status ){
             // console.log( [status, xhr] );
-            _.removeClass('loading');
+            _.removeClass('loading').blur();
 
           },
 
@@ -198,8 +198,8 @@ $(function(){
       dots: false,
       arrows: true,
       appendArrows: arrows,
-      prevArrow: "<img class='arrow prev' src='wp-content/themes/NT24TV/images/arrow.svg'/>",
-      nextArrow: "<img class='arrow next' src='wp-content/themes/NT24TV/images/arrow.svg'/>",
+      prevArrow: "<img class='arrow prev' src='wp-content/themes/NT24TV/images/arrow.svg'/ alt='poprzedni'>",
+      nextArrow: "<img class='arrow next' src='wp-content/themes/NT24TV/images/arrow.svg' alt='następny'/>",
       swipeToSlide: true,
     };
 

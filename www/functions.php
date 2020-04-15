@@ -636,6 +636,7 @@
 
   }
 
+  // zwraca tablicę wpisów do wyświetlenie na pasku informacyjnym
   function getPilnePasek(){
     $homeID = get_page_by_title( 'home' )->ID;
     $limit = get_field( 'limit', $homeID );
@@ -676,6 +677,40 @@
     } );
 
     return array_slice( $items, 0, $limit );
+  }
+
+  // zwraca tablicę wpisów do wyświetlenia w sekcji "zobacz również"
+  function getPostMore( $args_user = array() ){
+    $args_basic = array(
+      'numberposts'   => 12,
+      'orderby'       => 'date',
+      'order'         => 'DESC',
+    );
+    $args = array_merge( $args_basic, $args_user );
+    $ret = array();
+    global $post_categories;
+
+    $tags_list = wp_get_post_tags( get_post()->ID );
+    if ( !empty( $tags_list ) ) {
+      $tags_posts = get_posts( array_merge( $args, array(
+        'tag__in'     => array_map( function( $t ){ return $t->term_id; }, $tags_list ),
+      ) ) );
+
+      $ret = array_merge( $ret, $tags_posts );
+
+    }
+
+    if ( count( $ret ) < (int)$args['numberposts'] ) {
+      $posts = get_posts( array_merge( $args, array(
+        'category__in'  => $post_categories,
+        'numberposts'   => (int)$args['numberposts'] - count( $ret ),
+        'orderby'       => 'rand',
+      ) ) );
+
+      $ret = array_merge( $ret, $posts );
+    }
+
+    return $ret;
   }
 
 ?>

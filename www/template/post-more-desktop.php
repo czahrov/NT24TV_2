@@ -6,17 +6,22 @@
 <div class="clear-top"></div>
 <h5 class="title-sidebar">Zobacz również</h5>
 <div id='more' class="row no-gutters">
-  <?php
-    $items = get_posts(array(
-      'numberposts'   => 12,
-      'exclude'       => array( get_the_ID() ),
-      'orderby'       => 'random',
-      'category'      => $category->cat_ID,
-    ));
-  ?>
   <!-- post -->
   <?php
-    foreach ($items as $item) {
+    foreach ( getPostMore() as $item ) {
+      if ( DBG ) {
+        echo "<!--";
+        print_r( $item );
+        echo "-->";
+      }
+      $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
+      if ( !$img ) {
+        $img = sprintf(
+          '%s/joomla_import/%s',
+          get_template_directory_uri(),
+          get_post_meta( $item->ID, 'thumb', true )
+        );
+      }
       printf(
         '<div class="col-6 col-lg-4">
           <a href="%1$s" class="link_post_small">
@@ -29,7 +34,7 @@
           </a>
         </div>',
         get_permalink( $item->ID ),
-        get_the_post_thumbnail_url( $item->ID, 'medium' ),
+        $img,
         $item->post_title,
         printTags( $item->ID )
       );

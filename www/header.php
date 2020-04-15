@@ -73,17 +73,27 @@
     <div id="_debug" class="">
       <div class="_server">
         <!-- <?php
-        print_r( $_SERVER );
+          print_r( $_SERVER );
         ?> -->
       </div>
       <div class="_post">
         <!-- <?php
-        print_r( get_post() );
+          print_r( get_post() );
         ?> -->
       </div>
       <div class="_post_meta">
         <!-- <?php
-        print_r( get_post_meta( get_post()->ID ) );
+          print_r( get_post_meta( get_post()->ID ) );
+        ?> -->
+      </div>
+      <div class="_post_tags">
+        <!-- <?php
+          print_r( wp_get_post_tags( get_post()->ID ) );
+        ?> -->
+      </div>
+      <div class="_post_categories">
+        <!-- <?php
+          print_r( wp_get_post_categories( get_post()->ID ) );
         ?> -->
       </div>
     </div>

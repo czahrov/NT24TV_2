@@ -29,7 +29,7 @@
       $ret = array_map( function( $item ){
         $title = printTags( $item->ID ) . addslashes( $item->post_title );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
-        $thumb = get_post_field( 'thumb', $item );
+        $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
         $url = get_permalink( $item );
         return array(
           'title' => trim( $title ),

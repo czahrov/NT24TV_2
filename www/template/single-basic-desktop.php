@@ -8,22 +8,24 @@
       <div class="before-content">
         <div class="author_date_tags">
           <?php
-          $segments = array(
-            "<span class='author'>".get_the_author()."</span>",
-            "<span class='date'>".get_the_date("d.m.Y")."</span>",
-            printImportant( get_the_id(), false ),
-            printFresh( get_the_id(), false ),
-            printHot( get_the_id(), false )
-          );
+            $segments = array(
+              "<span class='date'>".get_the_date("d.m.Y")."</span>",
+              printImportant( get_the_id(), false ),
+              printFresh( get_the_id(), false ),
+              printHot( get_the_id(), false )
+            );
 
-          echo implode(
-            '<span class="separator"></span>',
-            array_filter( $segments, function( $item ){
-              return !empty( $item );
-            } )
-          );
+            echo implode(
+              '<span class="separator"></span>',
+              array_filter( $segments, function( $item ){
+                return !empty( $item );
+              } )
+            );
           ?>
         </div>
+        <?php
+          global $last_comment;
+        ?>
         <div class="share_comment row justify-content-between">
           <div class="social_share">
             <span class="fb">
@@ -65,7 +67,10 @@
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
         <div class="zajawka">
-          <?php the_excerpt(); ?>
+          <?php
+            // the_excerpt();
+            echo get_field('lead');
+          ?>
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <div class="video">
@@ -73,10 +78,12 @@
           </div>
         <?php endif; ?>
         <?php
-        $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-        $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+          if( empty( $yt ) ):
+            $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+            $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
         ?>
-        <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
+          <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
+        <?php endif; ?>
 
         <?php
           $content = get_the_content();
@@ -89,7 +96,7 @@
             $content = str_replace( $tag, "%fp_g{$k}%", $content );
           }
 
-          $content = apply_filters( 'the_content', $content );
+          $content = apply_filters( 'the_content', $content ) . "<div class='author fw-bold'>".get_the_author()."</div>";
 
           foreach ($replace as $k => $v) {
             $content = str_replace( "%fp_g{$k}%", $replace[$k], $content );

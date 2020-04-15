@@ -314,6 +314,43 @@
   border-color: #e3000f;
 }
 
+.fc-yellow {
+  color: #f7d000;
+}
+
+.fc-yellow-hover {
+  transition: all .3s linear;
+}
+
+.fc-yellow-hover:hover {
+  color: #f7d000;
+}
+
+.bg-yellow {
+  background-color: #f7d000;
+}
+
+.bg-yellow-hover {
+  transition: all .3s linear;
+}
+
+.bg-yellow-hover:hover {
+  background-color: #f7d000;
+}
+
+.br-yellow {
+  border: solid 2px #f7d000;
+}
+
+.br-yellow-hover {
+  border: solid 2px transparent;
+  transition: all .3s linear;
+}
+
+.br-yellow-hover:hover {
+  border-color: #f7d000;
+}
+
 @media (min-width: 0px) {
   .padding {
     padding-left: 1rem !important;
@@ -620,6 +657,62 @@ iframe.wp-embedded-content {
   right: 0;
 }
 
+#pilne .label {
+  padding: 0 10px;
+  height: 34px;
+}
+
+#pilne .items {
+  box-shadow: 10px 10px 10px -13px #000 inset;
+  padding: 0 3px;
+  max-height: 34px;
+}
+
+#pilne .items .item {
+  height: 34px;
+  margin: 0 10px;
+}
+
+#pilne .items .item a {
+  color: inherit;
+}
+
+#pilne .items .item a:hover {
+  color: inherit;
+  -webkit-text-decoration: underline solid;
+          text-decoration: underline solid;
+}
+
+#pilne .items .item .separator {
+  padding-left: 10px;
+}
+
+@media (max-width: 1199px) {
+  #navbarResponsive ul.navbar-nav li.nav-item.marker {
+    background-color: #e3000f;
+    color: #fff;
+  }
+}
+
+@media (min-width: 1200px) {
+  #navbarResponsive ul.navbar-nav li.nav-item a.nav-link {
+    position: relative;
+  }
+  #navbarResponsive ul.navbar-nav li.nav-item a.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: transparent;
+    transition: .3s ease;
+  }
+  #navbarResponsive ul.navbar-nav li.nav-item.marker a.nav-link::before {
+    background-color: #e3000f;
+  }
+}
+
 #btn_more {
   margin: 0 auto;
 }
@@ -806,8 +899,23 @@ iframe.wp-embedded-content {
   top: 30px;
 }
 
+#post iframe {
+  max-width: 100%;
+}
+
 #post .video {
   margin-top: 25px;
+}
+
+#post .author {
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+#post .content {
+  text-align: justify;
 }
 
 #post .content a {
@@ -995,6 +1103,7 @@ iframe.wp-embedded-content {
 
 #page .content {
   margin: 30px auto;
+  text-align: justify;
 }
 
 #page #sidebar {

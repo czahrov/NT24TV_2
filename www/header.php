@@ -2,12 +2,14 @@
   // session_start();
 
   // blokada dostępu
-  if( !isset( $_COOKIE['sprytne'] ) and !isset( $_GET['sprytne'] ) ){
-    echo "strona w budowie...";
-    exit;
+  if( isset( $_COOKIE['sprytne'] ) or isset( $_GET['sprytne'] ) ){
+    setcookie( 'sprytne', 1, 0, '/' );
+    define( 'DBG', true );
   }
   else{
-    setcookie( 'sprytne', 1, 0, '/' );
+    define( 'DBG', false );
+    echo "strona w budowie...";
+    exit;
   }
 
   // Facepalm
@@ -17,9 +19,9 @@
 <!DOCTYPE html>
 <html lang="pl">
   <head>
-  <!-- <META NAME="robots" CONTENT="noindex">
+  <META NAME="robots" CONTENT="noindex">
   <META NAME="robots" CONTENT="nofollow">
-  <META NAME="robots" CONTENT="noindex,nofollow"> -->
+  <META NAME="robots" CONTENT="noindex,nofollow">
 
   <meta name="theme-color" content="#e3000f" />
   <meta charset="utf-8">
@@ -67,6 +69,25 @@
 </head>
 
 <body class='<?php echo getDevType(); ?>'>
+  <?php if (DBG): ?>
+    <div id="_debug" class="">
+      <div class="_server">
+        <!-- <?php
+        print_r( $_SERVER );
+        ?> -->
+      </div>
+      <div class="_post">
+        <!-- <?php
+        print_r( get_post() );
+        ?> -->
+      </div>
+      <div class="_post_meta">
+        <!-- <?php
+        print_r( get_post_meta( get_post()->ID ) );
+        ?> -->
+      </div>
+    </div>
+  <?php endif; ?>
   <?php do_action( 'get_live' ); ?>
   <?php do_action( 'get_live_event' ); ?>
   <?php do_action( 'get_relacja-live-event' ); ?>
@@ -102,12 +123,10 @@
   </section>
   <nav class="navbar navbar-expand-xl navbar-dark bg-white sticky-menu">
     <div class="container">
-
       <a href="<?php echo home_url(); ?>" class="logo mr-auto no-mobile">
         <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
       </a>
       <span class="toggler-name no-mobile">MENU</span>
-
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
         aria-expanded="false" aria-label="Toggle navigation">
         <!-- <span class="navbar-toggler-icon"></span> -->
@@ -118,8 +137,22 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mr-auto">
             <?php
-              $post = get_post();
               foreach ( wp_get_nav_menu_items('glowne-menu') as $item ){
+                $isActive = false;
+                $currentLink = sprintf(
+                  '%s://%s%s',
+                  $_SERVER['REQUEST_SCHEME'],
+                  $_SERVER['HTTP_HOST'],
+                  $_SERVER['REQUEST_URI']
+                );
+
+                echo "<!--";
+                print_r( $item );
+                var_dump( $currentLink );
+                echo "-->";
+
+                $isActive = $item->url == $currentLink;
+
                 printf(
                   '<li class="nav-item %3$s %4$s">
                     <a class="nav-link red-link" href="%1$s">
@@ -128,16 +161,43 @@
                   </li>',
                   $item->url,
                   $item->title,
-                  $item->guid == $post->guid?( 'active' ):( '' ),
+                  $isActive?( 'marker' ):( '' ),
                   implode( ' ', $item->classes )
                 );
               }
             ?>
           </ul>
         </div>
+
     </div>
   </nav>
   <div class="clear-top"></div>
+  <?php
+    $homeID = get_page_by_title( 'home' )->ID;
+    $kolor_pasek = get_field( 'kolor_paska', $homeID );
+    $kolor_czcionka = get_field( 'kolor_czcionki', $homeID );
+  ?>
+  <div id='pilne' class="container-fluid fw-bold no-padding" style="background-color:<?php echo $kolor_pasek; ?>; color:<?php echo $kolor_czcionka; ?>">
+    <div class="container d-flex no-padding">
+      <div class="label d-flex align-items-center">
+        PILNE
+      </div>
+      <div class="items col">
+        <?php
+          foreach ( getPilnePasek() as $post ) {
+            printf(
+              '<div class="item d-flex align-items-center">
+                <a class="" href="%s">%s</a>
+                <div class="separator">&diams;</div>
+              </div>',
+              get_permalink( $post->ID ),
+              $post->post_title
+            );
+          }
+        ?>
+      </div>
+    </div>
+  </div>
   <?php if ( getDevType() !== 'desktop'): ?>
     <div id="bot-bar" class="d-flex justify-content-around">
       <a class="button camera d-flex align-items-center justify-content-center" href="<?php echo home_url('kamery'); ?>">

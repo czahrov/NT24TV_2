@@ -63,7 +63,7 @@
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'large' ),
               $item->post_title,
-              printTags( $item->ID )
+              printTags( $item->ID, true, false )
             );
           }
         ?>

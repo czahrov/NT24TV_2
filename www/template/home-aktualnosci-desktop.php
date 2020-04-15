@@ -74,20 +74,18 @@
         <h5 class="title-sidebar line">Aktualności</h5>
         <ul>
           <?php
-          foreach ( array_slice( $items, 4 ) as $item) {
-            printf(
-              '<a href="%1$s">
-              <li>%4$s %2$s
-              <span class="data">%3$s</span>
-              </span>
-              </li>
-              </a>',
-              get_permalink( $item->ID ),
-              $item->post_title,
-              get_the_date( "d.m.Y", $item->ID ),
-              printTags( $item->ID )
-            );
-          }
+            foreach ( array_slice( $items, 4 ) as $item) {
+              printf(
+                '<a href="%s">
+                  <li>%s %s
+                    </span>
+                  </li>
+                </a>',
+                get_permalink( $item->ID ),
+                printTags( $item->ID ),
+                $item->post_title
+              );
+            }
           ?>
         </ul>
       </div>

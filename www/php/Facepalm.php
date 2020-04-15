@@ -77,7 +77,7 @@
         $img_thumb = wp_get_attachment_image_url( $img_id, 'thumbnail' );
 
         $ret .= sprintf(
-          '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" />',
+          '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" data-no-lazy="1"/>',
           $title,
           $img_thumb,
           $img_full

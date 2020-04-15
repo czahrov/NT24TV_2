@@ -9,7 +9,6 @@
         <div class="author_date_tags">
           <?php
           $segments = array(
-            "<span class='author'>".get_the_author()."</span>",
             "<span class='date'>".get_the_date("d.m.Y")."</span>",
             printImportant( get_the_id(), false ),
             printFresh( get_the_id(), false ),
@@ -42,7 +41,10 @@
               </a>
             </span>
           </div>
-          <?php if ( !empty( $last_comment ) ): ?>
+          <?php
+            global $last_comment;
+            if ( !empty( $last_comment ) ):
+          ?>
             <a class="comment d-flex ml-auto" href="<?php echo "#comment-{$last_comment->comment_ID}"; ?>">
               <i class="icon">
                 <img src="<?php echo get_template_directory_uri() . "/" ?>images/message.svg" alt="komentarz">
@@ -65,7 +67,10 @@
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
         <div class="zajawka">
-          <?php the_excerpt(); ?>
+          <?php
+            // the_excerpt();
+            echo get_field('lead');
+          ?>
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <div class="video">
@@ -73,12 +78,16 @@
           </div>
         <?php endif; ?>
         <?php
-        $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-        $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+          if( empty( $yt ) ):
+            $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+            $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
         ?>
-        <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
-
-        <?php the_content(); ?>
+          <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
+        <?php endif; ?>
+        <?php
+          the_content();
+          echo "<div class='author fw-bold'>".get_the_author()."</div>";
+        ?>
 
       </div>
 

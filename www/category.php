@@ -43,7 +43,8 @@
           <div id="" class="mid_post row no-gutters">
             <?php
               foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
-                $thumb = get_post_meta( $item->ID, 'thumb', true );
+                // $thumb = get_post_meta( $item->ID, 'thumb', true );
+                $thumb = get_field( 'thumb', $item->ID );
                 $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
 
                 printf(
@@ -58,7 +59,7 @@
                     </a>
                   </div>',
                   get_permalink( $item->ID ),
-                  strlen( $thumb )?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
+                  strlen( $thumb ) > 0?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
                   $item->post_title,
                   printTags( $item->ID ),
                   $thumb,

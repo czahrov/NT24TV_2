@@ -9,7 +9,6 @@
         <div class="author_date_tags">
           <?php
           $segments = array(
-            "<span class='author'>".get_the_author()."</span>",
             "<span class='date'>".get_the_date("d.m.Y")."</span>",
             printImportant( get_the_id(), false ),
             printFresh( get_the_id(), false ),
@@ -65,7 +64,10 @@
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
         <div class="zajawka">
-          <?php the_excerpt(); ?>
+          <?php
+            // the_excerpt();
+            echo get_field('lead');
+          ?>
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <div class="video">
@@ -95,7 +97,7 @@
           $content = str_replace( "%fp_g{$k}%", $replace[$k], $content );
         }
 
-        echo $content;
+        echo $content . "<div class='author fw-bold'>".get_the_author()."</div>";
         ?>
 
       </div>

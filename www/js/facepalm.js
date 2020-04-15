@@ -1,5 +1,23 @@
 $(function(){
 
+  // przewijanie paska informacyjnego
+  (function( pasek ){
+    pasek.slick({
+      slidesToShow: 1,
+      variableWidth: true,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      speed: 1000,
+      arrows: false,
+      dots: false,
+      centerMode: true,
+      // cssEase: 'linear',
+    });
+  })(
+    $('#pilne .items')
+  )
+
   // obsługa przycisku ładowania kolejnych wpisów w kategorii
   $('body #btn_more')
   .each(function(){

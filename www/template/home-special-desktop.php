@@ -63,7 +63,7 @@
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'large' ),
               $item->post_title,
-              printTags( $item->ID )
+              printTags( $item->ID, true, false )
             );
           }
         ?>
@@ -82,15 +82,15 @@
           foreach ( array_slice( $items, 4 ) as $item) {
             printf(
               '<a href="%1$s">
-              <li>%4$s %2$s
-              <span class="data">%3$s</span>
-              </span>
-              </li>
+                <li>%4$s %2$s
+                  <span class="data">%3$s</span>
+                  </span>
+                </li>
               </a>',
               get_permalink( $item->ID ),
               $item->post_title,
               get_the_date( "d.m.Y", $item->ID ),
-              printTags( $item->ID )
+              printTags( $item->ID, true, false )
             );
           }
           ?>

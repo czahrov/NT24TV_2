@@ -459,9 +459,40 @@
     }
   }
 
-  function printTags( $id = null, $icon = true ){
+  function printFormat( $id = null, $icon = false, $blackIcon = true ){
+    $format = get_post_format( $id );
+    // var_dump( array( 'format' => $format, 'blackIcon' => $blackIcon ) );
+    if( $format == 'video' ) {
+      if ( $icon ) {
+        return sprintf(
+          '<img class="tag-icon" src="%s/images/play%s.svg"/ alt="Trwa dyskusja" title="Gorący temat">',
+          get_template_directory_uri(),
+          $blackIcon?('_black'):('')
+        );
+      }
+      else {
+        return '<div class="item">Materiał video</div>';
+      }
+
+    }
+    elseif( $format == 'gallery' ) {
+      if ( $icon ) {
+        return sprintf(
+          '<img class="tag-icon" src="%s/images/images%s.svg"/ alt="Trwa dyskusja" title="Gorący temat">',
+          get_template_directory_uri(),
+          $blackIcon?('_black'):('')
+        );
+      }
+      else {
+        return '<div class="item">Galeria zdjęć</div>';
+      }
+    }
+  }
+
+  function printTags( $id = null, $icon = true, $blackIcon = true ){
     return sprintf(
-      '%s %s %s',
+      '%s %s %s %s',
+      printFormat( $id, $icon, $blackIcon ),
       printFresh( $id, $icon ),
       printImportant( $id, $icon ),
       printHot( $id, $icon )
@@ -603,6 +634,48 @@
       return $devType;
     }
 
+  }
+
+  function getPilnePasek(){
+    $homeID = get_page_by_title( 'home' )->ID;
+    $limit = get_field( 'limit', $homeID );
+    $kategorie = get_field( 'kategoria', $homeID );
+    $tagi = get_field( 'tag', $homeID );
+    $args_basic = array(
+      'numberposts' => (int)$limit,
+      'oderby'      => 'date',
+      'order'       => 'DESC',
+    );
+
+    if ( !empty( $kategorie ) ) {
+      $kategorie__in = array_map( function( $kat ){ return $kat->term_id; }, $kategorie );
+      $args_kat = array_merge( $args_basic, array(
+        'category__in' => $kategorie__in,
+      ) );
+    }
+
+    if ( !empty( $tagi ) ) {
+      $tagi__in = array_map( function( $tag ){ return $tag->term_id; }, $tagi );
+      $args_tag = array_merge( $args_basic, array(
+        'tag__in' => $tagi__in,
+      ) );
+    }
+
+    $items = array_merge( get_posts( $args_kat ), get_posts( $args_tag ) );
+    usort( $items, function( $a, $b ){
+      if ( $a->post_date_gmt < $b->post_date_gmt ) {
+        return 1;
+      }
+      elseif( $a->post_date_gmt > $b->post_date_gmt ) {
+        return -1;
+      }
+      else{
+        return 0;
+      }
+
+    } );
+
+    return array_slice( $items, 0, $limit );
   }
 
 ?>

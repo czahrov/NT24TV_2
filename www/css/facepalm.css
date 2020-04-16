@@ -965,15 +965,30 @@ iframe.wp-embedded-content {
   text-align: justify;
 }
 
-#post .content .author {
+#post .content a {
+  border-bottom: dotted 2px #e3000f;
+  color: inherit;
+}
+
+#post .after_content .separator {
+  margin: 0 10px;
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  width: 1px;
+  background-color: #e3e3e3;
+}
+
+#post .after_content .author {
   margin: 30px 10px;
   text-transform: uppercase;
   font-style: italic;
   opacity: 0.7;
 }
 
-#post .content a {
-  border-bottom: solid 2px #e3000f;
+#post .after_content .date {
+  font-size: 1rem;
+  color: #8e8e8e;
 }
 
 #post .slickGallery {

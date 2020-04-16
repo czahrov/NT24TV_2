@@ -830,20 +830,12 @@ iframe.wp-embedded-content{
     margin-top: 25px;
   }
 
-
   .content{
     text-align: justify;
 
-    .author {
-      margin: 30px 10px;
-      text-transform: uppercase;
-      font-style: italic;
-      opacity: 0.7;
-    }
-
     a{
-      border-bottom: solid 2px map-get( $color, 'red' );
-
+      border-bottom: dotted 2px map-get( $color, 'red' );
+      color: inherit;
     }
 
     &.main{
@@ -852,6 +844,31 @@ iframe.wp-embedded-content{
         background-color: map-get($color,'gray');
       }
 
+    }
+
+  }
+
+  .after_content{
+
+    .separator{
+      margin: 0 10px;
+      position: relative;
+      display: inline-block;
+      height: 20px;
+      width: 1px;
+      background-color: map-get($color, 'grey');
+    }
+
+    .author {
+      margin: 30px 10px;
+      text-transform: uppercase;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    .date{
+      font-size: 1rem;
+      color: #8e8e8e;
     }
 
   }

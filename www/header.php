@@ -96,6 +96,11 @@
           print_r( wp_get_post_categories( get_post()->ID ) );
         ?> -->
       </div>
+      <div class="_category">
+        <!-- <?php
+          print_r( get_category_by_slug( array_slice( explode( "/", $_SERVER['REQUEST_URI'] ), -2, -1 )[0] ) );
+        ?> -->
+      </div>
     </div>
   <?php endif; ?>
   <?php do_action( 'get_live' ); ?>
@@ -145,39 +150,66 @@
         <span class="circle"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mr-auto">
-            <?php
-              foreach ( wp_get_nav_menu_items('glowne-menu') as $item ){
-                $isActive = false;
-                $currentLink = sprintf(
-                  '%s://%s%s',
-                  $_SERVER['REQUEST_SCHEME'],
-                  $_SERVER['HTTP_HOST'],
-                  $_SERVER['REQUEST_URI']
-                );
+        <ul class="navbar-nav mr-auto bg-white">
+          <?php
+            $limit = 11;
+            $toPrint = array();
+            foreach ( wp_get_nav_menu_items('glowne-menu') as $item ){
+              $isActive = false;
+              $currentLink = sprintf(
+                '%s://%s%s',
+                $_SERVER['REQUEST_SCHEME'],
+                $_SERVER['HTTP_HOST'],
+                $_SERVER['REQUEST_URI']
+              );
 
-                echo "<!--";
-                print_r( $item );
-                var_dump( $currentLink );
-                echo "-->";
+              $isActive = $item->url == $currentLink;
 
-                $isActive = $item->url == $currentLink;
+              ob_start();
 
-                printf(
-                  '<li class="nav-item %3$s %4$s">
-                    <a class="nav-link red-link" href="%1$s">
-                      %2$s
-                    </a>
-                  </li>',
-                  $item->url,
-                  $item->title,
-                  $isActive?( 'marker' ):( '' ),
-                  implode( ' ', $item->classes )
-                );
-              }
-            ?>
-          </ul>
-        </div>
+              echo "<!--";
+              print_r( $item );
+              var_dump( $currentLink );
+              echo "-->";
+
+              $info = ob_get_contents();
+              ob_end_clean();
+
+              ob_start();
+              printf(
+                '<li class="nav-item %3$s %4$s">
+                  %5$s
+                  <a class="nav-link red-link" href="%1$s">
+                    %2$s
+                  </a>
+                </li>',
+                $item->url,
+                $item->title,
+                $isActive?( 'marker' ):( '' ),
+                implode( ' ', $item->classes ),
+                $ifo
+              );
+
+              $toPrint[] = ob_get_contents();
+              ob_end_clean();
+            }
+            echo implode( "", array_slice( $toPrint, 0, $limit ) );
+          ?>
+          <?php if ( count( $toPrint ) > $limit ): ?>
+            <li class="more">
+              <div class="dots">
+                ...
+              </div>
+              <ul>
+                <?php
+                  echo implode( "", array_slice( $toPrint, $limit ) );
+                ?>
+              </ul>
+            </li>
+          <?php endif; ?>
+
+        </ul>
+      </div>
 
     </div>
   </nav>

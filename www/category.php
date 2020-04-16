@@ -20,17 +20,17 @@
             $item = $posts[0];
             printf(
               '<a class="link_post big " href="%1$s">
-                  <div class="big-post">
-                      <div class="cover_img img1"></div>
-                      <div class="post_news_big" style="background-image:url(%2$s);">
-                          <span>
-                            <div class="post-tags">
-                              %4$s
-                            </div>
-                            %3$s
-                          </span>
+                <div class="big-post">
+                  <div class="cover_img img1"></div>
+                  <div class="post_news_big" style="background-image:url(%2$s);">
+                    <span>
+                      <div class="post-tags">
+                        %4$s
                       </div>
+                      %3$s
+                    </span>
                   </div>
+                </div>
               </a>',
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'full' ),

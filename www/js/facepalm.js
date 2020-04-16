@@ -8,7 +8,7 @@ $(function(){
       infinite: true,
       autoplay: true,
       autoplaySpeed: 2000,
-      speed: 1000,
+      speed: 1500,
       arrows: false,
       dots: false,
       centerMode: true,

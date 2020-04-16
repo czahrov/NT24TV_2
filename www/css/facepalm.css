@@ -687,6 +687,10 @@ iframe.wp-embedded-content {
   padding-left: 10px;
 }
 
+#navbarResponsive ul.navbar-nav li.nav-item {
+  background-color: #fff;
+}
+
 @media (max-width: 1199px) {
   #navbarResponsive ul.navbar-nav li.nav-item.marker {
     background-color: #e3000f;
@@ -710,6 +714,52 @@ iframe.wp-embedded-content {
   }
   #navbarResponsive ul.navbar-nav li.nav-item.marker a.nav-link::before {
     background-color: #e3000f;
+  }
+}
+
+#navbarResponsive ul.navbar-nav li.more {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#navbarResponsive ul.navbar-nav li.more .dots {
+  font-size: 40px;
+  line-height: 1px;
+  cursor: pointer;
+}
+
+#navbarResponsive ul.navbar-nav li.more > ul {
+  list-style-type: none;
+}
+
+@media (max-width: 1199px) {
+  #navbarResponsive ul.navbar-nav li.more > ul {
+    width: 100%;
+  }
+  #navbarResponsive ul.navbar-nav li.more .dots {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  #navbarResponsive ul.navbar-nav li.more > ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    box-shadow: 5px 5px 10px 0px #000;
+  }
+  #navbarResponsive ul.navbar-nav li.more > ul li.nav-item {
+    padding: 5px 10px;
+  }
+  #navbarResponsive ul.navbar-nav li.more > ul li.nav-item .nav-link {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: right;
+  }
+  #navbarResponsive ul.navbar-nav li.more:not(:hover) > ul {
+    display: none;
   }
 }
 

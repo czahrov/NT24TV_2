@@ -949,6 +949,10 @@ iframe.wp-embedded-content {
   top: 30px;
 }
 
+#category .noposts {
+  margin: 50px 0;
+}
+
 #post iframe {
   max-width: 100%;
 }
@@ -957,15 +961,15 @@ iframe.wp-embedded-content {
   margin-top: 25px;
 }
 
-#post .author {
-  margin-bottom: 30px;
+#post .content {
+  text-align: justify;
+}
+
+#post .content .author {
+  margin: 30px 10px;
   text-transform: uppercase;
   font-style: italic;
   opacity: 0.7;
-}
-
-#post .content {
-  text-align: justify;
 }
 
 #post .content a {

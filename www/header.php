@@ -213,7 +213,6 @@
 
     </div>
   </nav>
-  <div class="clear-top"></div>
   <?php
     $homeID = get_page_by_title( 'home' )->ID;
     $kolor_pasek = get_field( 'kolor_paska', $homeID );
@@ -240,6 +239,7 @@
       </div>
     </div>
   </div>
+  <div class="clear-top"></div>
   <?php if ( getDevType() !== 'desktop'): ?>
     <div id="bot-bar" class="d-flex justify-content-around">
       <a class="button camera d-flex align-items-center justify-content-center" href="<?php echo home_url('kamery'); ?>">

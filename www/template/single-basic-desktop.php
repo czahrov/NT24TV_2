@@ -1,4 +1,6 @@
-<?php global $fp; ?>
+<?php
+  global $fp, $comments_num;
+?>
 <div class="container">
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
@@ -96,7 +98,7 @@
             $content = str_replace( $tag, "%fp_g{$k}%", $content );
           }
 
-          $content = apply_filters( 'the_content', $content ) . "<div class='author fw-bold'>".get_the_author()."</div>";
+          $content = apply_filters( 'the_content', $content ) . "<div class='author fw-bold'>".apply_filters( 'custom_author', get_the_author() )."</div>";
 
           foreach ($replace as $k => $v) {
             $content = str_replace( "%fp_g{$k}%", $replace[$k], $content );

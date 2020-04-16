@@ -10,7 +10,7 @@
     'order'     => 'DESC',
   ));
 
-  global $last_comment;
+  global $last_comment, $comments_num;
   $last_comment = $last_comments[0];
   $comments_num = get_comments(array(
     'post_id'   => get_the_ID(),

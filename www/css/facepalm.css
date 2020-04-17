@@ -970,6 +970,20 @@ iframe.wp-embedded-content {
   color: inherit;
 }
 
+#post .content a::after {
+  content: '';
+  padding: 3px;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  margin-left: 0.4em;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-image: url(../images/foreign.svg);
+}
+
 #post .after_content .separator {
   margin: 0 10px;
   position: relative;

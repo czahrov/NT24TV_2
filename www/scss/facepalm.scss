@@ -836,6 +836,23 @@ iframe.wp-embedded-content{
     a{
       border-bottom: dotted 2px map-get( $color, 'red' );
       color: inherit;
+
+      &::after{
+        content: '';
+        padding: 3px;
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        margin-left: 0.4em;
+        background:{
+          position: center;
+          size: contain;
+          repeat: no-repeat;
+          origin: content-box;
+          image: url(../images/foreign.svg);
+        }
+      }
+
     }
 
     &.main{

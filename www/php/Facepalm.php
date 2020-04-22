@@ -58,11 +58,15 @@
       $videos = array_map( function($arg){
         // https://www.youtube.com/watch?time_continue=1&v=yvcobYgRB-A
         preg_match( '~.+/(.+?v=)?([^&]+)?~', $arg, $match );
+        // printf(
+        //   '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" title="%2$s" allowfullscreen></iframe>',
+        //   end( $match ),
+        //   'Zobacz film'
+        // );
         printf(
-          '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" title="%2$s" allowfullscreen></iframe>',
-            end( $match ),
-            'Zobacz film'
-          );
+          '<div class="yt-video" data-yt-video-id="%s"></div>',
+          end( $match )
+        );
       }, explode( $delimiter, $link ) );
 
     }

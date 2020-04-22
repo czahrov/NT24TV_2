@@ -27,7 +27,7 @@
                 <a href="%2$s" class="link_post_small">
                   <div class="small-post popular-post">
                     %4$s
-                    <span>%5$s %1$s</span>
+                    <span>%1$s</span>
                     <div class="post_news_small">
                       <div class="mask-popular"></div>
                       <div class="cover_img" style="background-image:url(%3$s);"></div>

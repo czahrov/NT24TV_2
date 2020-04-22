@@ -1,5 +1,5 @@
 <?php
-  global $fp, $comments_num;
+  global $fp, $comments_num, $last_comment;
 ?>
 <div class="container">
   <div class="row no-gutters">
@@ -24,9 +24,6 @@
             );
           ?>
         </div>
-        <?php
-          global $last_comment;
-        ?>
         <div class="share_comment row justify-content-between">
           <div class="social_share">
             <span class="fb">
@@ -75,6 +72,9 @@
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <div class="video">
+            <div class="exit">
+              X
+            </div>
             <?php $fp->genYoutubeVideo( $yt ); ?>
           </div>
         <?php endif; ?>
@@ -109,7 +109,10 @@
       </div>
       <div class="after_content d-flex align-items-center">
         <span class="author fw-bold">
-          <?php echo apply_filters( 'custom_author', get_the_author() ); ?>
+          <?php
+            // echo apply_filters( 'custom_author', get_the_author() );
+            echo get_the_author_meta('display_name');
+          ?>
         </span>
         <span class='separator'></span>
         <span class='date'>

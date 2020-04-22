@@ -227,9 +227,9 @@
         <?php
           foreach ( getPilnePasek() as $post ) {
             printf(
-              '<div class="item d-flex align-items-center">
+              '<div class="item d-flex text-center align-items-center justify-content-center">
                 <a class="" href="%s">%s</a>
-                <div class="separator">&diams;</div>
+                <div class="separator d-none d-md-block">&diams;</div>
               </div>',
               get_permalink( $post->ID ),
               $post->post_title

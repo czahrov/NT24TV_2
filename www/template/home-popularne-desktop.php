@@ -27,7 +27,7 @@
                 <a href="%2$s" class="link_post_small">
                   <div class="small-post popular-post">
                     %4$s
-                    <span>%5$s %1$s</span>
+                    <span>%1$s</span>
                     <div class="post_news_small">
                       <div class="mask-popular"></div>
                       <div class="cover_img" style="background-image:url(%3$s);"></div>
@@ -39,7 +39,7 @@
               get_permalink( $item->ID ),
               get_the_post_thumbnail_url( $item->ID, 'full' ),
               $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
-              printTags( $item->ID, false )
+              printTags( $item->ID )
             );
           }
         ?>

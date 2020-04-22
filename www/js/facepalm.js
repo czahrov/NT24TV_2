@@ -13,6 +13,16 @@ $(function(){
       dots: false,
       centerMode: true,
       // cssEase: 'linear',
+      responsive:[
+        {
+          breakpoint: 768,
+          settings:{
+            variableWidth: false,
+            centerMode: false,
+            adaptiveHeight: true,
+          }
+        },
+      ],
     });
   })(
     $('#pilne .items')
@@ -317,6 +327,95 @@ $(function(){
     $('#search-popup'),
     $('.head-menu .search-bar'),
     $('#bot-bar .button.search')
+  );
+
+  // obsługa filmików youtube
+  (function( placeholder ){
+    placeholder.each(function(){
+      const _ = $(this);
+      const root = _.parent();
+      const vidId = _.attr('data-yt-video-id');
+      let player = null;
+      let detached = false;
+      const playerTop = root.offset().top;
+      let playerHeight = null;
+      const windowPos = ()=>{
+        return $('html,body').prop('scrollTop')
+      };
+      const inView = ()=>{
+        return ( windowPos() - playerTop + 30 ) <= playerHeight;
+      };
+
+      _.before( $('<script src="https://www.youtube.com/iframe_api"></script>') );
+
+      window.onYouTubeIframeAPIReady = function(){
+        player = new YT.Player( _[0], {
+          videoId: vidId,
+          width: '100%',
+          height: '100%',
+          playerVars:{
+            // autoplay: 1,
+            controls: 1,
+            rel: 0,
+            origin: window.location.origin,
+            enablejsapi: 1,
+          },
+          events:{
+            onReady: function(e){
+              playerHeight = $(player.f).outerHeight();
+              player.playVideo();
+              root.find('.mute').fadeIn();
+            },
+            onStateChange: function(e){
+              if ( e.data == 0 ) {
+                root.triggerHandler('attach');
+              }
+            },
+          }
+        } );
+      };
+
+      root
+      .on({
+        'getPlayer': function(e){
+          return player;
+        },
+        'detach': function(e){
+          if( player.getPlayerState() === 1 ){
+            $(this).addClass('mini');
+            detached = true;
+
+          }
+        },
+        'attach': function(e){
+          $(this).removeClass('mini');
+          playerHeight = $(this).outerHeight(true);
+          detached = false;
+        },
+        'exit': function(e){
+          player.pauseVideo();
+          $(this).triggerHandler( 'attach' );
+        },
+      });
+
+      root.find('.exit').click((e)=>{root.triggerHandler('exit')});
+
+      $(window)
+      .scroll(function(e){
+
+        if ( !inView()  && !detached ) {
+          root.triggerHandler('detach');
+        }
+        else if( inView() && detached ){
+          root.triggerHandler('attach');
+        }
+
+      });
+
+    });
+
+  })(
+    $('.yt-video')
   );
 
 });

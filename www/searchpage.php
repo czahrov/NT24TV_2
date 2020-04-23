@@ -22,13 +22,13 @@
         $img = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
           '<div class="item bg-grey-light-hover br-grey-hover col-12 col-sm-6 col-lg-4">
-            <a class="wrapper d-flex align-items-center" href="%1$s">
-              <div class="cover_img bg-grey flex-shrink-0" style="%2$s"></div>
+            <a class="wrapper d-flex align-items-center" href="%s">
+              <div class="cover_img bg-grey flex-shrink-0" style="%s"></div>
               <div class="small-post fc-black">
-                %4$s
                 <span>
-                  %3$s
+                  %s
                 </span>
+                %s
               </div>
             </a>
           </div>',

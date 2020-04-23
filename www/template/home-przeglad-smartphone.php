@@ -17,19 +17,19 @@
         $format = get_post_format( $item );
 
         printf(
-          '<a class="link_post big" href="%4$s">
+          '<a class="link_post big" href="%s">
             <div class="big-post">
               <div class="cover_img"></div>
-              <div class="post_news_big  img12" style="background-image:url(%1$s)">
-                %3$s
-                <span>%5$s %2$s</span>
+              <div class="post_news_big" style="background-image:url(%s)">
+                %s
+                <span>%s %s</span>
               </div>
             </div>
           </a>',
-          get_the_post_thumbnail_url( $item->ID, 'full' ),
-          $item->post_title,
-          $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
           get_permalink( $item->ID ),
+          get_the_post_thumbnail_url( $item->ID, 'full' ),
+          $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
+          $item->post_title,
           printTags( $item->ID, false )
         );
       ?>
@@ -44,19 +44,19 @@
             $format = get_post_format( $item );
             printf(
               '<div class="item col-6 col-md-4">
-                <a href="%1$s" class="link_post_small">
+                <a href="%s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
-                      %3$s
-                      <div class="cover_img img13" style="background-image:url(%2$s)"></div>
+                      %s
+                      <div class="cover_img img13" style="background-image:url(%s)"></div>
                     </div>
-                    <span>%5$s %4$s</span>
+                    <span>%s %s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
               $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
+              get_the_post_thumbnail_url( $item->ID, 'large' ),
               $item->post_title,
               printTags( $item->ID )
             );
@@ -103,20 +103,20 @@
             foreach ( $items as $item ) {
               $format = get_post_format( $item );
               printf(
-                '<a class="col-12 col-sm-6" href="%1$s">
+                '<a class="col-12 col-sm-6" href="%s">
                   <li>
                     <div class="image-container">
-                      <div class="image img5" style="background-image:url(%2$s)">
-                      %4$s
+                      <div class="image img5" style="background-image:url(%s)">
+                      %s
                       </div>
                     </div>
-                    <span>%5$s %3$s</span>
+                    <span>%s %s</span>
                   </li>
                 </a>',
                 get_permalink( $item->ID ),
                 get_the_post_thumbnail_url( $item->ID, 'medium' ),
-                $item->post_title,
                 $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
+                $item->post_title,
                 printTags( $item->ID )
               );
             }

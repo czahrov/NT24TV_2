@@ -602,6 +602,22 @@
 
   }
 
+  function fetchGallery( $shortcode = null ){
+    preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
+    return $found;
+  }
+
+  function fetchFilebirdGallery( $content = "" ){
+    preg_match( '/wp:filebird\/block\-filebird\-gallery.+?"images":\[(.+?)\}\]\} \-\->/', $content, $gallery );
+    preg_match_all( '/"id"\:(\d+)/', $gallery[1], $found );
+    $ret = array_map( function($arg){
+      return (int)$arg;
+    }, $found[1] );
+    // return $gallery;
+    // return $found[1];
+    return $ret;
+  }
+
   // wykrywanie urządzenia
   function getDevType( $echo = false ){
     static $devType = null;

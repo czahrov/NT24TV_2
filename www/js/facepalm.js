@@ -1,33 +1,5 @@
 $(function(){
 
-  // przewijanie paska informacyjnego
-  (function( pasek ){
-    pasek.slick({
-      slidesToShow: 1,
-      variableWidth: true,
-      infinite: true,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      speed: 1500,
-      arrows: false,
-      dots: false,
-      centerMode: true,
-      // cssEase: 'linear',
-      responsive:[
-        {
-          breakpoint: 768,
-          settings:{
-            variableWidth: false,
-            centerMode: false,
-            adaptiveHeight: true,
-          }
-        },
-      ],
-    });
-  })(
-    $('#pilne .items')
-  )
-
   // obsługa przycisku ładowania kolejnych wpisów w kategorii
   $('body #btn_more')
   .each(function(){
@@ -168,6 +140,8 @@ $(function(){
     $(this)
     .unitegallery({
       gallery_theme: "tiles",
+      tiles_type: "justified",
+      // gallery_width: '100%',
 			// tiles_type: "nested",
       lightbox_type: 'compact',
       tile_overlay_color: '#e3000f',
@@ -416,6 +390,58 @@ $(function(){
 
   })(
     $('.yt-video')
+  );
+
+  // przewijany pasek informacyjny
+  (function( pasek, view ){
+    // szybkość przewijania [pixel/s]
+    const speed = 100;
+    // pobiera listę elementów do wyświetlenia
+    const getItems = ()=>{
+      return pasek.find('.items .item');
+    };
+
+    pasek.find('.items').prepend('<div class="box"></div>');
+    getItems().detach().appendTo( pasek.find('.items .box') );
+    pasek.find('.items .box').clone().appendTo( pasek.find('.items') );
+
+    // długość wyświetlanej części paska
+    const getViewWidth = ()=>{
+      return view.outerWidth(true);
+    };
+    // długość całkowita przewijanego paska
+    const getFullWidth = ()=>{
+      return pasek.find('.items .box:first').prop('scrollWidth');
+    };
+
+    let mainTL = new TimelineMax({
+      repeat: -1,
+    })
+    .add( TweenMax.fromTo(
+      pasek.find('.items .box'),
+      getFullWidth()/speed,
+      {
+        x: 0,
+      },
+      {
+        x: getFullWidth() * (-1),
+        ease: Linear.easeNone,
+      }
+    ) );
+
+    view.on({
+      mouseenter: (e)=>{
+        mainTL.pause();
+      },
+      mouseleave: (e)=>{
+        mainTL.resume();
+      },
+    });
+
+  })(
+    $('#pilne'),
+    $('#pilne .items'),
+    $('#pilne .items .item')
   );
 
 });

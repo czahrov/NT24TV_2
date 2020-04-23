@@ -24,22 +24,21 @@
             $format = get_post_format( $item );
             printf(
               '<div class="col-sm-12 col-12 col-lg-6 col-md-6">
-                <a href="%2$s" class="link_post_small">
+                <a href="%s" class="link_post_small">
                   <div class="small-post popular-post">
-                    %4$s
-                    <span>%1$s</span>
+                    %s
+                    <span>%s</span>
                     <div class="post_news_small">
                       <div class="mask-popular"></div>
-                      <div class="cover_img" style="background-image:url(%3$s);"></div>
+                      <div class="cover_img" style="background-image:url(%s);"></div>
                     </div>
                   </div>
                 </a>
               </div>',
-              $item->post_title,
               get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'full' ),
               $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
-              printTags( $item->ID )
+              $item->post_title,
+              get_the_post_thumbnail_url( $item->ID, 'full' )
             );
           }
         ?>

@@ -17,18 +17,18 @@
           foreach ($items as $item) {
             printf(
               '<div class="slide-content">
-                <a href="%1$s" class="link_post_small">
+                <a href="%s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
-                      <div class="cover_img img25" style="background-image:url(%3$s)"></div>
+                      <div class="cover_img" style="background-image:url(%s)"></div>
                     </div>
-                    <span>%4$s %2$s</span>
+                    <span>%s %s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
-              $item->post_title,
               get_the_post_thumbnail_url( $item->ID, 'medium' ),
+              $item->post_title,
               printTags( $item->ID )
             );
           }
@@ -66,18 +66,18 @@
               foreach ($items as $item) {
                 printf(
                   '<div class="slide-content">
-                    <a href="%1$s" class="link_post_small">
+                    <a href="%s" class="link_post_small">
                       <div class="small-post">
                         <div class="post_news_small">
-                          <div class="cover_img img25" style="background-image:url(%3$s)"></div>
+                          <div class="cover_img" style="background-image:url(%s)"></div>
                         </div>
-                        <span>%4$s %2$s</span>
+                        <span>%s %s</span>
                       </div>
                     </a>
                   </div>',
                   get_permalink( $item->ID ),
-                  $item->post_title,
                   get_the_post_thumbnail_url( $item->ID, 'medium'),
+                  $item->post_title,
                   printTags( $item->ID )
                 );
               }
@@ -122,23 +122,19 @@
 
           foreach ($items as $item) {
             printf(
-              '<a href="%1$s" class="single" title="%5$s">
+              '<a href="%s" class="single" title="%s">
                 <div class="image-container">
-                  <div class="image vid1" style="background-image:url(%2$s);">
+                  <div class="image" style="background-image:url(%s);">
                     <div class="video-post">
-                      <img src="%4$s/images/play.svg" alt="odtwórz film"/>
-                    </div>
-                    <div class="post-tags">
-                      %3$s
+                      <img src="%s/images/play.svg" alt="odtwórz film"/>
                     </div>
                   </div>
                 </div>
               </a>',
               get_permalink( $item->ID ),
+              $item->post_title,
               get_the_post_thumbnail_url( $item->ID, 'medium' ),
-              printTags( $item->ID, false ),
-              get_template_directory_uri(),
-              $item->post_title
+              get_template_directory_uri()
             );
           }
         ?>

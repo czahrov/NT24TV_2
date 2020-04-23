@@ -45,12 +45,12 @@
           foreach( array_slice( $items, 1, 3 ) as $item ){
             printf(
               '<div class="col col-lg-4">
-                <a href="%1$s" class="link_post_small">
+                <a href="%s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
-                      <div class="cover_img img2" style="background-image:url(%2$s)"></div>
+                      <div class="cover_img img2" style="background-image:url(%s)"></div>
                     </div>
-                    <span>%4$s %3$s</span>
+                    <span>%s %s</span>
                   </div>
                 </a>
               </div>',
@@ -82,8 +82,8 @@
                   </li>
                 </a>',
                 get_permalink( $item->ID ),
-                printTags( $item->ID ),
-                $item->post_title
+                $item->post_title,
+                printTags( $item->ID )
               );
             }
           ?>

@@ -16,20 +16,20 @@
         $format = get_post_format( $item );
 
         printf(
-          '<a class="link_post big" href="%4$s">
+          '<a class="link_post big" href="%s">
             <div class="big-post">
               <div class="cover_img"></div>
-              <div class="post_news_big  img12" style="background-image:url(%1$s)">
-                %3$s
-                <span>%5$s %2$s</span>
+              <div class="post_news_big  img12" style="background-image:url(%s)">
+                <span>%s %s</span>
+                %s
               </div>
             </div>
           </a>',
+          get_permalink( $item->ID ),
           get_the_post_thumbnail_url( $item->ID, 'full' ),
           $item->post_title,
-          $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
-          get_permalink( $item->ID ),
-          printTags( $item->ID, false )
+          printTags( $item->ID, false ),
+          $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') )
         );
       ?>
 
@@ -43,19 +43,19 @@
             $format = get_post_format( $item );
             printf(
               '<div class="col-6 col-lg-4">
-                <a href="%1$s" class="link_post_small">
+                <a href="%s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
-                      %3$s
-                      <div class="cover_img img13" style="background-image:url(%2$s)"></div>
+                      %s
+                      <div class="cover_img img13" style="background-image:url(%s)"></div>
                     </div>
-                    <span>%5$s %4$s</span>
+                    <span>%s %s</span>
                   </div>
                 </a>
               </div>',
               get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
               $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
+              get_the_post_thumbnail_url( $item->ID, 'large' ),
               $item->post_title,
               printTags( $item->ID )
             );

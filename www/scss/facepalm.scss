@@ -113,6 +113,10 @@ body{
 
 }
 
+#_debug{
+  display: none;
+}
+
 a{
 
   &:hover, &:focus{
@@ -384,13 +388,18 @@ iframe.wp-embedded-content{
     max-height: 34px;
     max-height: 68px;
     max-width: calc( 100% - 60px);
+    overflow: hidden;
+
+    .box{
+      display: flex;
+    }
 
     .item{
-      // height: 34px;
-      margin: 5px 10px;
+      margin: 5px 0px;
 
       a{
         color: inherit;
+        white-space: nowrap;
 
         &:hover{
           color: inherit;
@@ -400,19 +409,10 @@ iframe.wp-embedded-content{
       }
 
       .separator{
-
+        padding: 0 10px;
       }
 
       &.slick-center{
-
-      }
-
-      @media( min-width: map-get($break,'md') ){
-        margin: 5px 0px;
-
-        .separator{
-          padding: 0 10px;
-        }
 
       }
 
@@ -835,6 +835,11 @@ iframe.wp-embedded-content{
 
 }
 
+[id^="UGallery_"]{
+  margin: 1rem 0;
+  width: 100% !important;
+}
+
 #post{
 
   iframe{
@@ -1076,10 +1081,6 @@ iframe.wp-embedded-content{
 
   }
 
-  [id^="UGallery_"]{
-    margin: 1rem 0;
-
-  }
 
   .fpGallery{
     font-size: 0;

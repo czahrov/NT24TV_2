@@ -445,6 +445,10 @@
   }
 }
 
+#_debug {
+  display: none;
+}
+
 a:hover, a:focus {
   text-decoration: none;
 }
@@ -673,14 +677,20 @@ iframe.wp-embedded-content {
   max-height: 34px;
   max-height: 68px;
   max-width: calc( 100% - 60px);
+  overflow: hidden;
+}
+
+#pilne .items .box {
+  display: flex;
 }
 
 #pilne .items .item {
-  margin: 5px 10px;
+  margin: 5px 0px;
 }
 
 #pilne .items .item a {
   color: inherit;
+  white-space: nowrap;
 }
 
 #pilne .items .item a:hover {
@@ -689,13 +699,8 @@ iframe.wp-embedded-content {
           text-decoration: underline solid;
 }
 
-@media (min-width: 768px) {
-  #pilne .items .item {
-    margin: 5px 0px;
-  }
-  #pilne .items .item .separator {
-    padding: 0 10px;
-  }
+#pilne .items .item .separator {
+  padding: 0 10px;
 }
 
 #navbarResponsive ul.navbar-nav li.nav-item {
@@ -964,6 +969,11 @@ iframe.wp-embedded-content {
   margin: 50px 0;
 }
 
+[id^="UGallery_"] {
+  margin: 1rem 0;
+  width: 100% !important;
+}
+
 #post iframe {
   max-width: 100%;
   max-height: 100%;
@@ -1174,10 +1184,6 @@ iframe.wp-embedded-content {
 #post .slickGallery .slick-dots li.slick-active button {
   border-color: #e3000f;
   background-color: transparent;
-}
-
-#post [id^="UGallery_"] {
-  margin: 1rem 0;
 }
 
 #post .fpGallery {

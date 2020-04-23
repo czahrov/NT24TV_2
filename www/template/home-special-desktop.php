@@ -19,28 +19,27 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-lg-8">
-
       <!-- Big Post -->
       <?php
         $item = $items[0];
         printf(
-          '<a class="link_post big " href="%1$s">
+          '<a class="link_post big " href="%s">
             <div class="big-post">
-              <div class="cover_img img1"></div>
-              <div class="post_news_big" style="background-image:url(%2$s)">
+              <div class="cover_img"></div>
+              <div class="post_news_big" style="background-image:url(%s)">
                 <span>
                   <div class="post-tags">
-                    %4$s
+                    %s
                   </div>
-                  %3$s
+                  %s
                 </span>
               </div>
             </div>
           </a>',
           get_permalink( $item->ID ),
           get_the_post_thumbnail_url( $item->ID, 'full' ),
-          $item->post_title,
-          printTags( $item->ID, false )
+          printTags( $item->ID, false ),
+          $item->post_title
         );
       ?>
       <div class="clear-top"></div>
@@ -51,12 +50,12 @@
           foreach( array_slice( $items, 1, 3 ) as $item ){
             printf(
               '<div class="col col-lg-4">
-                <a href="%1$s" class="link_post_small">
+                <a href="%s" class="link_post_small">
                   <div class="small-post">
                     <div class="post_news_small">
-                      <div class="cover_img img2" style="background-image:url(%2$s)"></div>
+                      <div class="cover_img" style="background-image:url(%s)"></div>
                     </div>
-                    <span>%4$s %3$s</span>
+                    <span>%s %s</span>
                   </div>
                 </a>
               </div>',
@@ -81,15 +80,11 @@
           <?php
           foreach ( array_slice( $items, 4 ) as $item) {
             printf(
-              '<a href="%1$s">
-                <li>%4$s %2$s
-                  <span class="data">%3$s</span>
-                  </span>
-                </li>
+              '<a href="%s">
+                <li>%s %s </li>
               </a>',
               get_permalink( $item->ID ),
               $item->post_title,
-              get_the_date( "d.m.Y", $item->ID ),
               printTags( $item->ID, true, false )
             );
           }

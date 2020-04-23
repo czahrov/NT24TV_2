@@ -27,15 +27,15 @@
             <?php
               $item = $posts[0];
               printf(
-                '<a class="link_post big " href="%1$s">
+                '<a class="link_post big " href="%s">
                   <div class="big-post">
-                    <div class="cover_img img1"></div>
-                      <div class="post_news_big" style="background-image:url(%2$s);">
+                    <div class="cover_img"></div>
+                      <div class="post_news_big" style="background-image:url(%s);">
                       <span>
+                        %s
                         <div class="post-tags">
-                          %4$s
+                          %s
                         </div>
-                        %3$s
                       </span>
                     </div>
                   </div>
@@ -48,7 +48,7 @@
             ?>
             <div class="clear-top"></div>
             <!-- MID POSTS -->
-            <div id="" class="mid_post row no-gutters">
+            <div class="mid_post row no-gutters">
               <?php
                 foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
                   // $thumb = get_post_meta( $item->ID, 'thumb', true );
@@ -56,22 +56,22 @@
                   $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
 
                   printf(
-                    '<div class="item col-6 col-lg-4" data-thumb="%5$s" data-img="%6$s">
-                      <a href="%1$s" class="link_post_small">
+                    '<div class="item col-6 col-lg-4" data-thumb="%s" data-img="%s">
+                      <a href="%s" class="link_post_small">
                         <div class="small-post">
                           <div class="post_news_small">
-                            <div class="cover_img img2" style="background-image:url(%2$s);"></div>
+                            <div class="cover_img" style="background-image:url(%s);"></div>
                           </div>
-                          <span>%4$s %3$s</span>
+                          <span>%s %s</span>
                         </div>
                       </a>
                     </div>',
+                    $thumb,
+                    $img,
                     get_permalink( $item->ID ),
                     strlen( $thumb ) > 0?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
                     $item->post_title,
-                    printTags( $item->ID ),
-                    $thumb,
-                    $img
+                    printTags( $item->ID )
                   );
                 }
               ?>

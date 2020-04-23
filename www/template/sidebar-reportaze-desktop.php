@@ -13,20 +13,20 @@
     foreach ( $items as $item ) {
       $format = get_post_format( $item );
       printf(
-        '<a href="%1$s">
-        <li>
-        <div class="image-container">
-        <div class="image img5" style="background-image:url(%2$s)">
-        %4$s
-        </div>
-        </div>
-        <span>%5$s %3$s</span>
-        </li>
+        '<a href="%s">
+          <li>
+            <div class="image-container">
+              <div class="image" style="background-image:url(%s)">
+                %s
+              </div>
+            </div>
+            <span>%s %s</span>
+          </li>
         </a>',
         get_permalink( $item->ID ),
         get_the_post_thumbnail_url( $item->ID, 'medium' ),
-        $item->post_title,
         $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
+        $item->post_title,
         printTags( $item->ID )
       );
     }

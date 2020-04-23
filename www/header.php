@@ -223,13 +223,13 @@
       <div class="label d-flex align-items-center">
         PILNE
       </div>
-      <div class="items col">
+      <div class="items d-flex">
         <?php
           foreach ( getPilnePasek() as $post ) {
             printf(
               '<div class="item d-flex text-center align-items-center justify-content-center">
+                <div class="separator">&diams;</div>
                 <a class="" href="%s">%s</a>
-                <div class="separator d-none d-md-block">&diams;</div>
               </div>',
               get_permalink( $post->ID ),
               $post->post_title

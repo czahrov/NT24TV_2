@@ -396,15 +396,6 @@ $(function(){
   (function( pasek, view ){
     // szybkość przewijania [pixel/s]
     const speed = 100;
-    // pobiera listę elementów do wyświetlenia
-    const getItems = ()=>{
-      return pasek.find('.items .item');
-    };
-
-    pasek.find('.items').prepend('<div class="box"></div>');
-    getItems().detach().appendTo( pasek.find('.items .box') );
-    pasek.find('.items .box').clone().appendTo( pasek.find('.items') );
-
     // długość wyświetlanej części paska
     const getViewWidth = ()=>{
       return view.outerWidth(true);
@@ -413,6 +404,10 @@ $(function(){
     const getFullWidth = ()=>{
       return pasek.find('.items .box:first').prop('scrollWidth');
     };
+
+    pasek.find('.items').prepend('<div class="box"></div>');
+    pasek.find('.items .item').detach().appendTo( pasek.find('.items .box') );
+    pasek.find('.items .box').clone().appendTo( pasek.find('.items') );
 
     let mainTL = new TimelineMax({
       repeat: -1,

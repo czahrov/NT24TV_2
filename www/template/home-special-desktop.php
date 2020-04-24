@@ -3,7 +3,7 @@
   // var_dump( $cat );
 
   $items = get_posts(array(
-    'numberposts'   => 9,
+    'numberposts'   => 11,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -15,22 +15,25 @@
 ?>
 <!-- Page Content -->
 <div id='<?php echo $cat->slug; ?>' class="<?php echo getDevType(); ?> special container" style="background-color:<?php echo $meta['kolor'][0]; ?>">
-  <h5 class="title-sidebar"><?php echo $cat->name; ?></h5>
+  <a href="<?php echo get_category_link( $cat->term_id ); ?>">
+    <h5 class="title-sidebar">
+      <?php echo $cat->name; ?>
+    </h5>
+  </a>
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-lg-8">
-      <!-- Big Post -->
-      <?php
+      <div class="row no-gutters">
+        <!-- Big Post -->
+        <?php
         $item = $items[0];
         printf(
-          '<a class="link_post big " href="%s">
+          '<a class="link_post big col-12 col-lg-8" href="%s">
             <div class="big-post">
               <div class="cover_img"></div>
               <div class="post_news_big" style="background-image:url(%s)">
                 <span>
-                  <div class="post-tags">
-                    %s
-                  </div>
+                  <div class="post-tags"> %s </div>
                   %s
                 </span>
               </div>
@@ -41,34 +44,29 @@
           printTags( $item->ID, false ),
           $item->post_title
         );
-      ?>
-      <div class="clear-top"></div>
-
-      <div class="row no-gutters">
+        ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 3 ) as $item ){
-            printf(
-              '<div class="col col-lg-4">
-                <a href="%s" class="link_post_small">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      <div class="cover_img" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
-              $item->post_title,
-              printTags( $item->ID, true, false )
-            );
-          }
+        foreach( array_slice( $items, 1, 4 ) as $item ){
+          printf(
+            '<a href="%s" class="link_post_small col-12 col-sm-6 col-lg-4">
+              <div class="small-post">
+                <div class="post_news_small">
+                  <div class="cover_img" style="background-image:url(%s)"></div>
+                </div>
+                <span>%s %s</span>
+              </div>
+            </a>',
+            get_permalink( $item->ID ),
+            get_the_post_thumbnail_url( $item->ID, 'large' ),
+            $item->post_title,
+            printTags( $item->ID, true, false )
+          );
+        }
         ?>
 
       </div>
-      <!-- /row-->
+      <div class="clear-top"></div>
 
     </div>
     <!-- /col-8 -->

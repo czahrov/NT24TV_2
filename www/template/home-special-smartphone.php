@@ -3,7 +3,7 @@
   // var_dump( $cat );
 
   $items = get_posts(array(
-    'numberposts'   => 13,
+    'numberposts'   => 11,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -19,7 +19,11 @@
 
     <!-- Blog Entries Column -->
     <div class="col-12">
-      <h5 class="title-sidebar"><?php echo $cat->name; ?></h5>
+      <a href="<?php echo get_category_link( $cat->term_id ); ?>">
+        <h5 class="title-sidebar">
+          <?php echo $cat->name; ?>
+        </h5>
+      </a>
       <!-- Big Post -->
       <?php
         $item = $items[0];

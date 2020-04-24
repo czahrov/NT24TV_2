@@ -347,6 +347,28 @@ iframe.wp-embedded-content{
       bottom: 1rem;
     }
 
+    .link_post.big{
+      margin-bottom: 30px;
+
+      .big-post{
+        height: 11rem;
+
+        @media( min-width: map-get($break, 'sm') ){
+          height: 22rem;
+        }
+
+        @media( min-width: map-get($break, 'lg') ){
+          height: 100%;
+        }
+
+      }
+
+      @media( min-width: map-get($break, 'md') ) and (max-width: (map-get($break, 'xl') - 1px)){
+        margin-bottom: 0;
+      }
+
+    }
+
   }
 
   &.smartphone{

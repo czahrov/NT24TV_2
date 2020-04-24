@@ -644,6 +644,32 @@ iframe.wp-embedded-content {
   padding-bottom: 1rem;
 }
 
+[id].special.desktop .link_post.big {
+  margin-bottom: 30px;
+}
+
+[id].special.desktop .link_post.big .big-post {
+  height: 11rem;
+}
+
+@media (min-width: 576px) {
+  [id].special.desktop .link_post.big .big-post {
+    height: 22rem;
+  }
+}
+
+@media (min-width: 992px) {
+  [id].special.desktop .link_post.big .big-post {
+    height: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  [id].special.desktop .link_post.big {
+    margin-bottom: 0;
+  }
+}
+
 [id].special.smartphone {
   margin-bottom: 60px;
 }

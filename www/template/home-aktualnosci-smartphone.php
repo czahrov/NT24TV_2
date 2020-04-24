@@ -12,7 +12,9 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12">
-      <h5 class="title-sidebar">Aktualności</h5>
+      <a href="<?php echo get_category_link( get_category_by_slug('aktualnosci')->cat_ID ); ?>">
+        <h5 class="title-sidebar line">Aktualności</h5>
+      </a>
       <!-- Big Post -->
       <?php
         $item = $items[0];

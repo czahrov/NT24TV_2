@@ -13,9 +13,7 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-12 col-lg-8">
-
       <h5 class="title-sidebar">Najbardziej pupularne</h5>
-
       <!-- Post -->
       <div class="slick row no-gutters najbardziej-popularne">
         <!-- single post -->

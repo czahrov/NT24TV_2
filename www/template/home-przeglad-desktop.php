@@ -9,7 +9,9 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-md-6 col-lg-8">
-      <h5 class="title-sidebar">Przegląd tygodniowy</h5>
+      <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>">
+        <h5 class="title-sidebar">Przegląd tygodniowy</h5>
+      </a>
       <!-- BIG Post -->
       <?php
         $item = $items[0];
@@ -79,7 +81,9 @@
     <!-- /col-8 -->
     <!-- Sidebar Column -->
     <div class="col-sm-12 col-md-6 col-lg-4 sidebar-list">
-      <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
+      <a href="<?php echo get_permalink( get_page_by_title( 'Pogoda' )->ID ); ?>">
+        <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
+      </a>
       <?php get_template_part('template/airly'); ?>
 
       <div class="clear-top"></div>

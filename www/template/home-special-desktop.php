@@ -3,7 +3,7 @@
   // var_dump( $cat );
 
   $items = get_posts(array(
-    'numberposts'   => 11,
+    'numberposts'   => 10,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -66,7 +66,6 @@
         ?>
 
       </div>
-      <div class="clear-top"></div>
 
     </div>
     <!-- /col-8 -->

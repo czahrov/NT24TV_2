@@ -2,7 +2,9 @@
 <div id='wskrocie' class="<?php echo getDevType(); ?> container">
   <div class="row no-gutters">
     <div class="col-12">
-      <h5 class="title-sidebar">Będzie się działo</h5>
+      <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
+        <h5 class="title-sidebar">Będzie się działo</h5>
+      </a>
       <div class="slider">
         <?php
           $items = get_posts( array(
@@ -108,9 +110,11 @@
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
-    <div id="r" class="sidebar col-12 sidebar-list row no-gutters">
+    <div class="sidebar col-12 sidebar-list row no-gutters">
       <div class="reportaze ogloszenia-urzedowe col-12 col-lg-6">
-        <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
+        <a href="<?php echo get_category_link( get_category_by_slug( 'ogloszenia-urzedowe' )->cat_ID ); ?>">
+          <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
+        </a>
         <ul class="image-sidebar-section">
           <?php
             $items = get_posts(array(

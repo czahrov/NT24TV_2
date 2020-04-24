@@ -1,5 +1,7 @@
 <div id="nadchodzace" class="<?php echo getDevType(); ?> single-post sidebar-list">
-  <h5 class="title-sidebar line">Będzie się działo</h5>
+  <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
+    <h5 class="title-sidebar">Będzie się działo</h5>
+  </a>
   <ul class="image-sidebar-section">
     <?php
       $items = get_posts(array(

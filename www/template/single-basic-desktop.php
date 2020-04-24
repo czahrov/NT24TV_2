@@ -123,7 +123,7 @@
     </div>
     <!-- sidebar -->
     <!-- Sidebar Column -->
-    <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
       <div class="col-12 col-sm col-lg-12">
         <?php echo printAd('v-l'); ?>
       </div>
@@ -139,14 +139,14 @@
 <div class="container">
   <div class="row no-gutters">
     <!-- comments -->
-    <div class="col-12 col-lg-8 single-post no-padding">
+    <div class="col-12 col-lg-8 single-post no-padding__">
       <div class="row no-gutters komentarze">
         <?php get_template_part("template/post-comments"); ?>
       </div>
       <?php get_template_part("template/post-more-desktop"); ?>
     </div>
     <!-- /col-8 -->
-    <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
       <div class="col-12 col-sm col-lg-12">
         <?php echo printAd('v-l'); ?>
       </div>

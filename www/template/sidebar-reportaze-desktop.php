@@ -1,8 +1,10 @@
 <div class="reportaze">
-  <h5 class="title-sidebar line">Reportaże</h5>
+  <a href="<?php echo get_category_link( get_category_by_slug( 'reportaze' )->cat_ID ); ?>">
+    <h5 class="title-sidebar line">Reportaże</h5>
+  </a>
   <?php
   $items = get_posts(array(
-    'numberposts'     => 7,
+    'numberposts'     => 6,
     'category_name'   => 'reportaze',
   ));
   ?>

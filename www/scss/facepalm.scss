@@ -273,6 +273,14 @@ img.tag-icon{
 
 }
 
+.sidebar-list{
+
+  .position-sticky{
+    top: 50px;
+  }
+
+}
+
 ol, ul{
   list-style-position: inside;
 }
@@ -789,7 +797,11 @@ iframe.wp-embedded-content{
   .sidebar{
 
     @media( min-width: map-get( $break, 'lg' ) ){
-      margin-top: 32px;
+      margin-top: calc( 3.25rem - 12px );
+    }
+
+    @media( min-width: map-get( $break, 'xl' ) ){
+      margin-top: calc( 2.75rem - 12px );
     }
 
   }
@@ -846,7 +858,7 @@ iframe.wp-embedded-content{
     }
 
     .sidebar{
-      top: 30px;
+      
     }
 
   }
@@ -1102,7 +1114,6 @@ iframe.wp-embedded-content{
     }
 
   }
-
 
   .fpGallery{
     font-size: 0;

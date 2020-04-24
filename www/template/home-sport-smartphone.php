@@ -12,7 +12,9 @@
 
     <!-- Blog Entries Column -->
     <div class="col-12">
-      <h5 class="title-sidebar">Sport</h5>
+      <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>">
+        <h5 class="title-sidebar">Sport</h5>
+      </a>
 
       <!-- BIG Post -->
       <?php
@@ -72,7 +74,9 @@
     <!-- Sidebar Column -->
     <div class="col-12 sidebar-list">
       <div class="reportaze sticky">
-        <h5 class="title-sidebar line">Kultura</h5>
+        <a href="<?php echo get_category_link( get_category_by_slug( 'kultura' )->cat_ID ); ?>">
+          <h5 class="title-sidebar line">Kultura</h5>
+        </a>
         <?php
           $items = get_posts( array(
             'numberposts'    => 8,

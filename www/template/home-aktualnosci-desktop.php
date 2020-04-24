@@ -71,7 +71,9 @@
     <!-- Sidebar Column -->
     <div class="col-12 col-lg-4 sidebar-list">
       <div class="position-sticky">
-        <h5 class="title-sidebar line">Aktualności</h5>
+        <a href="<?php echo get_category_link( get_category_by_slug('aktualnosci')->cat_ID ); ?>">
+          <h5 class="title-sidebar line">Aktualności</h5>
+        </a>
         <ul>
           <?php
             foreach ( array_slice( $items, 4 ) as $item) {

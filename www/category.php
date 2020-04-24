@@ -96,7 +96,7 @@
         </div>
         <!-- / col -->
         <!-- Sidebar Column -->
-        <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+        <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
           <div class="col-12 col-sm col-lg-12">
             <?php echo printAd('v-l'); ?>
           </div>

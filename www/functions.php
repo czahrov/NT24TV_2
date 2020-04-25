@@ -730,6 +730,20 @@
     return $ret;
   }
 
+  function getPostViews( $post_id = null ){
+    $ret = false;
+    $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
+
+    if( !$con ) return $ret;
+    $sql = "SELECT count FROM nttv_post_views WHERE period = 'total' AND id = {$post_id} LIMIT 1";
+    $query = mysqli_query( $con, $sql );
+    $ret = mysqli_fetch_object( $query )->count;
+
+    mysqli_free_result( $query );
+    mysqli_close( $con );
+    return $ret;
+  }
+
   add_filter( 'custom_author', function( $arg ){
     $segments = explode( " ", $arg );
     return implode( "", array_map( function( $seg ){

@@ -18,7 +18,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
+<head>
   <META NAME="robots" CONTENT="noindex">
   <META NAME="robots" CONTENT="nofollow">
   <META NAME="robots" CONTENT="noindex,nofollow">
@@ -28,6 +28,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="<?php echo bloginfo('description'); ?>">
   <meta name="author" content="">
+  <link href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
   <title><?php wp_title( '|', true, 'right' ); echo bloginfo('name'); ?></title>
   <link rel="preconnect" href="https://via.placeholder.com/">
 

@@ -66,18 +66,19 @@
       <div class="content main padding no-padding-xl">
         <div class="zajawka">
           <?php
-            // the_excerpt();
-            echo get_field('lead');
+            $excerpt =  get_the_excerpt( get_post() );
+            $lead =  get_field('lead');
+            echo empty( $lead )?( $excerpt ):( $lead );
           ?>
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-          <div class="video">
-            <div class="exit">
-              X
+            <div class="video">
+              <div class="exit">
+                X
+              </div>
+              <?php $fp->genYoutubeVideo( $yt ); ?>
             </div>
-            <?php $fp->genYoutubeVideo( $yt ); ?>
-          </div>
-        <?php endif; ?>
+          <?php endif; ?>
         <?php
           if( empty( $yt ) ):
             $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
@@ -91,8 +92,6 @@
           $replace = array();
           preg_match_all( '/\[gallery.*?\]/', $content, $found );
           foreach ( $found[0] as $k => $tag ) {
-            // $replace = printGallery( $tag );
-            // $content = str_replace( $tag, $replace, $content );
             $replace[] = printGallery( $tag );
             $content = str_replace( $tag, "%fp_g{$k}%", $content );
           }
@@ -117,6 +116,10 @@
         <span class='separator'></span>
         <span class='date'>
           <?php echo get_the_date("d.m.Y"); ?>
+        </span>
+        <span class='separator'></span>
+        <span class='date'>
+          <?php echo "Wyświetleń: " . getPostViews( get_post()->ID ); ?>
         </span>
       </div>
       <!-- /content -->

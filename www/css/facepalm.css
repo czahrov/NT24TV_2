@@ -997,6 +997,27 @@ iframe.wp-embedded-content {
   background-repeat: no-repeat;
 }
 
+#category.galeria .cover_img {
+  position: relative;
+}
+
+#category.galeria .cover_img .counter {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 0 10px 0 0;
+  color: #fff;
+}
+
+#category.galeria .cover_img .counter img {
+  width: 20px;
+  margin-right: 10px;
+}
+
 #category .noposts {
   margin: 50px 0;
 }

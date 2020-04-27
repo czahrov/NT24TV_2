@@ -72,38 +72,31 @@
           ?>
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-            <div class="video">
-              <div class="exit">
-                X
-              </div>
-              <?php $fp->genYoutubeVideo( $yt ); ?>
+          <div class="video">
+            <div class="exit">
+              X
             </div>
-          <?php endif; ?>
-        <?php
-          if( empty( $yt ) ):
-            $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-            $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-        ?>
-          <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
+            <?php $fp->genYoutubeVideo( $yt ); ?>
+          </div>
         <?php endif; ?>
-
         <?php
-          $content = get_the_content();
-          $replace = array();
-          preg_match_all( '/\[gallery.*?\]/', $content, $found );
-          foreach ( $found[0] as $k => $tag ) {
-            $replace[] = printGallery( $tag );
-            $content = str_replace( $tag, "%fp_g{$k}%", $content );
+          if( empty( $yt ) ){
+            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+            $img = $thumb !== false?( $thumb ):(
+              file_exists( $thumb_alt )?( $thumb_alt ):( false )
+            );
+
+            if ( $img !== false ) {
+              printf(
+                '<img class="img-fluid" src="%s" alt="%s"/>',
+                $img,
+                $post->post_title
+              );
+            }
           }
-
-          $content = apply_filters( 'the_content', $content );
-
-          foreach ($replace as $k => $v) {
-            $content = str_replace( "%fp_g{$k}%", $replace[$k], $content );
-          }
-
-          echo $content;
         ?>
+        <?php the_content(); ?>
 
       </div>
       <div class="after_content d-flex align-items-center">

@@ -858,7 +858,34 @@ iframe.wp-embedded-content{
     }
 
     .sidebar{
-      
+
+    }
+
+  }
+
+  &.galeria{
+
+    .cover_img{
+      position: relative;
+
+      .counter{
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.8);
+        border-radius: 0 10px 0 0;
+        color: #fff;
+
+        img{
+          width: 20px;
+          margin-right: 10px;
+        }
+
+      }
+
     }
 
   }

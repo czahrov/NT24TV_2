@@ -81,23 +81,8 @@
         <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
 
         <?php
-        $content = get_the_content();
-        $replace = array();
-        preg_match_all( '/\[gallery.*?\]/', $content, $found );
-        foreach ( $found[0] as $k => $tag ) {
-          // $replace = printGallery( $tag );
-          // $content = str_replace( $tag, $replace, $content );
-          $replace[] = printGallery( $tag );
-          $content = str_replace( $tag, "%fp_g{$k}%", $content );
-        }
-
-        $content = apply_filters( 'the_content', $content );
-
-        foreach ($replace as $k => $v) {
-          $content = str_replace( "%fp_g{$k}%", $replace[$k], $content );
-        }
-
-        echo $content . "<div class='author fw-bold'>".get_the_author()."</div>";
+          the_content();
+          echo $content . "<div class='author fw-bold'>".get_the_author()."</div>";
         ?>
 
       </div>

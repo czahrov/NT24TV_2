@@ -76,9 +76,9 @@
       $ret = "<div id='UGallery_{$num}' style='display:none'>";
 
       foreach ( $img_ids as $img_id ) {
-        $title = get_the_title( $img_id );
-        $img_full = wp_get_attachment_image_url( $img_id, 'full' );
-        $img_thumb = wp_get_attachment_image_url( $img_id, 'thumbnail' );
+        $title = get_the_title( (int)$img_id );
+        $img_full = wp_get_attachment_image_url( (int)$img_id, 'full' );
+        $img_thumb = wp_get_attachment_image_url( (int)$img_id, 'thumbnail' );
 
         $ret .= sprintf(
           '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" data-no-lazy="1"/>',

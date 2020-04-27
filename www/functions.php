@@ -16,6 +16,45 @@
   global $fp;
   $fp = new Facepalm();
 
+  // modyfikacja standardowej galerii wp
+  add_filter( 'the_content', function( $content ){
+    global $fp;
+
+    // NOWY EDYTOR
+    // podmiana segmentów
+    preg_match_all( '~<\!\-\- wp:gallery.*?"ids":\[(.+?)\].*?/wp:gallery \-\->~ms', $content, $found );
+    foreach ($found[1] as $k => $v) {
+      $content = str_replace( $found[0][$k], $fp->printUGallery( explode( ',', $v ), false ), $content );
+    }
+
+    //STARY EDYTOR
+    // podmiana segmentów
+    preg_match_all( '~\[gallery.*?ids="(.+?)".*?\]~', $content, $found );
+    foreach ($found[1] as $k => $v) {
+      $content = str_replace( $found[0][$k], $fp->printUGallery( explode( ',', $v ), false ), $content );
+    }
+
+    return $content;
+  }, 8 );
+
+  // modyfikacja galerii filebird
+  add_filter( 'the_content', function( $content ){
+    global $fp;
+
+    // NOWY EDYTOR
+    // podmiana segmentów
+    preg_match_all( '~<\!\-\- wp:filebird/block\-filebird\-gallery.+?/wp:filebird/block\-filebird\-gallery \-\->~ms', $content, $found );
+    // var_dump( $found );
+    foreach ($found[0] as $k => $v) {
+      // var_dump( $v );
+      preg_match_all( '~"id":(\d+)~', $v, $ids );
+      // var_dump( $ids );
+      $content = str_replace( $v, $fp->printUGallery( $ids[1], false ), $content );
+    }
+
+    return $content;
+  }, 8 );
+
   /* generuje komunikat o transmisji live */
   add_action( 'get_live', function( $arg ){
 
@@ -589,12 +628,22 @@
 
   }
 
-  function printGallery( $shortcode = null ){
+  function printGallery( $shortcode = null, $type = 'wordpress' ){
     global $fp;
 
-    preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
-    $ids = explode( ',', $found[1] );
-    // var_dump( $ids );
+    switch( $type ){
+      case 'wordpress':
+        preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
+        $ids = explode( ',', $found[1] );
+        // var_dump( $ids );
+        break;
+      case 'filebird':
+        $ids = array_map( function($arg){
+          return (int)$arg;
+        }, $shortcode );
+        break;
+    }
+
 
     return $fp->printUGallery( $ids, false );
     // return $fp->printSlick( $ids, false );
@@ -602,19 +651,29 @@
 
   }
 
-  function fetchGallery( $shortcode = null ){
-    preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
-    return $found;
-  }
+  // zwraca tablicę tablic id zdjęć znalezionych we wpisie
+  function fetchPostGalleries( $content ){
+    $ret = array();
 
-  function fetchFilebirdGallery( $content = "" ){
-    preg_match( '/wp:filebird\/block\-filebird\-gallery.+?"images":\[(.+?)\}\]\} \-\->/', $content, $gallery );
-    preg_match_all( '/"id"\:(\d+)/', $gallery[1], $found );
-    $ret = array_map( function($arg){
-      return (int)$arg;
-    }, $found[1] );
-    // return $gallery;
-    // return $found[1];
+    // STANDARDOWA GALERIA WP - NOWY EDYTOR
+    preg_match_all( '~<\!\-\- wp:gallery.*?"ids":\[(.+?)\].*?/wp:gallery \-\->~ms', $content, $found );
+    foreach ($found[1] as $k => $v) {
+      $ret[] = explode( ',', $v );
+    }
+
+    // STANDARDOWA GALERIA WP - STARY EDYTOR
+    preg_match_all( '~\[gallery.*?ids="(.+?)".*?\]~', $content, $found );
+    foreach ($found[1] as $k => $v) {
+      $ret[] = explode( ',', $v );
+    }
+
+    // GALERIA FILEBIRD - NOWY EDYTOR
+    preg_match_all( '~<\!\-\- wp:filebird/block\-filebird\-gallery.+?/wp:filebird/block\-filebird\-gallery \-\->~ms', $content, $found );
+    foreach ($found[0] as $k => $v) {
+      preg_match_all( '~"id":(\d+)~', $v, $ids );
+      $ret[] = $ids[1];
+    }
+
     return $ret;
   }
 
@@ -730,6 +789,7 @@
     return $ret;
   }
 
+  // pobiera liczbę wyświetleń dla danego wpisu
   function getPostViews( $post_id = null ){
     $ret = false;
     $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
@@ -744,6 +804,7 @@
     return $ret;
   }
 
+  // modyfikacja sposobu wyświetlania autora wpisu
   add_filter( 'custom_author', function( $arg ){
     $segments = explode( " ", $arg );
     return implode( "", array_map( function( $seg ){

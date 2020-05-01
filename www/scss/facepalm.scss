@@ -276,7 +276,7 @@ img.tag-icon{
 .sidebar-list{
 
   .position-sticky{
-    top: 50px;
+    // top: 50px;
   }
 
 }
@@ -346,8 +346,9 @@ iframe.wp-embedded-content{
         display: flex;
         flex-direction: column;
         background-color: transparent;
-        height: 300px;
-        min-height: 61.8vw;
+        height: 65.25vw;
+        max-height: 470px;
+        min-height: 300px;
 
         .post_news_big{
           background-color: #000;
@@ -355,6 +356,44 @@ iframe.wp-embedded-content{
 
         .video{
           margin: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.image-sidebar-section{
+
+  &.alt{
+
+    a{
+
+      li{
+        padding: 0.5rem 1rem;
+
+        .image-container{
+          margin-right: 20px;
+
+        }
+
+        span{
+          padding-left: 0;
+        }
+
+      }
+
+      &:nth-child(n+2){
+
+        li{
+
+          .image-container{
+            display: none;
+          }
+
         }
 
       }
@@ -386,19 +425,6 @@ iframe.wp-embedded-content{
 
     &:hover li{
       background-color: rgba(0,0,0,0.2);
-    }
-
-    &:nth-child(n+2){
-
-      li{
-        border-top: 1px solid rgba( map-get($color,'grey'), 0.4 );
-
-        .image-container{
-          display: none;
-        }
-
-      }
-
     }
 
   }
@@ -462,6 +488,14 @@ iframe.wp-embedded-content{
       top: 100%;
       left: 0;
       right: 0;
+    }
+
+  }
+
+  &.tablet{
+
+    .big-post{
+      max-height: 210px;
     }
 
   }
@@ -790,15 +824,19 @@ iframe.wp-embedded-content{
 
 #popularne{
 
+  .sidebar-list{
+    padding-top: 2.3rem;
+  }
+
   .position-sticky{
 
     @media( min-width: map-get($break,'lg')){
-      margin-top: 45px;
+      // margin-top: 45px;
     }
 
     @media( min-width: map-get($break,'lg') + 1px){
-      margin-top: 38.5px;
-      margin-bottom: 30px;
+      // margin-top: 38.5px;
+      // margin-bottom: 30px;
     }
 
   }
@@ -1422,7 +1460,7 @@ iframe.wp-embedded-content{
   border-top: solid 1px map-get($color,'grey');
   background-color: map-get( $color, 'white' );
   font-size: 0;
-  z-index: 200;
+  z-index: 10002;
 
   .button{
     position: relative;

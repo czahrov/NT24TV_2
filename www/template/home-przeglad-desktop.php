@@ -1,6 +1,6 @@
 <?php
   $items = get_posts(array(
-    'numberposts'     => 7,
+    'numberposts'     => 4,
     'category_name'   => 'przeglad-tygodniowy',
   ));
 ?>

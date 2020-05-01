@@ -46,11 +46,11 @@
         </a>
         <?php
           $items = get_posts( array(
-            'numberposts'    => 6,
+            'numberposts'    => 10,
             'category_name'  =>   'kultura'
           ) );
         ?>
-        <ul class="image-sidebar-section">
+        <ul class="image-sidebar-section alt">
 
           <!-- single post -->
           <?php

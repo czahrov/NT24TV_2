@@ -2,7 +2,7 @@
   global $cat;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
-    'numberposts'   => 7,
+    'numberposts'   => 5,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -35,7 +35,7 @@
     <!-- Sidebar Column -->
     <div class="col-12 col-lg-4 sidebar-list">
       <div class="position-sticky">
-        <ul class="image-sidebar-section alt padding">
+        <ul class="image-sidebar-section special padding">
           <?php
             foreach ( array_slice( $items, 2 ) as $item) {
               printPost( $item, 'side-special' );

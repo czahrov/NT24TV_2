@@ -18,16 +18,12 @@
 
   global $cat;
   foreach ($spec_cats as $cat ) {
-    get_template_part( sprintf(
-      'template/home-special-%s',
-      getDevType()
-    ));
-    // print_r( $scat );
-    // print_r( get_term_meta( $scat->term_id ) );
+    templateLoader('template/home-special-%s');
   }
   unset( $cat );
 
   global $devType;
+  // lista plików z szablonami
   $files = array(
     'template/home-aktualnosci-%s',
     'template/home-przeglad-%s',
@@ -37,11 +33,15 @@
     'template/home-sponsorowane-%s',
   );
 
-  array_map( function($arg){
-    get_template_part( sprintf(
-      $arg,
-      getDevType()
-      ) );
-  }, $files );
+  // ładowanie szablonów
+  templateLoader( $files );
+  // array_map( function($arg){
+  //   $types = array( 'desktop', 'tablet', 'smartphone' );
+  //   $file_url = sprintf(
+  //     $arg,
+  //     getDevType()
+  //   );
+  //   get_template_part( $file_url );
+  // }, $files );
 ?>
 <?php get_footer(); ?>

@@ -686,8 +686,8 @@
 
       if ( $detect->isMobile() ) {
         if ( $detect->isTablet() ) {
-          // $devType = 'tablet';
-          $devType = 'desktop';
+          $devType = 'tablet';
+          // $devType = 'desktop';
         }
         else{
           $devType = 'smartphone';
@@ -826,7 +826,7 @@
       case 'large':
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<div class="col-sm-12 col-12 col-lg-6 col-md-6">
+          '<div class="col-sm-12 col-12 col-lg-6 col-md-6 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post popular-post">
                 %s
@@ -838,6 +838,7 @@
               </div>
             </a>
           </div>',
+          $data['class'],
           $data['url'],
           $type,
           $data['format'] !== false?("<div class='{$data['format']}-post'></div>"):(''),
@@ -884,16 +885,17 @@
           }
 
           printf(
-            '<div class="link_post big %s" data-post-type="%s">
+            '<div class="link_post big %s %s" data-post-type="%s">
               <div class="big-post col no-padding">
                 <div class="post_news_big">
                   %s
                 </div>
-                <a href="%s">
+                <a class="padding nopadding-lg" href="%s">
                   <span>%s</span>
                 </a>
               </div>
             </div>',
+            $data['class'],
             $source_type,
             $type,
             $player_html,
@@ -923,7 +925,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, false );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<a class="link_post big col-12 col-lg-8" href="%s" data-post-type="%s">
+          '<a class="link_post big col-12 col-lg-8 %s" href="%s" data-post-type="%s">
             <div class="big-post">
               <div class="cover_img"></div>
               <div class="post_news_big" style="background-image:url(%s)">
@@ -933,6 +935,7 @@
               </div>
             </div>
           </a>',
+          $data['class'],
           $data['url'],
           $type,
           $data['img'],
@@ -943,7 +946,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, true );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col col-lg-4">
+          '<div class="col-6 col-md-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">
@@ -953,6 +956,7 @@
               </div>
             </a>
           </div>',
+          $data['class'],
           $data['url'],
           $type,
           $data['img'],
@@ -963,7 +967,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, false );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col col-lg-4">
+          '<div class="col col-lg-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">
@@ -973,6 +977,7 @@
               </div>
             </a>
           </div>',
+          $data['class'],
           $data['url'],
           $type,
           $data['img'],
@@ -983,7 +988,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, true );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a href="%s" data-post-type="%s">
+          '<a class="%s" href="%s" data-post-type="%s">
             <li>
               <div class="image-container">
                 <div class="image" style="background-image:url(%s)"></div>
@@ -991,6 +996,7 @@
               <span>%s</span>
             </li>
           </a>',
+          $data['class'],
           $data['url'],
           $type,
           $data['img'],
@@ -1001,7 +1007,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, false );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a href="%s" data-post-type="%s">
+          '<a class="%s" href="%s" data-post-type="%s">
             <li>
               <div class="image-container">
                 <div class="image" style="background-image:url(%s)"></div>
@@ -1009,6 +1015,7 @@
               <span>%s</span>
             </li>
           </a>',
+          $data['class'],
           $data['url'],
           $type,
           $data['img'],
@@ -1039,7 +1046,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, true );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="slide-content">
+          '<div class="slide-content %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">
@@ -1049,6 +1056,7 @@
               </div>
             </a>
           </div>',
+          $data['class'],
           $data['url'],
           $type,
           $data['img'],
@@ -1059,6 +1067,35 @@
         // code...
         break;
     }
+  }
+
+  // funkcja ładująca szablony w zależności od rodzaju urządzenia
+  function templateLoader( $file ){
+    $types = array( 'smartphone', 'tablet', 'desktop' );
+    $current = getDevType();
+    if ( is_array( $file ) ) {
+      foreach ($file as $n => $f) {
+        templateLoader( $f );
+      }
+    }
+    else {
+      $base = get_template_directory()."/";
+      // var_dump( sprintf( $base.$file.".php", $current ) );
+      if ( file_exists( sprintf( $base.$file."php", $current ) ) ) {
+        get_template_part( sprintf( $file, $current ) );
+      }
+      else {
+        for( $i = array_search( $current, $types ); $i < count( $types ); $i++ ){
+          if ( file_exists( sprintf( $base.$file.".php", $types[$i] ) ) ) {
+            // var_dump( sprintf( $base.$file.".php", $types[$i] ) );
+            get_template_part( sprintf( $file, $types[$i] ) );
+            break;
+          }
+        }
+      }
+
+    }
+
   }
 
 ?>

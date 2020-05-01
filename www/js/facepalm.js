@@ -321,7 +321,7 @@ $(function(){
         return $('html,body').prop('scrollTop')
       };
       const inView = ()=>{
-        return (( windowPos() - playerTop + 30 ) <= playerHeight)&&( (windowPos() + window.innerHeight) >= playerTop );
+        return (( windowPos() - playerTop + 30 ) <= playerHeight)&&( windowPos() >= ( playerTop - window.innerHeight )  );
       };
       var playerStatus = null;
 
@@ -372,7 +372,7 @@ $(function(){
                 let current = $(this).css('position');
                 return current == 'static'?('relative'):( current );
               },
-              zIndex: 150,
+              zIndex: 10001,
             });
             $(this).addClass('mini');
             detached = true;

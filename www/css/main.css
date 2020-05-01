@@ -1704,6 +1704,7 @@ footer.bg-footer .copy .copy-content {
   }
   .sidebar-list ul a li {
     padding: 1.2rem 1rem;
+    padding: 0.5rem 1rem;
     width: 100%;
   }
   .ogloszenia-urzedowe a {

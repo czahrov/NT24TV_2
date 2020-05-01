@@ -309,16 +309,21 @@ $(function(){
       const _ = $(this);
       const root = _.parent();
       const vidId = _.attr('data-yt-video-id');
-      let player = null;
-      let detached = false;
+      const autoplay = _.attr('data-yt-video-autoplay');
+      const controls = _.attr('data-yt-video-controls');
+      const muted = _.attr('data-yt-video-muted');
+      const allow_detach = _.attr('data-yt-video-detach');
+      var player = null;
+      var detached = false;
       const playerTop = root.offset().top;
-      let playerHeight = null;
+      var playerHeight = null;
       const windowPos = ()=>{
         return $('html,body').prop('scrollTop')
       };
       const inView = ()=>{
-        return ( windowPos() - playerTop + 30 ) <= playerHeight;
+        return (( windowPos() - playerTop + 30 ) <= playerHeight)&&( (windowPos() + window.innerHeight) >= playerTop );
       };
+      var playerStatus = null;
 
       _.before( $('<script src="https://www.youtube.com/iframe_api"></script>') );
 
@@ -329,7 +334,7 @@ $(function(){
           height: '100%',
           playerVars:{
             // autoplay: 1,
-            controls: 1,
+            controls: controls,
             rel: 0,
             origin: window.location.origin,
             enablejsapi: 1,
@@ -337,8 +342,14 @@ $(function(){
           events:{
             onReady: function(e){
               playerHeight = $(player.f).outerHeight();
-              player.playVideo();
-              root.find('.mute').fadeIn();
+              if ( muted == 1 ) {
+                player.mute();
+                root.find('.mute').fadeIn();
+              }
+              if ( autoplay == 1 && inView() ) {
+                player.playVideo();
+                console.log('play_onReady');
+              }
             },
             onStateChange: function(e){
               if ( e.data == 0 ) {
@@ -349,19 +360,28 @@ $(function(){
         } );
       };
 
-      root
-      .on({
+      root.on({
         'getPlayer': function(e){
           return player;
         },
         'detach': function(e){
-          if( player.getPlayerState() === 1 ){
+          if( typeof player == 'object' && player.getPlayerState() === 1 ){
+            root.parents('body > [id]:first')
+            .css({
+              position: function(e){
+                let current = $(this).css('position');
+                return current == 'static'?('relative'):( current );
+              },
+              zIndex: 150,
+            });
             $(this).addClass('mini');
             detached = true;
-
           }
         },
         'attach': function(e){
+          root.parents('body > [id]:first').attr({
+            'style': null,
+          });
           $(this).removeClass('mini');
           playerHeight = $(this).outerHeight(true);
           detached = false;
@@ -372,16 +392,35 @@ $(function(){
         },
       });
 
+      $('body').keydown((e)=>{
+        if ( e.code == 'Escape' ) {
+          root.triggerHandler('exit');
+        }
+      });
+
       root.find('.exit').click((e)=>{root.triggerHandler('exit')});
 
-      $(window)
-      .scroll(function(e){
+      $(window).scroll(function(e){
+        if( allow_detach == 1 ){
+          if ( !inView()  && !detached ){
+            root.triggerHandler('detach');
+          }
+          else if( inView() && detached ){
+            root.triggerHandler('attach');
+          }
 
-        if ( !inView()  && !detached ) {
-          root.triggerHandler('detach');
+          if ( playerStatus != 'play' && inView() && [-1,5].indexOf( player.getPlayerState() ) > 0 ) {
+            player.playVideo();
+            playerStatus = 'play';
+            // console.log('play_scroll');
+          }
+
         }
-        else if( inView() && detached ){
-          root.triggerHandler('attach');
+
+        if( playerStatus != 'pause' && !inView() && allow_detach !== 1 && [1].indexOf( player.getPlayerState() ) > 0 ){
+          player.pauseVideo();
+          playerStatus = 'pause';
+          // console.log('pause_scroll');
         }
 
       });

@@ -54,21 +54,64 @@
       return $ret;
     }
 
-    public function genYoutubeVideo( $link = "", $delimiter = "|" ){
-      $videos = array_map( function($arg){
-        // https://www.youtube.com/watch?time_continue=1&v=yvcobYgRB-A
-        preg_match( '~.+/(.+?v=)?([^&]+)?~', $arg, $match );
-        // printf(
-        //   '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" title="%2$s" allowfullscreen></iframe>',
-        //   end( $match ),
-        //   'Zobacz film'
-        // );
-        printf(
-          '<div class="yt-video" data-yt-video-id="%s"></div>',
-          end( $match )
-        );
-      }, explode( $delimiter, $link ) );
+    // generuje html youtube playera
+    public function genYoutubeVideo( $url = "", $args = array() ){
+      $data = array_merge( array(
+        'autoplay'  => true,
+        'muted'     => true,
+        'controls'  => 1,
+        'detach'    => 1,
+      ), $args );
 
+      // https://www.youtube.com/watch?time_continue=1&v=yvcobYgRB-A
+      // https://www.youtube.com/watch?v=qrtIxEFWgvQ
+      preg_match( '~.+/(.*?v=)?([^\&\|]+)?~', $url, $match );
+      // printf(
+      //   '<iframe class="youtube_video" src="https://www.youtube.com/embed/%1$s" title="%2$s" allowfullscreen></iframe>',
+      //   end( $match ),
+      //   'Zobacz film'
+      // );
+
+      return sprintf(
+        '<div class="video">
+          <div class="exit"> X </div>
+          <div class="yt-video" data-yt-video-id="%s" data-yt-video-muted="%u" data-yt-video-autoplay="%u" data-yt-video-control="%u" data-yt-video-detach="%u"></div>
+        </div>',
+        end( $match ),
+        (int)$data['muted'],
+        (int)$data['autoplay'],
+        (int)$data['controls'],
+        (int)$data['detach']
+      );
+    }
+
+    // generuje html playera dla mediów z biblioteki mediów
+    public function genMediaPlayer( $media = null, $args = array() ){
+      if ( !$media instanceof WP_POST ) return false;
+      $data = array_merge( array(
+        'width'     => '100%',
+        'height'    => '100%',
+        'autoplay'  => false,
+        'muted'     => true,
+        'controls'  => true,
+        'poster'    => false,
+        'class'     => '',
+      ), $args );
+
+      return sprintf(
+        '<video class="media_player %s" width="%s" height="%s" %s %s %s>
+          <source src="%s" type="%s"/>
+          Twoja przeglądarka nie obsługuje odtwarzacza mediów HTML5
+        </video>',
+        $data['class'],
+        $data['width'],
+        $data['height'],
+        $data['controls'] == true?('controls'):(''),
+        $data['muted'] == true?('muted'):(''),
+        $data['autoplay'] == true?('autoplay'):(''),
+        wp_get_attachment_url( $media->ID ),
+        $media->post_mime_type
+      );
     }
 
     public function printUGallery( $img_ids = array(), $echo = true ){

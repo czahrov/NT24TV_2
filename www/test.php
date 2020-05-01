@@ -1,4 +1,4 @@
 <?php /* Template Name: test */ ?>
 <?php
-  print_r( get_post( 11957 ) );
-  print_r( get_post_meta( 11957 ) );
+  $id = 106130;
+  var_dump( get_post_format( $id ) );

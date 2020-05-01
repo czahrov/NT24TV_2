@@ -15,22 +15,7 @@
         <!-- post -->
         <?php
           foreach ($items as $item) {
-            printf(
-              '<div class="slide-content">
-                <a href="%s" class="link_post_small">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      <div class="cover_img" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'medium' ),
-              $item->post_title,
-              printTags( $item->ID )
-            );
+            printPost( $item, 'slider' );
           }
         ?>
       </div>
@@ -64,22 +49,7 @@
             <!-- post -->
             <?php
               foreach ($items as $item) {
-                printf(
-                  '<div class="slide-content">
-                    <a href="%s" class="link_post_small">
-                      <div class="small-post">
-                        <div class="post_news_small">
-                          <div class="cover_img" style="background-image:url(%s)"></div>
-                        </div>
-                        <span>%s %s</span>
-                      </div>
-                    </a>
-                  </div>',
-                  get_permalink( $item->ID ),
-                  get_the_post_thumbnail_url( $item->ID, 'medium'),
-                  $item->post_title,
-                  printTags( $item->ID )
-                );
+                printPost( $item, 'slider' );
               }
             ?>
 
@@ -120,21 +90,7 @@
           ));
 
           foreach ($items as $item) {
-            printf(
-              '<a href="%s" class="single" title="%s">
-                <div class="image-container">
-                  <div class="image" style="background-image:url(%s);">
-                    <div class="video-post">
-                      <img src="%s/images/play.svg" alt="odtwórz film"/>
-                    </div>
-                  </div>
-                </div>
-              </a>',
-              get_permalink( $item->ID ),
-              $item->post_title,
-              get_the_post_thumbnail_url( $item->ID, 'medium' ),
-              get_template_directory_uri()
-            );
+            printPost( $item, 'side-big' );
           }
         ?>
 

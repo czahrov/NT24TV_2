@@ -17,26 +17,7 @@
       </a>
       <!-- Big Post -->
       <?php
-        $item = $items[0];
-        printf(
-          '<a class="link_post item" href="%s">
-            <div class="big-post">
-              <div class="cover_img img1"></div>
-              <div class="post_news_big" style="background-image:url(%s)">
-                <span>
-                  <div class="post-tags">
-                    %s
-                  </div>
-                  %s
-                </span>
-              </div>
-            </div>
-          </a>',
-          get_permalink( $item->ID ),
-          get_the_post_thumbnail_url( $item->ID, 'full' ),
-          printTags( $item->ID, false ),
-          $item->post_title
-        );
+        printPost( $items[0],'big' );
       ?>
       <div class="clear-top"></div>
 
@@ -44,22 +25,7 @@
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1 ) as $item ){
-            printf(
-              '<div class="item col-6 col-md-4">
-                <a class="link_post_small" href="%s">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      <div class="cover_img img2" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
-              $item->post_title,
-              printTags( $item->ID )
-            );
+            printPost( $item, 'mid' );
           }
         ?>
 

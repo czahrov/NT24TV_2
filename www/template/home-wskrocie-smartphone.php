@@ -15,22 +15,7 @@
         <!-- post -->
         <?php
           foreach ($items as $item) {
-            printf(
-              '<div class="slide-content">
-                <a href="%s" class="link_post_small">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      <div class="cover_img" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'medium' ),
-              $item->post_title,
-              printTags( $item->ID )
-            );
+            printPost( $item, 'slider' );
           }
         ?>
       </div>
@@ -65,22 +50,7 @@
             <!-- post -->
             <?php
               foreach ($items as $item) {
-                printf(
-                  '<div class="slide-content">
-                    <a href="%s" class="link_post_small">
-                      <div class="small-post">
-                        <div class="post_news_small">
-                          <div class="cover_img" style="background-image:url(%s)"></div>
-                        </div>
-                        <span>%s %s</span>
-                      </div>
-                    </a>
-                  </div>',
-                  get_permalink( $item->ID ),
-                  get_the_post_thumbnail_url( $item->ID, 'medium'),
-                  $item->post_title,
-                  printTags( $item->ID )
-                );
+                printPost( $item, 'slider' );
               }
             ?>
 
@@ -125,20 +95,7 @@
           <!-- single post -->
           <?php
             foreach ($items as $item) {
-              printf(
-                '<a href="%s">
-                  <li>
-                    <div class="image-container">
-                      <div class="image" style="background-image:url(%s);"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </li>
-                </a>',
-                get_permalink( $item->ID ),
-                get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
-                $item->post_title,
-                printTags( $item->ID )
-              );
+              printPost( $item, 'side' );
             }
           ?>
 
@@ -156,21 +113,24 @@
           ));
 
           foreach ($items as $item) {
-            printf(
-              '<a class="single col-12 col-sm-6 col-lg-12 no-padding" href="%s" alt="%s">
-                <div class="image-container">
-                  <div class="image" style="background-image:url(%s);">
-                    <div class="video-post">
-                      <img src="%s/images/play.svg" alt="odtwórz film"/>
-                    </div>
-                  </div>
-                </div>
-              </a>',
-              get_permalink( $item->ID ),
-              $item->post_title,
-              get_the_post_thumbnail_url( $item->ID, 'medium' ),
-              get_template_directory_uri()
-            );
+            // printf(
+            //   '<a class="single col-12 col-sm-6 col-lg-12 no-padding" href="%s" alt="%s">
+            //     <div class="image-container">
+            //       <div class="image" style="background-image:url(%s);">
+            //         <div class="video-post">
+            //           <img src="%s/images/play.svg" alt="odtwórz film"/>
+            //         </div>
+            //       </div>
+            //     </div>
+            //   </a>',
+            //   get_permalink( $item->ID ),
+            //   $item->post_title,
+            //   get_the_post_thumbnail_url( $item->ID, 'medium' ),
+            //   get_template_directory_uri()
+            // );
+            printPost( $item, 'side-big', array(
+              'class' => 'col-12 col-sm-6 col-lg-12 no-padding',
+            ) );
           }
         ?>
 

@@ -15,25 +15,7 @@
       </a>
       <!-- BIG Post -->
       <?php
-        $item = $items[0];
-        $format = get_post_format( $item );
-
-        printf(
-          '<a class="link_post big" href="%s">
-            <div class="big-post">
-              <div class="cover_img"></div>
-              <div class="post_news_big" style="background-image:url(%s)">
-                %s
-                <span>%s %s</span>
-              </div>
-            </div>
-          </a>',
-          get_permalink( $item->ID ),
-          get_the_post_thumbnail_url( $item->ID, 'full' ),
-          $format == 'video'?('<div class="video-post"></div>'):( $format == 'gallery'?('<div class="gallery-post"></div>'):('') ),
-          $item->post_title,
-          printTags( $item->ID, false )
-        );
+        printPost( $items[0], 'big' );
       ?>
 
       <div class="clear-top"></div>
@@ -43,25 +25,7 @@
         <!-- MID post -->
         <?php
           foreach ( array_slice( $items, 1 ) as $item ) {
-            $format = get_post_format( $item );
-            printf(
-              '<div class="item col-6 col-md-4">
-                <a href="%s" class="link_post_small">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      %s
-                      <div class="cover_img img13" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
-              $item->post_title,
-              printTags( $item->ID )
-            );
+            printPost( $item, 'mid' );
           }
         ?>
 
@@ -107,24 +71,7 @@
           <!-- single post -->
           <?php
             foreach ( $items as $item ) {
-              $format = get_post_format( $item );
-              printf(
-                '<a class="col-12 col-sm-6" href="%s">
-                  <li>
-                    <div class="image-container">
-                      <div class="image img5" style="background-image:url(%s)">
-                      %s
-                      </div>
-                    </div>
-                    <span>%s %s</span>
-                  </li>
-                </a>',
-                get_permalink( $item->ID ),
-                get_the_post_thumbnail_url( $item->ID, 'medium' ),
-                $format == 'video'?( '<div class="video-post"></div>' ):( $format == 'gallery'?( '<div class="gallery-post"></div>' ):( '' ) ),
-                $item->post_title,
-                printTags( $item->ID )
-              );
+              printPost( $item, 'side' );
             }
           ?>
 

@@ -16,22 +16,32 @@
   global $fp;
   $fp = new Facepalm();
 
+  // modyfikacja sposobu wyświetlania autora wpisu
+  add_filter( 'custom_author', function( $arg ){
+    $segments = explode( " ", $arg );
+    return implode( "", array_map( function( $seg ){
+      return sprintf(
+        '%s.',
+        substr( $seg, 0, 1 )
+      );
+    }, $segments ) );
+    return $arg;
+  } );
+
   // modyfikacja standardowej galerii wp
   add_filter( 'the_content', function( $content ){
     global $fp;
 
-    // NOWY EDYTOR
-    // podmiana segmentów
+    // NOWY EDYTOR - podmiana segmentów
     preg_match_all( '~<\!\-\- wp:gallery.*?"ids":\[(.+?)\].*?/wp:gallery \-\->~ms', $content, $found );
     foreach ($found[1] as $k => $v) {
-      $content = str_replace( $found[0][$k], $fp->printUGallery( explode( ',', $v ), false ), $content );
+      $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
     }
 
-    //STARY EDYTOR
-    // podmiana segmentów
+    //STARY EDYTOR - podmiana segmentów
     preg_match_all( '~\[gallery.*?ids="(.+?)".*?\]~', $content, $found );
     foreach ($found[1] as $k => $v) {
-      $content = str_replace( $found[0][$k], $fp->printUGallery( explode( ',', $v ), false ), $content );
+      $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
     }
 
     return $content;
@@ -41,15 +51,11 @@
   add_filter( 'the_content', function( $content ){
     global $fp;
 
-    // NOWY EDYTOR
-    // podmiana segmentów
+    // NOWY EDYTOR - podmiana segmentów
     preg_match_all( '~<\!\-\- wp:filebird/block\-filebird\-gallery.+?/wp:filebird/block\-filebird\-gallery \-\->~ms', $content, $found );
-    // var_dump( $found );
     foreach ($found[0] as $k => $v) {
-      // var_dump( $v );
       preg_match_all( '~"id":(\d+)~', $v, $ids );
-      // var_dump( $ids );
-      $content = str_replace( $v, $fp->printUGallery( $ids[1], false ), $content );
+      $content = str_replace( $v, printGallery( $ids[1], false ), $content );
     }
 
     return $content;
@@ -453,6 +459,7 @@
 
   } );
 
+  // generuje oznaczenie wpisu "pilne"
   function printImportant( $id = null, $icon = false ){
     if( get_post_meta( $id, 'pilne', true ) == 1 ){
       if ( $icon ) {
@@ -467,6 +474,7 @@
     }
   }
 
+  // generuje oznaczenie wpisu "przed chwilą"
   function printFresh( $id = null, $icon = false ){
     $timeNow = date_create()->getTimestamp();
     $timePost = date_create( get_the_date( 'Y-m-d H:i:s', $id ) )->getTimestamp();
@@ -485,6 +493,7 @@
     }
   }
 
+  // generuje oznaczenie wpisu "trwa dyskusja"
   function printHot( $id = null, $icon = false ){
     if ( get_comments_number( $id ) >= 5 ) {
       if ( $icon ) {
@@ -499,6 +508,7 @@
     }
   }
 
+  // generuje ikonkę rodzaju wpisu video/gallery
   function printFormat( $id = null, $icon = false, $blackIcon = true ){
     $format = get_post_format( $id );
     // var_dump( array( 'format' => $format, 'blackIcon' => $blackIcon ) );
@@ -529,16 +539,18 @@
     }
   }
 
+  // wypisuje oznaczenia dla wpisu
   function printTags( $id = null, $icon = true, $blackIcon = true ){
     return sprintf(
       '%s %s %s %s',
-      printFormat( $id, $icon, $blackIcon ),
       printFresh( $id, $icon ),
       printImportant( $id, $icon ),
-      printHot( $id, $icon )
+      printHot( $id, $icon ),
+      printFormat( $id, $icon, $blackIcon )
     );
   }
 
+  // generuje reklamę
   function printAd( $type = null, $promo = false ){
     // v-s : Pionowy S ( max 400x230 px )
     // v-m : Pionowy M ( max 400x500 px )
@@ -628,27 +640,11 @@
 
   }
 
-  function printGallery( $shortcode = null, $type = 'wordpress' ){
+  // generuje galerię mediów o podanych id
+  function printGallery( $ids = array(), $echo = true ){
     global $fp;
 
-    switch( $type ){
-      case 'wordpress':
-        preg_match( '/ids="([\d,]+)"/', $shortcode, $found );
-        $ids = explode( ',', $found[1] );
-        // var_dump( $ids );
-        break;
-      case 'filebird':
-        $ids = array_map( function($arg){
-          return (int)$arg;
-        }, $shortcode );
-        break;
-    }
-
-
-    return $fp->printUGallery( $ids, false );
-    // return $fp->printSlick( $ids, false );
-    // return $fp->printGallery( $ids, false );
-
+    return $fp->printUGallery( $ids, $echo );
   }
 
   // zwraca tablicę tablic id zdjęć znalezionych we wpisie
@@ -804,16 +800,265 @@
     return $ret;
   }
 
-  // modyfikacja sposobu wyświetlania autora wpisu
-  add_filter( 'custom_author', function( $arg ){
-    $segments = explode( " ", $arg );
-    return implode( "", array_map( function( $seg ){
-      return sprintf(
-        '%s.',
-        substr( $seg, 0, 1 )
-      );
-    }, $segments ) );
-    return $arg;
-  } );
+  // generuje kafelki wpisów
+  function printPost( $post = null, $type = null, $args = array() ){
+    // return '';
+    if ( $post instanceof WP_POST ) {
+      $item = $post;
+    }
+    elseif( is_numeric( $post ) ) {
+      $item = get_post( $post );
+    }
+    else{
+      return false;
+    }
+
+    global $fp;
+    $data = array_merge( array(
+      'title'   => $item->post_title,
+      'img'     => '',
+      'url'     => get_permalink( $item->ID ),
+      'format'  => get_post_format( $item ),
+      'class'   => '',
+    ), $args );
+
+    switch ( $type ) {
+      case 'large':
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+        printf(
+          '<div class="col-sm-12 col-12 col-lg-6 col-md-6">
+            <a href="%s" class="link_post_small" data-post-type="%s">
+              <div class="small-post popular-post">
+                %s
+                <span>%s</span>
+                <div class="post_news_small">
+                  <div class="mask-popular"></div>
+                  <div class="cover_img" style="background-image:url(%s);"></div>
+                </div>
+              </div>
+            </a>
+          </div>',
+          $data['url'],
+          $type,
+          $data['format'] !== false?("<div class='{$data['format']}-post'></div>"):(''),
+          $data['title'],
+          $data['img']
+        );
+        break;
+      case 'big':
+        $data['title'] .= " " . printTags( $item->ID, true, false );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+        // var_dump( get_field( 'source' ) );
+
+        if ( $data['format'] == 'video' && !is_null( get_field( 'source', $item ) ) ) {
+          $isAutoplay = get_field( 'autoplay', $item );
+          $isDetachAble = get_field( 'detach', $item );
+          $source_type = get_field( 'source', $item );
+          $sources = get_field( $source_type, $item );
+          $source = is_array( $sources )?( $sources[0] ):( $sources );
+          $player_html = null;
+          $poster = get_the_post_thumbnail_url( $item, 'medium' );
+
+          // var_dump( array(
+          //   'autoplay' => $isAutoplay,
+          //   'src_type'  => $source_type,
+          //   'src'  => $source,
+          // ) );
+
+          switch ( $source_type ) {
+            case 'media':
+              $player_html = $fp->genMediaPlayer( $source, array(
+                // 'autoplay'  => $isAutoplay,
+                'poster'    => $poster,
+              ));
+              break;
+            case 'youtube':
+              $player_html = $fp->genYoutubeVideo( $source, array(
+                'detach'    => $isDetachAble,
+                'muted'     => true,
+              ) );
+              break;
+            default:
+              // code...
+              break;
+          }
+
+          printf(
+            '<div class="link_post big %s" data-post-type="%s">
+              <div class="big-post col no-padding">
+                <div class="post_news_big">
+                  %s
+                </div>
+                <a href="%s">
+                  <span>%s</span>
+                </a>
+              </div>
+            </div>',
+            $source_type,
+            $type,
+            $player_html,
+            $data['url'],
+            $data['title']
+          );
+        }
+        else {
+          printf(
+            '<a class="link_post big" href="%s" data-post-type="%s">
+              <div class="big-post">
+                <div class="cover_img"></div>
+                  <div class="post_news_big" style="background-image:url(%s)">
+                  <span>%s</span>
+                </div>
+              </div>
+            </a>',
+            $data['url'],
+            $type,
+            $data['img'],
+            $data['title']
+          );
+        }
+
+        break;
+      case 'big-special':
+        $data['title'] .= " " . printTags( $item->ID, true, false );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+        printf(
+          '<a class="link_post big col-12 col-lg-8" href="%s" data-post-type="%s">
+            <div class="big-post">
+              <div class="cover_img"></div>
+              <div class="post_news_big" style="background-image:url(%s)">
+                <span>
+                  %s
+                </span>
+              </div>
+            </div>
+          </a>',
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
+        break;
+      case 'mid':
+        $data['title'] .= " " . printTags( $item->ID, true, true );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        printf(
+          '<div class="col col-lg-4">
+            <a href="%s" class="link_post_small" data-post-type="%s">
+              <div class="small-post">
+                <div class="post_news_small">
+                  <div class="cover_img" style="background-image:url(%s)"></div>
+                </div>
+                <span>%s</span>
+              </div>
+            </a>
+          </div>',
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
+        break;
+      case 'mid-special':
+        $data['title'] .= " " . printTags( $item->ID, true, false );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        printf(
+          '<div class="col col-lg-4">
+            <a href="%s" class="link_post_small" data-post-type="%s">
+              <div class="small-post">
+                <div class="post_news_small">
+                  <div class="cover_img" style="background-image:url(%s)"></div>
+                </div>
+                <span>%s</span>
+              </div>
+            </a>
+          </div>',
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
+        break;
+      case 'side':
+        $data['title'] .= " " . printTags( $item->ID, true, true );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
+        printf(
+          '<a href="%s" data-post-type="%s">
+            <li>
+              <div class="image-container">
+                <div class="image" style="background-image:url(%s)"></div>
+              </div>
+              <span>%s</span>
+            </li>
+          </a>',
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
+        break;
+      case 'side-special':
+        $data['title'] .= " " . printTags( $item->ID, true, false );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
+        printf(
+          '<a href="%s" data-post-type="%s">
+            <li>
+              <div class="image-container">
+                <div class="image" style="background-image:url(%s)"></div>
+              </div>
+              <span>%s</span>
+            </li>
+          </a>',
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
+        break;
+      case 'side-big':
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        printf(
+          '<a href="%s" class="single %s" title="%s" data-post-type="%s">
+            <div class="image-container">
+              <div class="image" style="background-image:url(%s);">
+                <div class="video-post">
+                  <img src="%s/images/play.svg" alt="odtwórz film"/>
+                </div>
+              </div>
+            </div>
+          </a>',
+          $data['url'],
+          $data['class'],
+          $data['title'],
+          $type,
+          $data['img'],
+          get_template_directory_uri()
+        );
+        break;
+      case 'slider':
+        $data['title'] .= " " . printTags( $item->ID, true, true );
+        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        printf(
+          '<div class="slide-content">
+            <a href="%s" class="link_post_small" data-post-type="%s">
+              <div class="small-post">
+                <div class="post_news_small">
+                  <div class="cover_img" style="background-image:url(%s)"></div>
+                </div>
+                <span>%s</span>
+              </div>
+            </a>
+          </div>',
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
+        break;
+      default:
+        // code...
+        break;
+    }
+  }
 
 ?>

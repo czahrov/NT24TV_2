@@ -17,43 +17,14 @@
 
       <!-- BIG Post -->
       <?php
-        $item = $items[0];
-        printf(
-          '<a class="link_post big" href="%s">
-            <div class="big-post">
-              <div class="cover_img"></div>
-              <div class="post_news_big" style="background-image:url(%s)">
-                <span>%s %s</span>
-              </div>
-            </div>
-          </a>',
-          get_permalink( $item->ID ),
-          get_the_post_thumbnail_url( $item->ID, 'full' ),
-          $item->post_title,
-          printTags( $item->ID, true, false )
-        );
+        printPost( $items[0], 'big' );
       ?>
       <div class="clear-top"></div>
       <div class="row no-gutters">
         <!-- MID post -->
         <?php
           foreach ( array_slice( $items, 1 ) as $item ) {
-            printf(
-              '<div class="col col-lg-4">
-                <a href="%s" class="link_post_small">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      <div class="cover_img" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
-              $item->post_title,
-              printTags( $item->ID )
-            );
+            printPost( $item, 'mid' );
           }
         ?>
 
@@ -84,20 +55,7 @@
           <!-- single post -->
           <?php
             foreach ( $items as $item ) {
-              printf(
-                '<a href="%s">
-                  <li>
-                    <div class="image-container">
-                      <div class="image" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </li>
-                </a>',
-                get_permalink( $item->ID ),
-                get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
-                $item->post_title,
-                printTags( $item->ID )
-              );
+              printPost( $item, 'side' );
             }
           ?>
 

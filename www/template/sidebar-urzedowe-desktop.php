@@ -12,20 +12,7 @@
     <!-- single post -->
     <?php
       foreach ($items as $item) {
-        printf(
-          '<a href="%1$s">
-            <li>
-              <div class="image-container">
-                <div class="image img19" style="background-image:url(%3$s);"></div>
-              </div>
-              <span>%4$s %2$s</span>
-            </li>
-          </a>',
-          get_permalink( $item->ID ),
-          $item->post_title,
-          get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
-          printTags( $item->ID )
-        );
+        printPost( $item, 'side' );
       }
     ?>
 

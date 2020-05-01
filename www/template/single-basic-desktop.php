@@ -13,9 +13,9 @@
             $segments = array(
               printImportant( get_the_id(), false ),
               printFresh( get_the_id(), false ),
-              printHot( get_the_id(), false )
+              printHot( get_the_id(), false ),
+              "Wyświetleń: " . getPostViews( get_post()->ID )
             );
-
             echo implode(
               '<span class="separator"></span>',
               array_filter( $segments, function( $item ){
@@ -72,12 +72,7 @@
           ?>
         </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-          <div class="video">
-            <div class="exit">
-              X
-            </div>
-            <?php $fp->genYoutubeVideo( $yt ); ?>
-          </div>
+          <?php echo $fp->genYoutubeVideo( $yt ); ?>
         <?php endif; ?>
         <?php
           if( empty( $yt ) ){
@@ -111,7 +106,7 @@
           <?php echo get_the_date("d.m.Y"); ?>
         </span>
         <span class='separator'></span>
-        <span class='date'>
+        <span class='date views'>
           <?php echo "Wyświetleń: " . getPostViews( get_post()->ID ); ?>
         </span>
       </div>

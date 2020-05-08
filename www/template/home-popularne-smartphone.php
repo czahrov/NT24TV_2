@@ -19,7 +19,7 @@
         <!-- single post -->
         <?php
           foreach ($items as $item) {
-            printPost( $item, 'large' );
+            printPost( $item, 'large', array( 'class' => 'no-padding' ) );
           }
         ?>
 

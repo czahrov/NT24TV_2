@@ -14,7 +14,7 @@
               printImportant( get_the_id(), false ),
               printFresh( get_the_id(), false ),
               printHot( get_the_id(), false ),
-              "Wyświetleń: " . getPostViews( get_post()->ID )
+              getPostViews( get_post()->ID )
             );
             echo implode(
               '<span class="separator"></span>',
@@ -64,6 +64,26 @@
       </div>
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
+        <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
+          <?php echo $fp->genYoutubeVideo( $yt ); ?>
+        <?php endif; ?>
+        <?php
+        if( empty( $yt ) ){
+          $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+          $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+          $img = $thumb !== false?( $thumb ):(
+            file_exists( $thumb_alt )?( $thumb_alt ):( false )
+          );
+
+          if ( $img !== false ) {
+            printf(
+              '<img class="img-fluid" src="%s" alt="%s"/>',
+              $img,
+              $post->post_title
+            );
+          }
+        }
+        ?>
         <div class="zajawka">
           <?php
             $excerpt =  get_the_excerpt( get_post() );
@@ -71,26 +91,6 @@
             echo empty( $lead )?( $excerpt ):( $lead );
           ?>
         </div>
-        <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-          <?php echo $fp->genYoutubeVideo( $yt ); ?>
-        <?php endif; ?>
-        <?php
-          if( empty( $yt ) ){
-            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-            $img = $thumb !== false?( $thumb ):(
-              file_exists( $thumb_alt )?( $thumb_alt ):( false )
-            );
-
-            if ( $img !== false ) {
-              printf(
-                '<img class="img-fluid" src="%s" alt="%s"/>',
-                $img,
-                $post->post_title
-              );
-            }
-          }
-        ?>
         <?php the_content(); ?>
 
       </div>
@@ -104,10 +104,6 @@
         <span class='separator'></span>
         <span class='date'>
           <?php echo get_the_date("d.m.Y"); ?>
-        </span>
-        <span class='separator'></span>
-        <span class='date views'>
-          <?php echo "Wyświetleń: " . getPostViews( get_post()->ID ); ?>
         </span>
       </div>
       <!-- /content -->

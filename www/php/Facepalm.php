@@ -142,6 +142,29 @@
       }
     }
 
+    public function printOldUGallery( $files = array(), $echo = true ){
+      static $num = 1;
+      $ret = "<div id='UGallery_old{$num}' style='display:none'>";
+
+      foreach ( $files as $file ) {
+        $ret .= sprintf(
+          '<img class="no-lazy" alt="" src="%1$s" data-image="%1$s" data-description="" data-no-lazy="1"/>',
+          $file
+        );
+
+      }
+
+      $ret .= "</div>";
+      $num++;
+
+      if ( $echo ) {
+        echo $ret;
+      }
+      else{
+        return $ret;
+      }
+    }
+
     public function printSlick( $img_ids = array(), $echo = true ){
       $items = "";
       foreach ($img_ids as $img_id) {

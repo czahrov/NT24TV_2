@@ -1,6 +1,6 @@
 <?php
   $items = get_posts(array(
-    'numberposts'   => 13,
+    'numberposts'   => 14,
     'category_name' => 'aktualnosci',
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -11,20 +11,18 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-lg-8">
-      <!-- Big Post -->
-      <?php
-        printPost( $items[0], 'big' );
-      ?>
-      <div class="clear-top"></div>
       <div class="row no-gutters">
+        <!-- Big Post -->
+        <?php
+          printPost( $items[0], 'big', array( 'class' => 'padding' ) );
+        ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 3 ) as $item ){
-            printPost( $item, 'mid' );
+          foreach( array_slice( $items, 1, 4 ) as $item ){
+            printPost( $item, 'mid', array( 'class' => 'padding' ) );
           }
         ?>
       </div>
-      <!-- /row-->
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
@@ -35,7 +33,7 @@
         </a>
         <ul class="image-sidebar-section alt">
           <?php
-            foreach ( array_slice( $items, 4 ) as $item) {
+            foreach ( array_slice( $items, 5 ) as $item) {
               printPost( $item, 'side' );
             }
           ?>

@@ -44,6 +44,12 @@
       $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
     }
 
+    // stare galerie importowane z joomli
+    $old_gallery_path = get_field( 'gallery_name' );
+    if ( $old_gallery_path !== false ) {
+      $content .= $fp->printOldUGallery( fetch_old_gallery( $old_gallery_path ) );
+    }
+
     return $content;
   }, 8 );
 
@@ -785,19 +791,25 @@
     return $ret;
   }
 
-  // pobiera liczbę wyświetleń dla danego wpisu
-  function getPostViews( $post_id = null ){
-    $ret = false;
-    $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
+  // zwraca liczbę wyświetleń dla danego wpisu
+  function getPostViews( $post_id = null, $pattern = "Stronę wyświetlono %u razy" ){
+    if ( get_field( 'prezentacja', get_page_by_title( 'Home' )->ID ) == 1 ) {
+      $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
 
-    if( !$con ) return $ret;
-    $sql = "SELECT count FROM nttv_post_views WHERE period = 'total' AND id = {$post_id} LIMIT 1";
-    $query = mysqli_query( $con, $sql );
-    $ret = mysqli_fetch_object( $query )->count;
+      if( !$con ) return $ret;
+      $sql = "SELECT count FROM nttv_post_views WHERE period = 'total' AND id = {$post_id} LIMIT 1";
+      $query = mysqli_query( $con, $sql );
+      $ret = mysqli_fetch_object( $query )->count;
 
-    mysqli_free_result( $query );
-    mysqli_close( $con );
-    return $ret;
+      mysqli_free_result( $query );
+      mysqli_close( $con );
+
+      return sprintf(
+        $pattern,
+        $ret
+      );
+    }
+    return false;
   }
 
   // generuje kafelki wpisów
@@ -851,74 +863,73 @@
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         // var_dump( get_field( 'source' ) );
 
-        if ( $data['format'] == 'video' && !is_null( get_field( 'source', $item ) ) ) {
-          $isAutoplay = get_field( 'autoplay', $item );
-          $isDetachAble = get_field( 'detach', $item );
-          $source_type = get_field( 'source', $item );
-          $sources = get_field( $source_type, $item );
-          $source = is_array( $sources )?( $sources[0] ):( $sources );
-          $player_html = null;
-          $poster = get_the_post_thumbnail_url( $item, 'medium' );
-
-          // var_dump( array(
-          //   'autoplay' => $isAutoplay,
-          //   'src_type'  => $source_type,
-          //   'src'  => $source,
-          // ) );
-
-          switch ( $source_type ) {
-            case 'media':
-              $player_html = $fp->genMediaPlayer( $source, array(
-                // 'autoplay'  => $isAutoplay,
-                'poster'    => $poster,
-              ));
-              break;
-            case 'youtube':
-              $player_html = $fp->genYoutubeVideo( $source, array(
-                'detach'    => $isDetachAble,
-                'muted'     => true,
-              ) );
-              break;
-            default:
-              // code...
-              break;
-          }
-
-          printf(
-            '<div class="link_post big %s %s" data-post-type="%s">
-              <div class="big-post col no-padding">
-                <div class="post_news_big">
-                  %s
-                </div>
-                <a class="padding nopadding-lg" href="%s">
-                  <span>%s</span>
-                </a>
+        // if ( $data['format'] == 'video' && !is_null( get_field( 'source', $item ) ) ) {
+        //   $isAutoplay = get_field( 'autoplay', $item );
+        //   $isDetachAble = get_field( 'detach', $item );
+        //   $source_type = get_field( 'source', $item );
+        //   $sources = get_field( $source_type, $item );
+        //   $source = is_array( $sources )?( $sources[0] ):( $sources );
+        //   $player_html = null;
+        //   $poster = get_the_post_thumbnail_url( $item, 'medium' );
+        //
+        //   // var_dump( array(
+        //   //   'autoplay' => $isAutoplay,
+        //   //   'src_type'  => $source_type,
+        //   //   'src'  => $source,
+        //   // ) );
+        //
+        //   switch ( $source_type ) {
+        //     case 'media':
+        //       $player_html = $fp->genMediaPlayer( $source, array(
+        //         // 'autoplay'  => $isAutoplay,
+        //         'poster'    => $poster,
+        //       ));
+        //       break;
+        //     case 'youtube':
+        //       $player_html = $fp->genYoutubeVideo( $source, array(
+        //         'detach'    => $isDetachAble,
+        //         'muted'     => true,
+        //       ) );
+        //       break;
+        //     default:
+        //       // code...
+        //       break;
+        //   }
+        //
+        //   printf(
+        //     '<div class="link_post big %s %s" data-post-type="%s">
+        //       <div class="big-post col no-padding">
+        //         <div class="post_news_big"> %s </div>
+        //         <a class="padding nopadding-lg" href="%s">
+        //           <span>%s</span>
+        //         </a>
+        //       </div>
+        //     </div>',
+        //     $data['class'],
+        //     $source_type,
+        //     $type,
+        //     $player_html,
+        //     $data['url'],
+        //     $data['title']
+        //   );
+        // }
+        // else {
+        // }
+        printf(
+          '<a class="link_post big col-12 col-lg-8 %s" href="%s" data-post-type="%s">
+            <div class="big-post">
+              <div class="cover_img"></div>
+              <div class="post_news_big" style="background-image:url(%s)">
+                <span> %s </span>
               </div>
-            </div>',
-            $data['class'],
-            $source_type,
-            $type,
-            $player_html,
-            $data['url'],
-            $data['title']
-          );
-        }
-        else {
-          printf(
-            '<a class="link_post big" href="%s" data-post-type="%s">
-              <div class="big-post">
-                <div class="cover_img"></div>
-                  <div class="post_news_big" style="background-image:url(%s)">
-                  <span>%s</span>
-                </div>
-              </div>
-            </a>',
-            $data['url'],
-            $type,
-            $data['img'],
-            $data['title']
-          );
-        }
+            </div>
+          </a>',
+          $data['class'],
+          $data['url'],
+          $type,
+          $data['img'],
+          $data['title']
+        );
 
         break;
       case 'big-special':
@@ -929,9 +940,7 @@
             <div class="big-post">
               <div class="cover_img"></div>
               <div class="post_news_big" style="background-image:url(%s)">
-                <span>
-                  %s
-                </span>
+                <span> %s </span>
               </div>
             </div>
           </a>',
@@ -946,7 +955,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, true );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col-6 col-md-4 %s">
+          '<div class="col-6 col-lg-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">
@@ -1096,6 +1105,39 @@
 
     }
 
+  }
+
+  function fetch_old_gallery( $path_to_dir = "" ){
+    $abs_path_to_joomla = getcwd() . '/../web/nowytarg24.tv/wp-content/themes/NowyTargTV/joomla_import/';
+    // var_dump($abs_path_to_joomla);
+    $rel_path_to_joomla = get_template_directory_uri() . '/joomla_import/' . $path_to_dir;
+    // var_dump($rel_path_to_joomla);
+    $files = array_slice( scandir( $abs_path_to_joomla . $path_to_dir ), 2 );
+    $files = array_filter( $files, function( $arg ){
+      preg_match( '~(\d+x\d+)|(\.orig$)~', $arg, $found );
+      if ( !empty( $found[0] ) ) {
+        return false;
+      }
+      else {
+        if( in_array( strtolower( pathinfo( $arg, PATHINFO_EXTENSION ) ), array( 'jpg', 'jpeg', 'png', 'bmp' ) ) ){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      }
+
+    });
+    $files = array_map( function( $arg ) use ($rel_path_to_joomla){
+      return sprintf(
+        '%s/%s',
+        $rel_path_to_joomla,
+        $arg
+      );
+    }, $files );
+
+    return $files;
   }
 
 ?>

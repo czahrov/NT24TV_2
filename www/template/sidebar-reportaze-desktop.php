@@ -4,7 +4,7 @@
   </a>
   <?php
   $items = get_posts(array(
-    'numberposts'     => 10,
+    'numberposts'     => 14,
     'category_name'   => 'reportaze',
   ));
   ?>

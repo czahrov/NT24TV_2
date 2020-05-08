@@ -1,6 +1,6 @@
 <?php
   $items = get_posts(array(
-    'numberposts'     => 4,
+    'numberposts'     => 5,
     'category_name'   => 'przeglad-tygodniowy',
   ));
 ?>
@@ -12,22 +12,17 @@
       <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>">
         <h5 class="title-sidebar">Przegląd tygodniowy</h5>
       </a>
-      <!-- BIG Post -->
-      <?php
-        printPost( $items[0], 'big' );
-      ?>
-
-      <div class="clear-top"></div>
-
       <div class="row no-gutters">
-
-        <!-- MID post -->
+        <!-- Big Post -->
         <?php
-          foreach ( array_slice( $items, 1 ) as $item ) {
-            printPost( $item, 'mid' );
+          printPost( $items[0], 'big', array( 'class' => 'padding' ) );
+        ?>
+        <!-- Mid post -->
+        <?php
+          foreach( array_slice( $items, 1, 4 ) as $item ){
+            printPost( $item, 'mid', array( 'class' => 'padding' ) );
           }
         ?>
-
       </div>
       <!-- /row-->
       <div class="clear-top"></div>

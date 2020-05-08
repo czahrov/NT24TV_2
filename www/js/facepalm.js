@@ -305,6 +305,7 @@ $(function(){
 
   // obsługa filmików youtube
   (function( placeholder ){
+    return false;
     placeholder.each(function(){
       const _ = $(this);
       const root = _.parent();
@@ -324,6 +325,7 @@ $(function(){
         return (( windowPos() - playerTop + 30 ) <= playerHeight)&&( windowPos() >= ( playerTop - window.innerHeight )  );
       };
       var playerStatus = null;
+      const exit_btn = _.find('.exit');
 
       _.before( $('<script src="https://www.youtube.com/iframe_api"></script>') );
 
@@ -383,6 +385,7 @@ $(function(){
             'style': null,
           });
           $(this).removeClass('mini');
+          _.attr('style', null);
           playerHeight = $(this).outerHeight(true);
           detached = false;
         },
@@ -398,7 +401,7 @@ $(function(){
         }
       });
 
-      root.find('.exit').click((e)=>{root.triggerHandler('exit')});
+      exit_btn.click((e)=>{root.triggerHandler('exit')});
 
       $(window).scroll(function(e){
         if( allow_detach == 1 ){
@@ -423,6 +426,18 @@ $(function(){
           // console.log('pause_scroll');
         }
 
+        $('.video.mini')
+        .find('.yt-video, .exit')
+        .css({
+          top: function(e){
+            return Math.max(
+              $('#pilne').offset().top + $('#pilne').outerHeight(true) - $('html,body').prop('scrollTop'),
+              $('nav.navbar').outerHeight(true),
+              0
+            );
+          },
+        });
+
       });
 
     });
@@ -434,7 +449,7 @@ $(function(){
   // przewijany pasek informacyjny
   (function( pasek, view ){
     // szybkość przewijania [pixel/s]
-    const speed = 100;
+    const speed = 50;
     // długość wyświetlanej części paska
     const getViewWidth = ()=>{
       return view.outerWidth(true);

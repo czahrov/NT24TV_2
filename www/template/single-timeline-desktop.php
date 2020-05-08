@@ -12,7 +12,8 @@
             "<span class='date'>".get_the_date("d.m.Y")."</span>",
             printImportant( get_the_id(), false ),
             printFresh( get_the_id(), false ),
-            printHot( get_the_id(), false )
+            printHot( get_the_id(), false ),
+            getPostViews( get_post()->ID )
           );
 
           echo implode(
@@ -66,12 +67,6 @@
       </div>
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
-        <div class="zajawka">
-          <?php
-            // the_excerpt();
-            echo get_field('lead');
-          ?>
-        </div>
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <div class="video">
             <?php $fp->genYoutubeVideo( $yt ); ?>
@@ -84,13 +79,26 @@
         ?>
           <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
         <?php endif; ?>
+        <div class="zajawka">
         <?php
-          the_content();
-          echo "<div class='author fw-bold'>".get_the_author()."</div>";
+        // the_excerpt();
+        echo get_field('lead');
         ?>
-
+        </div>
+        <?php the_content(); ?>
       </div>
-
+      <div class="after_content d-flex align-items-center">
+        <span class="author fw-bold">
+          <?php
+            // echo apply_filters( 'custom_author', get_the_author() );
+            echo get_the_author_meta('display_name');
+          ?>
+        </span>
+        <span class='separator'></span>
+        <span class='date'>
+          <?php echo get_the_date("d.m.Y"); ?>
+        </span>
+      </div>
       <!-- timeline -->
       <style type="text/css">
         span.date {

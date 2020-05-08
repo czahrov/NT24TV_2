@@ -5,7 +5,7 @@
   <ul class="image-sidebar-section">
     <?php
       $items = get_posts(array(
-        'numberposts'   => 5,
+        'numberposts'   => 8,
         'category_name' => 'bedzie-sie-dzialo',
       ));
     ?>

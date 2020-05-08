@@ -18,14 +18,14 @@
 
       <!-- BIG Post -->
       <?php
-        printPost( $items[0], 'big' );
+        printPost( $items[0], 'big', array( 'class' => 'no-padding' ) );
       ?>
       <div class="clear-top"></div>
       <div class="mid_post row no-gutters">
         <!-- MID post -->
         <?php
           foreach ( array_slice( $items, 1 ) as $item ) {
-            printPost( $item, 'mid' );
+            printPost( $item, 'mid', array( 'class' => 'item' ) );
           }
         ?>
 

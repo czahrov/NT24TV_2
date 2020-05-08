@@ -8,19 +8,18 @@
       <div class="before-content">
         <div class="author_date_tags">
           <?php
-          $segments = array(
-            "<span class='date'>".get_the_date("d.m.Y")."</span>",
-            printImportant( get_the_id(), false ),
-            printFresh( get_the_id(), false ),
-            printHot( get_the_id(), false )
-          );
-
-          echo implode(
-            '<span class="separator"></span>',
-            array_filter( $segments, function( $item ){
-              return !empty( $item );
-            } )
-          );
+            $segments = array(
+              printImportant( get_the_id(), false ),
+              printFresh( get_the_id(), false ),
+              printHot( get_the_id(), false ),
+              getPostViews( get_post()->ID )
+            );
+            echo implode(
+              '<span class="separator"></span>',
+              array_filter( $segments, function( $item ){
+                return !empty( $item );
+              } )
+            );
           ?>
         </div>
         <div class="share_comment row justify-content-between">
@@ -75,16 +74,26 @@
           </div>
         <?php endif; ?>
         <?php
-        $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-        $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+          $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+          $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
         ?>
         <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
 
         <?php
           the_content();
-          echo $content . "<div class='author fw-bold'>".get_the_author()."</div>";
         ?>
-
+      </div>
+      <div class="after_content d-flex align-items-center">
+        <span class="author fw-bold">
+          <?php
+            // echo apply_filters( 'custom_author', get_the_author() );
+            echo get_the_author_meta('display_name');
+          ?>
+        </span>
+        <span class='separator'></span>
+        <span class='date'>
+          <?php echo get_the_date("d.m.Y"); ?>
+        </span>
       </div>
       <!-- /content -->
     </div>

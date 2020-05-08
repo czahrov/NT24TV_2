@@ -1,8 +1,9 @@
 <?php get_header(); ?>
 <?php
   $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
+  $post_limit = getDevType() == 'smartphone'?(15):(16);
   $posts = get_posts(array(
-    'numberposts'   => 13,
+    'numberposts'   => $post_limit,
     'cat'           => $category->cat_ID,
   ));
 ?>
@@ -25,59 +26,18 @@
           <?php if ( !empty( $posts) ): ?>
             <!-- BIG POST -->
             <?php
-              $item = $posts[0];
-              printf(
-                '<a class="link_post big " href="%s">
-                  <div class="big-post">
-                    <div class="cover_img"></div>
-                      <div class="post_news_big" style="background-image:url(%s);">
-                      <span>
-                        %s
-                        <div class="post-tags">
-                          %s
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-                </a>',
-                get_permalink( $item->ID ),
-                get_the_post_thumbnail_url( $item->ID, 'full' ),
-                $item->post_title,
-                printTags( $item->ID, false )
-              );
+              printPost( $posts[0], 'big', array( 'class'=> 'no-padding col-lg-12' ) );
             ?>
             <div class="clear-top"></div>
             <!-- MID POSTS -->
             <div class="mid_post row no-gutters">
               <?php
                 foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
-                  // $thumb = get_post_meta( $item->ID, 'thumb', true );
-                  $thumb = get_field( 'thumb', $item->ID );
-                  $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
-
-                  printf(
-                    '<div class="item col-6 col-lg-4" data-thumb="%s" data-img="%s">
-                      <a href="%s" class="link_post_small">
-                        <div class="small-post">
-                          <div class="post_news_small">
-                            <div class="cover_img" style="background-image:url(%s);"></div>
-                          </div>
-                          <span>%s %s</span>
-                        </div>
-                      </a>
-                    </div>',
-                    $thumb,
-                    $img,
-                    get_permalink( $item->ID ),
-                    strlen( $thumb ) > 0?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
-                    $item->post_title,
-                    printTags( $item->ID )
-                  );
+                  printPost( $item, 'mid', array( 'class'=> 'item' ) );
                 }
               ?>
-              </button>
             </div>
-            <?php if ( count($posts) == 13 ): ?>
+            <?php if ( count($posts) == $post_limit ): ?>
               <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
                 <div class="spinner position-absolute">
                   <div class="box position-absolute"> </div>

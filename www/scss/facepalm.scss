@@ -320,42 +320,47 @@ iframe.wp-embedded-content{
   max-width: 100%;
 }
 
-.link_post{
+[id]{
 
-  &.big{
-    position: relative;
-    z-index: 100;
+  .link_post{
 
-    &.media,
-    &.youtube{
+    &.big{
+      display: inline-block;
+      position: relative;
+      z-index: 100;
 
-      a{
-        display: block;
-        // margin-top: 5px;
-        margin: 0.5em 0;
-        color: map-get($color, 'black');
-        font-size: 1.3rem;
-        font-family: map-get($font,'semibold');
-      }
+      &.media,
+      &.youtube{
 
-    }
-
-    &.youtube{
-
-      .big-post{
-        display: flex;
-        flex-direction: column;
-        background-color: transparent;
-        height: 65.25vw;
-        max-height: 470px;
-        min-height: 300px;
-
-        .post_news_big{
-          background-color: #000;
+        a{
+          display: block;
+          // margin-top: 5px;
+          margin: 0.5em 0;
+          color: map-get($color, 'black');
+          font-size: 1.3rem;
+          font-family: map-get($font,'semibold');
         }
 
-        .video{
-          margin: 0;
+      }
+
+      &.youtube{
+
+        .big-post{
+          display: flex;
+          flex-direction: column;
+          background-color: transparent;
+          height: 65.25vw;
+          max-height: 470px;
+          min-height: 300px;
+
+          .post_news_big{
+            background-color: #000;
+          }
+
+          .video{
+            margin: 0;
+          }
+
         }
 
       }
@@ -364,6 +369,22 @@ iframe.wp-embedded-content{
 
   }
 
+  &:not(.smartphone){
+    .big-post{
+      // height: 100%;
+      min-height: 22rem;
+    }
+
+  }
+
+}
+
+[data-post-type='big']{
+
+  @media(min-width: map-get( $break, 'md')){
+    margin-bottom: 30px;
+
+  }
 }
 
 .image-sidebar-section{
@@ -442,6 +463,11 @@ iframe.wp-embedded-content{
     color: #fff;
   }
 
+  .link_post.big{
+    margin-bottom: 30px;
+
+  }
+
   &.desktop{
     padding:{
       top: 1rem;
@@ -449,7 +475,6 @@ iframe.wp-embedded-content{
     }
 
     .link_post.big{
-      margin-bottom: 30px;
 
       .big-post{
         height: 11rem;
@@ -462,10 +487,6 @@ iframe.wp-embedded-content{
           height: 100%;
         }
 
-      }
-
-      @media( min-width: map-get($break, 'md') ) and (max-width: (map-get($break, 'xl') - 1px)){
-        margin-bottom: 0;
       }
 
     }
@@ -507,6 +528,10 @@ iframe.wp-embedded-content{
   background:{
     color: map-get($color, 'black');
   }
+}
+
+nav.navbar{
+  z-index: 10002;
 }
 
 #pilne{
@@ -1006,6 +1031,19 @@ iframe.wp-embedded-content{
     margin: 50px 0;
   }
 
+  .link_post{
+
+    &.big{
+      margin: 0;
+
+      .big-post{
+
+      }
+
+    }
+
+  }
+
 }
 
 [id^="UGallery_"]{
@@ -1034,6 +1072,7 @@ iframe.wp-embedded-content{
     padding: .5em .8em;
     background-color: map-get($color,'black');
     border-radius: 0 10px 10px 0;
+    font-size: 20px;
     color: map-get($color, 'white');
     cursor: pointer;
     line-height: 1em;
@@ -1057,7 +1096,7 @@ iframe.wp-embedded-content{
       }
 
       @media( min-width: map-get($break,'xl')){
-        top: 46px;
+        // top: 46px;
       }
 
     }
@@ -1077,7 +1116,7 @@ iframe.wp-embedded-content{
       }
 
       @media( min-width: map-get($break,'xl')){
-        top: 46px;
+        // top: 46px;
       }
 
     }

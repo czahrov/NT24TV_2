@@ -613,12 +613,13 @@ iframe.wp-embedded-content {
   max-width: 100%;
 }
 
-.link_post.big {
+[id] .link_post.big {
+  display: inline-block;
   position: relative;
   z-index: 100;
 }
 
-.link_post.big.media a, .link_post.big.youtube a {
+[id] .link_post.big.media a, [id] .link_post.big.youtube a {
   display: block;
   margin: 0.5em 0;
   color: #141c1f;
@@ -626,7 +627,7 @@ iframe.wp-embedded-content {
   font-family: "open_sanssemibold";
 }
 
-.link_post.big.youtube .big-post {
+[id] .link_post.big.youtube .big-post {
   display: flex;
   flex-direction: column;
   background-color: transparent;
@@ -635,12 +636,22 @@ iframe.wp-embedded-content {
   min-height: 300px;
 }
 
-.link_post.big.youtube .big-post .post_news_big {
+[id] .link_post.big.youtube .big-post .post_news_big {
   background-color: #000;
 }
 
-.link_post.big.youtube .big-post .video {
+[id] .link_post.big.youtube .big-post .video {
   margin: 0;
+}
+
+[id]:not(.smartphone) .big-post {
+  min-height: 22rem;
+}
+
+@media (min-width: 768px) {
+  [data-post-type='big'] {
+    margin-bottom: 30px;
+  }
 }
 
 .image-sidebar-section.alt a li {
@@ -693,13 +704,13 @@ iframe.wp-embedded-content {
   color: #fff;
 }
 
+[id].special .link_post.big {
+  margin-bottom: 30px;
+}
+
 [id].special.desktop {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-[id].special.desktop .link_post.big {
-  margin-bottom: 30px;
 }
 
 [id].special.desktop .link_post.big .big-post {
@@ -715,12 +726,6 @@ iframe.wp-embedded-content {
 @media (min-width: 992px) {
   [id].special.desktop .link_post.big .big-post {
     height: 100%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-  [id].special.desktop .link_post.big {
-    margin-bottom: 0;
   }
 }
 
@@ -748,6 +753,10 @@ iframe.wp-embedded-content {
 .media_player {
   cursor: pointer;
   background-color: #141c1f;
+}
+
+nav.navbar {
+  z-index: 10002;
 }
 
 #pilne {
@@ -1072,6 +1081,10 @@ iframe.wp-embedded-content {
   margin: 50px 0;
 }
 
+#category .link_post.big {
+  margin: 0;
+}
+
 [id^="UGallery_"] {
   margin: 1rem 0;
   width: 100% !important;
@@ -1098,6 +1111,7 @@ iframe.wp-embedded-content {
   padding: .5em .8em;
   background-color: #141c1f;
   border-radius: 0 10px 10px 0;
+  font-size: 20px;
   color: #fff;
   cursor: pointer;
   line-height: 1em;
@@ -1121,12 +1135,6 @@ iframe.wp-embedded-content {
   }
 }
 
-@media (min-width: 1200px) {
-  .video.mini .yt-video {
-    top: 46px;
-  }
-}
-
 .video.mini .exit {
   display: block;
   position: fixed;
@@ -1141,12 +1149,6 @@ iframe.wp-embedded-content {
     left: 44.5vh;
     right: initial;
     border-radius: 0 0 10px 0;
-  }
-}
-
-@media (min-width: 1200px) {
-  .video.mini .exit {
-    top: 46px;
   }
 }
 

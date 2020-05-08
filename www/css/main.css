@@ -354,7 +354,9 @@ section.head-menu .head-items .weather ul li a {
 
 .link_post .big-post .post_news_big span {
   margin: 0 20px;
+  margin: 30px;
   padding: 50px 0;
+  padding: 0;
   position: absolute;
   z-index: 2;
   left: 0;
@@ -377,12 +379,6 @@ section.head-menu .head-items .weather ul li a {
   background-color: #e3000f;
   text-transform: uppercase;
   border-radius: 2px;
-}
-
-@media (min-width: 576px) {
-  .link_post .big-post .post_news_big span {
-    margin: 0 50px;
-  }
 }
 
 @media (min-width: 768px) {
@@ -1716,6 +1712,7 @@ footer.bg-footer .copy .copy-content {
     margin-bottom: 30px;
     display: inline-block;
     width: 49.7%;
+    width: 100%;
   }
   .filmy-promocyjne .single:last-child {
     margin-bottom: 30px;

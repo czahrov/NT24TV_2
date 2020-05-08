@@ -376,7 +376,9 @@ section.head-menu {
 
       & span {
         margin: 0 20px;
+        margin: 30px;
         padding: 50px 0;
+        padding: 0;
         position: absolute;
         z-index: 2;
         left: 0;
@@ -399,8 +401,9 @@ section.head-menu {
           text-transform: uppercase;
           border-radius: 2px;
         }
+
         @media(min-width: 576px) {
-          margin: 0 50px;
+          // margin: 0 50px;
         }
       }
     }
@@ -2112,6 +2115,7 @@ footer.bg-footer {
     margin-bottom: 30px;
     display: inline-block;
     width: 49.7%;
+    width: 100%;
   }
 
   .filmy-promocyjne .single:last-child {

@@ -2,7 +2,7 @@
   global $cat;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
-    'numberposts'   => 12,
+    'numberposts'   => 5,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -25,7 +25,7 @@
         ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 4 ) as $item ){
+          foreach( array_slice( $items, 1, 1 ) as $item ){
             printPost( $item, 'mid-special', array( 'class' => 'padding' ) );
           }
         ?>
@@ -37,7 +37,7 @@
       <div class="position-sticky">
         <ul class="image-sidebar-section padding">
           <?php
-            foreach ( array_slice( $items, 5 ) as $item) {
+            foreach ( array_slice( $items, 2 ) as $item) {
               printPost( $item, 'side-special' );
             }
           ?>

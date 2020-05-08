@@ -916,7 +916,7 @@
         // else {
         // }
         printf(
-          '<a class="link_post big col-12 col-lg-8 %s" href="%s" data-post-type="%s">
+          '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
             <div class="big-post">
               <div class="cover_img"></div>
               <div class="post_news_big" style="background-image:url(%s)">
@@ -936,7 +936,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, false );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<a class="link_post big col-12 col-lg-8 %s" href="%s" data-post-type="%s">
+          '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
             <div class="big-post">
               <div class="cover_img"></div>
               <div class="post_news_big" style="background-image:url(%s)">
@@ -955,7 +955,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, true );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col-6 col-lg-4 %s">
+          '<div class="col-6 col-md-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">
@@ -976,7 +976,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, false );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col col-lg-4 %s">
+          '<div class="col col-md-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">

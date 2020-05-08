@@ -2,7 +2,7 @@
   global $cat;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
-    'numberposts'   => 12,
+    'numberposts'   => 5,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -17,7 +17,7 @@
   </a>
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-md-8">
       <div class="row no-gutters">
         <!-- Big Post -->
         <?php
@@ -25,7 +25,7 @@
         ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 4 ) as $item ){
+          foreach( array_slice( $items, 1, 1 ) as $item ){
             printPost( $item, 'mid-special', array( 'class' => 'padding' ) );
           }
         ?>
@@ -33,11 +33,11 @@
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
-    <div class="col-12 col-lg-4 sidebar-list">
+    <div class="col-12 col-md-4 sidebar-list">
       <div class="position-sticky">
         <ul class="image-sidebar-section special padding">
           <?php
-            foreach ( array_slice( $items, 5 ) as $item) {
+            foreach ( array_slice( $items, 2 ) as $item) {
               printPost( $item, 'side-special' );
             }
           ?>

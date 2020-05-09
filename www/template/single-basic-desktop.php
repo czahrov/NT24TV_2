@@ -71,9 +71,7 @@
         if( empty( $yt ) ){
           $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
           $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-          $img = $thumb !== false?( $thumb ):(
-            file_exists( $thumb_alt )?( $thumb_alt ):( false )
-          );
+          $img = $thumb !== false?( $thumb ):( $thumb_alt );
 
           if ( $img !== false ) {
             printf(

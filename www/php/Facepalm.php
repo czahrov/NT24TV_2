@@ -219,5 +219,127 @@
 
     }
 
+    public function embed_video_for_post( $post = null, $options = array(), $echo = false ){
+      $wp_post = false;
+      if ( is_numeric( $post ) ) {
+        $wp_post = get_post( $post );
+      }
+      elseif( $post instanceof WP_POST ) {
+        $wp_post = $post;
+      }
+
+      $options = array_merge( array(
+        'autoplay'    => get_field( 'autoplay', $wp_post->ID ),
+        'mute'        => get_field( 'mute', $wp_post->ID ),
+        'detachable'  => get_field( 'detach', $wp_post->ID ),
+        'controls'    => 1,
+        'loop'        => get_field( 'loop', $wp_post->ID ),
+        'pin'         => get_field( 'pin', $wp_post->ID ),
+        'class'       => '',
+        'width'       => '100%',
+        'height'      => '100%',
+      ), $options );
+
+      $media = get_field( 'media', $wp_post->ID );
+      $youtube = get_field( 'youtube', $wp_post->ID );
+      $source = get_field( 'source', $wp_post->ID );
+
+      if ( $source ) {
+        $video_type_name = $source;
+      }
+      else {
+        if ( $youtube ) {
+          $video_type_name = 'youtube';
+        }
+        elseif( $media ) {
+          $video_type_name = 'media';
+        }
+
+      }
+
+      if( $wp_post !== false ){
+        $player_html = "";
+        switch ( $video_type_name ) {
+          case 'media':
+            $media_player_options = array();
+            if($options['controls'] > 0)  $media_player_options[] = 'controls';
+            if($options['autoplay'])      $media_player_options[] = 'autoplay';
+            if($options['mute'])          $media_player_options[] = 'muted';
+
+            $player_html = sprintf(
+              '<video class="player" width="%s" height="%s" %s data-player-type="%s">
+                <source src="%s" type="%s"/>
+                Twoja przeglądarka nie obsługuje odtwarzacza mediów HTML5
+              </video>',
+              $options['width'],
+              $options['height'],
+              implode( ' ', $media_player_options ),
+              $video_type_name,
+              $media['url'],
+              $media['mime_type']
+            );
+            break;
+          case 'youtube':
+            // youtube video url example
+            // https://www.youtube.com/watch?v=QYVjcIpvt10
+            // https://youtu.be/FUpza22te6g
+            $pattern = '~(?:(?:&|\?)v=|youtu\.be/)([\w\-]+)~i';
+            preg_match( $pattern, $youtube, $match );
+            $video_ID = $match[1];
+
+            // generate attributes for youtube player
+            $attributes = array(
+              'width'         => '100%',
+              'height'        => '100%',
+              'video'         => $video_ID,
+              'player-type'   => $video_type_name,
+              'controls'      => (int)$options['controls'],
+              'autoplay'      => (int)$options['autoplay'],
+              'muted'         => (int)$options['mute'],
+              'loop'          => (int)$options['loop'],
+              'detachable'    => (int)$options['detachable'],
+              'pin'           => (int)$options['pin'],
+            );
+            $atts = array();
+            foreach ($attributes as $k => $v) {
+              $atts[] = 'data-'.$k.'="'.$v.'"';
+            }
+
+            // generate HTML for youtube player
+            $player_html = sprintf(
+              '<div class="player" %s></div>',
+              implode( ' ', $atts )
+            );
+            break;
+          default:
+            echo "<!-- VIDEO: NIE USTAWIONO ŹRÓDŁA -->";
+            return false;
+            break;
+        }
+
+        $output = sprintf(
+          '<div id="video" class="%s">
+            %s
+            <div class="overlay fw-bold fc-white">
+              <img src="%s/images/mute.svg"/> Wyłącz wyciszenie
+            </div>
+          </div>',
+          $options['mute'] == 1?('mute'):(''),
+          $player_html,
+          get_template_directory_uri()
+        );
+
+        if ( $echo ) {
+          return $output;
+        }
+        else {
+          echo $output;
+        }
+
+
+      }
+
+    }
+
   }
 ?>

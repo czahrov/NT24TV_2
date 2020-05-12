@@ -1,11 +1,20 @@
 <?php
   global $cat;
+  $posts_limit = 5;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
-    'numberposts'   => 5,
+    'numberposts'   => $posts_limit,
     'cat'           => $cat->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
+  ));
+  $items_pined = get_posts(array(
+    'numberposts'   => 1,
+    'cat'           => $cat->term_id,
+    'orderby'       => 'date',
+    'order'         => 'DESC',
+    'meta_key'      => 'pin',
+    'meta_value'    => '1',
   ));
 ?>
 <!-- Page Content -->
@@ -21,6 +30,10 @@
       <div class="row no-gutters">
         <!-- Big Post -->
         <?php
+          if ( !empty( $items_pined ) ) {
+            array_unshift( $items, $items_pined[0] );
+            $items = array_slice( $items, 0, $posts_limit );
+          }
           printPost( $items[0], 'big-special', array( 'class' => 'padding' ) );
         ?>
         <!-- Mid post -->

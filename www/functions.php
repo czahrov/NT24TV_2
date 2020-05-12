@@ -467,7 +467,7 @@
 
   // generuje oznaczenie wpisu "pilne"
   function printImportant( $id = null, $icon = false ){
-    if( get_post_meta( $id, 'pilne', true ) == 1 ){
+    if( get_field( 'pilne', get_post()->ID ) == 1 ){
       if ( $icon ) {
         return sprintf(
           '<img class="tag-icon" src="%s/images/important.svg"/ alt="Ważne" title="Ważna informacja">',
@@ -815,6 +815,7 @@
   // generuje kafelki wpisów
   function printPost( $post = null, $type = null, $args = array() ){
     // return '';
+    $item = null;
     if ( $post instanceof WP_POST ) {
       $item = $post;
     }
@@ -860,96 +861,79 @@
         break;
       case 'big':
         $data['title'] .= " " . printTags( $item->ID, true, false );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
-        // var_dump( get_field( 'source' ) );
-
-        // if ( $data['format'] == 'video' && !is_null( get_field( 'source', $item ) ) ) {
-        //   $isAutoplay = get_field( 'autoplay', $item );
-        //   $isDetachAble = get_field( 'detach', $item );
-        //   $source_type = get_field( 'source', $item );
-        //   $sources = get_field( $source_type, $item );
-        //   $source = is_array( $sources )?( $sources[0] ):( $sources );
-        //   $player_html = null;
-        //   $poster = get_the_post_thumbnail_url( $item, 'medium' );
-        //
-        //   // var_dump( array(
-        //   //   'autoplay' => $isAutoplay,
-        //   //   'src_type'  => $source_type,
-        //   //   'src'  => $source,
-        //   // ) );
-        //
-        //   switch ( $source_type ) {
-        //     case 'media':
-        //       $player_html = $fp->genMediaPlayer( $source, array(
-        //         // 'autoplay'  => $isAutoplay,
-        //         'poster'    => $poster,
-        //       ));
-        //       break;
-        //     case 'youtube':
-        //       $player_html = $fp->genYoutubeVideo( $source, array(
-        //         'detach'    => $isDetachAble,
-        //         'muted'     => true,
-        //       ) );
-        //       break;
-        //     default:
-        //       // code...
-        //       break;
-        //   }
-        //
-        //   printf(
-        //     '<div class="link_post big %s %s" data-post-type="%s">
-        //       <div class="big-post col no-padding">
-        //         <div class="post_news_big"> %s </div>
-        //         <a class="padding nopadding-lg" href="%s">
-        //           <span>%s</span>
-        //         </a>
-        //       </div>
-        //     </div>',
-        //     $data['class'],
-        //     $source_type,
-        //     $type,
-        //     $player_html,
-        //     $data['url'],
-        //     $data['title']
-        //   );
-        // }
-        // else {
-        // }
-        printf(
-          '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
-            <div class="big-post">
-              <div class="cover_img"></div>
-              <div class="post_news_big" style="background-image:url(%s)">
-                <span> %s </span>
+        if( get_post_format( $item ) == 'video' ){
+          printf(
+            '<div class="link_post big fc-black col-12 col-md-8 %s" data-post-type="%s">
+              <div class="big-post">
+                <div class="post_news_big">
+                  %s
+                </div>
               </div>
-            </div>
-          </a>',
-          $data['class'],
-          $data['url'],
-          $type,
-          $data['img'],
-          $data['title']
-        );
-
+              <a href="%s" class="title fw-semibold padding"> %s </a>
+            </div>',
+            $data['class'],
+            $type,
+            $fp->embed_video_for_post( $item, array(), true ),
+            $data['url'],
+            $item->post_title
+          );
+        }
+        else{
+          $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+          printf(
+            '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
+              <div class="big-post">
+                <div class="cover_img"></div>
+                <div class="post_news_big" style="background-image:url(%s)">
+                  <span> %s </span>
+                </div>
+              </div>
+            </a>',
+            $data['class'],
+            $data['url'],
+            $type,
+            $data['img'],
+            $data['title']
+          );
+        }
         break;
       case 'big-special':
         $data['title'] .= " " . printTags( $item->ID, true, false );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
-        printf(
-          '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
-            <div class="big-post">
-              <div class="cover_img"></div>
-              <div class="post_news_big" style="background-image:url(%s)">
-                <span> %s </span>
+        if( get_post_format( $item ) == 'video' ){
+          printf(
+            '<div class="link_post big fc-white col-12 col-md-8 %s" data-post-type="%s">
+              <div class="big-post">
+                <div class="post_news_big">
+                  %s
+                </div>
               </div>
-            </div>
-          </a>',
-          $data['class'],
-          $data['url'],
-          $type,
-          $data['img'],
-          $data['title']
-        );
+              <a href="%s" class="title fw-semibold padding"> %s </a>
+            </div>',
+            $data['class'],
+            $type,
+            $fp->embed_video_for_post( $item, array(), true ),
+            $data['url'],
+            $data['title']
+          );
+        }
+        else{
+          $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+          printf(
+            '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
+              <div class="big-post">
+                <div class="cover_img"></div>
+                <div class="post_news_big" style="background-image:url(%s)">
+                  <span> %s </span>
+                </div>
+              </div>
+            </a>',
+            $data['class'],
+            $data['url'],
+            $type,
+            $data['img'],
+            $data['title']
+          );
+        }
         break;
       case 'mid':
         $data['title'] .= " " . printTags( $item->ID, true, true );
@@ -976,7 +960,7 @@
         $data['title'] .= " " . printTags( $item->ID, true, false );
         $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col col-md-4 %s">
+          '<div class="col-6 col-md-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post">
                 <div class="post_news_small">

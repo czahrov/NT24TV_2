@@ -65,7 +65,10 @@
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-          <?php echo $fp->genYoutubeVideo( $yt ); ?>
+          <?php
+            // echo $fp->genYoutubeVideo( $yt );
+            $fp->embed_video_for_post( get_post() );
+          ?>
         <?php endif; ?>
         <?php
         if( empty( $yt ) ){

@@ -303,147 +303,197 @@ $(function(){
     $('#bot-bar .button.search')
   );
 
-  // obsługa filmików youtube
-  (function( placeholder ){
-    return false;
-    placeholder.each(function(){
-      const _ = $(this);
-      const root = _.parent();
-      const vidId = _.attr('data-yt-video-id');
-      const autoplay = _.attr('data-yt-video-autoplay');
-      const controls = _.attr('data-yt-video-controls');
-      const muted = _.attr('data-yt-video-muted');
-      const allow_detach = _.attr('data-yt-video-detach');
-      var player = null;
-      var detached = false;
-      const playerTop = root.offset().top;
-      var playerHeight = null;
-      const windowPos = ()=>{
-        return $('html,body').prop('scrollTop')
-      };
-      const inView = ()=>{
-        return (( windowPos() - playerTop + 30 ) <= playerHeight)&&( windowPos() >= ( playerTop - window.innerHeight )  );
-      };
-      var playerStatus = null;
-      const exit_btn = _.find('.exit');
+  // obsługa osadzanego video
+  (function( videos, video_youtube, video_media ){
+    let players = [];
 
-      _.before( $('<script src="https://www.youtube.com/iframe_api"></script>') );
+    // pseudo interface dla odtwarzaczy
+    videos.each(function(){
+      let _ = $(this);
+      let isPined = true;
+      let fixed_video = $('#fixed_video');
+      let player_copy = null;
 
-      window.onYouTubeIframeAPIReady = function(){
-        player = new YT.Player( _[0], {
-          videoId: vidId,
-          width: '100%',
-          height: '100%',
-          playerVars:{
-            // autoplay: 1,
-            controls: controls,
-            rel: 0,
-            origin: window.location.origin,
-            enablejsapi: 1,
-          },
-          events:{
-            onReady: function(e){
-              playerHeight = $(player.f).outerHeight();
-              if ( muted == 1 ) {
-                player.mute();
-                root.find('.mute').fadeIn();
-              }
-              if ( autoplay == 1 && inView() ) {
-                player.playVideo();
-                console.log('play_onReady');
-              }
-            },
-            onStateChange: function(e){
-              if ( e.data == 0 ) {
-                root.triggerHandler('attach');
-              }
-            },
-          }
-        } );
-      };
-
-      root.on({
-        'getPlayer': function(e){
-          return player;
+      _.on({
+        mute: function(e){
+          console.log('player.mute()');
         },
-        'detach': function(e){
-          if( typeof player == 'object' && player.getPlayerState() === 1 ){
-            root.parents('body > [id]:first')
+        unmute: function(e){
+          console.log('player.unmute()');
+        },
+        play: function(e){
+          console.log('player.play()');
+        },
+        pause: function(e){
+          console.log('player.pause()');
+        },
+        exit: function(e){
+          console.log('player.exit()');
+        },
+        pop: function(e){
+          isPined = false;
+          $( _ ).before(
+            $('<div class="placeholder"></div>')
             .css({
-              position: function(e){
-                let current = $(this).css('position');
-                return current == 'static'?('relative'):( current );
-              },
-              zIndex: 10001,
-            });
-            $(this).addClass('mini');
-            detached = true;
-          }
+              minHeight: function(){
+                return _.outerHeight(true);
+              }
+            })
+          );
+          _.addClass('pop');
+          console.log('player.pop()');
         },
-        'attach': function(e){
-          root.parents('body > [id]:first').attr({
-            'style': null,
-          });
-          $(this).removeClass('mini');
-          _.attr('style', null);
-          playerHeight = $(this).outerHeight(true);
-          detached = false;
-        },
-        'exit': function(e){
-          player.pauseVideo();
-          $(this).triggerHandler( 'attach' );
+        pin: function(e){
+          isPined = true;
+          _.prevAll('.placeholder').remove();
+          _.removeClass('pop');
+          console.log('player.pin()');
         },
       });
 
-      $('body').keydown((e)=>{
-        if ( e.code == 'Escape' ) {
-          root.triggerHandler('exit');
-        }
+      // wyłączenie wyciszenia
+      _.find('.overlay').click((e)=>{
+        _.triggerHandler('unmute');
       });
 
-      exit_btn.click((e)=>{root.triggerHandler('exit')});
+      // pływający odtwarzacz
+      if( $('#post').length ){
+        let video_start = _.offset().top;
+        let video_end = video_start + _.outerHeight(true);
 
-      $(window).scroll(function(e){
-        if( allow_detach == 1 ){
-          if ( !inView()  && !detached ){
-            root.triggerHandler('detach');
+        $(window).scroll(function(e){
+          let screen_start = $('html,body').prop('scrollTop') + $('nav.navbar').outerHeight(true);
+          let screen_end = $('html,body').prop('scrollTop') + window.innerHeight;
+
+          // sprawdzanie czy odtwarzacz jest w polu widzenia
+          if( video_end >= screen_start && video_start <= screen_end ){
+            // w polu widzenia
+            if ( !isPined ) _.triggerHandler('pin');
           }
-          else if( inView() && detached ){
-            root.triggerHandler('attach');
+          else{
+            // poza polem widzenia
+            if ( isPined ) _.triggerHandler('pop');
           }
-
-          if ( playerStatus != 'play' && inView() && [-1,5].indexOf( player.getPlayerState() ) > 0 ) {
-            player.playVideo();
-            playerStatus = 'play';
-            // console.log('play_scroll');
-          }
-
-        }
-
-        if( playerStatus != 'pause' && !inView() && allow_detach !== 1 && [1].indexOf( player.getPlayerState() ) > 0 ){
-          player.pauseVideo();
-          playerStatus = 'pause';
-          // console.log('pause_scroll');
-        }
-
-        $('.video.mini')
-        .find('.yt-video, .exit')
-        .css({
-          top: function(e){
-            return Math.max(
-              $('#pilne').offset().top + $('#pilne').outerHeight(true) - $('html,body').prop('scrollTop'),
-              $('nav.navbar').outerHeight(true),
-              0
-            );
-          },
         });
-
-      });
+      }
 
     });
 
+    // obsługa filmów youtube
+    if ( video_youtube.length ) {
+      $.getScript( 'https://www.youtube.com/iframe_api' );
+      window.onYouTubeIframeAPIReady = function(){
+        video_youtube.each(function(){
+          console.info( $(this) );
+          let _ = $(this);
+          let root = _.parents("#video:first");
+          let player = null;
+          let videoID = _.attr('data-video');
+          let autoplay = _.attr('data-autoplay');
+          let muted = _.attr('data-muted');
+          let controls = _.attr('data-controls');
+          let player_width = _.attr('data-width');
+          let player_height = _.attr('data-height');
+          let overlay = root.find('.overlay');
+          let TL_overlay = new TimelineLite({
+            paused: true,
+          })
+          .add(
+            TweenLite.fromTo(
+              overlay,
+              0.5,
+              {
+                opacity: 1,
+              },
+              {
+                opacity: 0,
+              }
+            ),
+            0
+          )
+          .add(
+            TweenLite.fromTo(
+              overlay,
+              0.3,
+              {
+                scale: 1,
+              },
+              {
+                scale: 0,
+              }
+            ),
+            '+=0',
+            'sequence'
+          );
+
+          console.log('onYouTubeIframeAPIReady()');
+          player = new YT.Player( _[0], {
+            videoId: videoID,
+            width: player_width,
+            height: player_height,
+            playerVars:{
+              autoplay: autoplay,
+              controls: controls,
+              rel: 0,
+              origin: window.location.origin,
+              enablejsapi: 1,
+            },
+            events:{
+              onReady: function(e){
+                if( autoplay ){
+                  root.triggerHandler('play');
+                }
+                if( muted ){
+                  root.triggerHandler('mute');
+                }
+              },
+              onStateChange: function(e){
+
+              },
+            }
+          } );
+          players.push( player );
+          window.player_helper = players;
+
+          root.on({
+            mute: function(e){
+              player.mute();
+              console.log('player is muted');
+            },
+            unmute: function(e){
+              player.unMute();
+              TL_overlay.play();
+              console.log('player is unmuted');
+            },
+            play: function(e){
+              player.playVideo();
+              console.log('player is played');
+            },
+            pause: function(e){
+              player.pauseVideo();
+              console.log('player is paused');
+            },
+          });
+
+        });
+
+      }
+
+    }
+
+    // obsługa filmów z mediów
+    if ( video_media.length ) {
+      video_media.each(function(){
+        let _ = $(this);
+
+      });
+
+    }
+
   })(
-    $('.yt-video')
+    $('[id="video"]'),
+    $('[id="video"] .player[data-player-type="youtube"]'),
+    $('[id="video"] .player[data-player-type="media"]')
   );
 
   // przewijany pasek informacyjny

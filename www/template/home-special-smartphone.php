@@ -1,17 +1,21 @@
 <?php
-  global $cat;
-  // var_dump( $cat );
-
-  $items = get_posts(array(
-    'numberposts'   => 11,
-    'cat'           => $cat->term_id,
-    'orderby'       => 'date',
-    'order'         => 'DESC'
-  ));
-
-  $meta = get_term_meta( $cat->term_id );
-  // var_dump( $meta );
-
+global $cat;
+$posts_limit = 11;
+$meta = get_term_meta( $cat->term_id );
+$items = get_posts(array(
+  'numberposts'   => $posts_limit,
+  'cat'           => $cat->term_id,
+  'orderby'       => 'date',
+  'order'         => 'DESC'
+));
+$items_pined = get_posts(array(
+  'numberposts'   => 1,
+  'cat'           => $cat->term_id,
+  'orderby'       => 'date',
+  'order'         => 'DESC',
+  'meta_key'      => 'pin',
+  'meta_value'    => '1',
+));
 ?>
 <!-- Page Content -->
 <div id='<?php echo $cat->slug; ?>' class="<?php echo getDevType(); ?> special container" style="background-color:<?php echo $meta['kolor'][0]; ?>">
@@ -26,26 +30,11 @@
       </a>
       <!-- Big Post -->
       <?php
-        $item = $items[0];
-        printf(
-          '<a class="link_post item" href="%s">
-            <div class="big-post">
-              <div class="cover_img"></div>
-              <div class="post_news_big" style="background-image:url(%s)">
-                <span>
-                  %s
-                  <div class="post-tags">
-                    %s
-                  </div>
-                </span>
-              </div>
-            </div>
-          </a>',
-          get_permalink( $item->ID ),
-          get_the_post_thumbnail_url( $item->ID, 'full' ),
-          $item->post_title,
-          printTags( $item->ID, false )
-        );
+        if ( !empty( $items_pined ) ) {
+          array_unshift( $items, $items_pined[0] );
+          $items = array_slice( $items, 0, $posts_limit );
+        }
+        printPost( $items[0], 'big-special', array( 'class' => 'no-padding' ) );
       ?>
       <div class="clear-top"></div>
 
@@ -53,22 +42,7 @@
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1 ) as $item ){
-            printf(
-              '<div class="item col-6 col-md-4">
-                <a class="link_post_small" href="%s">
-                  <div class="small-post">
-                    <div class="post_news_small">
-                      <div class="cover_img" style="background-image:url(%s)"></div>
-                    </div>
-                    <span>%s %s</span>
-                  </div>
-                </a>
-              </div>',
-              get_permalink( $item->ID ),
-              get_the_post_thumbnail_url( $item->ID, 'large' ),
-              $item->post_title,
-              printTags( $item->ID, true, false )
-            );
+            printPost( $item, 'mid-special', array() );
           }
         ?>
 

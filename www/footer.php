@@ -1,4 +1,5 @@
   <!-- Footer -->
+  <div id="fixed_video" class=""> </div>
   <footer class=" bg-footer">
 
     <div class="foot-content">

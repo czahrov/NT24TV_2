@@ -550,7 +550,7 @@ nav.navbar{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba( #000, 0.8 );
+    background-color: rgba( #000, 0.7 );
     font-size: 20px;
 
     img{
@@ -562,6 +562,7 @@ nav.navbar{
   }
 
   &.pop{
+    display: none;
     position: fixed;
     padding: 0;
     right: 0;
@@ -1109,81 +1110,11 @@ nav.navbar{
   width: 100% !important;
 }
 
-.video{
-  position: relative;
-  margin: 25px auto;
-  width: 100%;
-  height: 100%;
-  // padding-bottom: 56.25%;
-  background-color: map-get($color,'black');
-
-  .yt-video{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .exit{
-    display: none;
-    padding: .5em .8em;
-    background-color: map-get($color,'black');
-    border-radius: 0 10px 10px 0;
-    font-size: 20px;
-    color: map-get($color, 'white');
-    cursor: pointer;
-    line-height: 1em;
-    z-index: 100;
-  }
-
-  &.mini{
-
-    .yt-video{
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: initial;
-      bottom: initial;
-      width: 100vw;
-      height: 25vh;
-      z-index: 1000;
-
-      @media( min-width: map-get($break,'sm')){
-        width: 44.5vh;
-      }
-
-      @media( min-width: map-get($break,'xl')){
-        // top: 46px;
-      }
-
-    }
-
-    .exit{
-      display: block;
-      position: fixed;
-      top: 25vh;
-      right: 0;
-      border-radius: 0 0 0 10px;
-
-      @media( min-width: map-get($break,'sm')){
-        top: 0;
-        left: 44.5vh;
-        right: initial;
-        border-radius: 0 0 10px 0;
-      }
-
-      @media( min-width: map-get($break,'xl')){
-        // top: 46px;
-      }
-
-    }
-
-  }
-
-}
-
 #post{
+
+  [id^="attachment"]{
+    max-width: 100%;
+  }
 
   iframe{
     max-width: 100%;
@@ -1426,6 +1357,19 @@ nav.navbar{
           }
 
         }
+
+      }
+
+    }
+
+  }
+
+  &.smartphone{
+
+    #video{
+
+      &.pop{
+        bottom: 40px;
 
       }
 

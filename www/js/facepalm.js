@@ -312,7 +312,26 @@ $(function(){
       let _ = $(this);
       let isPined = true;
       let fixed_video = $('#fixed_video');
-      let player_copy = null;
+      let video_start = _.offset().top;
+      let video_end = video_start + _.outerHeight(true);
+      let autoplay = _.find('.player').attr('data-autoplay') == 1;
+      let isPlayed = false;
+      let muted = _.find('.player').attr('data-muted') == 1;
+      const inView = function(){
+        let screen_start = $('html,body').prop('scrollTop') + $('nav.navbar').outerHeight(true);
+        let screen_end = $('html,body').prop('scrollTop') + window.innerHeight;
+
+        if( video_end >= screen_start && video_start <= screen_end ){
+          // w polu widzenia
+          return true;
+        }
+        else{
+          // poza polem widzenia
+          return false;
+        }
+
+      };
+      let lastState = -1;
 
       _.on({
         mute: function(e){
@@ -349,6 +368,65 @@ $(function(){
           _.removeClass('pop');
           console.log('player.pin()');
         },
+        playerReady: function(e){
+          console.log('player.onReady()');
+          if ( $('#post').length ) {
+            _.triggerHandler('play');
+            _.triggerHandler('unmute');
+          }
+          else{
+            if( autoplay ){
+              if( muted ){
+                _.triggerHandler('mute');
+              }
+              else{
+                _.triggerHandler('unmute');
+              }
+            }
+            else{
+              _.triggerHandler('unmute');
+            }
+          }
+
+          // włączanie filmu gdy będzie w polu widzenia
+          $(window)
+          .scroll(function(e){
+            if( autoplay && inView() && !isPlayed ){
+              isPlayed = true;
+              _.triggerHandler('play');
+            }
+          })
+          .scroll();
+        },
+        getPlayer: function(e){
+          console.log('player.getPlayer()');
+        },
+        playerStateChange: function(e, state){
+          console.log('player.playerStateChange()');
+          lastState = state;
+          switch ( state ) {
+            case -1: // unstarted
+
+              break;
+            case 0: // ended
+              _.triggerHandler('pin');
+              break;
+            case 1: // played
+
+              break;
+            case 2: // paused
+              _.triggerHandler('pin');
+              break;
+            case 3: // buffering
+
+              break;
+            case 5: // video cued
+
+              break;
+            default:
+
+          }
+        },
       });
 
       // wyłączenie wyciszenia
@@ -358,21 +436,15 @@ $(function(){
 
       // pływający odtwarzacz
       if( $('#post').length ){
-        let video_start = _.offset().top;
-        let video_end = video_start + _.outerHeight(true);
-
         $(window).scroll(function(e){
-          let screen_start = $('html,body').prop('scrollTop') + $('nav.navbar').outerHeight(true);
-          let screen_end = $('html,body').prop('scrollTop') + window.innerHeight;
-
           // sprawdzanie czy odtwarzacz jest w polu widzenia
-          if( video_end >= screen_start && video_start <= screen_end ){
+          if( inView() ){
             // w polu widzenia
             if ( !isPined ) _.triggerHandler('pin');
           }
           else{
             // poza polem widzenia
-            if ( isPined ) _.triggerHandler('pop');
+            if ( isPined && [1].indexOf( lastState ) > -1 ) _.triggerHandler('pop');
           }
         });
       }
@@ -384,7 +456,6 @@ $(function(){
       $.getScript( 'https://www.youtube.com/iframe_api' );
       window.onYouTubeIframeAPIReady = function(){
         video_youtube.each(function(){
-          console.info( $(this) );
           let _ = $(this);
           let root = _.parents("#video:first");
           let player = null;
@@ -432,7 +503,8 @@ $(function(){
             width: player_width,
             height: player_height,
             playerVars:{
-              autoplay: autoplay,
+              // autoplay: autoplay,
+              autoplay: 0,
               controls: controls,
               rel: 0,
               origin: window.location.origin,
@@ -440,15 +512,10 @@ $(function(){
             },
             events:{
               onReady: function(e){
-                if( autoplay ){
-                  root.triggerHandler('play');
-                }
-                if( muted ){
-                  root.triggerHandler('mute');
-                }
+                root.triggerHandler('playerReady');
               },
               onStateChange: function(e){
-
+                root.triggerHandler('playerStateChange',[e.data]);
               },
             }
           } );
@@ -472,6 +539,9 @@ $(function(){
             pause: function(e){
               player.pauseVideo();
               console.log('player is paused');
+            },
+            getPlayer: function(e){
+              return player;
             },
           });
 

@@ -280,7 +280,7 @@
             );
             break;
           case 'youtube':
-            // youtube video url example
+            // youtube video url examples
             // https://www.youtube.com/watch?v=QYVjcIpvt10
             // https://youtu.be/FUpza22te6g
             $pattern = '~(?:(?:&|\?)v=|youtu\.be/)([\w\-]+)~i';

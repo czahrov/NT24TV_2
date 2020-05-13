@@ -861,7 +861,7 @@
         break;
       case 'big':
         $data['title'] .= " " . printTags( $item->ID, true, false );
-        if( get_post_format( $item ) == 'video' ){
+        if( get_post_format( $item ) == 'video' && get_field( 'home', $item->ID ) == 1 ){
           printf(
             '<div class="link_post big fc-black col-12 col-md-8 %s" data-post-type="%s">
               <div class="big-post">
@@ -899,7 +899,7 @@
         break;
       case 'big-special':
         $data['title'] .= " " . printTags( $item->ID, true, false );
-        if( get_post_format( $item ) == 'video' ){
+        if( get_post_format( $item ) == 'video' && get_field( 'home', $item->ID ) == 1 ){
           printf(
             '<div class="link_post big fc-white col-12 col-md-8 %s" data-post-type="%s">
               <div class="big-post">

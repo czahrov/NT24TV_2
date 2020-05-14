@@ -315,8 +315,8 @@ $(function(){
       let video_start = _.offset().top;
       let video_end = video_start + _.outerHeight(true);
       let autoplay = _.find('.player').attr('data-autoplay') == 1;
-      let isPlayed = false;
       let muted = _.find('.player').attr('data-muted') == 1;
+      let isPlayed = false;
       const inView = function(){
         let screen_start = $('html,body').prop('scrollTop') + $('nav.navbar').outerHeight(true);
         let screen_end = $('html,body').prop('scrollTop') + window.innerHeight;
@@ -332,13 +332,46 @@ $(function(){
 
       };
       let lastState = -1;
+      let overlay = _.find('.overlay');
+      let TL_mute = new TimelineMax({
+        paused: true,
+      })
+      .add(
+        TweenMax.fromTo(
+          overlay,
+          0.1,
+          {
+            scale: 0,
+          },
+          {
+            scale: 1,
+          }
+        ),
+        0
+      )
+      .add(
+        TweenMax.fromTo(
+          overlay,
+          0.3,
+          {
+            opacity: 0,
+          },
+          {
+            opacity: 1,
+          }
+        ),
+        '+=0',
+        'sequence'
+      );
 
       _.on({
         mute: function(e){
           console.log('player.mute()');
+          TL_mute.play();
         },
         unmute: function(e){
           console.log('player.unmute()');
+          TL_mute.reverse();
         },
         play: function(e){
           console.log('player.play()');
@@ -388,12 +421,18 @@ $(function(){
             }
           }
 
-          // włączanie filmu gdy będzie w polu widzenia
+          // włączanie/pauzowanie filmu gdy (nie)będzie w polu widzenia
           $(window)
           .scroll(function(e){
-            if( autoplay && inView() && !isPlayed ){
-              isPlayed = true;
-              _.triggerHandler('play');
+            if( autoplay ){
+              if ( inView() && !isPlayed ) {
+                _.triggerHandler('play');
+                if(lastState > -1) isPlayed = true;
+              }
+              if ( $('#post').length == 0 && !inView() && isPlayed ) {
+                _.triggerHandler('pause');
+                isPlayed = false;
+              }
             }
           })
           .scroll();
@@ -402,7 +441,7 @@ $(function(){
           console.log('player.getPlayer()');
         },
         playerStateChange: function(e, state){
-          console.log('player.playerStateChange()');
+          console.log('player.playerStateChange('+state+')');
           lastState = state;
           switch ( state ) {
             case -1: // unstarted
@@ -427,6 +466,17 @@ $(function(){
 
           }
         },
+      });
+
+      $('body').keydown(function(e){
+        console.log('player.keydown('+e.code+')');
+        switch (e.code) {
+          case 'Escape':
+            _.triggerHandler('pause');
+            break;
+          default:
+
+        }
       });
 
       // wyłączenie wyciszenia
@@ -466,36 +516,6 @@ $(function(){
           let player_width = _.attr('data-width');
           let player_height = _.attr('data-height');
           let overlay = root.find('.overlay');
-          let TL_overlay = new TimelineLite({
-            paused: true,
-          })
-          .add(
-            TweenLite.fromTo(
-              overlay,
-              0.5,
-              {
-                opacity: 1,
-              },
-              {
-                opacity: 0,
-              }
-            ),
-            0
-          )
-          .add(
-            TweenLite.fromTo(
-              overlay,
-              0.3,
-              {
-                scale: 1,
-              },
-              {
-                scale: 0,
-              }
-            ),
-            '+=0',
-            'sequence'
-          );
 
           console.log('onYouTubeIframeAPIReady()');
           player = new YT.Player( _[0], {
@@ -525,11 +545,12 @@ $(function(){
           root.on({
             mute: function(e){
               player.mute();
+              // TL_mute.play();
               console.log('player is muted');
             },
             unmute: function(e){
               player.unMute();
-              TL_overlay.play();
+              // TL_mute.reverse();
               console.log('player is unmuted');
             },
             play: function(e){
@@ -555,6 +576,56 @@ $(function(){
     if ( video_media.length ) {
       video_media.each(function(){
         let _ = $(this);
+        let root = _.parents("#video:first");
+        let player = _[0];
+        let videoID = _.attr('data-video');
+        let autoplay = _.attr('data-autoplay');
+        let muted = _.attr('data-muted');
+        let controls = _.attr('data-controls');
+        let player_width = _.attr('data-width');
+        let player_height = _.attr('data-height');
+        let overlay = root.find('.overlay');
+
+        root.on({
+          mute: function(e){
+            player.muted = true;
+            console.log('player is muted');
+          },
+          unmute: function(e){
+            player.muted = false;
+            console.log('player is unmuted');
+          },
+          play: function(e){
+            player.play();
+            console.log('player is played');
+          },
+          pause: function(e){
+            player.pause();
+            console.log('player is paused');
+          },
+          getPlayer: function(e){
+            return player;
+          },
+        });
+
+        _.on({
+          playing: function(e){
+            console.log('media_player.plaing()');
+            root.triggerHandler('playerStateChange', [1]);
+          },
+          pause: function(e){
+            console.log('media_player.pause()');
+            root.triggerHandler('playerStateChange', [2]);
+          },
+          ended: function(e){
+            console.log('media_player.ended()');
+            root.triggerHandler('playerStateChange', [0]);
+          },
+          loadeddata: function(e){
+            console.log('media_player.loadeddata()');
+            root.triggerHandler('playerReady');
+          },
+        });
 
       });
 

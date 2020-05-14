@@ -231,7 +231,6 @@
       $options = array_merge( array(
         'autoplay'    => get_field( 'autoplay', $wp_post->ID ),
         'mute'        => get_field( 'mute', $wp_post->ID ),
-        'detachable'  => get_field( 'detach', $wp_post->ID ),
         'controls'    => 1,
         'loop'        => get_field( 'loop', $wp_post->ID ),
         'pin'         => get_field( 'pin', $wp_post->ID ),
@@ -261,20 +260,32 @@
         $player_html = "";
         switch ( $video_type_name ) {
           case 'media':
-            $media_player_options = array();
-            if($options['controls'] > 0)  $media_player_options[] = 'controls';
-            if($options['autoplay'])      $media_player_options[] = 'autoplay';
-            if($options['mute'])          $media_player_options[] = 'muted';
+            // generate attributes for media player
+            $attributes = array(
+              'width'         => '100%',
+              'height'        => '100%',
+              'video'         => $video_ID,
+              'player-type'   => $video_type_name,
+              'controls'      => (int)$options['controls'],
+              'autoplay'      => (int)$options['autoplay'],
+              'muted'         => (int)$options['mute'],
+              'loop'          => (int)$options['loop'],
+              'detachable'    => (int)$options['detachable'],
+              'pin'           => (int)$options['pin'],
+            );
+            $atts = array();
+            foreach ($attributes as $k => $v) {
+              $atts[] = 'data-'.$k.'="'.$v.'"';
+            }
 
             $player_html = sprintf(
-              '<video class="player" width="%s" height="%s" %s data-player-type="%s">
+              '<video class="player" controls="%u" autoplay="%u" %s>
                 <source src="%s" type="%s"/>
                 Twoja przeglądarka nie obsługuje odtwarzacza mediów HTML5
               </video>',
-              $options['width'],
-              $options['height'],
-              implode( ' ', $media_player_options ),
-              $video_type_name,
+              $attributes['controls'],
+              $attributes['autoplay'],
+              implode( ' ', $atts ),
               $media['url'],
               $media['mime_type']
             );

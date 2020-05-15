@@ -1,7 +1,20 @@
 <?php get_header(); ?>
 <?php
   $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
-  $post_limit = getDevType() == 'smartphone'?(15):(16);
+  switch ( getDevType() ) {
+    case 'smartphone':
+      $post_limit = 15;
+      break;
+    case 'tablet':
+      $post_limit = 17;
+      break;
+    case 'desktop':
+      $post_limit = 17;
+      break;
+    default:
+      // code...
+      break;
+  }
   $posts = get_posts(array(
     'numberposts'   => $post_limit,
     'cat'           => $category->cat_ID,
@@ -24,28 +37,27 @@
             <?php echo $category->name; ?>
           </h5>
           <?php if ( !empty( $posts) ): ?>
-            <!-- BIG POST -->
-            <?php
-              printPost( $posts[0], 'big', array( 'class'=> 'no-padding col-lg-12' ) );
-            ?>
-            <div class="clear-top"></div>
-            <!-- MID POSTS -->
-            <div class="mid_post row no-gutters">
+            <div class="items row no-gutters">
+              <!-- BIG POST -->
+              <?php
+                printPost( $posts[0], 'big', array( 'class'=> 'item no-padding' ) );
+              ?>
+              <!-- MID POSTS -->
               <?php
                 foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
                   printPost( $item, 'mid', array( 'class'=> 'item' ) );
                 }
               ?>
+              <?php if ( count($posts) == $post_limit ): ?>
+                <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
+                  <div class="spinner position-absolute">
+                    <div class="box position-absolute"> </div>
+                  </div>
+                  Załaduj więcej
+                </button>
+              <?php endif; ?>
+              <!-- /row-->
             </div>
-            <?php if ( count($posts) == $post_limit ): ?>
-              <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
-                <div class="spinner position-absolute">
-                  <div class="box position-absolute"> </div>
-                </div>
-                Załaduj więcej
-              </button>
-            <?php endif; ?>
-            <!-- /row-->
             <!-- /before content -->
           <?php else: ?>
             <div class="noposts text-center text-uppercase fw-bold">

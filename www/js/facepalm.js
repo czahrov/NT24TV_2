@@ -6,7 +6,8 @@ $(function(){
     let _ = $(this);
     _.on({
       click: function(e){
-        let items = _.prevAll('.mid_post').find('.item');
+        // let items = _.prevAll('.mid_post').find('.item');
+        let items = _.parent('.items').find('.item');
         let root = items.first().parent();
 
         let query_parts = {
@@ -82,7 +83,8 @@ $(function(){
               t.find('.cover_img')
               .css( 'background-image', 'url('+item.img+')' );
               t.find('.small-post > span').html( item.title.replace( /\\/g, '' ) );
-              root.append(t);
+              // root.append(t);
+              _.before(t);
               // $('#btn_more').before( t );
             } );
 

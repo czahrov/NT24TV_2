@@ -12,32 +12,33 @@
 
     <!-- Blog Entries Column -->
     <div class="col-12">
-      <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>">
+      <a href="<?php echo get_category_link( $category->cat_ID ); ?>">
         <h5 class="title-sidebar">Sport</h5>
       </a>
-
-      <!-- BIG Post -->
-      <?php
-        printPost( $items[0], 'big', array( 'class' => 'no-padding' ) );
-      ?>
-      <div class="clear-top"></div>
-      <div class="mid_post row no-gutters">
-        <!-- MID post -->
+      <div class="items row no-gutters">
+        <!-- Big Post -->
         <?php
-          foreach ( array_slice( $items, 1 ) as $item ) {
-            printPost( $item, 'mid', array( 'class' => 'item' ) );
+          if ( !empty( $items_pined ) ) {
+            array_unshift( $items, $items_pined[0] );
+            $items = array_slice( $items, 0, $posts_limit );
+          }
+          printPost( $items[0], 'big-special', array( 'class' => 'item no-padding' ) );
+        ?>
+        <!-- Mid post -->
+        <?php
+          foreach( array_slice( $items, 1 ) as $item ){
+            printPost( $item, 'mid-special', array( 'class' => 'item' ) );
           }
         ?>
 
+        <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
+          <div class="spinner position-absolute">
+            <div class="box position-absolute"> </div>
+          </div>
+          Załaduj więcej
+        </button>
+        <!-- /row-->
       </div>
-      <!-- /row-->
-      <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug ?>">
-        <div class="spinner position-absolute">
-          <div class="box position-absolute"> </div>
-        </div>
-        Załaduj więcej
-      </button>
-      <div class="clear-top"></div>
 
     </div>
     <!-- /col-8 -->

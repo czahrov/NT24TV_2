@@ -5,7 +5,8 @@
     $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest' ||
     strpos( $_SERVER['HTTP_REFERER'], BASE ) !== 0
   ) {
-    header("Location:" . BASE, true, 404 );
+    // header("Location:" . BASE, true, 404 );
+    header("Location:" . home_url(), true, 404 );
     exit;
   }
 
@@ -15,6 +16,7 @@
       $start = (int)$_GET['from'];
       $end = (int)$_GET['to'];
       $catSlug = $_GET['cat'];
+      $isSpecialCategory = get_term_meta( get_category_by_slug( $catSlug )->cat_ID, 'front', true ) == 1;
       if( empty( $catSlug ) ){
         preg_match_all( "/[^\/]+/", $_SERVER['HTTP_REFERER'], $match );
         $catSlug = end( $match[0] );
@@ -27,7 +29,7 @@
       ));
 
       $ret = array_map( function( $item ){
-        $title = printTags( $item->ID ) . addslashes( $item->post_title );
+        $title = addslashes( $item->post_title ) . printTags( $item->ID, true, $isSpecialCategory );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
         $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
         $url = get_permalink( $item );
@@ -55,7 +57,7 @@
       ));
 
       $ret = array_map( function( $item ){
-        $title = printTags( $item->ID) . addslashes( $item->post_title );
+        $title = addslashes( $item->post_title ) . printTags( $item->ID );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
         $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
         $url = get_permalink( $item->ID );

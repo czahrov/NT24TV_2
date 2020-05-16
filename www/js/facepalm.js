@@ -5,7 +5,7 @@ $(function(){
   .each(function(){
     let _ = $(this);
     _.on({
-      click: function(e){
+      click: function(e){7
         // let items = _.prevAll('.mid_post').find('.item');
         let items = _.parent('.items').find('.item');
         let root = items.first().parent();
@@ -407,7 +407,7 @@ $(function(){
           console.log('player.onReady()');
           if ( $('#post').length ) {
             _.triggerHandler('play');
-            _.triggerHandler('unmute');
+            _.triggerHandler('mute');
           }
           else{
             if( autoplay ){

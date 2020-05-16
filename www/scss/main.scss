@@ -318,6 +318,7 @@ section.head-menu {
     border-radius: 50px;
     border-bottom-right-radius: 50px;
     padding: 20px 0 20px 45px;
+    cursor: text;
   }
 }
 
@@ -441,10 +442,15 @@ section.head-menu {
 
   & .post_news_small {
     width: 100%;
-    height: 11rem;
+    height: 28.125vw;
     background: #000;
     position: relative;
     overflow: hidden;
+
+    @media(min-width: 768px){
+      height: 11rem;
+    }
+
   }
 
   & .cover_img {

@@ -40,7 +40,7 @@
             <div class="items row no-gutters">
               <!-- BIG POST -->
               <?php
-                printPost( $posts[0], 'big', array( 'class'=> 'item no-padding' ) );
+                printPost( $posts[0], 'big', array( 'class'=> 'item' ) );
               ?>
               <!-- MID POSTS -->
               <?php

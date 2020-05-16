@@ -299,6 +299,7 @@ section.head-menu .head-items .weather ul li a {
   border-radius: 50px;
   border-bottom-right-radius: 50px;
   padding: 20px 0 20px 45px;
+  cursor: text;
 }
 
 .clear-top {
@@ -412,10 +413,16 @@ section.head-menu .head-items .weather ul li a {
 
 .link_post_small .post_news_small {
   width: 100%;
-  height: 11rem;
+  height: 28.125vw;
   background: #000;
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .link_post_small .post_news_small {
+    height: 11rem;
+  }
 }
 
 .link_post_small .cover_img {

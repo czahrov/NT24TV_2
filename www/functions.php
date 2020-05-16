@@ -1,7 +1,7 @@
 <?php
   // header( "Cache-Control: max-age=31536000" );
-  header( "Cache-Control: private, no-cache, no-store, must-revalidate, max-age=1" );
-  header( "Pragma: no-cache", false );
+  // header( "Cache-Control: private, no-cache, no-store, must-revalidate, max-age=1" );
+  // header( "Pragma: no-cache", false );
   // date_default_timezone_set('Europe/Warsaw');
   error_reporting( E_ALL & ~E_WARNING & ~E_NOTICE );
 

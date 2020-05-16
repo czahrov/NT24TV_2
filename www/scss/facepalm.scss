@@ -285,30 +285,21 @@ ol, ul{
   list-style-position: inside;
 }
 
-.mid_post{
+.items{
 
   .item{
-    border: solid 1px map-get( $color, 'white' );
 
-    @media( max-width: map-get($break,'md') - 1px){
-      &:nth-child(2n){
-        border-right-width: 0;
-      }
+    &:not(.big){
+      border: solid map-get($color, 'white');
+      border-width: 0 1px;
 
-      &:nth-child(2n+1){
-        border-left-width: 0;
-      }
-
-    }
-
-    @media( min-width: map-get($break,'md')){
-      &:nth-child(3n){
-        border-right-width: 0;
-      }
-
-      &:nth-child(3n+1){
-        border-left-width: 0;
-      }
+      // &:nth-child(2n){
+      //   border-right-width: 1px;
+      // }
+      //
+      // &:nth-child(2n+1){
+      //   border-left-width: 1px;
+      // }
 
     }
 
@@ -620,6 +611,7 @@ nav.navbar{
 
     .item{
       margin: 5px 0px;
+      border: none;
 
       a{
         color: inherit;
@@ -1384,34 +1376,6 @@ nav.navbar{
 #search{
   // padding: 0 1rem;
 
-  .items{
-
-    .item{
-      padding: 1.2rem 1rem;
-
-      .cover_img{
-        width: 28%;
-        height: 5rem;
-        background:{
-          position: top;
-          size: cover;
-          repeat: no-repeat;
-          image: url(../images/no-photo.png);
-        }
-      }
-
-      .small-post{
-        padding-left: 20px;
-      }
-
-      &, &:hover, &:focus{
-        text-decoration: none;
-      }
-
-    }
-
-  }
-
 }
 
 #page{
@@ -1451,10 +1415,17 @@ nav.navbar{
 
     .item{
 
-      iframe, .img{
-        width: 100%;
-        height: 40vw;
-        max-height: 300px;
+      .iframe_wrapper{
+        position: relative;
+        padding-bottom: 56.25%;
+
+        iframe{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
 
       }
 
@@ -1471,8 +1442,12 @@ nav.navbar{
       }
 
       .text{
-        padding: 10px 0;
-        font-size: 20px;
+        display: block;
+        margin-top: 5px;
+        // padding: 10px 0;
+        color: #141c1f;
+        font-size: 1.3rem;
+        font-family: "open_sanssemibold";
       }
 
     }
@@ -1565,7 +1540,7 @@ nav.navbar{
   right: 0;
   bottom: 0;
   background-color: rgba( #000, 0.7 );
-  z-index: 100;
+  z-index: 110;
 
   .box{
     position: absolute;

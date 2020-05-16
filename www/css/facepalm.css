@@ -587,26 +587,9 @@ ol, ul {
   list-style-position: inside;
 }
 
-.mid_post .item {
-  border: solid 1px #fff;
-}
-
-@media (max-width: 767px) {
-  .mid_post .item:nth-child(2n) {
-    border-right-width: 0;
-  }
-  .mid_post .item:nth-child(2n+1) {
-    border-left-width: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .mid_post .item:nth-child(3n) {
-    border-right-width: 0;
-  }
-  .mid_post .item:nth-child(3n+1) {
-    border-left-width: 0;
-  }
+.items .item:not(.big) {
+  border: solid #fff;
+  border-width: 0 1px;
 }
 
 iframe.wp-embedded-content {
@@ -836,6 +819,7 @@ nav.navbar {
 
 #pilne .items .item {
   margin: 5px 0px;
+  border: none;
 }
 
 #pilne .items .item a {
@@ -1347,27 +1331,6 @@ nav.navbar {
   bottom: 40px;
 }
 
-#search .items .item {
-  padding: 1.2rem 1rem;
-}
-
-#search .items .item .cover_img {
-  width: 28%;
-  height: 5rem;
-  background-position: top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(../images/no-photo.png);
-}
-
-#search .items .item .small-post {
-  padding-left: 20px;
-}
-
-#search .items .item, #search .items .item:hover, #search .items .item:focus {
-  text-decoration: none;
-}
-
 #page .banner {
   height: 50vh;
   max-height: 300px;
@@ -1395,10 +1358,17 @@ nav.navbar {
   top: 50px;
 }
 
-#page #kamery .item iframe, #page #kamery .item .img {
+#page #kamery .item .iframe_wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+#page #kamery .item .iframe_wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 40vw;
-  max-height: 300px;
+  height: 100%;
 }
 
 #page #kamery .item .img {
@@ -1408,8 +1378,11 @@ nav.navbar {
 }
 
 #page #kamery .item .text {
-  padding: 10px 0;
-  font-size: 20px;
+  display: block;
+  margin-top: 5px;
+  color: #141c1f;
+  font-size: 1.3rem;
+  font-family: "open_sanssemibold";
 }
 
 @media (min-width: 992px) {
@@ -1478,7 +1451,7 @@ nav.navbar {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 100;
+  z-index: 110;
 }
 
 #search-popup .box {

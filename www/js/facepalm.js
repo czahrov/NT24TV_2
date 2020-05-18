@@ -442,6 +442,9 @@ $(function(){
         getPlayer: function(e){
           console.log('player.getPlayer()');
         },
+        getPlayerState: function(e){
+          return lastState;
+        },
         playerStateChange: function(e, state){
           console.log('player.playerStateChange('+state+')');
           lastState = state;
@@ -471,7 +474,7 @@ $(function(){
       });
 
       $('body').keydown(function(e){
-        console.log('player.keydown('+e.code+')');
+        // console.log('player.keydown('+e.code+')');
         switch (e.code) {
           case 'Escape':
             _.triggerHandler('pause');
@@ -518,6 +521,8 @@ $(function(){
           let player_width = _.attr('data-width');
           let player_height = _.attr('data-height');
           let overlay = root.find('.overlay');
+          const isiOS = $('body').hasClass('ios');
+          const isAndroid = $('body').hasClass('android');
 
           console.log('onYouTubeIframeAPIReady()');
           player = new YT.Player( _[0], {
@@ -544,6 +549,19 @@ $(function(){
           players.push( player );
           window.player_helper = players;
 
+          _.on({
+            onInteract: function(e){
+              $('body')
+              .one('touchend', function(e){
+                player.playVideo();
+              })
+              .one('click', function(e){
+                player.playVideo();
+              });
+            },
+
+          });
+
           root.on({
             mute: function(e){
               player.mute();
@@ -556,7 +574,13 @@ $(function(){
               console.log('player is unmuted');
             },
             play: function(e){
-              player.playVideo();
+              if ( isiOS ) {
+                _.triggerHandler('onInteract');
+              }
+              else {
+                player.playVideo();
+              }
+
               console.log('player is played');
             },
             pause: function(e){

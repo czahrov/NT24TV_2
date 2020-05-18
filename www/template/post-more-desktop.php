@@ -10,9 +10,9 @@
   <?php
     foreach ( getPostMore() as $item ) {
       if ( DBG ) {
-        echo "<!--";
+        echo "<div id='more_dbg' style='display:none;'><!--";
         print_r( $item );
-        echo "-->";
+        echo "--></div>";
       }
       $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
       if ( !$img ) {

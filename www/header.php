@@ -70,7 +70,7 @@
   <?php wp_head(); ?>
 </head>
 
-<body class='<?php echo getDevType(); ?>'>
+<body class='<?php echo getDevType().' '.getOSType(); ?>'>
   <?php if (DBG): ?>
     <div id="_debug" class="">
       <div class="_server">

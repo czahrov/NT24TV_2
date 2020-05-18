@@ -108,7 +108,7 @@
         $data['height'],
         $data['controls'] == true?('controls'):(''),
         $data['muted'] == true?('muted'):(''),
-        $data['autoplay'] == true?('autoplay'):(''),
+        $data['autoplay'] == true?('autoplay playsinline'):(''),
         wp_get_attachment_url( $media->ID ),
         $media->post_mime_type
       );

@@ -679,7 +679,7 @@
     return $ret;
   }
 
-  // wykrywanie urządzenia
+  // wykrywanie rodzaju urządzenia ( smartphone, tablet, desktop )
   function getDevType( $echo = false ){
     static $devType = null;
 
@@ -710,6 +710,35 @@
     }
     else {
       return $devType;
+    }
+
+  }
+
+  // wykrywanie rodzaju systemu ( Android, iOS )
+  function getOSType( $echo = false ){
+    static $osType = null;
+
+    if ( !class_exists('Mobile_Detect') ) {
+      include_once( get_template_directory() . '/php/Mobile_Detect.php' );
+    }
+
+    if ( $osType == null ) {
+      $detect = new Mobile_Detect();
+
+      if ( $detect->isiOS() ) {
+        $osType = 'ios';
+      }
+      elseif( $detect->isAndroidOS() ){
+        $osType = 'androidos';
+      }
+
+    }
+
+    if ( $echo ) {
+      echo $osType;
+    }
+    else {
+      return $osType;
     }
 
   }

@@ -151,7 +151,7 @@
         <span class="circle"></span>
         <span class="circle"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse <?php echo getDevType(); ?>" id="navbarResponsive">
         <ul class="navbar-nav mr-auto bg-white">
           <?php
             $limit = 11;

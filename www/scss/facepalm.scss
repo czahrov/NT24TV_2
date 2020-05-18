@@ -514,7 +514,137 @@ iframe.wp-embedded-content{
 }
 
 nav.navbar{
+  position: relative;
   z-index: 10002;
+
+  #navbarResponsive{
+
+    ul.navbar-nav{
+
+      li.nav-item{
+        background-color: #fff;
+
+        @media( max-width: map-get($break,'xl') - 1px ){
+
+          &.marker{
+            background-color: map-get($color,'red');
+            color: map-get($color,'white');
+
+          }
+
+        }
+
+        @media( min-width: map-get($break,'xl') ){
+
+          a.nav-link{
+            position: relative;
+
+            &::before{
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              height: 2px;
+              background-color: transparent;
+              transition: .3s ease;
+
+            }
+
+          }
+
+          &.marker{
+
+            a.nav-link{
+
+              &::before{
+                background-color: map-get($color,'red');
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      li.more{
+        position: relative;
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+
+        .dots{
+          font-size: 40px;
+          line-height: 1px;
+          cursor: pointer;
+        }
+
+        & > ul{
+          list-style-type: none;
+        }
+
+        @media( max-width: 1199px){
+
+          & > ul{
+            width: 100%;
+          }
+
+          .dots{
+            display: none;
+          }
+
+        }
+
+        @media( min-width: 1200px){
+
+          & > ul{
+            position: absolute;
+            top: 100%;
+            right: 0;
+            box-shadow: 5px 5px 10px 0px #000;
+
+            li.nav-item{
+              padding: 5px 10px;
+
+              .nav-link{
+                padding: {
+                  left: 10px;
+                  right: 10px;
+                };
+                text-align: right;
+              }
+
+            }
+
+          }
+
+          &:not(:hover){
+
+            & > ul{
+              display: none;
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+    @media(max-width: 1199px){
+
+      position: absolute;
+      top: 100%;
+      left: 0px;
+      right: 0px;
+      z-index: 1000;
+    }
+
+  }
+
 }
 
 #video{
@@ -629,125 +759,6 @@ nav.navbar{
       }
 
       &.slick-center{
-
-      }
-
-    }
-
-  }
-
-}
-
-#navbarResponsive{
-
-  ul.navbar-nav{
-
-    li.nav-item{
-      background-color: #fff;
-
-      @media( max-width: map-get($break,'xl') - 1px ){
-
-        &.marker{
-          background-color: map-get($color,'red');
-          color: map-get($color,'white');
-
-        }
-
-      }
-
-      @media( min-width: map-get($break,'xl') ){
-
-        a.nav-link{
-          position: relative;
-
-          &::before{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background-color: transparent;
-            transition: .3s ease;
-
-          }
-
-        }
-
-        &.marker{
-
-          a.nav-link{
-
-            &::before{
-              background-color: map-get($color,'red');
-            }
-
-          }
-
-        }
-
-      }
-
-    }
-
-    li.more{
-      position: relative;
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-
-      .dots{
-        font-size: 40px;
-        line-height: 1px;
-        cursor: pointer;
-      }
-
-      & > ul{
-        list-style-type: none;
-      }
-
-      @media( max-width: 1199px){
-
-        & > ul{
-          width: 100%;
-        }
-
-        .dots{
-          display: none;
-        }
-
-      }
-
-      @media( min-width: 1200px){
-
-        & > ul{
-          position: absolute;
-          top: 100%;
-          right: 0;
-          box-shadow: 5px 5px 10px 0px #000;
-
-          li.nav-item{
-            padding: 5px 10px;
-
-            .nav-link{
-              padding: {
-                left: 10px;
-                right: 10px;
-              };
-              text-align: right;
-            }
-
-          }
-
-        }
-
-        &:not(:hover){
-
-          & > ul{
-            display: none;
-          }
-
-        }
 
       }
 
@@ -1091,6 +1102,18 @@ nav.navbar{
 
       .big-post{
 
+      }
+
+    }
+
+  }
+
+  &.desktop{
+
+    .link_post{
+
+      &.big{
+        margin: 0 0 30px;
       }
 
     }

@@ -729,7 +729,94 @@ iframe.wp-embedded-content {
 }
 
 nav.navbar {
+  position: relative;
   z-index: 10002;
+}
+
+nav.navbar #navbarResponsive ul.navbar-nav li.nav-item {
+  background-color: #fff;
+}
+
+@media (max-width: 1199px) {
+  nav.navbar #navbarResponsive ul.navbar-nav li.nav-item.marker {
+    background-color: #e3000f;
+    color: #fff;
+  }
+}
+
+@media (min-width: 1200px) {
+  nav.navbar #navbarResponsive ul.navbar-nav li.nav-item a.nav-link {
+    position: relative;
+  }
+  nav.navbar #navbarResponsive ul.navbar-nav li.nav-item a.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: transparent;
+    transition: .3s ease;
+  }
+  nav.navbar #navbarResponsive ul.navbar-nav li.nav-item.marker a.nav-link::before {
+    background-color: #e3000f;
+  }
+}
+
+nav.navbar #navbarResponsive ul.navbar-nav li.more {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+nav.navbar #navbarResponsive ul.navbar-nav li.more .dots {
+  font-size: 40px;
+  line-height: 1px;
+  cursor: pointer;
+}
+
+nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
+  list-style-type: none;
+}
+
+@media (max-width: 1199px) {
+  nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
+    width: 100%;
+  }
+  nav.navbar #navbarResponsive ul.navbar-nav li.more .dots {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    box-shadow: 5px 5px 10px 0px #000;
+  }
+  nav.navbar #navbarResponsive ul.navbar-nav li.more > ul li.nav-item {
+    padding: 5px 10px;
+  }
+  nav.navbar #navbarResponsive ul.navbar-nav li.more > ul li.nav-item .nav-link {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: right;
+  }
+  nav.navbar #navbarResponsive ul.navbar-nav li.more:not(:hover) > ul {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  nav.navbar #navbarResponsive {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    right: 0px;
+    z-index: 1000;
+  }
 }
 
 #video {
@@ -835,82 +922,6 @@ nav.navbar {
 
 #pilne .items .item .separator {
   padding: 0 10px;
-}
-
-#navbarResponsive ul.navbar-nav li.nav-item {
-  background-color: #fff;
-}
-
-@media (max-width: 1199px) {
-  #navbarResponsive ul.navbar-nav li.nav-item.marker {
-    background-color: #e3000f;
-    color: #fff;
-  }
-}
-
-@media (min-width: 1200px) {
-  #navbarResponsive ul.navbar-nav li.nav-item a.nav-link {
-    position: relative;
-  }
-  #navbarResponsive ul.navbar-nav li.nav-item a.nav-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: transparent;
-    transition: .3s ease;
-  }
-  #navbarResponsive ul.navbar-nav li.nav-item.marker a.nav-link::before {
-    background-color: #e3000f;
-  }
-}
-
-#navbarResponsive ul.navbar-nav li.more {
-  position: relative;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-}
-
-#navbarResponsive ul.navbar-nav li.more .dots {
-  font-size: 40px;
-  line-height: 1px;
-  cursor: pointer;
-}
-
-#navbarResponsive ul.navbar-nav li.more > ul {
-  list-style-type: none;
-}
-
-@media (max-width: 1199px) {
-  #navbarResponsive ul.navbar-nav li.more > ul {
-    width: 100%;
-  }
-  #navbarResponsive ul.navbar-nav li.more .dots {
-    display: none;
-  }
-}
-
-@media (min-width: 1200px) {
-  #navbarResponsive ul.navbar-nav li.more > ul {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    box-shadow: 5px 5px 10px 0px #000;
-  }
-  #navbarResponsive ul.navbar-nav li.more > ul li.nav-item {
-    padding: 5px 10px;
-  }
-  #navbarResponsive ul.navbar-nav li.more > ul li.nav-item .nav-link {
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: right;
-  }
-  #navbarResponsive ul.navbar-nav li.more:not(:hover) > ul {
-    display: none;
-  }
 }
 
 #btn_more {
@@ -1119,6 +1130,10 @@ nav.navbar {
 
 #category .link_post.big {
   margin: 0;
+}
+
+#category.desktop .link_post.big {
+  margin: 0 0 30px;
 }
 
 [id^="UGallery_"] {

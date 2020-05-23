@@ -25,7 +25,7 @@
               if( $typ === 'ipcamlive' ):
                 $alias = get_post_meta( $item->ID, 'alias', true );
                 ?>
-                <div class='item col-12 col-md-6 col-xl-4 d-flex flex-column'>
+                <div class='item col-12 d-flex flex-column'>
                   <div class="iframe_wrapper">
                     <iframe class='' src="//ipcamlive.com/player/player.php?alias=<?php echo $alias; ?>" frameborder="0" allowfullscreen></iframe>
                   </div>

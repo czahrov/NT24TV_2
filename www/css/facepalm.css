@@ -1373,6 +1373,10 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
   top: 50px;
 }
 
+#page #kamery .item {
+  margin-bottom: 30px;
+}
+
 #page #kamery .item .iframe_wrapper {
   position: relative;
   padding-bottom: 56.25%;

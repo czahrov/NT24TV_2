@@ -120,6 +120,7 @@
           </div>
         <form class="search-bar" method="get" action="<?php echo home_url('szukaj'); ?>">
           <div class="input-group">
+            <input class="hitbox" type="submit" name="" value="">
             <input class="form-control" type="text" name="q" pattern="(?=.*\S).{3,}" title="Szukana fraza musi składać się z co najmniej 4 znaków alfanumerycznych" placeholder="Szukaj w portalu Nowy Targ 24 TV ..." required>
           </div>
         </form>

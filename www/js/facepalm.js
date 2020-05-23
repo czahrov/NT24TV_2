@@ -574,11 +574,10 @@ $(function(){
               console.log('player is unmuted');
             },
             play: function(e){
+              player.playVideo();
+
               if ( isiOS ) {
                 _.triggerHandler('onInteract');
-              }
-              else {
-                player.playVideo();
               }
 
               console.log('player is played');

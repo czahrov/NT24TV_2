@@ -1574,6 +1574,7 @@ nav.navbar{
 
     .search-bar{
       width: 90vw;
+
     }
 
   }
@@ -1589,6 +1590,38 @@ nav.navbar{
 
   @media( min-width: map-get( $break, 'xl' ) + 1px ){
     display: none !important;
+  }
+
+}
+
+form.search-bar{
+
+  .input-group{
+
+    .hitbox{
+      position: absolute;
+      padding: 0;
+      top: 6px;
+      left: 14px;
+      width: 30px;
+      height: 30px;
+      z-index: 10;
+      cursor: pointer;
+      background:{
+        image: url(../images/search.svg);
+        position: center;
+        size: auto;
+        repeat: no-repeat;
+        color: transparent;
+      };
+      border: none;
+      outline: none;
+    }
+
+    .form-control{
+      border-radius: 50px;
+    }
+
   }
 
 }

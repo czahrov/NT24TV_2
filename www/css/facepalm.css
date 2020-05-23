@@ -1492,4 +1492,26 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
   }
 }
 
+form.search-bar .input-group .hitbox {
+  position: absolute;
+  padding: 0;
+  top: 6px;
+  left: 14px;
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+  cursor: pointer;
+  background-image: url(../images/search.svg);
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+form.search-bar .input-group .form-control {
+  border-radius: 50px;
+}
+
 /*# sourceMappingURL=facepalm.css.map */

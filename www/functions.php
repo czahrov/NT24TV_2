@@ -856,9 +856,11 @@
     }
 
     global $fp;
+    $img = get_the_post_thumbnail_url( $item->ID, 'large' );
+    $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
     $data = array_merge( array(
       'title'   => $item->post_title,
-      'img'     => '',
+      'img'     => $img !== false?( $img ):( $thumb ),
       'url'     => get_permalink( $item->ID ),
       'format'  => get_post_format( $item ),
       'class'   => '',
@@ -866,7 +868,7 @@
 
     switch ( $type ) {
       case 'large':
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
           '<div class="col-sm-12 col-12 col-lg-6 col-md-6 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
@@ -908,7 +910,7 @@
           );
         }
         else{
-          $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+          // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
           printf(
             '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
               <div class="big-post">
@@ -946,7 +948,7 @@
           );
         }
         else{
-          $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
+          // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
           printf(
             '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
               <div class="big-post">
@@ -966,7 +968,7 @@
         break;
       case 'mid':
         $data['title'] .= " " . printTags( $item->ID, true, true );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
           '<div class="col-6 col-md-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
@@ -987,7 +989,7 @@
         break;
       case 'mid-special':
         $data['title'] .= " " . printTags( $item->ID, true, false );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
           '<div class="col-6 col-md-4 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
@@ -1008,7 +1010,7 @@
         break;
       case 'side':
         $data['title'] .= " " . printTags( $item->ID, true, true );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
           '<a class="%s" href="%s" data-post-type="%s">
             <li>
@@ -1027,7 +1029,7 @@
         break;
       case 'side-special':
         $data['title'] .= " " . printTags( $item->ID, true, false );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
           '<a class="%s" href="%s" data-post-type="%s">
             <li>
@@ -1045,7 +1047,7 @@
         );
         break;
       case 'side-big':
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
           '<a href="%s" class="single %s" title="%s" data-post-type="%s">
             <div class="image-container">
@@ -1066,7 +1068,7 @@
         break;
       case 'slider':
         $data['title'] .= " " . printTags( $item->ID, true, true );
-        $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
+        // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
           '<div class="slide-content %s">
             <a href="%s" class="link_post_small" data-post-type="%s">

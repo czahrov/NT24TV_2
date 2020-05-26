@@ -23,7 +23,7 @@
 <!-- Page Content -->
 <div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container">
     <?php if (DBG): ?>
-      <div class="_posts">
+      <div class="debug _posts">
         <!--
           <?php print_r( $posts ); ?>
         -->

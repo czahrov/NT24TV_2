@@ -29,7 +29,7 @@
                   <div class="iframe_wrapper">
                     <iframe class='' src="//ipcamlive.com/player/player.php?alias=<?php echo $alias; ?>" frameborder="0" allowfullscreen></iframe>
                   </div>
-                  <div class='title text-center d-flex align-items-center'>
+                  <div class='title padding text-center d-flex align-items-center'>
                     <div class='icon fa fa-play-circle'></div>
                     <div class='text fw-bold'><?php echo $title; ?></div>
 

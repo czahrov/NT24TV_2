@@ -138,18 +138,14 @@ $(function(){
   );
 
   // generowanie galerii unitegallery
-  $('[id^="UGallery_"]').each(function(){
-    $(this)
-    .unitegallery({
-      gallery_theme: "tiles",
-      tiles_type: "justified",
-      // gallery_width: '100%',
-			// tiles_type: "nested",
-      lightbox_type: 'compact',
-      tile_overlay_color: '#e3000f',
-      tiles_col_width: 150,
-    });
-
+  $('#UGallery').unitegallery({
+    gallery_theme: "tiles",
+    tiles_type: "justified",
+    // gallery_width: '100%',
+    // tiles_type: "nested",
+    lightbox_type: 'compact',
+    tile_overlay_color: '#e3000f',
+    tiles_col_width: 150,
   });
 
   // generowanie galerii slick
@@ -536,6 +532,7 @@ $(function(){
               rel: 0,
               origin: window.location.origin,
               enablejsapi: 1,
+              playsinline: 1,
             },
             events:{
               onReady: function(e){
@@ -707,6 +704,74 @@ $(function(){
     $('#pilne'),
     $('#pilne .items'),
     $('#pilne .items .item')
+  );
+
+  // popup
+  (function(popup, box, view, controls){
+    let popup_show_TL = new TimelineMax({
+      paused: true,
+      onStart: function(e){
+        popup.show();
+      },
+      onReverseComplete: function(e){
+        popup.hide();
+      },
+    })
+    .add(
+      TweenMax.fromTo(
+        popup,
+        .5,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+        }
+      ),
+      0
+    )
+    .add(
+      TweenMax.fromTo(
+        box,
+        1,
+        {
+          opacity: 0,
+          scale: 0.5,
+          xPercent: -50,
+          yPercent: -50,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+        }
+      ),
+      '+=0',
+      'sequence'
+    )
+    .totalDuration(.5);
+
+    popup.on({
+      open: function(e,url){
+        popup_show_TL.play();
+        if( typeof url !== 'undefined' ){
+          view.empty().append('<iframe src="'+url+'"></iframe>');
+        }
+      },
+      close: function(e){
+        popup_show_TL.reverse();
+      },
+
+    });
+
+    controls.children('.exit').click((e)=>{
+      popup.triggerHandler('close');
+    });
+
+  })(
+    $('#popup'),
+    $('#popup .box'),
+    $('#popup .box .view'),
+    $('#popup .box .controls')
   );
 
 });

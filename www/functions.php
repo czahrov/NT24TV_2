@@ -28,41 +28,60 @@
     return $arg;
   } );
 
-  // modyfikacja standardowej galerii wp
+  // zastępowanie standardowych galerii WP oraz starych importowanych galerii galerią UGallery
   add_filter( 'the_content', function( $content ){
     global $fp;
+    // tablica numerów ID zdjęć
+    $images_ids = array();
+    // tablica adres url grafik, zarówno miniatur 'thumb' jak i pełnych grafik 'full'
+    $images_url = array();
 
     // NOWY EDYTOR - podmiana segmentów
     preg_match_all( '~<\!\-\- wp:gallery.*?"ids":\[(.+?)\].*?/wp:gallery \-\->~ms', $content, $found );
     foreach ($found[1] as $k => $v) {
-      $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
+      // $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
+      $content = str_replace( $found[0][$k], '', $content );
+      $images_ids = array_merge( $images_ids, explode( ',', $v ) );
     }
 
     //STARY EDYTOR - podmiana segmentów
     preg_match_all( '~\[gallery.*?ids="(.+?)".*?\]~', $content, $found );
     foreach ($found[1] as $k => $v) {
-      $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
+      // $content = str_replace( $found[0][$k], printGallery( explode( ',', $v ), false ), $content );
+      $content = str_replace( $found[0][$k], '', $content );
+      $images_ids = array_merge( $images_ids, explode( ',', $v ) );
     }
-
-    // stare galerie importowane z joomli
-    $old_gallery_path = get_field( 'gallery_name' );
-    if ( $old_gallery_path !== false ) {
-      $content .= $fp->printOldUGallery( fetch_old_gallery( $old_gallery_path ) );
-    }
-
-    return $content;
-  }, 8 );
-
-  // modyfikacja galerii filebird
-  add_filter( 'the_content', function( $content ){
-    global $fp;
 
     // NOWY EDYTOR - podmiana segmentów
     preg_match_all( '~<\!\-\- wp:filebird/block\-filebird\-gallery.+?/wp:filebird/block\-filebird\-gallery \-\->~ms', $content, $found );
     foreach ($found[0] as $k => $v) {
       preg_match_all( '~"id":(\d+)~', $v, $ids );
-      $content = str_replace( $v, printGallery( $ids[1], false ), $content );
+      // $content = str_replace( $v, printGallery( $ids[1], false ), $content );
+      $content = str_replace( $v, '', $content );
+      $images_ids = array_merge( $images_ids, $ids[1] );
     }
+
+    // stare galerie importowane z joomli
+    $old_gallery_path = get_field( 'gallery_name' );
+    if ( $old_gallery_path !== false ) {
+      // $content .= $fp->printOldUGallery( fetch_old_gallery( $old_gallery_path ) );
+      foreach ( fetch_old_gallery( $old_gallery_path ) as $img_url ) {
+        $images_url[] = array(
+          'thumb' => $img_url,
+          'full' => $img_url,
+        );
+      }
+    }
+
+    // wypełnianie tablicy z adresami url grafik
+    foreach ( $images_ids as $id ) {
+      $images_url[] = array(
+        'thumb' => wp_get_attachment_image_url( $id, 'thumbnail' ),
+        'full' => wp_get_attachment_image_url( $id, 'full' ),
+      );
+    }
+
+    $content .= $fp->printUGalleryFromArray( $images_url, false );
 
     return $content;
   }, 8 );
@@ -822,7 +841,8 @@
 
   // zwraca liczbę wyświetleń dla danego wpisu
   function getPostViews( $post_id = null, $pattern = "Stronę wyświetlono %u razy" ){
-    if ( get_field( 'prezentacja', get_page_by_title( 'Home' )->ID ) == 1 ) {
+    // Home page, ID:40
+    if ( get_field( 'prezentacja', 40 ) == 1 ) {
       $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
 
       if( !$con ) return $ret;
@@ -916,7 +936,9 @@
               <div class="big-post">
                 <div class="cover_img"></div>
                 <div class="post_news_big" style="background-image:url(%s)">
-                  <span> %s </span>
+                  <div class="content">
+                    <span> %s </span>
+                  </div>
                 </div>
               </div>
             </a>',
@@ -954,7 +976,9 @@
               <div class="big-post">
                 <div class="cover_img"></div>
                 <div class="post_news_big" style="background-image:url(%s)">
-                  <span> %s </span>
+                  <div class="content">
+                    <span> %s </span>
+                  </div>
                 </div>
               </div>
             </a>',
@@ -976,7 +1000,9 @@
                 <div class="post_news_small">
                   <div class="cover_img" style="background-image:url(%s)"></div>
                 </div>
-                <span>%s</span>
+                <div class="content">
+                  <span> %s </span>
+                </div>
               </div>
             </a>
           </div>',
@@ -997,7 +1023,9 @@
                 <div class="post_news_small">
                   <div class="cover_img" style="background-image:url(%s)"></div>
                 </div>
-                <span>%s</span>
+                <div class="content">
+                  <span> %s </span>
+                </div>
               </div>
             </a>
           </div>',

@@ -309,12 +309,7 @@ section.head-menu .head-items .weather ul li a {
 
 .link_post .big-post {
   width: 100%;
-  height: 61.8vw;
-  max-height: 31rem;
-  max-height: 22rem;
-  background: #000;
   position: relative;
-  overflow: hidden;
 }
 
 .link_post .big-post .video-icon {
@@ -380,12 +375,6 @@ section.head-menu .head-items .weather ul li a {
   background-color: #e3000f;
   text-transform: uppercase;
   border-radius: 2px;
-}
-
-@media (min-width: 768px) {
-  .link_post .big-post {
-    height: 40vw;
-  }
 }
 
 .link_post:hover .big-post {
@@ -1219,7 +1208,7 @@ footer.bg-footer .copy .copy-content {
     padding: 1rem 2rem;
   }
   .logo img {
-    max-width: 10rem;
+    max-width: 15rem;
     margin-right: auto;
     padding-left: 1rem;
   }
@@ -1678,7 +1667,7 @@ footer.bg-footer .copy .copy-content {
     padding: 1rem 2rem;
   }
   .logo img {
-    max-width: 10rem;
+    max-width: 20rem;
     margin-right: auto;
     padding-left: 1rem;
   }

@@ -262,3 +262,15 @@
       <div class="box"> </div>
     </div>
   <?php endif; ?>
+  <div id="popup" class="">
+    <div class="box">
+      <div class="controls">
+        <div class="exit">
+          <img src="<?php echo get_template_directory_uri(); ?>/images/close.svg" alt="">
+        </div>
+      </div>
+      <div class="view">
+        
+      </div>
+    </div>
+  </div>

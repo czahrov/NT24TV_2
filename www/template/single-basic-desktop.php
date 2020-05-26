@@ -11,6 +11,7 @@
         <div class="author_date_tags">
           <?php
             $segments = array(
+              get_the_date().' '.get_the_time(),
               printImportant( get_the_id(), false ),
               printFresh( get_the_id(), false ),
               printHot( get_the_id(), false ),
@@ -70,6 +71,13 @@
             $fp->embed_video_for_post( get_post() );
           ?>
         <?php endif; ?>
+        <div class="zajawka">
+          <?php
+            $excerpt =  get_the_excerpt( get_post() );
+            $lead =  get_field('lead');
+            echo empty( $lead )?( $excerpt ):( $lead );
+          ?>
+        </div>
         <?php
         if( empty( $yt ) ){
           $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
@@ -85,13 +93,6 @@
           }
         }
         ?>
-        <div class="zajawka">
-          <?php
-            $excerpt =  get_the_excerpt( get_post() );
-            $lead =  get_field('lead');
-            echo empty( $lead )?( $excerpt ):( $lead );
-          ?>
-        </div>
         <?php the_content(); ?>
 
       </div>

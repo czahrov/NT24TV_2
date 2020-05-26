@@ -2,12 +2,8 @@
 <?php get_header(); ?>
 <?php
   global $fp;
-  // $fp->embed_video_for_post( 108188 );
-  // $fp->embed_video_for_post( 108463 );
-  // var_dump( get_category_by_slug('koronawirus')->term_id );
-  // var_dump( get_category_by_slug('koronawirus')->cat_ID );
-  // var_dump( get_field( 'front', get_category_by_slug('koronawirus')->term_id ) );
-  $catSlug = 'koronawirus';
-  var_dump( get_term_meta( get_category_by_slug( $catSlug )->cat_ID, 'front', true ) );
+  var_dump( get_page_by_title('Home') );
+  var_dump( get_post(40) );
+  var_dump( get_field( 'prezentacja', get_post( 40 )->ID ) );
 ?>
 <?php get_footer(); ?>

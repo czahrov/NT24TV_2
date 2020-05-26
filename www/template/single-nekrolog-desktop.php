@@ -9,6 +9,7 @@
         <div class="author_date_tags">
           <?php
             $segments = array(
+              get_the_date().' '.get_the_time(),
               printImportant( get_the_id(), false ),
               printFresh( get_the_id(), false ),
               printHot( get_the_id(), false ),
@@ -62,38 +63,35 @@
       </div>
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
+        <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
+          <?php
+            // echo $fp->genYoutubeVideo( $yt );
+            $fp->embed_video_for_post( get_post() );
+          ?>
+        <?php endif; ?>
         <div class="zajawka">
           <?php
-            // the_excerpt();
-            echo get_field('lead');
+            $excerpt =  get_the_excerpt( get_post() );
+            $lead =  get_field('lead');
+            echo empty( $lead )?( $excerpt ):( $lead );
           ?>
         </div>
-        <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-          <div class="video">
-            <?php $fp->genYoutubeVideo( $yt ); ?>
-          </div>
-        <?php endif; ?>
         <?php
-          $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-          $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-        ?>
-        <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
+          if( empty( $yt ) ){
+            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+            $img = $thumb !== false?( $thumb ):( $thumb_alt );
 
-        <?php
-          the_content();
+            if ( $img !== false ) {
+              printf(
+                '<img class="img-fluid" src="%s" alt="%s"/>',
+                $img,
+                $post->post_title
+              );
+            }
+          }
         ?>
-      </div>
-      <div class="after_content d-flex align-items-center">
-        <span class="author fw-bold">
-          <?php
-            // echo apply_filters( 'custom_author', get_the_author() );
-            echo get_the_author_meta('display_name');
-          ?>
-        </span>
-        <span class='separator'></span>
-        <span class='date'>
-          <?php echo get_the_date("d.m.Y"); ?>
-        </span>
+        <?php the_content(); ?>
       </div>
       <!-- /content -->
     </div>

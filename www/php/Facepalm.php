@@ -142,6 +142,34 @@
       }
     }
 
+    public function printUGalleryFromArray( $imgs = array(), $echo = true ){
+      $ret = "<div id='UGallery' style='display:none'>";
+
+      foreach ( $imgs as $img ) {
+        // $title = get_the_title( (int)$img_id );
+        $title = basename( $img['full'] );
+        // $img_full = wp_get_attachment_image_url( (int)$img_id, 'full' );
+        // $img_thumb = wp_get_attachment_image_url( (int)$img_id, 'thumbnail' );
+
+        $ret .= sprintf(
+          '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" data-no-lazy="1"/>',
+          $title,
+          $img['thumb'],
+          $img['full']
+        );
+
+      }
+
+      $ret .= "</div>";
+      $num++;
+      if ( $echo ) {
+        echo $ret;
+      }
+      else{
+        return $ret;
+      }
+    }
+
     public function printOldUGallery( $files = array(), $echo = true ){
       static $num = 1;
       $ret = "<div id='UGallery_old{$num}' style='display:none'>";
@@ -329,12 +357,13 @@
         }
 
         $output = sprintf(
-          '<div id="video" class="%s">
+          '<div id="video" class="%s %s">
             %s
             <div class="overlay fw-bold fc-white">
-              <img src="%s/images/mute.svg"/> Wyłącz wyciszenie
+              <img src="%s/images/mute.svg"/> Włącz dźwięk
             </div>
           </div>',
+          $video_type_name,
           $options['mute'] == 1?('mute'):(''),
           $player_html,
           get_template_directory_uri()

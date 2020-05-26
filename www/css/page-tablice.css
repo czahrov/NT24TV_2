@@ -1,0 +1,135 @@
+#tablice h1 {
+  color: #141c1f;
+  font-family: "open_sansbold";
+  padding: 1.5rem 0 1.5rem 20px;
+  position: relative;
+  margin: 0;
+}
+
+#tablice h1::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  background-color: #e3000f;
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  transform: translate(0, -50%);
+}
+
+#tablice .section_title {
+  margin-top: 1.5rem;
+}
+
+#tablice .tablice-header {
+  padding: 0 15px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+#tablice .tablice-claim h1 {
+  background-color: #f6f6f6;
+  font-size: 12px;
+  color: #000;
+  padding: 24px 30px;
+  text-transform: uppercase;
+}
+
+#tablice .tablice-kontakt span {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+#tablice .tablice-kontakt p {
+  font-size: 26px;
+}
+
+#tablice .tablice-kontent {
+  margin-top: 33px;
+}
+
+#tablice .thumbs-rating-container {
+  display: none;
+}
+
+#tablice .tablice-alert {
+  margin-top: 33px;
+  margin-bottom: 33px;
+}
+
+#tablice .tablice-alert p {
+  background: #f6f6f6;
+  padding: 15px 30px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+#tablice a.tablice-link {
+  text-decoration: underline;
+  color: #173e6d;
+}
+
+#tablice .tablice-tabela h3 {
+  margin-bottom: 25px;
+}
+
+#tablice .tablice-tabela table {
+  width: 100% !important;
+}
+
+#tablice .tablice-tabela table td {
+  padding: 15px 0 15px 15px;
+  text-align: left !important;
+}
+
+#tablice .tablice-tabela table tr:first-child td {
+  color: #173e6d;
+  font-weight: 600;
+}
+
+#tablice .tablice-tabela table tr:first-child {
+  background-color: #fff;
+}
+
+#tablice .tablice-tabela table tr:nth-child(2),
+#tablice .tablice-tabela table tr:nth-of-type(2) {
+  background-color: #f4f4f4;
+}
+
+#tablice .tablice-tabela table tr:nth-child(3),
+#tablice .tablice-tabela table tr:nth-of-type(3) {
+  background-color: #fff;
+}
+
+#tablice .tablice-tabela table tr:nth-child(4),
+#tablice .tablice-tabela table tr:nth-of-type(4) {
+  background-color: #f4f4f4;
+}
+
+#tablice .tablice-tabela table tr:nth-child(5),
+#tablice .tablice-tabela table tr:nth-of-type(5) {
+  background-color: #fff;
+}
+
+#tablice .tablice-tabela table tr:nth-child(6),
+#tablice .tablice-tabela table tr:nth-of-type(6) {
+  background-color: #f4f4f4;
+}
+
+#tablice .tablice-tabela table tr:nth-child(7),
+#tablice .tablice-tabela table tr:nth-of-type(7) {
+  background-color: #fff;
+}
+
+#tablice .tablice-tabela table tr:nth-child(8),
+#tablice .tablice-tabela table tr:nth-of-type(8) {
+  background-color: #f4f4f4;
+}
+
+#tablice .tablice-tabela table tr:nth-child(9),
+#tablice .tablice-tabela table tr:nth-of-type(9) {
+  background-color: #fff;
+}
+
+/*# sourceMappingURL=page-tablice.css.map */

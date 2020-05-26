@@ -9,7 +9,7 @@
         <div class="author_date_tags">
           <?php
           $segments = array(
-            "<span class='date'>".get_the_date("d.m.Y")."</span>",
+            "<span class='date'>".get_the_date().' '.get_the_time()."</span>",
             printImportant( get_the_id(), false ),
             printFresh( get_the_id(), false ),
             printHot( get_the_id(), false ),
@@ -68,23 +68,33 @@
       <!-- /before content -->
       <div class="content main padding no-padding-xl">
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
-          <div class="video">
-            <?php $fp->genYoutubeVideo( $yt ); ?>
-          </div>
-        <?php endif; ?>
-        <?php
-          if( empty( $yt ) ):
-            $img = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-            $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-        ?>
-          <img class="img-fluid" src="<?php echo $img !== false?( $img ):( $thumb ); ?>" alt="<?php echo $post->post_title; ?>">
+          <?php
+            // echo $fp->genYoutubeVideo( $yt );
+            $fp->embed_video_for_post( get_post() );
+          ?>
         <?php endif; ?>
         <div class="zajawka">
-        <?php
-        // the_excerpt();
-        echo get_field('lead');
-        ?>
+          <?php
+            $excerpt =  get_the_excerpt( get_post() );
+            $lead =  get_field('lead');
+            echo empty( $lead )?( $excerpt ):( $lead );
+          ?>
         </div>
+        <?php
+          if( empty( $yt ) ){
+            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+            $img = $thumb !== false?( $thumb ):( $thumb_alt );
+
+            if ( $img !== false ) {
+              printf(
+                '<img class="img-fluid" src="%s" alt="%s"/>',
+                $img,
+                $post->post_title
+              );
+            }
+          }
+        ?>
         <?php the_content(); ?>
       </div>
       <div class="after_content d-flex align-items-center">

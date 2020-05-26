@@ -1,6 +1,6 @@
 <?php
   $items = get_posts(array(
-    'numberposts'   => 14,
+    'numberposts'   => 17,
     'category_name' => 'aktualnosci',
     'orderby'       => 'date',
     'order'         => 'DESC'

@@ -31,7 +31,7 @@
             ),
             'cookies' => '',
           ),
-          'comment_notes_before'  => 'Komentarze muszą najpierw zostać zaakceptowane przez administratora. Twój adres e-mail nie zostani opublikowany.',
+          'comment_notes_before'  => 'Komentarze muszą najpierw zostać zaakceptowane przez administratora. Redakcja nowytarg24.tv http://nowytarg24.tv nie odpowiada za treść komentarzy internautów.',
           'comment_field' => '<p class="comment-form-comment">
               <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required" placeholder="Napisz komentarz"></textarea>
             </p>',

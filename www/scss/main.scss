@@ -1270,7 +1270,8 @@ footer.bg-footer {
     margin-top: -1px;
 
     & a {
-      max-width: 100%;
+      margin: 10px auto;
+      max-width: 200px;
       width: 100%;
     }
 
@@ -1594,7 +1595,8 @@ footer.bg-footer {
     margin-top: -1px;
 
     & a {
-      max-width: 100%;
+      margin: 10px auto;
+      max-width: 400px;
       width: 100%;
     }
 
@@ -1921,7 +1923,8 @@ footer.bg-footer {
     margin-top: 20px;
 
     & a {
-      max-width: 100%;
+      margin: 10px auto;
+      max-width: 400px;
       width: 100%;
     }
 
@@ -2187,7 +2190,10 @@ footer.bg-footer {
     & .foot-content {
       & .logo_menu {
         display: block;
+        display: inline-block;
         text-align: center;
+        width: 49%;
+        vertical-align: middle;
 
         & ul {
           & li {
@@ -2199,8 +2205,11 @@ footer.bg-footer {
       }
 
       & .contact-info {
-        text-align: center;
         display: block;
+        display: inline-block;
+        text-align: center;
+        width: 49%;
+        vertical-align: middle;
 
         & span {
           margin-right: 0;

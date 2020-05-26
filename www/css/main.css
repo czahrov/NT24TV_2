@@ -1103,7 +1103,8 @@ footer.bg-footer .copy .copy-content {
     margin-top: -1px;
   }
   .button-line a {
-    max-width: 100%;
+    margin: 10px auto;
+    max-width: 200px;
     width: 100%;
   }
   .button-line:before {
@@ -1331,7 +1332,8 @@ footer.bg-footer .copy .copy-content {
     margin-top: -1px;
   }
   .button-line a {
-    max-width: 100%;
+    margin: 10px auto;
+    max-width: 400px;
     width: 100%;
   }
   .button-line:before {
@@ -1562,7 +1564,8 @@ footer.bg-footer .copy .copy-content {
     margin-top: 20px;
   }
   .button-line a {
-    max-width: 100%;
+    margin: 10px auto;
+    max-width: 400px;
     width: 100%;
   }
   .button-line:before {
@@ -1749,7 +1752,10 @@ footer.bg-footer .copy .copy-content {
   }
   footer.bg-footer .foot-content .logo_menu {
     display: block;
+    display: inline-block;
     text-align: center;
+    width: 49%;
+    vertical-align: middle;
   }
   footer.bg-footer .foot-content .logo_menu ul li {
     margin-left: 0;
@@ -1757,8 +1763,11 @@ footer.bg-footer .copy .copy-content {
     display: block;
   }
   footer.bg-footer .foot-content .contact-info {
-    text-align: center;
     display: block;
+    display: inline-block;
+    text-align: center;
+    width: 49%;
+    vertical-align: middle;
   }
   footer.bg-footer .foot-content .contact-info span {
     margin-right: 0;

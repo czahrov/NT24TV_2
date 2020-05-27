@@ -194,18 +194,32 @@ $(function(){
   (function( slider, items, arrows ){
     let settings = {
       infinite: true,
-      slidesToShow: 1,
+      slidesToShow: 3,
       dots: false,
       arrows: true,
       appendArrows: arrows,
       prevArrow: "<img class='arrow prev' src='wp-content/themes/NT24TV/images/arrow.svg'/ alt='poprzedni'>",
       nextArrow: "<img class='arrow next' src='wp-content/themes/NT24TV/images/arrow.svg' alt='następny'/>",
       swipeToSlide: true,
+      responsive: [
+        {
+          breakpoint: 960,
+          settings:{
+            slidesToShow: 2,
+          }
+        },
+        {
+          breakpoint: 720,
+          settings:{
+            slidesToShow: 1,
+          }
+        }
+      ],
     };
 
     $(window)
     .resize(function(){
-      if ( window.innerWidth < 768 ) {
+      if ( window.innerWidth < 1200 ) {
         if ( !slider.hasClass('slick-initialized' ) ) {
           // console.log('start');
           slider.slick(settings);

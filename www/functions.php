@@ -28,7 +28,7 @@
     return $arg;
   } );
 
-  // zastępowanie standardowych galerii WP oraz starych importowanych galerii galerią UGallery
+  // zastępowanie standardowych galerii WP, galerii FileBird oraz starych importowanych galerii galerią UGallery
   add_filter( 'the_content', function( $content ){
     global $fp;
     // tablica numerów ID zdjęć
@@ -76,7 +76,7 @@
     // wypełnianie tablicy z adresami url grafik
     foreach ( $images_ids as $id ) {
       $images_url[] = array(
-        'thumb' => wp_get_attachment_image_url( $id, 'thumbnail' ),
+        'thumb' => wp_get_attachment_image_url( $id, 'medium' ),
         'full' => wp_get_attachment_image_url( $id, 'full' ),
       );
     }
@@ -876,7 +876,7 @@
     }
 
     global $fp;
-    $img = get_the_post_thumbnail_url( $item->ID, 'large' );
+    $img = get_the_post_thumbnail_url( $item->ID, 'full' );
     $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
     $data = array_merge( array(
       'title'   => $item->post_title,
@@ -890,7 +890,7 @@
       case 'large':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<div class="col-sm-12 col-12 col-lg-6 col-md-6 %s">
+          '<div class="col-12 col-md-6 col-lg-4 col-xl-3 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post popular-post">
                 %s

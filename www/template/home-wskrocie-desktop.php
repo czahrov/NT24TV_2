@@ -1,6 +1,6 @@
 <!-- Page Content -->
 <div id='wskrocie' class="<?php echo getDevType(); ?> container">
-  <div class="row no-gutters">
+  <div class="row padding">
     <div class="col-md-12 col-lg-8">
       <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
         <h5 class="title-sidebar">Będzie się działo</h5>
@@ -19,7 +19,7 @@
           }
         ?>
       </div>
-      <div class="button-line slider-arrows">
+      <div class="button-line slider-arrows padding">
         <button class="prev slick-arrow">
           <img src="<?php echo get_template_directory_uri() . "/" ?>images/arrow.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/arrow.png'" alt="strzałka">
         </button>
@@ -54,7 +54,7 @@
             ?>
 
           </div>
-          <div class="button-line slider-arrows">
+          <div class="button-line slider-arrows padding">
             <button class="prev slick-arrow">
               <img src="<?php echo get_template_directory_uri() . "/" ?>images/arrow.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/arrow.png'" alt="strzałka">
             </button>
@@ -78,7 +78,7 @@
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
-    <div class="sidebar col-lg-4 col-md-12 sidebar-list">
+    <div class="sidebar col-lg-4 col-md-12 sidebar-list no-padding">
       <?php get_template_part("template/sidebar-urzedowe-desktop"); ?>
       <div class="clear-top"></div>
       <h5 class="title-sidebar">Filmy promocyjne</h5>

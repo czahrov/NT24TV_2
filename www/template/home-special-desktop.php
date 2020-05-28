@@ -17,7 +17,6 @@
     'meta_value'    => '1',
   ));
 ?>
-<!-- Page Content -->
 <div id='<?php echo $cat->slug; ?>' class="<?php echo getDevType(); ?> special container" style="background-color:<?php echo $meta['kolor'][0]; ?>">
   <a href="<?php echo get_category_link( $cat->term_id ); ?>">
     <h5 class="title-sidebar">
@@ -27,19 +26,19 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-lg-8">
-      <div class="row no-gutters">
+      <div class="row no-gutters padding">
         <!-- Big Post -->
         <?php
           if ( !empty( $items_pined ) ) {
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big-special', array( 'class' => 'padding' ) );
+          printPost( $items[0], 'big-special', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 1 ) as $item ){
-            printPost( $item, 'mid-special', array( 'class' => 'no-padding' ) );
+            printPost( $item, 'mid-special', array( 'class' => '' ) );
           }
         ?>
       </div>
@@ -47,7 +46,7 @@
     <!-- /col-8 -->
     <!-- Sidebar Column -->
     <div class="col-12 col-lg-4 sidebar-list">
-      <div class="position-sticky">
+      <div class="">
         <ul class="image-sidebar-section">
           <?php
             foreach ( array_slice( $items, 2 ) as $item) {
@@ -63,6 +62,7 @@
     <a href="<?php echo get_category_link( $cat->term_id ); ?>" class="">Zobacz więcej</a>
   </div>
 </div>
+<!-- Page Content -->
 <!-- reklama pozioma -->
 <?php echo printAd('h-l'); ?>
 <!-- <div class="reklama-full-page">

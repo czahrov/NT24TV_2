@@ -14,21 +14,21 @@
       <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>">
         <h5 class="title-sidebar">Sport</h5>
       </a>
-      <div class="row no-gutters">
+      <div class="row no-gutters padding">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => 'padding' ) );
+          printPost( $items[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 4 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => 'padding' ) );
+            printPost( $item, 'mid', array( 'class' => '' ) );
           }
         ?>
       </div>
       <!-- /row-->
       <div class="clear-top"></div>
-      <div class="button-line">
+      <div class="button-line padding">
         <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>" class="">Więcej Sportu</a>
       </div>
 
@@ -43,7 +43,7 @@
         </a>
         <?php
           $items = get_posts( array(
-            'numberposts'    => 12,
+            'numberposts'    => 18,
             'category_name'  => 'kultura'
           ) );
         ?>

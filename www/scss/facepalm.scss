@@ -353,6 +353,10 @@ iframe.wp-embedded-content{
 
 [id]{
 
+  .title-sidebar{
+    margin-left: 10px;
+  }
+
   .link_post{
 
     &.big{
@@ -377,30 +381,38 @@ iframe.wp-embedded-content{
 
   }
 
-  .sidebar-list ul a{
+  .sidebar-list{
 
-    li{
-      border: none;
-      // padding: 0.5rem 0;
-      padding: 0;
+    ul a{
 
-      .image-container{
-        margin-right: 10px;
+      li{
+        border: none;
+        // padding: 0.5rem 0;
+        padding: 0;
+
+        .image-container{
+          margin-right: 10px;
+        }
+
+        span{
+          padding-left: 0;
+        }
+
       }
 
-      span{
-        padding-left: 0;
+      &:hover li{
+        // background-color: rgba(0,0,0,0.2);
+      }
+
+      &:not(:last-child){
+        border-bottom: dashed 1px #ccc;
+
       }
 
     }
 
-    &:hover li{
-      // background-color: rgba(0,0,0,0.2);
-    }
-
-    &:not(:last-child){
-      border-bottom: dashed 1px #ccc;
-
+    .title-sidebar{
+      margin-left: 0;
     }
 
   }
@@ -433,6 +445,39 @@ iframe.wp-embedded-content{
 
       }
 
+      .big-post{
+        padding-bottom: 56.25%;
+
+        .post_news_big{
+
+          span{
+            font-size: 2rem;
+          }
+
+        }
+
+      }
+
+    }
+
+    .image-sidebar-section{
+
+      a{
+
+        li{
+
+          span{
+            font-size: 0.9rem;
+          }
+
+        }
+
+      }
+
+    }
+
+    .button-line{
+      padding: 10px 0;
     }
 
   }
@@ -476,21 +521,33 @@ iframe.wp-embedded-content{
         bottom: 1rem;
       }
 
-      .link_post.big{
+      .link_post{
 
-        .big-post{
-          // height: 11rem;
+        &.big{
 
-          @media( min-width: map-get($break, 'sm') ){
-            // height: 22rem;
-          }
+          .big-post{
+            // height: 11rem;
 
-          @media( min-width: map-get($break, 'lg') ){
-            // height: 100%;
+            @media( min-width: map-get($break, 'sm') ){
+              // height: 22rem;
+            }
+
+            @media( min-width: map-get($break, 'lg') ){
+              // height: 100%;
+            }
+
           }
 
         }
 
+        .big-post{
+          padding-bottom: 56.25%;
+        }
+
+      }
+
+      .title-sidebar{
+        margin-left: 10px;
       }
 
     }
@@ -1005,6 +1062,14 @@ nav.navbar{
     padding-right: 10px;
   }
 
+  &.desktop{
+
+    .adbox{
+      margin: 15px 10px;
+    }
+
+  }
+
 }
 
 #popularne{
@@ -1061,8 +1126,13 @@ nav.navbar{
     }
 
     [data-post-type="large"]{
-      padding-right: 2px;
-      margin: 2px -14px;
+      padding-right: 0;
+      margin: 2px;
+    }
+
+    .adbox{
+      margin-top: 0.85rem;
+      justify-content: flex-start;
     }
 
   }

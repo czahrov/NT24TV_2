@@ -9,13 +9,13 @@
 <!-- Page Content -->
 <div id='popularne' class="<?php echo getDevType(); ?> container">
 
-  <div class="row no-gutters">
+  <div class="row">
 
     <!-- Blog Entries Column -->
     <div class="col-md-12 col-lg-8">
       <h5 class="title-sidebar">Najbardziej pupularne</h5>
       <!-- Post -->
-      <div class="slick row no-gutters najbardziej-popularne">
+      <div class="slick row no-gutters padding najbardziej-popularne">
         <!-- single post -->
         <?php
           foreach ($items as $item) {
@@ -30,7 +30,7 @@
     <!-- /col-8 -->
 
     <!-- Sidebar Column -->
-    <div class="col-md-12 col-lg-4 sidebar-list">
+    <div class="col-md-12 col-lg-4 sidebar-list no-padding">
       <div id="" class="position-sticky">
         <!-- reklama pionowa -->
         <?php echo printAd( 'v-l' ); ?>

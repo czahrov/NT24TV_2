@@ -1,6 +1,6 @@
 <?php
   global $cat;
-  $posts_limit = 5;
+  $posts_limit = 7;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
     'numberposts'   => $posts_limit,
@@ -39,7 +39,7 @@
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 1 ) as $item ){
-            printPost( $item, 'mid-special', array( 'class' => 'padding' ) );
+            printPost( $item, 'mid-special', array( 'class' => 'no-padding' ) );
           }
         ?>
       </div>
@@ -48,7 +48,7 @@
     <!-- Sidebar Column -->
     <div class="col-12 col-lg-4 sidebar-list">
       <div class="position-sticky">
-        <ul class="image-sidebar-section padding">
+        <ul class="image-sidebar-section">
           <?php
             foreach ( array_slice( $items, 2 ) as $item) {
               printPost( $item, 'side-special' );

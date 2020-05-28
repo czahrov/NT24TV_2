@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div id='wskrocie' class="<?php echo getDevType(); ?> container">
+<div id='wskrocie' class="<?php echo getDevType(); ?> container padding">
   <div class="row no-gutters">
     <div class="col-12 col-md-8">
       <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">

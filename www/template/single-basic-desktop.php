@@ -114,7 +114,7 @@
     <!-- Sidebar Column -->
     <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
       <div class="col-12 col-sm col-lg-12">
-        <?php echo printAd('v-l'); ?>
+        <?php echo printAd( 'v-l', false, array( 'class'=> 'padding' ) ); ?>
       </div>
       <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
         <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
@@ -137,7 +137,7 @@
     <!-- /col-8 -->
     <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
       <div class="col-12 col-sm col-lg-12">
-        <?php echo printAd('v-l'); ?>
+        <?php echo printAd( 'v-l', false, array( 'class' => 'padding' ) ); ?>
       </div>
       <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
         <?php get_template_part('template/sidebar-popularne-desktop'); ?>

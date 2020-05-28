@@ -5,7 +5,7 @@
 ?>
 <div class="clear-top"></div>
 <h5 class="title-sidebar">Zobacz również</h5>
-<div id='more' class="row no-gutters">
+<div id='more' class="row no-gutters padding">
   <!-- post -->
   <?php
     foreach ( getPostMore() as $item ) {
@@ -23,7 +23,7 @@
         );
       }
       printf(
-        '<div class="col-6 col-lg-4">
+        '<div class="col-6 col-md-4">
           <a href="%s" class="link_post_small">
             <div class="small-post">
               <div class="post_news_small">

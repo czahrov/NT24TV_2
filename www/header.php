@@ -217,7 +217,7 @@
     </div>
   </nav>
   <?php
-    $homeID = get_page_by_title( 'home' )->ID;
+    $homeID = 40;
     $kolor_pasek = get_field( 'kolor_paska', $homeID );
     $kolor_czcionka = get_field( 'kolor_czcionki', $homeID );
   ?>
@@ -270,7 +270,7 @@
         </div>
       </div>
       <div class="view">
-        
+
       </div>
     </div>
   </div>

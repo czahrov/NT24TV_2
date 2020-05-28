@@ -4,11 +4,11 @@
   </a>
   <?php
   $items = get_posts(array(
-    'numberposts'     => 9,
+    'numberposts'     => 7,
     'category_name'   => 'reportaze',
   ));
   ?>
-  <ul class="image-sidebar-section alt">
+  <ul class="image-sidebar-section">
 
     <!-- single post -->
     <?php

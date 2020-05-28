@@ -1,6 +1,6 @@
 <?php
   $items = get_posts(array(
-    'numberposts'   => 17,
+    'numberposts'   => 21,
     'category_name' => 'aktualnosci',
     'orderby'       => 'date',
     'order'         => 'DESC'
@@ -11,15 +11,15 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-lg-8">
-      <div class="row no-gutters">
+      <div class="row">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => 'padding' ) );
+          printPost( $items[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 4 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => 'padding' ) );
+            printPost( $item, 'mid', array( 'class' => 'no-padding' ) );
           }
         ?>
       </div>

@@ -576,7 +576,7 @@
   }
 
   // generuje reklamę
-  function printAd( $type = null, $promo = false ){
+  function printAd( $type = null, $promo = false, $args = array() ){
     // v-s : Pionowy S ( max 400x230 px )
     // v-m : Pionowy M ( max 400x500 px )
     // v-l : Pionowy L ( max 400x700 px )
@@ -658,7 +658,8 @@
       $img,
       $type,
       $ad->ID,
-      ( $parse[0] == 'h' and in_array( $parse[1], array( 'l', 'm' ) ) )?( 'no-padding' ):( '' ),
+      // ( $parse[0] == 'h' and in_array( $parse[1], array( 'l', 'm' ) ) )?( 'no-padding' ):( '' ),
+      $args['class'],
       $ad->post_title,
       ($target == '_blank')?('rel="noopener"'):('')
     );
@@ -890,7 +891,7 @@
       case 'large':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<div class="col-12 col-md-6 col-lg-4 col-xl-3 %s">
+          '<div class="col-12 col-md-6 %s">
             <a href="%s" class="link_post_small" data-post-type="%s">
               <div class="small-post popular-post">
                 %s
@@ -920,7 +921,7 @@
                   %s
                 </div>
               </div>
-              <a href="%s" class="title fw-semibold padding"> %s </a>
+              <a href="%s" class="title fw-semibold"> %s </a>
             </div>',
             $data['class'],
             $type,
@@ -960,7 +961,7 @@
                   %s
                 </div>
               </div>
-              <a href="%s" class="title fw-semibold padding"> %s </a>
+              <a href="%s" class="title fw-semibold"> %s </a>
             </div>',
             $data['class'],
             $type,

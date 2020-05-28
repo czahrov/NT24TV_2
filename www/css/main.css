@@ -308,8 +308,10 @@ section.head-menu .head-items .weather ul li a {
 }
 
 .link_post .big-post {
-  width: 100%;
   position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 48%;
 }
 
 .link_post .big-post .video-icon {
@@ -340,26 +342,25 @@ section.head-menu .head-items .weather ul li a {
 }
 
 .link_post .big-post .post_news_big {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-position: center;
-  position: relative;
   background-size: cover;
 }
 
 .link_post .big-post .post_news_big span {
-  margin: 0 20px;
-  margin: 30px;
-  padding: 50px 0;
-  padding: 0;
   position: absolute;
+  margin: 0;
+  padding: 10px;
   z-index: 2;
   left: 0;
   bottom: 0;
   color: #fff;
   font-family: "open_sansextrabold";
-  font-size: 2rem;
+  font-size: 17px;
   text-shadow: 0 1px 1.6px #141c1f;
   text-shadow: 0 0.0275rem 0.05rem #141c1f;
 }
@@ -383,8 +384,8 @@ section.head-menu .head-items .weather ul li a {
 }
 
 .link_post_small {
-  margin-bottom: 30px;
   display: block;
+  margin-bottom: 10px;
 }
 
 .link_post_small .small-post .video-icon {
@@ -401,21 +402,20 @@ section.head-menu .head-items .weather ul li a {
 }
 
 .link_post_small .post_news_small {
+  position: relative;
+  padding-bottom: 56.25%;
   width: 100%;
   height: 28.125vw;
+  height: 0;
   background: #000;
-  position: relative;
   overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .link_post_small .post_news_small {
-    height: 11rem;
-  }
 }
 
 .link_post_small .cover_img {
   position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-position: center;
@@ -506,29 +506,31 @@ h5.title-sidebar:before {
   border-bottom: 1px solid #e3e3e3;
 }
 
-.sidebar-list ul a:hover li {
-  background-color: #fcfafa;
+ul.image-sidebar-section {
+  font-size: 0;
 }
 
 ul.image-sidebar-section a {
+  display: block;
   font-family: "open_sansregular";
   font-size: 1.1rem;
 }
 
 ul.image-sidebar-section a li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 1.5rem 0;
 }
 
 ul.image-sidebar-section a li span {
-  padding-left: 20px;
   width: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
 }
 
 ul.image-sidebar-section a .image-container {
   background-color: #141c1f;
-  height: 5rem;
   width: 40%;
   width: 10rem;
   position: relative;
@@ -550,11 +552,18 @@ ul.image-sidebar-section a .image-container .video-icon {
 
 ul.image-sidebar-section a .image-container .image {
   position: relative;
+  padding-bottom: 56.25%;
   width: 100%;
   height: 100%;
+  height: 0;
   background-position: center;
   position: relative;
   background-size: cover;
+}
+
+ul.image-sidebar-section a:not(:last-child) {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .najbardziej-popularne .link_post_small span {
@@ -565,7 +574,7 @@ ul.image-sidebar-section a .image-container .image {
   margin: 0 20px;
   color: #fff;
   font-family: "open_sansextrabold";
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-shadow: 0 1px 1.6px #141c1f;
   text-shadow: 0 0.0275rem 0.05rem #141c1f;
   z-index: 5;
@@ -601,10 +610,6 @@ ul.image-sidebar-section a .image-container .image {
   z-index: 2;
   height: 63%;
   background-repeat: no-repeat;
-}
-
-.slide-content {
-  padding: 0 15px;
 }
 
 .slider-arrows .prev {
@@ -649,17 +654,20 @@ ul.image-sidebar-section a .image-container .image {
 }
 
 .filmy-promocyjne .single .image-container {
+  position: relative;
   width: 100%;
-  height: 19rem;
+  height: 0;
+  padding-bottom: 56.25%;
   background-color: #fff;
 }
 
 .filmy-promocyjne .single .image-container .image {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-position: center;
-  position: relative;
   background-size: cover;
 }
 
@@ -877,7 +885,6 @@ footer.bg-footer .copy .copy-content {
 }
 
 .content img {
-  margin: 25px 0;
   max-width: 100%;
   height: auto;
 }
@@ -1067,17 +1074,6 @@ footer.bg-footer .copy .copy-content {
   display: inherit;
 }
 
-.row.no-gutters {
-  margin-right: -15px;
-  margin-left: -15px;
-}
-
-.row.no-gutters > [class^="col-"],
-.row.no-gutters > [class*=" col-"] {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
 /* Extra small devices (phones, 600px and down) */
 @media (min-width: 276px) and (max-width: 600px) {
   h2 {
@@ -1227,9 +1223,6 @@ footer.bg-footer .copy .copy-content {
     /* margin-left: -15px; */
     margin-right: -15px;
   }
-  .link_post .big-post .post_news_big span {
-    font-size: 1.6rem;
-  }
   .link_post_small span {
     font-size: 1.1rem;
     padding: 1rem;
@@ -1243,9 +1236,6 @@ footer.bg-footer .copy .copy-content {
   }
   .link_post_small {
     margin-bottom: 0;
-  }
-  .slide-content .link_post_small .post_news_small {
-    height: 20rem;
   }
   .before-content {
     padding: 1rem;
@@ -1451,9 +1441,6 @@ footer.bg-footer .copy .copy-content {
     /* margin-left: -15px; */
     margin-right: -15px;
   }
-  .link_post .big-post .post_news_big span {
-    font-size: 1.6rem;
-  }
   .link_post_small span {
     font-size: 1.1rem;
     padding: 1rem;
@@ -1467,9 +1454,6 @@ footer.bg-footer .copy .copy-content {
   }
   .link_post_small {
     margin-bottom: 0;
-  }
-  .slide-content .link_post_small .post_news_small {
-    height: 20rem;
   }
   .before-content {
     padding: 1rem;
@@ -1559,9 +1543,6 @@ footer.bg-footer .copy .copy-content {
   }
   .slider-arrows {
     margin-right: 1rem;
-  }
-  .button-line {
-    margin-top: 20px;
   }
   .button-line a {
     margin: 10px auto;
@@ -1688,12 +1669,11 @@ footer.bg-footer .copy .copy-content {
     /* margin-left: -15px; */
     margin-right: -15px;
   }
-  .link_post .big-post .post_news_big span {
-    font-size: 1.6rem;
-  }
   .link_post_small span {
+    padding: 10px 0;
+    margin: 0;
     font-size: 1.1rem;
-    padding: 1rem;
+    font-family: "open_sansbold";
   }
   .sidebar-list ul a {
     font-size: 1.1rem;
@@ -1718,9 +1698,6 @@ footer.bg-footer .copy .copy-content {
   }
   .link_post_small {
     margin-bottom: 0;
-  }
-  .slide-content .link_post_small .post_news_small {
-    height: 11rem;
   }
   .before-content {
     padding: 1rem;

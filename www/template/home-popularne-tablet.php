@@ -7,7 +7,7 @@
   ) );
 ?>
 <!-- Page Content -->
-<div id='popularne' class="<?php echo getDevType(); ?> container">
+<div id='popularne' class="<?php echo getDevType(); ?> container padding">
 
   <div class="row no-gutters">
 

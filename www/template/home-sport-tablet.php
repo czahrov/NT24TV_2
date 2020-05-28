@@ -5,7 +5,7 @@
   ) );
 ?>
 <!-- Page Content -->
-<div id="sport" class="<?php echo getDevType(); ?> container">
+<div id="sport" class="<?php echo getDevType(); ?> container padding">
 
   <div class="row no-gutters">
 
@@ -17,12 +17,12 @@
       <div class="row no-gutters">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => 'padding' ) );
+          printPost( $items[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 4 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => 'padding' ) );
+            printPost( $item, 'mid', array( 'class' => '' ) );
           }
         ?>
       </div>
@@ -43,11 +43,11 @@
         </a>
         <?php
           $items = get_posts( array(
-            'numberposts'    => 12,
+            'numberposts'    => 6,
             'category_name'  => 'kultura'
           ) );
         ?>
-        <ul class="image-sidebar-section alt">
+        <ul class="image-sidebar-section">
 
           <!-- single post -->
           <?php

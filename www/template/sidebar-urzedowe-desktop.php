@@ -2,7 +2,7 @@
   <a href="<?php echo get_category_link( get_category_by_slug( 'ogloszenia-urzedowe' )->cat_ID ); ?>">
     <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
   </a>
-  <ul class="image-sidebar-section alt">
+  <ul class="image-sidebar-section">
     <?php
       $items = get_posts(array(
         'numberposts'   => 8,

@@ -15,12 +15,12 @@
       <div class="row no-gutters">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => 'padding' ) );
+          printPost( $items[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 4 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => 'padding' ) );
+            printPost( $item, 'mid', array( 'class' => 'no-padding' ) );
           }
         ?>
       </div>
@@ -47,7 +47,7 @@
 
       <div class="clear-top"></div>
       <div class="position-sticky">
-        <?php get_template_part('template/sidebar-reportaze-desktop'); ?>
+        <?php get_template_part('template/sidebar-reportaze-'.getDevType()); ?>
       </div>
       <!-- /reportaże -->
 

@@ -18,7 +18,7 @@
   ));
 ?>
 <!-- Page Content -->
-<div id='<?php echo $cat->slug; ?>' class="<?php echo getDevType(); ?> special container" style="background-color:<?php echo $meta['kolor'][0]; ?>">
+<div id='<?php echo $cat->slug; ?>' class="<?php echo getDevType(); ?> special container padding" style="background-color:<?php echo $meta['kolor'][0]; ?>">
   <a href="<?php echo get_category_link( $cat->term_id ); ?>">
     <h5 class="title-sidebar">
       <?php echo $cat->name; ?>
@@ -34,12 +34,12 @@
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big-special', array( 'class' => 'padding' ) );
+          printPost( $items[0], 'big-special', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 1 ) as $item ){
-            printPost( $item, 'mid-special', array( 'class' => 'padding' ) );
+            printPost( $item, 'mid-special', array( 'class' => '' ) );
           }
         ?>
       </div>
@@ -48,7 +48,7 @@
     <!-- Sidebar Column -->
     <div class="col-12 col-md-4 sidebar-list">
       <div class="position-sticky">
-        <ul class="image-sidebar-section special padding">
+        <ul class="image-sidebar-section special">
           <?php
             foreach ( array_slice( $items, 2 ) as $item) {
               printPost( $item, 'side-special' );

@@ -22,23 +22,12 @@
             printPost( $item, 'large', array( 'class' => 'no-padding' ) );
           }
         ?>
+        <?php echo printAd( 'v-l' ); ?>
 
       </div>
       <div class="arrows d-flex justify-content-between"> </div>
     </div>
     <!-- /col-8 -->
-
-    <!-- Sidebar Column -->
-    <div class="col-12 sidebar-list">
-      <div id="" class="sidebar position-sticky">
-        <!-- reklama pionowa -->
-        <?php echo printAd( 'v-l' ); ?>
-        <!-- <div class="reklama-sidebar sticky">
-          <div class="reklama">Reklama 400x700px</div>
-        </div> -->
-      </div>
-
-    </div>
 
   </div>
   <!-- /.row -->

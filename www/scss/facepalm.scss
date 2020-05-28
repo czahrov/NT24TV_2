@@ -1137,6 +1137,44 @@ nav.navbar{
 
   }
 
+  &.tablet{
+
+    .slick{
+
+      .adbox{
+        position: relative;
+        margin: 0;
+        height: 37rem;
+
+        &::before{
+          content: 'Reklama';
+          position: absolute;
+          padding: 5px;
+          padding: 2px 7px;
+          margin: 10px;
+          top: 0;
+          left: 0;
+          color: #fff;
+          font-family: map-get($font,'bold');
+          font-size: 0.8rem;
+          background-color: map-get($color,'red');
+          text-transform: uppercase;
+          border-radius: 2px;
+        }
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top;
+        }
+
+      }
+
+    }
+
+  }
+
 }
 
 #sponsorowane{

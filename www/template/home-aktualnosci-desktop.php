@@ -10,7 +10,7 @@
 <div id='aktualnosci' class="<?php echo getDevType(); ?> container">
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-sm-8">
       <div class="row no-gutters padding">
         <!-- Big Post -->
         <?php
@@ -26,7 +26,7 @@
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
-    <div class="col-12 col-lg-4 sidebar-list">
+    <div class="col-12 col-sm-4 sidebar-list">
       <div class="position-sticky">
         <a href="<?php echo get_category_link( get_category_by_slug('aktualnosci')->cat_ID ); ?>">
           <h5 class="title-sidebar line">Aktualności</h5>

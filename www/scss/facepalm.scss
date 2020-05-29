@@ -353,10 +353,6 @@ iframe.wp-embedded-content{
 
 [id]{
 
-  .title-sidebar{
-    margin-left: 10px;
-  }
-
   .link_post{
 
     &.big{
@@ -417,16 +413,25 @@ iframe.wp-embedded-content{
 
   }
 
-  [class^="link_post"]{
-    padding-right: 10px;
-  }
-
   &.smartphone{
 
     .link_post{
 
       &.big{
-        margin-bottom: 10px;
+        margin-bottom: 2px;
+      }
+
+      .big-post{
+        padding-bottom: 56.25%;
+      }
+
+    }
+
+    .link_post_small{
+
+      span{
+        margin: 0;
+        padding: 10px;
       }
 
     }
@@ -434,6 +439,10 @@ iframe.wp-embedded-content{
   }
 
   &.desktop{
+
+    .title-sidebar{
+      margin-left: 10px;
+    }
 
     .link_post{
 
@@ -483,9 +492,14 @@ iframe.wp-embedded-content{
   }
 
   &:not(.smartphone){
+
     .big-post{
       // height: 100%;
       // min-height: 22rem;
+    }
+
+    [class^="link_post"]{
+      padding-right: 10px;
     }
 
   }
@@ -544,10 +558,6 @@ iframe.wp-embedded-content{
           padding-bottom: 56.25%;
         }
 
-      }
-
-      .title-sidebar{
-        margin-left: 10px;
       }
 
     }
@@ -762,6 +772,27 @@ nav.navbar{
       left: 0px;
       right: 0px;
       z-index: 1000;
+    }
+
+  }
+
+}
+
+footer{
+
+  &.smartphone{
+
+    .foot-content{
+
+      .row{
+        flex-direction: column;
+
+        .logo_menu{
+          flex-direction: column;
+        }
+
+      }
+
     }
 
   }
@@ -1056,16 +1087,116 @@ nav.navbar{
 
 }
 
+#aktualnosci{
+
+  &.desktop{
+
+    .sidebar-list{
+
+      ul{
+
+        a{
+
+          @media( max-width: map-get($break,'xl') - 1px ){
+
+            &:nth-child(n+11){
+              display: none;
+            }
+
+            @media( orientation: landscape ){
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
 #przeglad_tygodniowy{
 
-  .adbox{
-    padding-right: 10px;
+  &:not(.smartphone){
+
+    .adbox{
+      padding-right: 10px;
+    }
+
   }
 
   &.desktop{
 
     .adbox{
       margin: 15px 10px;
+    }
+
+    .sidebar-list{
+
+      ul{
+
+        a{
+
+          @media( max-width: map-get($break,'xl') - 1px ){
+
+            @media( orientation: portrait ){
+
+              &:nth-child(n+11){
+                display: none;
+              }
+
+            }
+
+            @media( orientation: landscape ){
+
+              &:nth-child(n+16){
+                display: none;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+#sport{
+
+  &.desktop{
+
+    .sidebar-list{
+
+      ul{
+
+        a{
+
+          @media( max-width: map-get($break,'xl') - 1px ){
+
+            @media( orientation: portrait ){
+
+              &:nth-child(n+13){
+                display: none;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
     }
 
   }
@@ -1128,11 +1259,22 @@ nav.navbar{
     [data-post-type="large"]{
       padding-right: 0;
       margin: 2px;
+
+      @media( max-width: map-get($break,'lg') ){
+        margin: 0 -12px;
+      }
+
     }
 
     .adbox{
       margin-top: 0.85rem;
-      justify-content: flex-start;
+      justify-content: center;
+
+      @media(min-width: map-get($break,'lg')){
+        justify-content: flex-start;
+
+      }
+
     }
 
   }
@@ -1208,8 +1350,12 @@ nav.navbar{
 
   }
 
-  .adbox{
-    padding-right: 10px;
+  &:not(.smartphone){
+
+    .adbox{
+      padding-right: 10px;
+    }
+
   }
 
 }
@@ -1624,6 +1770,19 @@ nav.navbar{
 
       &.pop{
         bottom: 40px;
+
+      }
+
+    }
+
+    #more{
+
+      .link_post_small{
+
+        span{
+          margin: 0;
+          padding: 10px 0;
+        }
 
       }
 

@@ -1,4 +1,4 @@
-<div id="nadchodzace" class="<?php echo getDevType(); ?> single-post sidebar-list">
+<div id="nadchodzace" class="<?php echo getDevType(); ?> single-post sidebar-list padding no-padding-sm">
   <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
     <h5 class="title-sidebar">Będzie się działo</h5>
   </a>

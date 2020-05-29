@@ -751,6 +751,9 @@
       elseif( $detect->isAndroidOS() ){
         $osType = 'androidos';
       }
+      else{
+        $osType = 'unknownos';
+      }
 
     }
 
@@ -877,7 +880,7 @@
     }
 
     global $fp;
-    $img = get_the_post_thumbnail_url( $item->ID, 'full' );
+    $img = get_the_post_thumbnail_url( $item->ID, array( 640, 480 ) );
     $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
     $data = array_merge( array(
       'title'   => $item->post_title,
@@ -892,7 +895,7 @@
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
           '<div class="col-12 col-md-6 %s">
-            <a href="%s" class="link_post_small" data-post-type="%s">
+            <a href="%s" class="link_post_small" data-post-type="%s" title="%5$s">
               <div class="small-post popular-post">
                 %s
                 <span>%s</span>
@@ -912,28 +915,29 @@
         );
         break;
       case 'big':
-        $data['title'] .= " " . printTags( $item->ID, true, false );
+        // $data['title'] .= " " . printTags( $item->ID, true, false );
         if( get_post_format( $item ) == 'video' && get_field( 'home', $item->ID ) == 1 ){
           printf(
-            '<div class="link_post big fc-black col-12 col-md-8 %s" data-post-type="%s">
+            '<div class="link_post big fc-black col-12 col-sm-8 %s" data-post-type="%s">
               <div class="big-post">
                 <div class="post_news_big">
                   %s
                 </div>
               </div>
-              <a href="%s" class="title fw-semibold"> %s </a>
+              <a href="%s" class="title fw-semibold" title="%6$s"> %s </a>
             </div>',
             $data['class'],
             $type,
             $fp->embed_video_for_post( $item, array(), true ),
             $data['url'],
-            $item->post_title
+            $item->post_title,
+            $data['title']
           );
         }
         else{
           // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
           printf(
-            '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
+            '<a class="link_post big col-12 col-sm-8 %s" href="%s" data-post-type="%s" title="%6$s">
               <div class="big-post">
                 <div class="cover_img"></div>
                 <div class="post_news_big" style="background-image:url(%s)">
@@ -947,33 +951,35 @@
             $data['url'],
             $type,
             $data['img'],
+            $data['title'] . " " . printTags( $item->ID, true, false ),
             $data['title']
           );
         }
         break;
       case 'big-special':
-        $data['title'] .= " " . printTags( $item->ID, true, false );
+        // $data['title'] .= " " . printTags( $item->ID, true, false );
         if( get_post_format( $item ) == 'video' && get_field( 'home', $item->ID ) == 1 ){
           printf(
-            '<div class="link_post big fc-white col-12 col-md-8 %s" data-post-type="%s">
+            '<div class="link_post big fc-white col-12 col-sm-8 %s" data-post-type="%s">
               <div class="big-post">
                 <div class="post_news_big">
                   %s
                 </div>
               </div>
-              <a href="%s" class="title fw-semibold"> %s </a>
+              <a href="%s" class="title fw-semibold padding no-padding-md" title="%6$s"> %s </a>
             </div>',
             $data['class'],
             $type,
             $fp->embed_video_for_post( $item, array(), true ),
             $data['url'],
+            $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
             $data['title']
           );
         }
         else{
           // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
           printf(
-            '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s">
+            '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s" title="%6$s">
               <div class="big-post">
                 <div class="cover_img"></div>
                 <div class="post_news_big" style="background-image:url(%s)">
@@ -987,16 +993,17 @@
             $data['url'],
             $type,
             $data['img'],
+            $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
             $data['title']
           );
         }
         break;
       case 'mid':
-        $data['title'] .= " " . printTags( $item->ID, true, true );
+        // $data['title'] .= " " . printTags( $item->ID, true, true );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col-6 col-md-4 %s">
-            <a href="%s" class="link_post_small" data-post-type="%s">
+          '<div class="col-6 col-sm-4 %s">
+            <a href="%s" class="link_post_small" data-post-type="%s" title="%6$s">
               <div class="small-post">
                 <div class="post_news_small">
                   <div class="cover_img" style="background-image:url(%s)"></div>
@@ -1011,15 +1018,16 @@
           $data['url'],
           $type,
           $data['img'],
+          $fp->cutText( $data['title'] ) . printTags( $item->ID, true, true ),
           $data['title']
         );
         break;
       case 'mid-special':
-        $data['title'] .= " " . printTags( $item->ID, true, false );
+        // $data['title'] .= " " . printTags( $item->ID, true, false );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<div class="col-6 col-md-4 %s">
-            <a href="%s" class="link_post_small" data-post-type="%s">
+          '<div class="col-6 col-sm-4 %s">
+            <a href="%s" class="link_post_small" data-post-type="%s" title="%6$s">
               <div class="small-post">
                 <div class="post_news_small">
                   <div class="cover_img" style="background-image:url(%s)"></div>
@@ -1034,14 +1042,15 @@
           $data['url'],
           $type,
           $data['img'],
+          $fp->cutText( $data['title'] ) . " " . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
       case 'side':
-        $data['title'] .= " " . printTags( $item->ID, true, true );
+        // $data['title'] .= " " . printTags( $item->ID, true, true );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a class="%s" href="%s" data-post-type="%s">
+          '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
             <li>
               <div class="image-container">
                 <div class="image" style="background-image:url(%s)"></div>
@@ -1053,14 +1062,15 @@
           $data['url'],
           $type,
           $data['img'],
+          $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
       case 'side-special':
-        $data['title'] .= " " . printTags( $item->ID, true, false );
+        // $data['title'] .= " " . printTags( $item->ID, true, false );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a class="%s" href="%s" data-post-type="%s">
+          '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
             <li>
               <div class="image-container">
                 <div class="image" style="background-image:url(%s)"></div>
@@ -1072,13 +1082,14 @@
           $data['url'],
           $type,
           $data['img'],
+          $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
       case 'side-big':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<a href="%s" class="single %s" title="%s" data-post-type="%s">
+          '<a href="%s" class="single %s" title="%s" data-post-type="%s" title="%3$s">
             <div class="image-container">
               <div class="image" style="background-image:url(%s);">
                 <div class="video-post">
@@ -1096,11 +1107,11 @@
         );
         break;
       case 'slider':
-        $data['title'] .= " " . printTags( $item->ID, true, true );
+        // $data['title'] .= " " . printTags( $item->ID, true, true );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
           '<div class="slide-content %s">
-            <a href="%s" class="link_post_small" data-post-type="%s">
+            <a href="%s" class="link_post_small" data-post-type="%s" title="%6$s">
               <div class="small-post">
                 <div class="post_news_small">
                   <div class="cover_img" style="background-image:url(%s)"></div>
@@ -1113,6 +1124,7 @@
           $data['url'],
           $type,
           $data['img'],
+          $fp->cutText( $data['title'] ) . " " . printTags( $item->ID, true, true ),
           $data['title']
         );
         break;

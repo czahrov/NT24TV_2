@@ -2,8 +2,15 @@
 <?php get_header(); ?>
 <?php
   global $fp;
-  var_dump( get_page_by_title('Home') );
-  var_dump( get_post(40) );
-  var_dump( get_field( 'prezentacja', get_post( 40 )->ID ) );
+  $text = "Nowotarskie dziedzictwo poligraficzne zyska drugie życie. Ponad 3 mln zł dotacji ze środków unijnych dla Miasta na realizację projektu pn. Śladem zabytków techniki z Podhala na Liptów.";
+  $words = 6;
+  preg_match( "~(\S+\s+){{$words}}~", $text, $match );
+  // var_dump( $match );
+  $ret = $match[0];
+  if( strlen($text) > strlen($ret) ) $ret .= '(...)';
+  print_r(array(
+    'text'  => $text,
+    'ret'   => $ret,
+  ));
 ?>
 <?php get_footer(); ?>

@@ -194,7 +194,7 @@ $(function(){
   (function( slider, items, arrows ){
     let settings = {
       infinite: true,
-      slidesToShow: 3,
+      slidesToShow: 2,
       dots: false,
       arrows: true,
       appendArrows: arrows,
@@ -202,12 +202,6 @@ $(function(){
       nextArrow: "<img class='arrow next' src='wp-content/themes/NT24TV/images/arrow.svg' alt='następny'/>",
       swipeToSlide: true,
       responsive: [
-        {
-          breakpoint: 960,
-          settings:{
-            slidesToShow: 2,
-          }
-        },
         {
           breakpoint: 720,
           settings:{
@@ -219,7 +213,7 @@ $(function(){
 
     $(window)
     .resize(function(){
-      if ( window.innerWidth < 1200 ) {
+      if ( window.innerWidth < 992 ) {
         if ( !slider.hasClass('slick-initialized' ) ) {
           // console.log('start');
           slider.slick(settings);

@@ -1,7 +1,7 @@
 <!-- Page Content -->
 <div id='wskrocie' class="<?php echo getDevType(); ?> container">
   <div class="row padding">
-    <div class="col-md-12 col-lg-8">
+    <div class="col-12 col-sm-8">
       <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
         <h5 class="title-sidebar">Będzie się działo</h5>
       </a>
@@ -78,7 +78,7 @@
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
-    <div class="sidebar col-lg-4 col-md-12 sidebar-list no-padding">
+    <div class="sidebar col-12 col-sm-4 sidebar-list no-padding">
       <?php get_template_part("template/sidebar-urzedowe-desktop"); ?>
       <div class="clear-top"></div>
       <h5 class="title-sidebar">Filmy promocyjne</h5>

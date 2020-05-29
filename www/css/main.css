@@ -512,6 +512,7 @@ ul.image-sidebar-section {
 
 ul.image-sidebar-section a {
   display: block;
+  width: 100%;
   font-family: "open_sansregular";
   font-size: 1.1rem;
 }
@@ -1130,10 +1131,6 @@ footer.bg-footer .copy .copy-content {
     padding-left: 0;
     padding-right: 0;
   }
-  .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
-  }
   .row.no-gutters > [class^="col-"],
   .row.no-gutters > [class*=" col-"] {
     padding-right: 0;
@@ -1347,10 +1344,6 @@ footer.bg-footer .copy .copy-content {
   .container {
     padding-left: 0;
     padding-right: 0;
-  }
-  .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
   }
   .row.no-gutters > [class^="col-"],
   .row.no-gutters > [class*=" col-"] {
@@ -1575,10 +1568,6 @@ footer.bg-footer .copy .copy-content {
   .container {
     padding-left: 0;
     padding-right: 0;
-  }
-  .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
   }
   .row.no-gutters > [class^="col-"],
   .row.no-gutters > [class*=" col-"] {

@@ -617,10 +617,6 @@ iframe.wp-embedded-content {
   color: inherit;
 }
 
-[id] .title-sidebar {
-  margin-left: 10px;
-}
-
 [id] .link_post.big {
   display: inline-block;
   position: relative;
@@ -654,12 +650,21 @@ iframe.wp-embedded-content {
   margin-left: 0;
 }
 
-[id] [class^="link_post"] {
-  padding-right: 10px;
+[id].smartphone .link_post.big {
+  margin-bottom: 2px;
 }
 
-[id].smartphone .link_post.big {
-  margin-bottom: 10px;
+[id].smartphone .link_post .big-post {
+  padding-bottom: 56.25%;
+}
+
+[id].smartphone .link_post_small span {
+  margin: 0;
+  padding: 10px;
+}
+
+[id].desktop .title-sidebar {
+  margin-left: 10px;
 }
 
 [id].desktop .link_post.big .title {
@@ -680,6 +685,10 @@ iframe.wp-embedded-content {
 
 [id].desktop .button-line {
   padding: 10px 0;
+}
+
+[id]:not(.smartphone) [class^="link_post"] {
+  padding-right: 10px;
 }
 
 [id].special .sidebar-list ul a {
@@ -710,10 +719,6 @@ iframe.wp-embedded-content {
 
 [id].special.desktop .link_post .big-post {
   padding-bottom: 56.25%;
-}
-
-[id].special.desktop .title-sidebar {
-  margin-left: 10px;
 }
 
 [id].special.smartphone {
@@ -853,6 +858,14 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
     right: 0px;
     z-index: 1000;
   }
+}
+
+footer.smartphone .foot-content .row {
+  flex-direction: column;
+}
+
+footer.smartphone .foot-content .row .logo_menu {
+  flex-direction: column;
 }
 
 #video {
@@ -1068,12 +1081,36 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
   width: 100%;
 }
 
-#przeglad_tygodniowy .adbox {
+@media (max-width: 1199px) {
+  #aktualnosci.desktop .sidebar-list ul a:nth-child(n+11) {
+    display: none;
+  }
+}
+
+#przeglad_tygodniowy:not(.smartphone) .adbox {
   padding-right: 10px;
 }
 
 #przeglad_tygodniowy.desktop .adbox {
   margin: 15px 10px;
+}
+
+@media (max-width: 1199px) and (orientation: portrait) {
+  #przeglad_tygodniowy.desktop .sidebar-list ul a:nth-child(n+11) {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) and (orientation: landscape) {
+  #przeglad_tygodniowy.desktop .sidebar-list ul a:nth-child(n+16) {
+    display: none;
+  }
+}
+
+@media (max-width: 1199px) and (orientation: portrait) {
+  #sport.desktop .sidebar-list ul a:nth-child(n+13) {
+    display: none;
+  }
 }
 
 #popularne .slick + .arrows {
@@ -1111,9 +1148,21 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
   margin: 2px;
 }
 
+@media (max-width: 992px) {
+  #popularne.desktop [data-post-type="large"] {
+    margin: 0 -12px;
+  }
+}
+
 #popularne.desktop .adbox {
   margin-top: 0.85rem;
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  #popularne.desktop .adbox {
+    justify-content: flex-start;
+  }
 }
 
 #popularne.tablet .slick .adbox {
@@ -1161,7 +1210,7 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
   justify-content: center;
 }
 
-#wskrocie .adbox {
+#wskrocie:not(.smartphone) .adbox {
   padding-right: 10px;
 }
 
@@ -1450,6 +1499,11 @@ nav.navbar #navbarResponsive ul.navbar-nav li.more > ul {
 
 #post.smartphone #video.pop {
   bottom: 40px;
+}
+
+#post.smartphone #more .link_post_small span {
+  margin: 0;
+  padding: 10px 0;
 }
 
 #post:not(.desktop) #video.pop {

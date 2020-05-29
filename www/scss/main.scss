@@ -635,6 +635,7 @@ ul.image-sidebar-section {
 
   & a {
     display: block;
+    width: 100%;
     font-family: $font-regular;
     font-size: 1.1rem;
 
@@ -1348,8 +1349,8 @@ footer.bg-footer {
   }
 
   .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
+    // margin-right: 0;
+    // margin-left: 0;
 
     & > [class^="col-"],
     & > [class*=" col-"] {
@@ -1667,8 +1668,8 @@ footer.bg-footer {
   }
 
   .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
+    // margin-right: 0;
+    // margin-left: 0;
 
     & > [class^="col-"],
     & > [class*=" col-"] {
@@ -2001,8 +2002,8 @@ footer.bg-footer {
   }
 
   .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
+    // margin-right: 0;
+    // margin-left: 0;
 
     & > [class^="col-"],
     & > [class*=" col-"] {

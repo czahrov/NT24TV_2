@@ -8,7 +8,7 @@
 <div id='przeglad_tygodniowy' class="<?php echo getDevType(); ?> container padding">
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
-    <div class="col-md-8">
+    <div class="col-sm-8">
       <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>">
         <h5 class="title-sidebar">Przegląd tygodniowy</h5>
       </a>
@@ -39,7 +39,7 @@
     </div>
     <!-- /col-8 -->
     <!-- Sidebar Column -->
-    <div class="col-sm-12 col-md-4 sidebar-list">
+    <div class="col-12 col-sm-4 sidebar-list">
       <a href="<?php echo get_permalink( get_page_by_title( 'Pogoda' )->ID ); ?>">
         <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
       </a>
@@ -47,7 +47,10 @@
 
       <div class="clear-top"></div>
       <div class="position-sticky">
-        <?php get_template_part('template/sidebar-reportaze-'.getDevType()); ?>
+        <?php
+          // get_template_part('template/sidebar-reportaze-tablet');
+          templateLoader('template/sidebar-reportaze-%s');
+        ?>
       </div>
       <!-- /reportaże -->
 

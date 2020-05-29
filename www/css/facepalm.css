@@ -1149,7 +1149,7 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) {
-  #popularne.desktop [data-post-type="large"] {
+  #popularne.desktop .slick [data-post-type="large"] {
     margin: 0 -12px;
   }
 }
@@ -1165,13 +1165,13 @@ footer.smartphone .foot-content .row .logo_menu {
   }
 }
 
-#popularne.tablet .slick .adbox {
+#popularne:not(.desktop) .slick .adbox {
   position: relative;
   margin: 0;
   height: 37rem;
 }
 
-#popularne.tablet .slick .adbox::before {
+#popularne:not(.desktop) .slick .adbox::before {
   content: 'Reklama';
   position: absolute;
   padding: 5px;
@@ -1187,7 +1187,7 @@ footer.smartphone .foot-content .row .logo_menu {
   border-radius: 2px;
 }
 
-#popularne.tablet .slick .adbox img {
+#popularne:not(.desktop) .slick .adbox img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;

@@ -883,7 +883,7 @@
     $img = get_the_post_thumbnail_url( $item->ID, array( 640, 480 ) );
     $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
     $data = array_merge( array(
-      'title'   => $item->post_title,
+      'title'   => htmlentities($item->post_title),
       'img'     => $img !== false?( $img ):( $thumb ),
       'url'     => get_permalink( $item->ID ),
       'format'  => get_post_format( $item ),
@@ -894,7 +894,7 @@
       case 'large':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<div class="col-12 col-md-6 %s">
+          '<div class="col-6 %s">
             <a href="%s" class="link_post_small" data-post-type="%s" title="%5$s">
               <div class="small-post popular-post">
                 %s
@@ -937,7 +937,7 @@
         else{
           // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
           printf(
-            '<a class="link_post big col-12 col-sm-8 %s" href="%s" data-post-type="%s" title="%6$s">
+            '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s" title="%6$s">
               <div class="big-post">
                 <div class="cover_img"></div>
                 <div class="post_news_big" style="background-image:url(%s)">
@@ -972,7 +972,7 @@
             $type,
             $fp->embed_video_for_post( $item, array(), true ),
             $data['url'],
-            $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
+            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
             $data['title']
           );
         }
@@ -1018,7 +1018,7 @@
           $data['url'],
           $type,
           $data['img'],
-          $fp->cutText( $data['title'] ) . printTags( $item->ID, true, true ),
+          $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, true ),
           $data['title']
         );
         break;
@@ -1042,7 +1042,7 @@
           $data['url'],
           $type,
           $data['img'],
-          $fp->cutText( $data['title'] ) . " " . printTags( $item->ID, true, false ),
+          $fp->cutText( $data['title'], 10 ) . " " . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;

@@ -10,7 +10,7 @@
   <div class="row no-gutters">
 
     <!-- Blog Entries Column -->
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-sm-8">
       <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>">
         <h5 class="title-sidebar">Sport</h5>
       </a>
@@ -36,14 +36,14 @@
     <!-- /col-8 -->
 
     <!-- Sidebar Column -->
-    <div class="col-12 col-md-4 sidebar-list">
+    <div class="col-12 col-sm-4 sidebar-list">
       <div class="reportaze position-sticky">
         <a href="<?php echo get_category_link( get_category_by_slug( 'kultura' )->cat_ID ); ?>">
           <h5 class="title-sidebar line">Kultura</h5>
         </a>
         <?php
           $items = get_posts( array(
-            'numberposts'    => 6,
+            'numberposts'    => 7,
             'category_name'  => 'kultura'
           ) );
         ?>

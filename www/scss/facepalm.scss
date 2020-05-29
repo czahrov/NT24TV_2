@@ -1260,8 +1260,16 @@ footer{
       padding-right: 0;
       margin: 2px;
 
-      @media( max-width: map-get($break,'lg') ){
-        margin: 0 -12px;
+    }
+
+    .slick{
+
+      [data-post-type="large"]{
+
+        @media( max-width: map-get($break,'lg') ){
+          margin: 0 -12px;
+        }
+
       }
 
     }
@@ -1279,7 +1287,7 @@ footer{
 
   }
 
-  &.tablet{
+  &:not(.desktop){
 
     .slick{
 

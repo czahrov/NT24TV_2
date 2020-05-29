@@ -213,19 +213,24 @@ $(function(){
 
     $(window)
     .resize(function(){
-      if ( window.innerWidth < 992 ) {
         if ( !slider.hasClass('slick-initialized' ) ) {
           // console.log('start');
           slider.slick(settings);
         }
 
-      }
-      else{
-        if( slider.hasClass('slick-initialized' ) ){
-          // console.log('stop');
-          slider.slick('unslick');
-        }
-      }
+      // if ( window.innerWidth < 992 ) {
+      //   if ( !slider.hasClass('slick-initialized' ) ) {
+      //     // console.log('start');
+      //     slider.slick(settings);
+      //   }
+      //
+      // }
+      // else{
+      //   if( slider.hasClass('slick-initialized' ) ){
+      //     // console.log('stop');
+      //     slider.slick('unslick');
+      //   }
+      // }
     })
     .resize();
 

@@ -12,7 +12,7 @@
   <div class="row no-gutters">
 
     <!-- Blog Entries Column -->
-    <div class="col-md-12">
+    <div class="col-12">
       <h5 class="title-sidebar">Najbardziej popularne</h5>
       <!-- Post -->
       <div class="slick row no-gutters najbardziej-popularne">

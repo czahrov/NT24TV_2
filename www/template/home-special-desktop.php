@@ -1,6 +1,6 @@
 <?php
   global $cat;
-  $posts_limit = 7;
+  $posts_limit = 6;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
     'numberposts'   => $posts_limit,
@@ -50,7 +50,7 @@
         <ul class="image-sidebar-section">
           <?php
             foreach ( array_slice( $items, 2 ) as $item) {
-              printPost( $item, 'side-special' );
+              printPost( $item, 'side-special', array( 'class' => '' ) );
             }
           ?>
         </ul>

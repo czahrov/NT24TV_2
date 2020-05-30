@@ -1509,21 +1509,15 @@ footer.smartphone .foot-content .row .logo_menu {
   border: none;
 }
 
-@media (min-width: 576px) {
-  #post .position-sticky {
-    margin-top: 30px;
-  }
-}
-
-@media (min-width: 992x) {
-  #post .position-sticky {
-    margin-top: 0px;
-  }
-}
-
 #post .video {
   height: 0;
   padding-bottom: 56.25%;
+}
+
+@media (max-width: 992px) {
+  #post .sidebar-list ul a:nth-child(n+7) {
+    display: none;
+  }
 }
 
 #post #more .link_post_small {

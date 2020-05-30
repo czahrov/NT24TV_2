@@ -128,7 +128,7 @@
 <div class="container">
   <div class="row no-gutters">
     <!-- comments -->
-    <div class="col-12 col-lg-8 single-post no-padding__">
+    <div class="col-12 col-lg-8 single-post">
       <div class="row no-gutters komentarze">
         <?php get_template_part("template/post-comments"); ?>
       </div>

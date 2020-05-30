@@ -624,6 +624,21 @@ iframe.wp-embedded-content {
   z-index: 100;
 }
 
+[id] .link_post.big.video .big-post {
+  height: initial;
+  padding: 0;
+  margin: 0;
+}
+
+[id] .link_post.big.video .big-post .post_news_big {
+  position: static;
+}
+
+[id] .link_post.big.video .title {
+  padding: 5px;
+  font-size: 0.8rem;
+}
+
 [id] .link_post .big-post .post_news_big span {
   padding: 15px;
   font-size: 1.3rem;
@@ -1163,6 +1178,10 @@ footer.smartphone .foot-content .row .logo_menu {
   #popularne.desktop .adbox {
     justify-content: flex-start;
   }
+}
+
+#popularne.desktop .link_post_small span {
+  font-size: 2rem;
 }
 
 #popularne:not(.desktop) .slick .adbox {

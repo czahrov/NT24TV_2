@@ -35,7 +35,7 @@ $items_pined = get_posts(array(
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big-special', array( 'class' => 'item no-padding' ) );
+          printPost( $items[0], 'big-special', array( 'class' => 'item no-padding', 'pasek' => $meta['pasek'][0] ) );
         ?>
         <!-- Mid post -->
         <?php

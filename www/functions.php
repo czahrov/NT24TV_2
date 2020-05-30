@@ -879,7 +879,7 @@
       return false;
     }
 
-    global $fp;
+    global $fp, $cat;
     $img = get_the_post_thumbnail_url( $item->ID, array( 640, 480 ) );
     $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
     $data = array_merge( array(
@@ -918,20 +918,22 @@
         // $data['title'] .= " " . printTags( $item->ID, true, false );
         if( get_post_format( $item ) == 'video' && get_field( 'home', $item->ID ) == 1 ){
           printf(
-            '<div class="link_post big fc-black col-12 col-sm-8 %s" data-post-type="%s">
-              <div class="big-post">
-                <div class="post_news_big">
-                  %s
+            '<div class="link_post big video fc-white col-12 col-md-8 %s" data-post-type="%s">
+              <div class="row no-gutters">
+                <div class="big-post col-9">
+                  <div class="post_news_big">
+                    %s
+                  </div>
                 </div>
+                <a href="%s" class="title fw-semibold col-3 bg-red" title="%s"> %s </a>
               </div>
-              <a href="%s" class="title fw-semibold" title="%6$s"> %s </a>
             </div>',
             $data['class'],
             $type,
-            $fp->embed_video_for_post( $item, array(), true ),
+            $fp->embed_video_for_post( $item, array('class'=>''), true ),
             $data['url'],
-            $item->post_title,
-            $data['title']
+            $data['title'],
+            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false )
           );
         }
         else{
@@ -960,20 +962,23 @@
         // $data['title'] .= " " . printTags( $item->ID, true, false );
         if( get_post_format( $item ) == 'video' && get_field( 'home', $item->ID ) == 1 ){
           printf(
-            '<div class="link_post big fc-white col-12 col-sm-8 %s" data-post-type="%s">
-              <div class="big-post">
-                <div class="post_news_big">
-                  %s
+            '<div class="link_post big video fc-white col-12 col-sm-8 %s" data-post-type="%s">
+              <div class="row no-gutters">
+                <div class="big-post col-9">
+                  <div class="post_news_big">
+                    %s
+                  </div>
                 </div>
+                <a href="%s" class="title fw-semibold col-3" style="background-color:%s" title="%s"> %s </a>
               </div>
-              <a href="%s" class="title fw-semibold padding no-padding-md" title="%6$s"> %s </a>
             </div>',
             $data['class'],
             $type,
-            $fp->embed_video_for_post( $item, array(), true ),
+            $fp->embed_video_for_post( $item, array('class'=>''), true ),
             $data['url'],
-            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
-            $data['title']
+            $data['pasek'],
+            $data['title'],
+            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false )
           );
         }
         else{
@@ -1062,7 +1067,7 @@
           $data['url'],
           $type,
           $data['img'],
-          $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
+          $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
@@ -1082,7 +1087,7 @@
           $data['url'],
           $type,
           $data['img'],
-          $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
+          $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
@@ -1124,7 +1129,7 @@
           $data['url'],
           $type,
           $data['img'],
-          $fp->cutText( $data['title'] ) . " " . printTags( $item->ID, true, true ),
+          $fp->cutText( $data['title'], 10 ) . " " . printTags( $item->ID, true, true ),
           $data['title']
         );
         break;

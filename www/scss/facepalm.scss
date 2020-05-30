@@ -360,6 +360,28 @@ iframe.wp-embedded-content{
       position: relative;
       padding: 0 10px 0 0;
       z-index: 100;
+
+      &.video{
+
+        .big-post{
+          height: initial;
+          padding: 0;
+          margin: 0;
+
+          .post_news_big{
+            position: static;
+          }
+
+        }
+
+        .title{
+          padding: 5px;
+          font-size: 0.8rem;
+
+        }
+
+      }
+
     }
 
     .big-post{
@@ -1280,6 +1302,15 @@ footer{
 
       @media(min-width: map-get($break,'lg')){
         justify-content: flex-start;
+
+      }
+
+    }
+
+    .link_post_small{
+
+      span{
+        font-size: 2rem;
 
       }
 

@@ -170,10 +170,11 @@
             }
 
             $player_html = sprintf(
-              '<video class="player" controls="%u" autoplay="%u" %s>
+              '<video class="player %s" controls="%u" autoplay="%u" %s>
                 <source src="%s" type="%s"/>
                 Twoja przeglądarka nie obsługuje odtwarzacza mediów HTML5
               </video>',
+              $options['class'],
               $attributes['controls'],
               $attributes['autoplay'],
               implode( ' ', $atts ),
@@ -209,7 +210,8 @@
 
             // generate HTML for youtube player
             $player_html = sprintf(
-              '<div class="player" %s></div>',
+              '<div class="player %s" %s></div>',
+              $options['class'],
               implode( ' ', $atts )
             );
             break;

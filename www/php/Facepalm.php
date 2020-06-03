@@ -253,6 +253,26 @@
       if( strlen($text) > strlen($ret) ) $ret .= '(...)';
       return $ret;
     }
-    
+
+    public function mobile_detect_ios_helper(){
+      $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+      // detecting mobile
+      $mobile_pattern = "~iPhone~i";
+      preg_match( $mobile_pattern, $user_agent, $mobile );
+      if ( !empty( $mobile ) ) {
+        return 'mobile';
+      }
+      // detecting tablet
+
+      $tablet_pattern = "~iPad~i";
+      preg_match( $tablet_pattern, $user_agent, $mobile );
+      if ( !empty( $mobile ) ) {
+        return 'tablet';
+      }
+
+      return false;
+    }
+
   }
 ?>

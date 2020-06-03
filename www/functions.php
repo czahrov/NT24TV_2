@@ -12,9 +12,21 @@
   ));
 
   // Facepalm
-  include_once( get_template_directory() . '/php/Facepalm.php' );
+  function get_facepalm(){
+    static $handler = null;
+
+    if( !class_exists('Facepalm') ){
+      include_once( get_template_directory() . '/php/Facepalm.php' );
+    }
+
+    if( $handler == null ) {
+      $handler = new Facepalm();
+    }
+
+    return $handler;
+  }
   global $fp;
-  $fp = new Facepalm();
+  $fp = get_facepalm();
 
   // modyfikacja sposobu wyświetlania autora wpisu
   add_filter( 'custom_author', function( $arg ){
@@ -709,9 +721,10 @@
 
     if ( $devType == null ) {
       $detect = new Mobile_Detect();
+      $helper = get_facepalm()->mobile_detect_ios_helper();
 
-      if ( $detect->isMobile() ) {
-        if ( $detect->isTablet() ) {
+      if ( $detect->isMobile() || $helper == 'mobile' ) {
+        if ( $detect->isTablet() || $helper == 'tablet' ) {
           $devType = 'tablet';
         }
         else{

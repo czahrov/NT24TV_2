@@ -8,7 +8,7 @@
   // $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
   // $bgimg = !$thumb?( get_template_directory_uri() . "/images/page.jpg" ):( $thumb );
 ?>
-<div id="tablice" class="">
+<div id="tablice" class="<?php echo getDevType(); ?> padding-md">
   <div class="container">
     <div class="row no-gutters">
       <div class="content padding col-12 col-lg-8">
@@ -107,7 +107,7 @@
       </div>
       <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
         <div class="col-12 col-sm col-lg-12">
-          <?php echo printAd('v-l'); ?>
+          <?php echo printAd( 'v-l', false, array( 'class' => 'padding-md' ) ); ?>
         </div>
         <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
           <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>

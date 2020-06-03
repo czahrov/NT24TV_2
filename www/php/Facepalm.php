@@ -83,6 +83,7 @@
   }
 
     public function printUGalleryFromArray( $imgs = array(), $echo = true ){
+      if( count($imgs) == 0 ) return;
       $ret = "<div id='UGallery' style='display:none'>";
 
       foreach ( $imgs as $img ) {
@@ -252,6 +253,6 @@
       if( strlen($text) > strlen($ret) ) $ret .= '(...)';
       return $ret;
     }
-
+    
   }
 ?>

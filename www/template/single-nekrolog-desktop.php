@@ -1,4 +1,6 @@
-<?php global $fp; ?>
+<?php
+  global $fp, $comments_num, $last_comment;
+?>
 <div class="container">
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
@@ -77,48 +79,34 @@
           ?>
         </div>
         <?php
-          if( empty( $yt ) ){
-            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-            $img = $thumb !== false?( $thumb ):( $thumb_alt );
+        if( empty( $yt ) ){
+          $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+          $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+          $img = $thumb !== false?( $thumb ):( $thumb_alt );
 
-            if ( $img !== false ) {
-              printf(
-                '<img class="img-fluid" src="%s" alt="%s"/>',
-                $img,
-                $post->post_title
-              );
-            }
+          if ( $img !== false ) {
+            printf(
+              '<img class="img-fluid" src="%s" alt="%s"/>',
+              $img,
+              $post->post_title
+            );
           }
+        }
         ?>
         <?php the_content(); ?>
+
       </div>
       <!-- /content -->
     </div>
     <!-- sidebar -->
     <!-- Sidebar Column -->
-    <div class="col-12 col-lg-4">
-      <div class="sidebar position-sticky row no-gutters justify-content-start">
-        <div class="col-12 col-sm-6 col-lg-12">
-          <?php echo printAd('v-l'); ?>
-        </div>
-        <!-- Sidebar Column -->
-        <div class="col-12 col-sm-6 col-md">
-          <!-- <div class="reklama-sidebar">
-            <div class="reklama">Reklama 400x700px</div>
-          </div> -->
-          <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
-          <!-- /Będzie się działo-->
-        </div>
-        <!-- /.row -->
-
+    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+      <div class="col-12 col-sm col-lg-12">
+        <?php echo printAd( 'v-l', false, array( 'class'=> 'padding' ) ); ?>
       </div>
-      <!-- <div class="reklama-sidebar">
-          <div class="reklama">Reklama 400x700px</div>
-      </div> -->
-      <!-- <div class="reklama-sidebar sticky">
-          <div class="reklama">Reklama 400x700px</div>
-      </div> -->
+      <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+        <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
+      </div>
     </div>
   </div>
   <!-- /.row -->
@@ -128,24 +116,10 @@
 <div class="container">
   <div class="row no-gutters">
     <!-- comments -->
-    <div class="col-12">
+    <div class="col-12 single-post">
       <?php get_template_part("template/post-more-nekrolog-desktop"); ?>
     </div>
     <!-- /col-8 -->
-    <div class="col-12 col-lg-4">
-      <div class="sidebar position-sticky row no-gutters justify-content-start">
-        <!-- Sidebar Column -->
-        <div class="col-12 col-sm-6 col-md">
-          <!-- <div class="reklama-sidebar">
-            <div class="reklama">Reklama 400x700px</div>
-          </div> -->
-
-          <!-- /Będzie się działo-->
-        </div>
-        <!-- /.row -->
-
-      </div>
-    </div>
     <!-- /.row -->
   </div>
   <!-- /.container -->

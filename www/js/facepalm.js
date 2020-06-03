@@ -5,9 +5,9 @@ $(function(){
   .each(function(){
     let _ = $(this);
     _.on({
-      click: function(e){7
+      click: function(e){
         // let items = _.prevAll('.mid_post').find('.item');
-        let items = _.parent('.items').find('.item');
+        let items = _.parents('.items:first').find('.item');
         let root = items.first().parent();
 
         let query_parts = {
@@ -61,7 +61,7 @@ $(function(){
         }
 
         let query_string = query.join('&');
-        console.log( [query_parts, query, query_string] );
+        console.log({query_parts:query_parts, query:query, query_string:query_string});
 
         $(this).addClass('loading');
 
@@ -70,7 +70,7 @@ $(function(){
           url: '/api?' + query_string,
           success: function( data, status, xhr ) {
             let posts = JSON.parse( data );
-            console.log( [ status, posts, xhr ] );
+            console.log({status:status, posts:posts, xhr:xhr});
 
             if ( posts.length < 12 ){
               _.hide();
@@ -82,7 +82,7 @@ $(function(){
               t.find('a').attr( 'href', item.url );
               t.find('.cover_img')
               .css( 'background-image', 'url('+item.img+')' );
-              t.find('.small-post > span').html( item.title.replace( /\\/g, '' ) );
+              t.find('.small-post span').html( item.title.replace( /\\/g, '' ) );
               // root.append(t);
               _.before(t);
               // $('#btn_more').before( t );

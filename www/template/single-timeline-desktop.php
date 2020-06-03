@@ -1,4 +1,6 @@
-<?php global $fp; ?>
+<?php
+  global $fp, $comments_num, $last_comment;
+?>
 <div class="container">
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
@@ -8,20 +10,20 @@
       <div class="before-content">
         <div class="author_date_tags">
           <?php
-          $segments = array(
-            "<span class='date'>".get_the_date().' '.get_the_time()."</span>",
-            printImportant( get_the_id(), false ),
-            printFresh( get_the_id(), false ),
-            printHot( get_the_id(), false ),
-            getPostViews( get_post()->ID )
-          );
+            $segments = array(
+              "<span class='date'>".get_the_date().' '.get_the_time()."</span>",
+              printImportant( get_the_id(), false ),
+              printFresh( get_the_id(), false ),
+              printHot( get_the_id(), false ),
+              getPostViews( get_post()->ID )
+            );
 
-          echo implode(
-            '<span class="separator"></span>',
-            array_filter( $segments, function( $item ){
-              return !empty( $item );
-            } )
-          );
+            echo implode(
+              '<span class="separator"></span>',
+              array_filter( $segments, function( $item ){
+                return !empty( $item );
+              } )
+            );
           ?>
         </div>
         <div class="share_comment row justify-content-between">
@@ -66,7 +68,7 @@
         </div>
       </div>
       <!-- /before content -->
-      <div class="content main padding no-padding-xl">
+      <div class="content main padding-md">
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <?php
             // echo $fp->genYoutubeVideo( $yt );
@@ -111,13 +113,6 @@
       </div>
       <!-- timeline -->
       <style type="text/css">
-        span.date {
-          font-weight: 800;
-          position: relative;
-          color: #000;
-          padding-left: 30px;
-          }
-
         #live {
           background-color: #fff;
         }
@@ -134,6 +129,13 @@
 
         .timeline{
           max-width: 100%;
+        }
+
+        .timeline .date {
+          font-weight: 800;
+          position: relative;
+          color: #000;
+          padding-left: 10px;
         }
 
         .timeline img{
@@ -155,10 +157,12 @@
 
         .timeline .message {
           border-left: 1px dashed #dcdcdc;
+          margin: 0 10px;
+          padding-bottom: 10px;
         }
 
         .timeline .message p {
-          padding: 10px 0 0 30px;
+          padding: 10px 0 0 10px;
         }
 
         .timeline ul {
@@ -167,7 +171,7 @@
         }
 
         .timeline ul li {
-          padding: 20px 0;
+          /* padding: 20px 0; */
           list-style-type: none;
         }
 
@@ -259,17 +263,17 @@
         }
 
       </style>
-      <div class="timeline padding">
+      <div class="timeline padding-md">
         <ul>
           <?php while (has_sub_field('timeline_items')): ?>
-            <div class="message">
-              <li>
+            <li>
+              <div class="message">
                 <span class="date">
                   <?php the_sub_field('timeline_date'); ?>
                 </span>
                 <?php the_sub_field('timeline_content'); ?>
-              </li>
-            </div>
+              </div>
+            </li>
           <?php endwhile; ?>
         </ul>
       </div>
@@ -277,24 +281,12 @@
     </div>
     <!-- sidebar -->
     <!-- Sidebar Column -->
-    <div class="col-12 col-lg-4">
-      <div class="sidebar row no-gutters justify-content-start">
-        <div class="col-12 col-sm-6 col-lg-12">
-          <?php echo printAd('v-l'); ?>
-        </div>
+    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+      <div class="col-12 col-sm col-lg-12">
+        <?php echo printAd( 'v-l', false, array( 'class' => 'padding' ) ); ?>
       </div>
-      <div class="sidebar position-sticky row no-gutters justify-content-start">
-        <!-- Sidebar Column -->
-        <div class="col-12 col-sm-6 col-md">
-          <!-- <div class="reklama-sidebar">
-            <div class="reklama">Reklama 400x700px</div>
-          </div> -->
-          <div class="position-sticky">
-            <?php get_template_part('template/sidebar-popularne-desktop'); ?>
-          </div>
-          <!-- /Będzie się działo-->
-        </div>
-        <!-- /.row -->
+      <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+        <?php get_template_part('template/sidebar-popularne-desktop'); ?>
       </div>
     </div>
   </div>

@@ -638,6 +638,8 @@ ul.image-sidebar-section {
     width: 100%;
     font-family: $font-regular;
     font-size: 1.1rem;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
 
     & li {
       display: flex;
@@ -685,12 +687,6 @@ ul.image-sidebar-section {
         position: relative;
         background-size: cover;
       }
-    }
-
-    &:not(:last-child){
-      padding-bottom: 5px;
-      margin-bottom: 5px;
-
     }
 
   }

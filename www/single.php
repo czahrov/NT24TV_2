@@ -24,7 +24,7 @@
   ));
 ?>
 <!-- Page Content -->
-<div id='post' class="<?php echo getDevType() . " " . get_category( $post_categories[0] )->slug; ?>">
+<div id='post' class="<?php echo getDevType() . " " . get_category( end($post_categories) )->slug; ?>">
   <?php
     // var_dump( $categories );
     if( in_array( get_category_by_slug('nekrologi')->cat_ID, $post_categories ) ){

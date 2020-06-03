@@ -644,6 +644,10 @@ iframe.wp-embedded-content {
   font-size: 1.3rem;
 }
 
+[id] .sidebar-list ul a {
+  border-bottom: dashed 1px #ccc;
+}
+
 [id] .sidebar-list ul a li {
   border: none;
   padding: 0;
@@ -655,10 +659,6 @@ iframe.wp-embedded-content {
 
 [id] .sidebar-list ul a li span {
   padding-left: 0;
-}
-
-[id] .sidebar-list ul a:not(:last-child) {
-  border-bottom: dashed 1px #ccc;
 }
 
 [id] .sidebar-list .title-sidebar {
@@ -1276,37 +1276,22 @@ footer.smartphone .foot-content .row .logo_menu {
   }
 }
 
-#category .item {
-  border: solid 1px #fff;
-}
-
-@media (max-width: 991px) {
-  #category .item:nth-child(2n) {
-    border-right-width: 0;
-  }
-  #category .item:nth-child(2n+1) {
-    border-left-width: 0;
-  }
-}
-
-@media (min-width: 992px) {
-  #category .item:nth-child(3n) {
-    border-right-width: 0;
-  }
-  #category .item:nth-child(3n+1) {
-    border-left-width: 0;
-  }
-}
-
-#category.nekrologi .mid_post .item .post_news_small {
-  height: 330px;
+#category.nekrologi .items .item .post_news_small {
+  padding-bottom: 150%;
   background-color: transparent;
 }
 
-#category.nekrologi .mid_post .item .post_news_small .cover_img {
+#category.nekrologi .items .item .post_news_small .cover_img {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 992px) {
+  #category.nekrologi .image-sidebar-section ul a:nth-child(n+9),
+  #category.nekrologi .sidebar-list ul a:nth-child(n+9) {
+    display: none;
+  }
 }
 
 #category.galeria .cover_img {
@@ -1330,6 +1315,11 @@ footer.smartphone .foot-content .row .logo_menu {
   margin-right: 10px;
 }
 
+#category.galeria .image-sidebar-section ul a:nth-child(n+9),
+#category.galeria .sidebar-list ul a:nth-child(n+9) {
+  display: none;
+}
+
 #category .noposts {
   margin: 50px 0;
 }
@@ -1342,8 +1332,46 @@ footer.smartphone .foot-content .row .logo_menu {
   margin: 0;
 }
 
+#category .mid_post .item {
+  border: solid 1px transparent;
+}
+
 #category.desktop .link_post.big {
-  margin: 0 0 30px;
+  margin: 0 0 10px;
+}
+
+@media (max-width: 992px) and (orientation: portrait) {
+  #category.desktop:not(.nekrologi) .image-sidebar-section ul a:nth-child(n+7),
+  #category.desktop:not(.nekrologi) .sidebar-list ul a:nth-child(n+7) {
+    display: none;
+  }
+}
+
+#category.tablet .link_post.big {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 992px) and (orientation: portrait) {
+  #category.tablet .image-sidebar-section ul a:nth-child(n+8),
+  #category.tablet .sidebar-list ul a:nth-child(n+8) {
+    display: none;
+  }
+}
+
+#category.smartphone .link_post.big {
+  padding: 0px;
+  margin: 0 0 2px;
+}
+
+#category.smartphone .items .item {
+  border: solid 1px transparent;
+}
+
+@media (max-width: 992px) and (orientation: landscape) {
+  #category.smartphone .image-sidebar-section ul a:nth-child(n+5),
+  #category.smartphone .sidebar-list ul a:nth-child(n+5) {
+    display: none;
+  }
 }
 
 #UGallery {
@@ -1514,12 +1542,6 @@ footer.smartphone .foot-content .row .logo_menu {
   padding-bottom: 56.25%;
 }
 
-@media (max-width: 992px) {
-  #post .sidebar-list ul a:nth-child(n+7) {
-    display: none;
-  }
-}
-
 #post #more .link_post_small {
   padding: 0 5px;
 }
@@ -1541,6 +1563,16 @@ footer.smartphone .foot-content .row .logo_menu {
   }
 }
 
+#post.nekrologi .post_news_small {
+  background-color: transparent;
+  padding-bottom: 100%;
+}
+
+#post.nekrologi .post_news_small .cover_img {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 #post.smartphone #video.pop {
   bottom: 40px;
 }
@@ -1550,8 +1582,49 @@ footer.smartphone .foot-content .row .logo_menu {
   padding: 10px 0;
 }
 
+@media (max-width: 992px) and (orientation: landscape) {
+  #post.smartphone .image-sidebar-section ul a:nth-child(n+5),
+  #post.smartphone .sidebar-list ul a:nth-child(n+5) {
+    display: none;
+  }
+}
+
+@media (orientation: landscape) {
+  #post.tablet.nekrologi .sidebar-list ul a:nth-child(n+9) {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) and (orientation: portrait) {
+  #post.tablet .image-sidebar-section ul a:nth-child(n+7),
+  #post.tablet .sidebar-list ul a:nth-child(n+7) {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  #post.desktop .sidebar-list ul a:nth-child(n+7) {
+    display: none;
+  }
+}
+
+#post.desktop #video:not(.pop) {
+  margin-bottom: 30px;
+}
+
+#post.desktop .zajawka {
+  margin-bottom: 30px;
+}
+
 #post:not(.desktop) #video.pop {
   bottom: 40px;
+}
+
+@media (max-width: 992px) {
+  #tablice .image-sidebar-section ul a:nth-child(n+8),
+  #tablice .sidebar-list ul a:nth-child(n+8) {
+    display: none;
+  }
 }
 
 #page .banner {
@@ -1582,7 +1655,7 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 #page #kamery .item {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 #page #kamery .item .iframe_wrapper {
@@ -1615,6 +1688,27 @@ footer.smartphone .foot-content .row .logo_menu {
 @media (min-width: 992px) {
   #page.kamery .sidebar {
     padding-top: 15px;
+  }
+}
+
+@media (max-width: 992px) and (orientation: landscape) {
+  #page.smartphone .image-sidebar-section ul a:nth-child(n+6),
+  #page.smartphone .sidebar-list ul a:nth-child(n+6) {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) and (orientation: portrait) {
+  #page.tablet .image-sidebar-section ul a:nth-child(n+7),
+  #page.tablet .sidebar-list ul a:nth-child(n+7) {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) and (orientation: landscape) {
+  #page.tablet .image-sidebar-section ul a:nth-child(n+9),
+  #page.tablet .sidebar-list ul a:nth-child(n+9) {
+    display: none;
   }
 }
 

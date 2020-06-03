@@ -1,51 +1,33 @@
 <?php get_header(); ?>
 <?php
   $devType = getDevType();
-  $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
+  preg_match( '~^([^\?]+)~', $_SERVER['REQUEST_URI'], $match );
+  $category = get_category_by_path( $match[1], false );
+  $post_limit = 12;
   $posts = get_posts(array(
-    'numberposts'   => 12,
+    'numberposts'   => $post_limit,
     'cat'           => $category->cat_ID,
   ));
 ?>
 <!-- Page Content -->
-<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container">
-    <div class="row no-gutters">
-        <!-- Blog Entries Column -->
-        <div class="col-sm col-12">
-            <!-- Title -->
-            <h5 class="title-sidebar">
-              <?php echo $category->name; ?>
-            </h5>
+<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container padding-md">
+  <div class="row no-gutters">
+      <!-- Blog Entries Column -->
+      <div class="col-12 col-sm">
+        <!-- Title -->
+        <h5 class="title-sidebar">
+          <?php echo $category->name; ?>
+        </h5>
+        <?php if ( !empty( $posts) ): ?>
+          <div class="items row no-gutters">
             <!-- MID POSTS -->
-            <div id="" class="mid_post row no-gutters">
-              <?php
-                foreach ( $posts as $num => $item ){
-                  $thumb = get_post_meta( $item->ID, 'thumb', true );
-                  $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
-
-                  printf(
-                    '<div class="item col-6 col-lg-4" data-thumb="%5$s" data-img="%6$s">
-                      <a href="%1$s" class="link_post_small">
-                        <div class="small-post">
-                          <div class="post_news_small">
-                            <div class="cover_img img2" style="background-image:url(%2$s);"></div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>',
-                    get_permalink( $item->ID ),
-                    strlen( $thumb )?( get_template_directory_uri() . "/joomla_import/" . $thumb ):( $img ),
-                    '',
-                    '',
-                    $thumb,
-                    $img
-                  );
-                }
-              ?>
-              </button>
-            </div>
-            <?php if ( count($posts) == 12 ): ?>
-              <button id="btn_more" type="button" name="button" class="col-12 fp-btn btn-more fw-bold position-relative" data-cmd="posts">
+            <?php
+              foreach ( $posts as $num => $item ){
+                printPost( $item, 'mid', array( 'class'=> 'item' ) );
+              }
+            ?>
+            <?php if ( count($posts) == $post_limit ): ?>
+              <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
                 <div class="spinner position-absolute">
                   <div class="box position-absolute"> </div>
                 </div>
@@ -53,21 +35,26 @@
               </button>
             <?php endif; ?>
             <!-- /row-->
-            <!-- /before content -->
-        </div>
-        <!-- / col -->
-        <!-- Sidebar Column -->
-        <div class="col-md-4 sidebar-list">
-          <div class="sidebar row no-gutters d-md-block justify-content-center">
-            <div class="col-12 col-sm-6 col-md">
-              <?php echo printAd('v-l'); ?>
-            </div>
           </div>
-          <div class="sidebar position-sticky row no-gutters d-md-block justify-content-center">
-            <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
+          <!-- /before content -->
+        <?php else: ?>
+          <div class="noposts text-center text-uppercase fw-bold">
+            Ta kategoria nie posiada jeszcze wpisów do wyświetlenia :(
           </div>
+        <?php endif; ?>
+
+      </div>
+      <!-- / col -->
+      <!-- Sidebar Column -->
+      <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+        <div class="col-12 col-sm col-lg-12">
+          <?php echo printAd('v-l'); ?>
         </div>
-    </div>
+        <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+          <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
+        </div>
+      </div>
+  </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->

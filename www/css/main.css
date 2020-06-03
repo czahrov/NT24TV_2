@@ -515,6 +515,8 @@ ul.image-sidebar-section a {
   width: 100%;
   font-family: "open_sansregular";
   font-size: 1.1rem;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 ul.image-sidebar-section a li {
@@ -560,11 +562,6 @@ ul.image-sidebar-section a .image-container .image {
   background-position: center;
   position: relative;
   background-size: cover;
-}
-
-ul.image-sidebar-section a:not(:last-child) {
-  padding-bottom: 5px;
-  margin-bottom: 5px;
 }
 
 .najbardziej-popularne .link_post_small span {

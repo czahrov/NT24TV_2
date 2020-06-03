@@ -11,7 +11,7 @@
 
 	) );
 ?>
-<div id="page" class="<?php echo get_post()->post_name; ?>">
+<div id="page" class="<?php echo get_post()->post_name; ?> <?php echo getDevType() ?> padding-md">
   <div class="container">
     <div class="row no-gutters">
       <div class="content col-12 col-lg-8">

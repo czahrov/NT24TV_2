@@ -1,15 +1,16 @@
 <?php get_header(); ?>
 <?php
   global $fp;
-  $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
+  preg_match( '~^([^\?]+)~', $_SERVER['REQUEST_URI'], $match );
+  $category = get_category_by_path( $match[1], false );
   $posts = get_posts(array(
     // 'numberposts'   => 13,
     'cat'           => $category->cat_ID,
   ));
 ?>
 <!-- Page Content -->
-<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container">
-  <div class="row">
+<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container padding-md">
+  <div class="row no-gutters">
     <div class="col">
       <h5 class="title-sidebar">
         Galeria zdjęć
@@ -17,7 +18,7 @@
     </div>
   </div>
   <div class="row no-gutters">
-    <div class="col-12 col-sm">
+    <div class="col-12">
       <?php if ( !empty( $posts ) ): ?>
         <!-- MID POSTS -->
         <div class="mid_post row no-gutters">
@@ -62,11 +63,11 @@
       <?php endif; ?>
     </div>
     <!-- Sidebar Column -->
-    <div class="sidebar col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
-      <div class="col-12 col-sm col-lg-12">
+    <div class="sidebar col-12 row no-gutters padding-lg">
+      <div class="col-12 col-sm-4">
         <?php echo printAd('v-l'); ?>
       </div>
-      <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+      <div class="position-sticky col-12 col-sm-8">
         <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
       </div>
     </div>

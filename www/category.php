@@ -1,12 +1,13 @@
 <?php get_header(); ?>
 <?php
-  $category = get_category_by_path( $_SERVER['REQUEST_URI'], false );
+  preg_match( '~^([^\?]+)~', $_SERVER['REQUEST_URI'], $match );
+  $category = get_category_by_path( $match[1], false );
   switch ( getDevType() ) {
     case 'smartphone':
-      $post_limit = 15;
+      $post_limit = 13;
       break;
     case 'tablet':
-      $post_limit = 17;
+      $post_limit = 20;
       break;
     case 'desktop':
       $post_limit = 17;
@@ -21,7 +22,7 @@
   ));
 ?>
 <!-- Page Content -->
-<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container">
+<div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container padding-md">
     <?php if (DBG): ?>
       <div class="debug _posts">
         <!--

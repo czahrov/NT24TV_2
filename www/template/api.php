@@ -10,6 +10,10 @@
     exit;
   }
 
+  // include( get_template_directory() . '/php/Facepalm.php' );
+  // global $fp;
+  // var_dump( $fp );
+  // $fp = new Facepalm();
 
   switch ( $_GET['cmd'] ) {
     case 'posts':
@@ -30,11 +34,13 @@
 
       $ret = array_map( function( $item ){
         $title = addslashes( $item->post_title ) . printTags( $item->ID, true, $isSpecialCategory );
+        // $short_title = $fp->cutText( addslashes( $item->post_title ), 10 ) . printTags( $item->ID, true, $isSpecialCategory );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
         $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
         $url = get_permalink( $item );
         return array(
           'title' => trim( $title ),
+          // 'short_title' => trim( $short_title ),
           'url'   => $url,
           'img'   => $img !== false?( $img ):( $thumb ),
         );

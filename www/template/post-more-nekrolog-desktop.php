@@ -7,10 +7,11 @@
 <div class="clear-top"></div>
 <h5 class="title-sidebar">Zobacz również</h5>
 <div id='more' class="">
-  <div class="mid_post row no-gutters">
+  <div class="mid_post items row no-gutters">
     <?php
+      $post_limit = 12;
       $items = get_posts(array(
-        'numberposts'   => 12,
+        'numberposts'   => $post_limit,
         'exclude'       => array( get_the_ID() ),
         'orderby'       => 'random',
         'category'      => $category->cat_ID,
@@ -18,28 +19,18 @@
     ?>
     <!-- post -->
     <?php
-    foreach ($items as $item) {
-      printf(
-        '<div class="item col-6 col-md-4 col-lg-3">
-          <a href="%1$s" class="link_post_small">
-            <div class="small-post">
-              <div class="post_news_small">
-                <div class="cover_img img2" style="background-image:url(%2$s)"></div>
-              </div>
-            </div>
-          </a>
-        </div>',
-        get_permalink( $item->ID ),
-        get_the_post_thumbnail_url( $item->ID, 'medium' )
-      );
-    }
+      foreach ($items as $item) {
+        printPost( $item, 'mid', array( 'class'=> 'item' ) );
+      }
     ?>
+    <?php if ( count($items) == $post_limit ): ?>
+      <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
+        <div class="spinner position-absolute">
+          <div class="box position-absolute"> </div>
+        </div>
+        Załaduj więcej
+      </button>
+    <?php endif; ?>
   </div>
-  <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug ?>">
-    <div class="spinner position-absolute">
-      <div class="box position-absolute"> </div>
-    </div>
-    Załaduj więcej
-  </button>
 </div>
 <!-- /row-->

@@ -713,7 +713,6 @@
       if ( $detect->isMobile() ) {
         if ( $detect->isTablet() ) {
           $devType = 'tablet';
-          // $devType = 'desktop';
         }
         else{
           $devType = 'smartphone';

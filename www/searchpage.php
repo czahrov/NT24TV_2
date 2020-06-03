@@ -12,7 +12,7 @@
     // 'orderby'     => 'title',
   ));
 ?>
-<div id="search" class="container">
+<div id="search" class="<?php echo getDevType(); ?> container padding-md">
   <h5 class="title-sidebar">
     <?php echo "Wyszukiwana fraza: '{$search}'"; ?>
   </h5>

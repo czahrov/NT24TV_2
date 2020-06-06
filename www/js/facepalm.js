@@ -1,4 +1,79 @@
 $(function(){
+  const DBG = true;
+
+  // obsługa menu
+  (function(menu, view, stack, more, dots ){
+    menu
+    .on({
+      adjust: function(e){
+        if (DBG) console.log('adjust');
+        let avail_width = ()=>{ return view.outerWidth() };
+        let view_items_width = () => {
+          if ( !view.children('.item').length ) return 0;
+          let last_item = view.children('.item:last');
+          return last_item.position().left + last_item.outerWidth();
+        };
+
+        // przywracanie elementów ze stacku
+        dots.hide();
+        view.append( stack.children('.item').detach() );
+
+        // przenoszenie elementów do stacku
+        while( view_items_width() > avail_width() ){
+          // if (DBG) console.log({
+          //   view_items_width: view_items_width(),
+          //   avail_width: avail_width(),
+          // });
+          let detached_item = view.children('.item:last').detach();
+          stack.prepend( detached_item );
+        }
+
+        // przełączanie widoczności stacku
+        if ( stack.children('.item').length ) {
+          dots.show();
+        }
+        else{
+          dots.hide();
+        }
+
+        // zmiana wyświetlania listy
+        if ( stack.children('.item').length < 3 ) {
+          stack.addClass('small');
+        }
+        else {
+          stack.removeClass('small');
+        }
+      },
+    });
+
+    // dostosowywanie menu przy zmianach rozdzielczości
+    var resize_lock = false;
+    $(window).resize((e)=>{
+      if (DBG) console.log({resize_lock_status: resize_lock});
+      if( !resize_lock ){
+        resize_lock = true;
+        // if (DBG) console.log('resize_lock on!');
+        window.setTimeout(()=>{
+          menu.triggerHandler('adjust');
+          resize_lock = false;
+          // if (DBG) console.log('resize_lock off!');
+        },300);
+      }
+    })
+    .resize();
+
+    // obsługa przełączania widoczności kropek
+    more.click(function(e){
+      $(this).toggleClass('open');
+    });
+
+  })(
+    $('#main_menu'),
+    $('#main_menu .view'),
+    $('#main_menu .stack'),
+    $('#main_menu .more'),
+    $('#main_menu .more .dots')
+  );
 
   // obsługa przycisku ładowania kolejnych wpisów w kategorii
   $('body #btn_more')
@@ -13,7 +88,7 @@ $(function(){
         let query_parts = {
           cmd: ()=>{
             let val = _.attr('data-cmd');
-            console.log( val );
+            if (DBG) console.log( val );
             if ( val !== undefined ) {
               return val;
             }
@@ -61,7 +136,7 @@ $(function(){
         }
 
         let query_string = query.join('&');
-        console.log({query_parts:query_parts, query:query, query_string:query_string});
+        if (DBG) console.log({query_parts:query_parts, query:query, query_string:query_string});
 
         $(this).addClass('loading');
 
@@ -70,19 +145,22 @@ $(function(){
           url: '/api?' + query_string,
           success: function( data, status, xhr ) {
             let posts = JSON.parse( data );
-            console.log({status:status, posts:posts, xhr:xhr});
+            if (DBG) console.log({status:status, posts:posts, xhr:xhr});
 
             if ( posts.length < 12 ){
               _.hide();
             }
 
             posts.splice( 0, 12 ).forEach( (item)=>{
-              // console.log( [item] );
+              // if (DBG) console.log( [item] );
               let t = items.last().clone();
-              t.find('a').attr( 'href', item.url );
+              t.find('a').attr({
+                href: item.url,
+                title: item.title,
+              });
               t.find('.cover_img')
               .css( 'background-image', 'url('+item.img+')' );
-              t.find('.small-post span').html( item.title.replace( /\\/g, '' ) );
+              t.find('.small-post span').html( item.short_title.replace( /\\/g, '' ) );
               // root.append(t);
               _.before(t);
               // $('#btn_more').before( t );
@@ -90,10 +168,10 @@ $(function(){
 
           },
           error: function( xhr, status, error ){
-            console.error( [status, error] );
+            if (DBG) console.error( [status, error] );
           },
           complete: function( xhr, status ){
-            // console.log( [status, xhr] );
+            // if (DBG) console.log( [status, xhr] );
             _.removeClass('loading').blur();
 
           },
@@ -211,28 +289,9 @@ $(function(){
       ],
     };
 
-    $(window)
-    .resize(function(){
-        if ( !slider.hasClass('slick-initialized' ) ) {
-          // console.log('start');
-          slider.slick(settings);
-        }
-
-      // if ( window.innerWidth < 992 ) {
-      //   if ( !slider.hasClass('slick-initialized' ) ) {
-      //     // console.log('start');
-      //     slider.slick(settings);
-      //   }
-      //
-      // }
-      // else{
-      //   if( slider.hasClass('slick-initialized' ) ){
-      //     // console.log('stop');
-      //     slider.slick('unslick');
-      //   }
-      // }
-    })
-    .resize();
+    if ( !slider.hasClass('slick-initialized' ) ) {
+      slider.slick(settings);
+    }
 
   })(
     $('#popularne .slick'),

@@ -19,10 +19,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <META NAME="robots" CONTENT="noindex">
-  <META NAME="robots" CONTENT="nofollow">
-  <META NAME="robots" CONTENT="noindex,nofollow">
-
   <meta name="theme-color" content="#e3000f" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -139,7 +135,44 @@
       </div>
     </div>
   </section>
-  <nav class="navbar navbar-expand-xl navbar-dark bg-white sticky-menu">
+  <div id="main_menu" class="container">
+    <a href="<?php echo home_url(); ?>" class="logo d-xl-none">
+      <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
+    </a>
+    <nav class="padding no-padding-xl">
+      <ul class="items view">
+        <?php
+          $toPrint = array();
+          foreach ( wp_get_nav_menu_items('glowne-menu') as $item ){
+            $isActive = false;
+            $currentLink = sprintf(
+              '%s://%s%s',
+              $_SERVER['REQUEST_SCHEME'],
+              $_SERVER['HTTP_HOST'],
+              $_SERVER['REQUEST_URI']
+            );
+
+            $isActive = $item->url == $currentLink;
+
+            printf(
+              '<li class="item %3$s %4$s">
+                <a class="red-link" href="%1$s"> %2$s </a>
+              </li>',
+              $item->url,
+              $item->title,
+              $isActive?( 'marker' ):( '' ),
+              implode( ' ', $item->classes )
+            );
+          }
+        ?>
+      </ul>
+      <div class="more">
+        <div class="dots"> ··· </div>
+        <ul class='items stack'> </ul>
+      </div>
+    </nav>
+  </div>
+  <nav class="navbar navbar-expand-xl navbar-dark bg-white sticky-menu" hidden>
     <div class="container">
       <a href="<?php echo home_url(); ?>" class="logo mr-auto no-mobile">
         <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
@@ -190,7 +223,7 @@
                 $item->title,
                 $isActive?( 'marker' ):( '' ),
                 implode( ' ', $item->classes ),
-                $ifo
+                $info
               );
 
               $toPrint[] = ob_get_contents();

@@ -906,7 +906,7 @@
       case 'large':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
-          '<div class="col-6 %s">
+          '<div class="col-12 col-md-6 %s">
             <a href="%s" class="link_post_small" data-post-type="%s" title="%5$s">
               <div class="small-post popular-post">
                 %s

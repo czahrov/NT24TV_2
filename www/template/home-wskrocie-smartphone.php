@@ -2,18 +2,17 @@
 <div id='wskrocie' class="<?php echo getDevType(); ?> container">
   <div class="row no-gutters">
     <div class="col-12">
-      <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
-        <h5 class="title-sidebar">Będzie się działo</h5>
+      <?php $category_bedzie_sie_dzialo = get_category( 62 ); ?>
+      <a href="<?php echo get_category_link( $category_bedzie_sie_dzialo->cat_ID ); ?>">
+        <h5 class="title-sidebar"><?php echo $category_bedzie_sie_dzialo->name; ?></h5>
       </a>
       <div class="slider">
+        <!-- post -->
         <?php
           $items = get_posts( array(
             'numberposts' => 7,
-            'category_name' => 'bedzie-sie-dzialo',
+            'cat'         => $category_bedzie_sie_dzialo->cat_ID,
           ) );
-        ?>
-        <!-- post -->
-        <?php
           foreach ($items as $item) {
             printPost( $item, 'slider' );
           }
@@ -81,60 +80,23 @@
     <!-- /col-8 -->
     <!-- Sidebar Column -->
     <div class="sidebar col-12 sidebar-list row no-gutters">
-      <div class="reportaze ogloszenia-urzedowe col-12 col-lg-6">
-        <a href="<?php echo get_category_link( get_category_by_slug( 'ogloszenia-urzedowe' )->cat_ID ); ?>">
-          <h5 class="title-sidebar line">Ogłoszenia urzędowe</h5>
-        </a>
-        <ul class="image-sidebar-section">
+      <?php get_template_part("template/sidebar-urzedowe-smartphone"); ?>
+      <div class="col-12 col-lg-6">
+        <?php $category_filmy_promocyjne = get_category(113); ?>
+        <h5 class="title-sidebar"><?php echo $category_filmy_promocyjne->name; ?></h5>
+        <div class="filmy-promocyjne">
           <?php
             $items = get_posts(array(
-              'numberposts'   => 4,
-              'category_name' => 'ogloszenia-urzedowe',
+              'cat'           => $category_filmy_promocyjne->cat_ID,
+              'numberposts'   => 2,
             ));
-          ?>
-          <!-- single post -->
-          <?php
+
             foreach ($items as $item) {
-              printPost( $item, 'side' );
+              printPost( $item, 'side-big' );
             }
           ?>
 
-        </ul>
-
-      </div>
-      <!-- /ogłoszenia urzędowe -->
-      <div class="col-12 col-lg-6">
-        <h5 class="title-sidebar">Filmy promocyjne</h5>
-        <div class="filmy-promocyjne row no-gutters">
-        <?php
-          $items = get_posts(array(
-            'category_name' => 'filmy-promocyjne',
-            'numberposts'   => 2,
-          ));
-
-          foreach ($items as $item) {
-            // printf(
-            //   '<a class="single col-12 col-sm-6 col-lg-12 no-padding" href="%s" alt="%s">
-            //     <div class="image-container">
-            //       <div class="image" style="background-image:url(%s);">
-            //         <div class="video-post">
-            //           <img src="%s/images/play.svg" alt="odtwórz film"/>
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </a>',
-            //   get_permalink( $item->ID ),
-            //   $item->post_title,
-            //   get_the_post_thumbnail_url( $item->ID, 'medium' ),
-            //   get_template_directory_uri()
-            // );
-            printPost( $item, 'side-big', array(
-              'class' => 'col-12 col-sm-6 col-lg-12 no-padding',
-            ) );
-          }
-        ?>
-
-      </div>
+        </div>
       </div>
     </div>
     <!-- /.row -->

@@ -1,7 +1,9 @@
 <?php
+  $category = get_category(112);
+  $posts_limit = 4;
   $items = get_posts( array(
-    'numberposts'     => 4,
-    'category_name'   => 'popularne',
+    'numberposts'     => $posts_limit,
+    'cat'             => $category->cat_ID,
     'orderby'         => 'date',
     'order'           => 'DESC',
   ) );
@@ -13,7 +15,7 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-12">
-      <h5 class="title-sidebar">Najbardziej popularne</h5>
+      <h5 class="title-sidebar"><?php echo $category->name; ?></h5>
       <!-- Post -->
       <div class="slick row no-gutters najbardziej-popularne">
         <!-- single post -->
@@ -21,8 +23,15 @@
           foreach ($items as $item) {
             printPost( $item, 'large', array( 'class' => 'no-padding' ) );
           }
+          echo '<div class="col-12 col-md-6 no-padding">
+            <div class="link_post_small" data-post-type="large" title="">
+              <div class="small-post popular-post">
+                <div class="post_news_small"></div>';
+                printAd( 'v-l', false, array( 'class' => '' ) );
+        echo '</div>
+            </div>
+          </div>';
         ?>
-        <?php echo printAd( 'v-l' ); ?>
 
       </div>
       <div class="arrows d-flex justify-content-between"> </div>

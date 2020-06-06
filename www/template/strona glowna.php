@@ -28,6 +28,7 @@
     'template/home-aktualnosci-%s',
     'template/home-przeglad-%s',
     'template/home-sport-%s',
+    'template/home-chicago-%s',
     'template/home-popularne-%s',
     'template/home-wskrocie-%s',
     'template/home-sponsorowane-%s',

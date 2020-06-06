@@ -1,11 +1,11 @@
 <div class="reportaze">
-  <a href="<?php echo get_category_link( get_category_by_slug( 'reportaze' )->cat_ID ); ?>">
+  <a href="<?php echo get_category_link( 61 ); ?>">
     <h5 class="title-sidebar line">Reportaże</h5>
   </a>
   <?php
   $items = get_posts(array(
     'numberposts'     => 8,
-    'category_name'   => 'reportaze',
+    'cat'             => 61,
   ));
   ?>
   <ul class="image-sidebar-section">

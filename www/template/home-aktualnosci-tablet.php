@@ -1,9 +1,18 @@
 <?php
+  $category = get_category(56);
   $items = get_posts(array(
     'numberposts'   => 14,
-    'category_name' => 'aktualnosci',
+    'cat'           => $category->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
+  ));
+  $items_pined = get_posts(array(
+    'numberposts'   => 1,
+    'cat'           => $category->term_id,
+    'orderby'       => 'date',
+    'order'         => 'DESC',
+    'meta_key'      => 'pin',
+    'meta_value'    => '1',
   ));
 ?>
 <!-- Page Content -->
@@ -14,11 +23,15 @@
       <div class="row no-gutters">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => '' ) );
+          if ( !empty( $items_pined ) ) {
+            array_unshift( $items, $items_pined[0] );
+            $items = array_slice( $items, 0, $posts_limit );
+          }
+          printPost( array_splice( $items, 0, 1 )[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 4 ) as $item ){
+          foreach( array_splice( $items, 0, 4 ) as $item ){
             printPost( $item, 'mid', array( 'class' => '' ) );
           }
         ?>
@@ -28,12 +41,12 @@
     <!-- Sidebar Column -->
     <div class="col-12 col-md-4 sidebar-list">
       <div class="position-sticky">
-        <a href="<?php echo get_category_link( get_category_by_slug('aktualnosci')->cat_ID ); ?>">
-          <h5 class="title-sidebar line">Aktualności</h5>
+        <a href="<?php echo get_category_link( $category->cat_ID ); ?>">
+          <h5 class="title-sidebar line"><?php echo $category->name; ?></h5>
         </a>
         <ul class="image-sidebar-section alt">
           <?php
-            foreach ( array_slice( $items, 5 ) as $item) {
+            foreach ( array_splice( $items, 0 ) as $item) {
               printPost( $item, 'side' );
             }
           ?>
@@ -43,7 +56,14 @@
   </div>
   <!-- /.row -->
   <div class="button-line">
-    <a href="<?php echo get_category_link( get_category_by_slug('aktualnosci')->cat_ID ); ?>" class="">Więcej Aktualności</a>
+    <a href="<?php echo get_category_link( $category->cat_ID ); ?>" class="">
+      <?php
+        printf(
+          'Więcej %s',
+          strtolower( $category->name )
+        );
+      ?>
+    </a>
   </div>
   <!-- reklama pozioma -->
   <?php echo printAd('h-l'); ?>

@@ -1,7 +1,9 @@
 <?php
+  $category = get_category(112);
+  $posts_limit = 4;
   $items = get_posts( array(
-    'numberposts'     => 4,
-    'category_name'   => 'popularne',
+    'numberposts'     => $posts_limit,
+    'cat'             => $category->cat_ID,
     'orderby'         => 'date',
     'order'           => 'DESC',
   ) );
@@ -13,7 +15,7 @@
 
     <!-- Blog Entries Column -->
     <div class="col-md-12 col-lg-8">
-      <h5 class="title-sidebar">Najbardziej pupularne</h5>
+      <h5 class="title-sidebar"><?php echo $category->name; ?></h5>
       <!-- Post -->
       <div class="row no-gutters padding najbardziej-popularne">
         <!-- single post -->
@@ -34,9 +36,6 @@
       <div id="" class="position-sticky">
         <!-- reklama pionowa -->
         <?php echo printAd( 'v-l' ); ?>
-        <!-- <div class="reklama-sidebar sticky">
-          <div class="reklama">Reklama 400x700px</div>
-        </div> -->
       </div>
 
     </div>

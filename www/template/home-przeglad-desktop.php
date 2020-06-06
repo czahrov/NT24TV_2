@@ -1,7 +1,17 @@
 <?php
+  $category = get_category( 74 );
+  $posts_limit = 10;
   $items = get_posts(array(
-    'numberposts'     => 10,
-    'category_name'   => 'przeglad-tygodniowy',
+    'numberposts'     => $posts_limit,
+    'cat'             => $category->cat_ID,
+  ));
+  $items_pined = get_posts(array(
+    'numberposts'   => 1,
+    'cat'           => $category->term_id,
+    'orderby'       => 'date',
+    'order'         => 'DESC',
+    'meta_key'      => 'pin',
+    'meta_value'    => '1',
   ));
 ?>
 <!-- Page Content -->
@@ -9,17 +19,21 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12 col-sm-8">
-      <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>">
-        <h5 class="title-sidebar">Przegląd tygodniowy</h5>
+      <a href="<?php echo get_category_link( $category->cat_ID ); ?>">
+        <h5 class="title-sidebar"><?php echo $category->name; ?></h5>
       </a>
       <div class="row no-gutters padding">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => '' ) );
+          if ( !empty( $items_pined ) ) {
+            array_unshift( $items, $items_pined[0] );
+            $items = array_slice( $items, 0, $posts_limit );
+          }
+          printPost( array_splice( $items, 0, 1 )[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 4 ) as $item ){
+          foreach( array_splice( $items, 0, 4 ) as $item ){
             printPost( $item, 'mid', array( 'class' => '' ) );
           }
         ?>
@@ -27,7 +41,14 @@
       <!-- /row-->
       <div class="clear-top"></div>
       <div class="button-line padding">
-        <a href="<?php echo get_category_link( get_category_by_slug( 'przeglad-tygodniowy' )->cat_ID ); ?>" class="">Więcej Przeglądów</a>
+        <a href="<?php echo get_category_link( $category->cat_ID ); ?>" class="">
+          <?php
+            printf(
+              'Więcej %s',
+              strtolower( $category->name )
+            );
+          ?>
+        </a>
       </div>
 
       <!-- reklama pozioma -->
@@ -40,14 +61,17 @@
     <!-- /col-8 -->
     <!-- Sidebar Column -->
     <div class="col-12 col-sm-4 sidebar-list">
-      <a href="<?php echo get_permalink( get_page_by_title( 'Pogoda' )->ID ); ?>">
+      <a href="<?php echo get_permalink( 108566 ); ?>">
         <h5 class="title-sidebar">Stan powietrza Nowy Targ</h5>
       </a>
       <?php get_template_part('template/airly'); ?>
 
       <div class="clear-top"></div>
       <div class="position-sticky">
-        <?php get_template_part('template/sidebar-reportaze-'.getDevType()); ?>
+        <?php
+          // get_template_part('template/sidebar-reportaze-tablet');
+          templateLoader('template/sidebar-reportaze-%s');
+        ?>
       </div>
       <!-- /reportaże -->
 

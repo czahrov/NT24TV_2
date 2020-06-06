@@ -2,18 +2,17 @@
 <div id='wskrocie' class="<?php echo getDevType(); ?> container padding">
   <div class="row no-gutters">
     <div class="col-12 col-md-8">
-      <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
-        <h5 class="title-sidebar">Będzie się działo</h5>
+      <?php $category_bedzie_sie_dzialo = get_category( 62 ); ?>
+      <a href="<?php echo get_category_link( $category_bedzie_sie_dzialo->cat_ID ); ?>">
+        <h5 class="title-sidebar"><?php echo $category_bedzie_sie_dzialo->name; ?></h5>
       </a>
       <div class="slider">
+        <!-- post -->
         <?php
           $items = get_posts( array(
             'numberposts' => 7,
-            'category_name' => 'bedzie-sie-dzialo',
+            'cat'         => $category_bedzie_sie_dzialo->cat_ID,
           ) );
-        ?>
-        <!-- post -->
-        <?php
           foreach ($items as $item) {
             printPost( $item, 'slider' );
           }
@@ -70,9 +69,6 @@
       <div class="">
         <!-- reklama pozioma -->
         <?php echo printAd( 'h-m' ); ?>
-        <!-- <div class="reklama-full-page sticky">
-        <div class="reklama">Reklama 840x150px</div>
-      </div> -->
       </div>
 
     </div>
@@ -81,11 +77,12 @@
     <div class="sidebar col col-md-4 sidebar-list">
       <?php get_template_part("template/sidebar-urzedowe-desktop"); ?>
       <div class="clear-top"></div>
-      <h5 class="title-sidebar">Filmy promocyjne</h5>
+      <?php $category_filmy_promocyjne = get_category(113); ?>
+      <h5 class="title-sidebar"><?php echo $category_filmy_promocyjne->name; ?></h5>
       <div class="filmy-promocyjne">
         <?php
           $items = get_posts(array(
-            'category_name' => 'filmy-promocyjne',
+            'cat'           => $category_filmy_promocyjne->cat_ID,
             'numberposts'   => 2,
           ));
 

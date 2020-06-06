@@ -45,6 +45,37 @@
       </div>
     </div>
     <!-- /col-8 -->
+
+    <!-- Sidebar Column -->
+    <div class="col-12 sidebar-list">
+      <div class="reportaze sticky">
+        <?php
+          $category_ekologia = get_category( 81 );
+        ?>
+        <a href="<?php echo get_category_link( $category_ekologia->cat_ID ); ?>">
+          <h5 class="title-sidebar line"><?php echo $category_ekologia->name; ?></h5>
+        </a>
+        <?php
+          $items = get_posts( array(
+            'numberposts'    => 8,
+            'cat'             => $category_ekologia->cat_ID,
+          ) );
+        ?>
+        <ul class="image-sidebar-section row no-gutters">
+
+          <!-- single post -->
+          <?php
+            foreach ( $items as $item ) {
+              printPost( $item, 'side' );
+            }
+          ?>
+
+        </ul>
+
+      </div>
+      <!-- /kultura -->
+
+    </div>
   </div>
   <!-- /.row -->
 </div>

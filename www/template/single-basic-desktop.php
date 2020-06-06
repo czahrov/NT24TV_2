@@ -79,19 +79,19 @@
           ?>
         </div>
         <?php
-        if( empty( $yt ) ){
-          $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-          $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
-          $img = $thumb !== false?( $thumb ):( $thumb_alt );
+          if( empty( $yt ) ){
+            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', get_the_ID() );
+            $img = $thumb !== false?( $thumb ):( !empty( $thumb_alt )?( false ):( $thumb_alt ) );
 
-          if ( $img !== false ) {
-            printf(
-              '<img class="img-fluid" src="%s" alt="%s"/>',
-              $img,
-              $post->post_title
-            );
+            if ( $img !== false ) {
+              printf(
+                '<img class="img-fluid" src="%s" alt="%s"/>',
+                $img,
+                $post->post_title
+              );
+            }
           }
-        }
         ?>
         <?php the_content(); ?>
 
@@ -112,7 +112,7 @@
     </div>
     <!-- sidebar -->
     <!-- Sidebar Column -->
-    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg__ d-lg-block">
       <div class="col-12 col-sm col-lg-12">
         <?php echo printAd( 'v-l', false, array( 'class'=> 'padding' ) ); ?>
       </div>
@@ -135,7 +135,7 @@
       <?php get_template_part("template/post-more-desktop"); ?>
     </div>
     <!-- /col-8 -->
-    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg d-lg-block">
+    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters padding-lg__ d-lg-block">
       <div class="col-12 col-sm col-lg-12">
         <?php echo printAd( 'v-l', false, array( 'class' => 'padding' ) ); ?>
       </div>

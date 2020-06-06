@@ -1,19 +1,34 @@
 <?php
   // $category = get_category_by_slug('aktualnosci');
   $category = get_category(56);
+  $posts_limit = 13;
   $items = get_posts(array(
-    'numberposts'   => 13,
+    'numberposts'   => $posts_limit,
     'cat'           => $category->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
   ));
   $items_pined = get_posts(array(
     'numberposts'   => 1,
-    'cat'           => $category->term_id,
+    'cat'           => $category->cat_ID,
     'orderby'       => 'date',
     'order'         => 'DESC',
-    'meta_key'      => 'pin',
-    'meta_value'    => '1',
+    'meta_query' => array(
+      array(
+        'relation' => 'AND',
+        array(
+          'key'   => 'home',
+          'value' => 1,
+        ),
+        array(
+          'relation'  => 'AND',
+          array(
+            'key'   => 'pin',
+            'value' => 1,
+          ),
+        )
+      ),
+    ),
   ));
 ?>
 <!-- Page Content -->
@@ -31,7 +46,7 @@
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( array_splice( $item, 0, 1)[0], 'big', array( 'class' => 'item no-padding' ) );
+          printPost( array_splice( $items, 0, 1)[0], 'big', array( 'class' => 'item no-padding' ) );
         ?>
         <!-- Mid post -->
         <?php

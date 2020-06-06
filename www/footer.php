@@ -41,7 +41,7 @@
     </div>
     <div class="copy">
       <div class="container">
-        <div class="row no-gutters padding justify-content-around justify-content-xl-start">
+        <div class="row no-gutters padding justify-content-around justify-content-xl-end">
           <div class="copy-content">
             <p class="m-0 text-center">&copy;2020 Nowotarska Telewizja Kablowa. ul. Józefczaka 1, 34-400 Nowy Targ </p>
             <span>Projekt i wykonanie:

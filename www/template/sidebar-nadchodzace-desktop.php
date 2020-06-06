@@ -2,7 +2,7 @@
   <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
     <h5 class="title-sidebar">Będzie się działo</h5>
   </a>
-  <ul class="image-sidebar-section">
+  <ul class="image-sidebar-section padding no-padding-md">
     <?php
       $items = get_posts(array(
         'numberposts'   => 11,

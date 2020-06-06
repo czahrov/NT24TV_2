@@ -1,8 +1,32 @@
 <?php
+  $category_sport = get_category(58);
+  $posts_limit = 5;
   $items = get_posts( array(
-    'numberposts'     => 5,
+    'numberposts'     => $posts_limit,
     'category_name'   => 'sport'
   ) );
+  $items_pined = get_posts(array(
+    'numberposts'   => 1,
+    'cat'           => $category_sport->cat_ID,
+    'orderby'       => 'date',
+    'order'         => 'DESC',
+    'meta_query' => array(
+      array(
+        'relation' => 'AND',
+        array(
+          'key'   => 'home',
+          'value' => 1,
+        ),
+        array(
+          'relation'  => 'AND',
+          array(
+            'key'   => 'pin',
+            'value' => 1,
+          ),
+        )
+      ),
+    ),
+  ));
 ?>
 <!-- Page Content -->
 <div id="sport" class="<?php echo getDevType(); ?> container padding">
@@ -11,17 +35,21 @@
 
     <!-- Blog Entries Column -->
     <div class="col-12 col-sm-8">
-      <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>">
-        <h5 class="title-sidebar">Sport</h5>
+      <a href="<?php echo get_category_link( $category_sport->cat_ID ); ?>">
+        <h5 class="title-sidebar"><?php echo $category_sport->name; ?></h5>
       </a>
-      <div class="row no-gutters">
+      <div class="row no-gutters padding">
         <!-- Big Post -->
         <?php
-          printPost( $items[0], 'big', array( 'class' => '' ) );
+        if ( !empty( $items_pined ) ) {
+          array_unshift( $items, $items_pined[0] );
+          $items = array_slice( $items, 0, $posts_limit );
+        }
+        printPost( array_splice( $items, 0, 1)[0], 'big', array( 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
-          foreach( array_slice( $items, 1, 4 ) as $item ){
+          foreach( array_splice( $items, 0, 4 ) as $item ){
             printPost( $item, 'mid', array( 'class' => '' ) );
           }
         ?>
@@ -29,7 +57,14 @@
       <!-- /row-->
       <div class="clear-top"></div>
       <div class="button-line">
-        <a href="<?php echo get_category_link( get_category_by_slug( 'sport' )->cat_ID ); ?>" class="">Więcej Sportu</a>
+        <a href="<?php echo get_category_link( $category_sport->cat_ID ); ?>" class="">
+          <?php
+            printf(
+              'Więcej %s',
+              strtolower( $category_sport->name )
+            );
+          ?>
+        </a>
       </div>
 
     </div>
@@ -38,13 +73,16 @@
     <!-- Sidebar Column -->
     <div class="col-12 col-sm-4 sidebar-list">
       <div class="reportaze position-sticky">
-        <a href="<?php echo get_category_link( get_category_by_slug( 'kultura' )->cat_ID ); ?>">
-          <h5 class="title-sidebar line">Kultura</h5>
+        <?php
+          $category_kultura = get_category(59);
+        ?>
+        <a href="<?php echo get_category_link( $category_kultura->cat_ID ); ?>">
+          <h5 class="title-sidebar line"><?php echo $category_kultura->name; ?></h5>
         </a>
         <?php
           $items = get_posts( array(
             'numberposts'    => 7,
-            'category_name'  => 'kultura'
+            'cat'             => $category_kultura->cat_ID,
           ) );
         ?>
         <ul class="image-sidebar-section">

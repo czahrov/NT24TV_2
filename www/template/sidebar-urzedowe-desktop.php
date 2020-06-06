@@ -8,7 +8,7 @@
   <ul class="image-sidebar-section">
     <?php
       $items = get_posts(array(
-        'numberposts'   => 8,
+        'numberposts'   => 6,
         'cat'           => $category->cat_ID,
       ));
     ?>

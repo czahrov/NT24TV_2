@@ -1,18 +1,32 @@
 <?php
   $category = get_category(56);
   $items = get_posts(array(
-    'numberposts'   => 14,
+    'numberposts'   => 22,
     'cat'           => $category->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'
   ));
   $items_pined = get_posts(array(
     'numberposts'   => 1,
-    'cat'           => $category->term_id,
+    'cat'           => $category->cat_ID,
     'orderby'       => 'date',
     'order'         => 'DESC',
-    'meta_key'      => 'pin',
-    'meta_value'    => '1',
+    'meta_query' => array(
+      array(
+        'relation' => 'AND',
+        array(
+          'key'   => 'home',
+          'value' => 1,
+        ),
+        array(
+          'relation'  => 'AND',
+          array(
+            'key'   => 'pin',
+            'value' => 1,
+          ),
+        )
+      ),
+    ),
   ));
 ?>
 <!-- Page Content -->
@@ -31,7 +45,7 @@
         ?>
         <!-- Mid post -->
         <?php
-          foreach( array_splice( $items, 0, 4 ) as $item ){
+          foreach( array_splice( $items, 0, 7 ) as $item ){
             printPost( $item, 'mid', array( 'class' => '' ) );
           }
         ?>

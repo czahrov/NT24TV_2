@@ -13,7 +13,7 @@
   <div class="row no-gutters">
     <div class="col">
       <h5 class="title-sidebar">
-        Galeria zdjęć
+        <?php echo $category->name; ?>
       </h5>
     </div>
   </div>
@@ -27,13 +27,13 @@
           // var_dump( $galleries );
           if( empty( $galleries ) ) continue;
 
-          $img = wp_get_attachment_image_url( $galleries[0][0], 'medium' );
+          $img = wp_get_attachment_image_url( (int)$galleries[0][0], 'medium' );
           $photo_num = array_sum( array_map( function($g){
             return count( $g );
           }, $galleries ) );
 
           printf(
-            '<div class="item col-6 col-md-4 col-lg-3" data-img="%s">
+            '<div class="item col-6 col-md-4" data-img="%s">
               <a href="%s" class="link_post_small">
                 <div class="small-post">
                   <div class="post_news_small">

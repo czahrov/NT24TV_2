@@ -678,6 +678,12 @@ iframe.wp-embedded-content {
   padding: 10px;
 }
 
+@media (orientation: portrait) {
+  [id].tablet .link_post.big.video .title {
+    font-size: 0.6rem;
+  }
+}
+
 [id].desktop .title-sidebar {
   margin-left: 10px;
 }
@@ -688,7 +694,7 @@ iframe.wp-embedded-content {
 
 @media (min-width: 992px) {
   [id].desktop .link_post.big .title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -713,7 +719,7 @@ iframe.wp-embedded-content {
 }
 
 [id].desktop .image-sidebar-section a li span {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
 }
 
 [id].desktop .button-line {
@@ -941,6 +947,7 @@ footer.smartphone .foot-content .row .logo_menu {
   list-style: none;
   color: #000;
   overflow: hidden;
+  max-width: 100%;
 }
 
 #main_menu nav .items .item {
@@ -1012,7 +1019,7 @@ footer.smartphone .foot-content .row .logo_menu {
   position: absolute;
   top: 100%;
   right: 0;
-  width: 300px;
+  width: 270px;
   max-width: 100vw;
   list-style: none;
   background-color: #fff;
@@ -1258,26 +1265,16 @@ footer.smartphone .foot-content .row .logo_menu {
   width: 100%;
 }
 
-@media (orientation: landscape) {
-  #aktualnosci.desktop .sidebar-list a:nth-child(n+16) {
+@media (orientation: portrait) {
+  #aktualnosci.desktop .sidebar-list a:nth-child(n+11),
+  #aktualnosci.desktop .image-sidebar-section a:nth-child(n+11) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #aktualnosci.desktop .sidebar-list a:nth-child(n+10) {
-    display: none;
-  }
-}
-
-@media (orientation: landscape) {
-  #aktualnosci.tablet .sidebar-list a:nth-child(n+11) {
-    display: none;
-  }
-}
-
-@media (orientation: portrait) {
-  #aktualnosci.tablet .sidebar-list a:nth-child(n+8) {
+  #aktualnosci.tablet .sidebar-list a:nth-child(n+12),
+  #aktualnosci.tablet .image-sidebar-section a:nth-child(n+12) {
     display: none;
   }
 }
@@ -1319,15 +1316,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #sport.desktop .sidebar-list a:nth-child(n+11),
-  #sport.desktop .image-sidebar-section a:nth-child(n+11) {
-    display: none;
-  }
-}
-
-@media (orientation: landscape) {
-  #sport.desktop .sidebar-list a:nth-child(n+18),
-  #sport.desktop .image-sidebar-section a:nth-child(n+18) {
+  #sport.desktop .sidebar-list a:nth-child(n+8),
+  #sport.desktop .image-sidebar-section a:nth-child(n+8) {
     display: none;
   }
 }
@@ -1346,24 +1336,14 @@ footer.smartphone .foot-content .row .logo_menu {
   }
 }
 
-#chicago .image-sidebar-section {
-  margin-top: 3rem;
-}
-
 @media (orientation: portrait) {
-  #chicago.tablet .image-sidebar-section a:nth-child(n+8) {
-    display: none;
-  }
-}
-
-@media (orientation: landscape) {
-  #chicago.tablet .image-sidebar-section a:nth-child(n+11) {
+  #chicago.tablet .image-sidebar-section a:nth-child(n+10) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #chicago.desktop .image-sidebar-section a:nth-child(n+11) {
+  #chicago.desktop .image-sidebar-section a:nth-child(n+9) {
     display: none;
   }
 }
@@ -1546,7 +1526,11 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 #category.galeria .cover_img {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 #category.galeria .cover_img .counter {

@@ -893,10 +893,11 @@
 
     global $fp, $cat;
     $img = get_the_post_thumbnail_url( $item->ID, array( 640, 480 ) );
-    $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
+    $thumb_field = get_post_field( 'thumb', $item );
+    $thumb = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
     $data = array_merge( array(
       'title'   => htmlentities($item->post_title),
-      'img'     => $img !== false?( $img ):( $thumb ),
+      'img'     => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo.png" ) ),
       'url'     => get_permalink( $item->ID ),
       'format'  => get_post_format( $item ),
       'class'   => '',

@@ -57,7 +57,7 @@
       <?php
         $category_ekologia = get_category( 81 );
         $items = get_posts(array(
-          'numberposts' => 12,
+          'numberposts' => 11,
           'cat'         => $category_ekologia->cat_ID,
         ));
       ?>

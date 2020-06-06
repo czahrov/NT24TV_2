@@ -20,6 +20,7 @@
     'numberposts'   => $post_limit,
     'cat'           => $category->cat_ID,
   ));
+  $posts_num = count( $posts );
 ?>
 <!-- Page Content -->
 <div id="category" class="<?php echo getDevType() . " {$category->slug}"; ?> container padding-md">
@@ -41,15 +42,15 @@
             <div class="items row no-gutters">
               <!-- BIG POST -->
               <?php
-                printPost( $posts[0], 'big', array( 'class'=> 'item' ) );
+                printPost( array_splice( $posts, 0, 1 )[0], 'big', array( 'class'=> 'item' ) );
               ?>
               <!-- MID POSTS -->
               <?php
-                foreach ( array_slice( $posts, 1, 24 ) as $num => $item ){
+                foreach ( array_splice( $posts, 0, 24 ) as $num => $item ){
                   printPost( $item, 'mid', array( 'class'=> 'item' ) );
                 }
               ?>
-              <?php if ( count($posts) == $post_limit ): ?>
+              <?php if ( $posts_num == $post_limit ): ?>
                 <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
                   <div class="spinner position-absolute">
                     <div class="box position-absolute"> </div>

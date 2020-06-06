@@ -1,12 +1,12 @@
 $(function(){
-  const DBG = true;
+  const DBG = false;
 
   // obsługa menu
   (function(menu, view, stack, more, dots ){
     menu
     .on({
       adjust: function(e){
-        if (DBG) console.log('adjust');
+        // if (DBG) console.log('adjust');
         let avail_width = ()=>{ return view.outerWidth() };
         let view_items_width = () => {
           if ( !view.children('.item').length ) return 0;
@@ -436,21 +436,21 @@ $(function(){
 
       _.on({
         mute: function(e){
-          console.log('player.mute()');
+          if (DBG) console.log('player.mute()');
           TL_mute.play();
         },
         unmute: function(e){
-          console.log('player.unmute()');
+          if (DBG) console.log('player.unmute()');
           TL_mute.reverse();
         },
         play: function(e){
-          console.log('player.play()');
+          if (DBG) console.log('player.play()');
         },
         pause: function(e){
-          console.log('player.pause()');
+          if (DBG) console.log('player.pause()');
         },
         exit: function(e){
-          console.log('player.exit()');
+          if (DBG) console.log('player.exit()');
         },
         pop: function(e){
           isPined = false;
@@ -463,16 +463,16 @@ $(function(){
             })
           );
           _.addClass('pop');
-          console.log('player.pop()');
+          if (DBG) console.log('player.pop()');
         },
         pin: function(e){
           isPined = true;
           _.prevAll('.placeholder').remove();
           _.removeClass('pop');
-          console.log('player.pin()');
+          if (DBG) console.log('player.pin()');
         },
         playerReady: function(e){
-          console.log('player.onReady()');
+          if (DBG) console.log('player.onReady()');
           if ( $('#post').length ) {
             _.triggerHandler('play');
             _.triggerHandler('mute');
@@ -508,13 +508,13 @@ $(function(){
           .scroll();
         },
         getPlayer: function(e){
-          console.log('player.getPlayer()');
+          if (DBG) console.log('player.getPlayer()');
         },
         getPlayerState: function(e){
           return lastState;
         },
         playerStateChange: function(e, state){
-          console.log('player.playerStateChange('+state+')');
+          if (DBG) console.log('player.playerStateChange('+state+')');
           lastState = state;
           switch ( state ) {
             case -1: // unstarted
@@ -542,7 +542,7 @@ $(function(){
       });
 
       $('body').keydown(function(e){
-        // console.log('player.keydown('+e.code+')');
+        //if (DBG)  console.log('player.keydown('+e.code+')');
         switch (e.code) {
           case 'Escape':
             _.triggerHandler('pause');
@@ -592,7 +592,7 @@ $(function(){
           const isiOS = $('body').hasClass('ios');
           const isAndroid = $('body').hasClass('android');
 
-          console.log('onYouTubeIframeAPIReady()');
+          if (DBG) console.log('onYouTubeIframeAPIReady()');
           player = new YT.Player( _[0], {
             videoId: videoID,
             width: player_width,
@@ -635,12 +635,12 @@ $(function(){
             mute: function(e){
               player.mute();
               // TL_mute.play();
-              console.log('player is muted');
+              if (DBG) console.log('player is muted');
             },
             unmute: function(e){
               player.unMute();
               // TL_mute.reverse();
-              console.log('player is unmuted');
+              if (DBG) console.log('player is unmuted');
             },
             play: function(e){
               player.playVideo();
@@ -649,11 +649,11 @@ $(function(){
                 _.triggerHandler('onInteract');
               }
 
-              console.log('player is played');
+              if (DBG) console.log('player is played');
             },
             pause: function(e){
               player.pauseVideo();
-              console.log('player is paused');
+              if (DBG) console.log('player is paused');
             },
             getPlayer: function(e){
               return player;
@@ -683,19 +683,19 @@ $(function(){
         root.on({
           mute: function(e){
             player.muted = true;
-            console.log('player is muted');
+            if (DBG) console.log('player is muted');
           },
           unmute: function(e){
             player.muted = false;
-            console.log('player is unmuted');
+            if (DBG) console.log('player is unmuted');
           },
           play: function(e){
             player.play();
-            console.log('player is played');
+            if (DBG) console.log('player is played');
           },
           pause: function(e){
             player.pause();
-            console.log('player is paused');
+            if (DBG) console.log('player is paused');
           },
           getPlayer: function(e){
             return player;
@@ -704,19 +704,19 @@ $(function(){
 
         _.on({
           playing: function(e){
-            console.log('media_player.plaing()');
+            if (DBG) console.log('media_player.plaing()');
             root.triggerHandler('playerStateChange', [1]);
           },
           pause: function(e){
-            console.log('media_player.pause()');
+            if (DBG) console.log('media_player.pause()');
             root.triggerHandler('playerStateChange', [2]);
           },
           ended: function(e){
-            console.log('media_player.ended()');
+            if (DBG) console.log('media_player.ended()');
             root.triggerHandler('playerStateChange', [0]);
           },
           loadeddata: function(e){
-            console.log('media_player.loadeddata()');
+            if (DBG) console.log('media_player.loadeddata()');
             root.triggerHandler('playerReady');
           },
         });

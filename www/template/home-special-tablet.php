@@ -10,11 +10,25 @@
   ));
   $items_pined = get_posts(array(
     'numberposts'   => 1,
-    'cat'           => $cat->term_id,
+    'cat'           => $category->cat_ID,
     'orderby'       => 'date',
     'order'         => 'DESC',
-    'meta_key'      => 'pin',
-    'meta_value'    => '1',
+    'meta_query' => array(
+      array(
+        'relation' => 'AND',
+        array(
+          'key'   => 'home',
+          'value' => 1,
+        ),
+        array(
+          'relation'  => 'AND',
+          array(
+            'key'   => 'pin',
+            'value' => 1,
+          ),
+        )
+      ),
+    ),
   ));
 ?>
 <!-- Page Content -->

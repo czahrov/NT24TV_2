@@ -4,7 +4,7 @@
    */
   class Facepalm{
 
-    public function __construct( $arg ){
+    public function __construct(){
       // code...
     }
 

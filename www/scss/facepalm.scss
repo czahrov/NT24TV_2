@@ -502,7 +502,7 @@ iframe.wp-embedded-content{
       }
 
       .big-post{
-        padding-bottom: 56.25%;
+        // padding-bottom: 56.25%;
 
         .post_news_big{
 
@@ -883,6 +883,11 @@ footer{
 
   .logo{
     display: block;
+
+    img{
+      padding: 1rem 0;
+    }
+
   }
 
   nav{

@@ -698,10 +698,6 @@ iframe.wp-embedded-content {
   }
 }
 
-[id].desktop .link_post .big-post {
-  padding-bottom: 56.25%;
-}
-
 [id].desktop .link_post .big-post .post_news_big span {
   font-size: 1rem;
 }
@@ -931,6 +927,10 @@ footer.smartphone .foot-content .row .logo_menu {
 
 #main_menu .logo {
   display: block;
+}
+
+#main_menu .logo img {
+  padding: 1rem 0;
 }
 
 #main_menu nav {

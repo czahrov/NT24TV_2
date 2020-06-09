@@ -23,7 +23,7 @@
           foreach ($items as $item) {
             printPost( $item, 'large', array( 'class' => 'no-padding' ) );
           }
-          echo '<div class="col-12 col-md-6 no-padding">
+          echo '<div class="">
             <div class="link_post_small" data-post-type="large" title="">
               <div class="small-post popular-post">
                 <div class="post_news_small"></div>';

@@ -1,15 +1,15 @@
 <?php
   // Wiadomości prosto z Chicago
-  // $category = get_category( 286 );
-  $category = get_category( 81 );
+  $category_chicago = get_category( 280 );
+  // $category = get_category( 81 );
   $posts_limit = 13;
   $items = get_posts( array(
     'numberposts'     => $posts_limit,
-    'cat'             => $category->cat_ID,
+    'cat'             => $category_chicago->cat_ID,
   ) );
   $items_pined = get_posts(array(
     'numberposts'   => 1,
-    'cat'           => $category->term_id,
+    'cat'           => $category_chicago->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC',
     'meta_key'      => 'pin',
@@ -21,8 +21,8 @@
   <div class="row no-gutters">
     <!-- Blog Entries Column -->
     <div class="col-12">
-      <a href="<?php echo get_category_link( $category->cat_ID ); ?>">
-        <h5 class="title-sidebar"><?php echo $category->name; ?></h5>
+      <a href="<?php echo get_category_link( $category_chicago->cat_ID ); ?>">
+        <h5 class="title-sidebar"><?php echo $category_chicago->name; ?></h5>
       </a>
       <div class="items row no-gutters">
         <!-- Mid post -->
@@ -35,7 +35,7 @@
             printPost( $item, 'mid', array( 'class' => 'item' ) );
           }
         ?>
-        <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category->slug; ?>">
+        <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category_chicago->slug; ?>">
           <div class="spinner position-absolute">
             <div class="box position-absolute"> </div>
           </div>

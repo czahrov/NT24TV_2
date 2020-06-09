@@ -1,7 +1,7 @@
 <?php
   // Wiadomości prosto z Chicago
-  // $category_chicago = get_category( 286 );
-  $category_chicago = get_category( 71 );
+  $category_chicago = get_category( 280 );
+  // $category_chicago = get_category( 71 );
   $posts_limit = 6;
   $items = get_posts( array(
     'numberposts'     => $posts_limit,

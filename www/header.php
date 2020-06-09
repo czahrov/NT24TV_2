@@ -6,11 +6,12 @@
     setcookie( 'sprytne', 1, 0, '/' );
     define( 'DBG', true );
   }
-  else{
-    define( 'DBG', false );
-    echo "strona w budowie...";
-    exit;
-  }
+  // else{
+  //   define( 'DBG', false );
+  //   // echo "strona w budowie...";
+  //   include('wbudowie.html');
+  //   exit;
+  // }
 
   // Facepalm
   global $fp;
@@ -30,37 +31,41 @@
 
   <?php
     // wp_enqueue_style( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, string $media = 'all' )
+
     // wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
 
+    $ver = time();
+    // $ver = false;
+
     // fonty
-    wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css' );
+    wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css', array(), $ver );
 
     // jQuery
-    wp_enqueue_script( 'jQuery', get_template_directory_uri().'/vendor/jquery/jquery.min.js', array(), false, true );
+    wp_enqueue_script( 'jQuery', get_template_directory_uri().'/vendor/jquery/jquery.min.js', array(), $ver, true );
 
     // GSAP
-    wp_enqueue_script( 'GSAP-TMAX', get_template_directory_uri().'/js/TweenMax.min.js', array( 'jQuery' ), false, true );
+    wp_enqueue_script( 'GSAP-TMAX', get_template_directory_uri().'/js/TweenMax.min.js', array( 'jQuery' ), $ver, true );
 
     // bootstrap
-    wp_enqueue_style( 'bootsrap-core-css', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css' );
-    wp_enqueue_script( 'bootsrap', get_template_directory_uri().'/vendor/bootstrap/js/bootstrap.bundle.min.js', array( 'jQuery' ), false, true );
+    wp_enqueue_style( 'bootsrap-core-css', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css', array(), $ver );
+    wp_enqueue_script( 'bootsrap', get_template_directory_uri().'/vendor/bootstrap/js/bootstrap.bundle.min.js', array( 'jQuery' ), $ver, true );
 
     // slick slider
-    wp_enqueue_style( 'slickTheme', get_template_directory_uri() . '/css/slick-theme.css', array() );
-    wp_enqueue_style( 'slick', get_template_directory_uri() . '/css/slick.css', array('slickTheme') );
-    wp_enqueue_script( 'slickJS', get_template_directory_uri().'/js/slick.min.js', array(), false, true );
+    wp_enqueue_style( 'slickTheme', get_template_directory_uri() . '/css/slick-theme.css', array(), $ver );
+    wp_enqueue_style( 'slick', get_template_directory_uri() . '/css/slick.css', array('slickTheme'), $ver );
+    wp_enqueue_script( 'slickJS', get_template_directory_uri().'/js/slick.min.js', array(), $ver, true );
 
     // unitegallery
-    wp_enqueue_style( 'UGalleryCSS', get_template_directory_uri() . '/css/unite-gallery.css' );
-    wp_enqueue_script( 'UGalleryJS', get_template_directory_uri().'/js/unitegallery.min.js', array( 'jQuery' ), false, true );
-    wp_enqueue_script( 'UGalleryThemeJS', get_template_directory_uri().'/ug_themes/tiles/ug-theme-tiles.js', array( 'UGalleryJS' ), false, true );
-    // wp_enqueue_script( 'UGalleryThemeJS', get_template_directory_uri().'/ug_themes/compact/ug-theme-compact.js', array(), false, true );
+    wp_enqueue_style( 'UGalleryCSS', get_template_directory_uri() . '/css/unite-gallery.css', array(), $ver );
+    wp_enqueue_script( 'UGalleryJS', get_template_directory_uri().'/js/unitegallery.min.js', array( 'jQuery' ), $ver, true );
+    wp_enqueue_script( 'UGalleryThemeJS', get_template_directory_uri().'/ug_themes/tiles/ug-theme-tiles.js', array( 'UGalleryJS' ), $ver, true );
+    // wp_enqueue_script( 'UGalleryThemeJS', get_template_directory_uri().'/ug_themes/compact/ug-theme-compact.js', array(), $ver, true );
 
     // custom
-    wp_enqueue_style( 'style', get_template_directory_uri() . '/css/main.css' );
-    wp_enqueue_style( 'fp_style', get_template_directory_uri() . '/css/facepalm.css', array( 'style' ) );
-    wp_enqueue_script( 'home_slick', get_template_directory_uri().'/js/home_slick.js', array( 'slickJS' ), false, true );
-    wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/facepalm.js', array( 'jQuery' ), false, true );
+    wp_enqueue_style( 'style', get_template_directory_uri() . '/css/main.css', array(), $ver );
+    wp_enqueue_style( 'fp_style', get_template_directory_uri() . '/css/facepalm.css', array( 'style' ), $ver );
+    wp_enqueue_script( 'home_slick', get_template_directory_uri().'/js/home_slick.js', array( 'slickJS' ), $ver, true );
+    wp_enqueue_script( 'facepalm', get_template_directory_uri().'/js/facepalm.js', array( 'jQuery' ), $ver, true );
   ?>
 
   <?php wp_head(); ?>
@@ -124,11 +129,11 @@
           <ul>
             <li>
               <img src="<?php echo get_template_directory_uri() . "/images/cloud.svg" ?>" alt="Pogoda">
-              <a href="<?php echo home_url('pogoda'); ?>">Sprawdź pogodę</a>
+              <a href="<?php echo get_page_link( get_page_by_title('Pogoda') ); ?>">Sprawdź pogodę</a>
             </li>
             <li>
               <img src="<?php echo get_template_directory_uri() . "/images/cctv.svg" ?>"alt="Pogoda">
-              <a href="<?php echo home_url('kamery'); ?>">Kamery na żywo</a>
+              <a href="<?php echo get_page_link( get_page_by_title('Kamery') ); ?>">Kamery na żywo</a>
             </li>
           </ul>
         </div>
@@ -136,7 +141,7 @@
     </div>
   </section>
   <div id="main_menu" class="container">
-    <a href="<?php echo home_url(); ?>" class="logo d-xl-none">
+    <a href="<?php echo home_url(); ?>" class="logo flex-grow-1 text-center d-xl-none">
       <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
     </a>
     <nav class="padding no-padding-xl">

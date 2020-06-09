@@ -1,14 +1,17 @@
 <?php /* Template Name: API */ ?>
 <?php
-  define( 'BASE', "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}" );
-  // if (
-  //   $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest' ||
-  //   strpos( $_SERVER['HTTP_REFERER'], BASE ) !== 0
-  // ) {
-  //   // header("Location:" . BASE, true, 404 );
-  //   header("Location:" . home_url(), true, 404 );
-  //   exit;
-  // }
+  $protocol = !empty( $_SERVER['REQUEST_SCHEME'] )?( $_SERVER['REQUEST_SCHEME'] ):( $_SERVER['HTTPS'] == 'on'?( 'https' ):( 'http' ) );
+  $host = $_SERVER['HTTP_HOST'];
+  define( 'BASE', "{$protocol}://{$host}" );
+  // print_r( $_SERVER );
+  // exit;
+  if (
+    $_SERVER['HTTP_X_REQUESTED_WITH'] !== 'XMLHttpRequest' ||
+    strpos( $_SERVER['HTTP_REFERER'], BASE ) !== 0
+  ) {
+    header("Location:" . home_url(), true, 404 );
+    exit;
+  }
 
   $fp = get_facepalm();
 
@@ -33,13 +36,15 @@
         $title = addslashes( $item->post_title ) . printTags( $item->ID, true, $isSpecialCategory );
         $short_title = $fp->cutText( addslashes( $item->post_title ), 10 ) . printTags( $item->ID, true, $isSpecialCategory );
         $img = get_the_post_thumbnail_url( $item->ID, 'large' );
-        $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
+        $thumb_field = get_post_field( 'thumb', $item );
+        $thumb = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
+        $nophoto = get_template_directory_uri() . '/images/no-photo2.png';
         $url = get_permalink( $item );
         return array(
           'title' => trim( $title ),
           'short_title' => trim( $short_title ),
           'url'   => $url,
-          'img'   => $img !== false?( $img ):( $thumb ),
+          'img'   => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( $nophoto ) ),
         );
       }, $posts );
 

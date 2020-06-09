@@ -1,7 +1,4 @@
 <?php
-  /*Template Name: Strona główna*/
-?>
-<?php
   get_header();
   the_post();
 ?>

@@ -55,32 +55,32 @@
     }
 
     public function printUGallery( $img_ids = array(), $echo = true ){
-    static $num = 1;
-    $ret = "<div id='UGallery_{$num}' style='display:none'>";
+      static $num = 1;
+      $ret = "<div id='UGallery_{$num}' style='display:none'>";
 
-    foreach ( $img_ids as $img_id ) {
-      $title = get_the_title( (int)$img_id );
-      $img_full = wp_get_attachment_image_url( (int)$img_id, 'full' );
-      $img_thumb = wp_get_attachment_image_url( (int)$img_id, 'thumbnail' );
+      foreach ( $img_ids as $img_id ) {
+        $title = get_the_title( (int)$img_id );
+        $img_full = wp_get_attachment_image_url( (int)$img_id, 'full' );
+        $img_thumb = wp_get_attachment_image_url( (int)$img_id, 'thumbnail' );
 
-      $ret .= sprintf(
-        '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" data-no-lazy="1"/>',
-        $title,
-        $img_thumb,
-        $img_full
-      );
+        $ret .= sprintf(
+          '<img class="no-lazy" alt="%1$s" src="%2$s" data-image="%3$s" data-description="%1$s" data-no-lazy="1"/>',
+          $title,
+          $img_thumb,
+          $img_full
+        );
 
+      }
+
+      $ret .= "</div>";
+      $num++;
+      if ( $echo ) {
+        echo $ret;
+      }
+      else{
+        return $ret;
+      }
     }
-
-    $ret .= "</div>";
-    $num++;
-    if ( $echo ) {
-      echo $ret;
-    }
-    else{
-      return $ret;
-    }
-  }
 
     public function printUGalleryFromArray( $imgs = array(), $echo = true ){
       if( count($imgs) == 0 ) return;

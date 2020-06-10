@@ -937,6 +937,7 @@ footer.smartphone .foot-content .row .logo_menu {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  max-width: 100%;
   align-items: center;
 }
 

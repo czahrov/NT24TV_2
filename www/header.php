@@ -6,12 +6,11 @@
     setcookie( 'sprytne', 1, 0, '/' );
     define( 'DBG', true );
   }
-  // else{
-  //   define( 'DBG', false );
-  //   // echo "strona w budowie...";
-  //   include('wbudowie.html');
-  //   exit;
-  // }
+  else{
+    define( 'DBG', false );
+    // include('wbudowie.html');
+    // exit;
+  }
 
   // Facepalm
   global $fp;
@@ -28,7 +27,6 @@
   <link href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
   <title><?php wp_title( '|', true, 'right' ); echo bloginfo('name'); ?></title>
   <link rel="preconnect" href="https://via.placeholder.com/">
-
   <?php
     // wp_enqueue_style( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, string $media = 'all' )
 
@@ -75,34 +73,34 @@
   <?php if (DBG): ?>
     <div id="_debug" class="">
       <div class="_server">
-        <!-- <?php
+        <?php
           print_r( $_SERVER );
-        ?> -->
+        ?>
       </div>
       <div class="_post">
-        <!-- <?php
+        <?php
           print_r( get_post() );
-        ?> -->
+        ?>
       </div>
       <div class="_post_meta">
-        <!-- <?php
+        <?php
           print_r( get_post_meta( get_post()->ID ) );
-        ?> -->
+        ?>
       </div>
       <div class="_post_tags">
-        <!-- <?php
+        <?php
           print_r( wp_get_post_tags( get_post()->ID ) );
-        ?> -->
+        ?>
       </div>
       <div class="_post_categories">
-        <!-- <?php
+        <?php
           print_r( wp_get_post_categories( get_post()->ID ) );
-        ?> -->
+        ?>
       </div>
       <div class="_category">
-        <!-- <?php
+        <?php
           print_r( get_category_by_slug( array_slice( explode( "/", $_SERVER['REQUEST_URI'] ), -2, -1 )[0] ) );
-        ?> -->
+        ?>
       </div>
     </div>
   <?php endif; ?>
@@ -147,17 +145,27 @@
     <nav class="padding no-padding-xl">
       <ul class="items view">
         <?php
-          $toPrint = array();
-          foreach ( wp_get_nav_menu_items('glowne-menu') as $item ){
-            $isActive = false;
-            $currentLink = sprintf(
-              '%s://%s%s',
-              $_SERVER['REQUEST_SCHEME'],
-              $_SERVER['HTTP_HOST'],
-              $_SERVER['REQUEST_URI']
-            );
-
-            $isActive = $item->url == $currentLink;
+          $main_menu = wp_get_nav_menu_items('glowne-menu');
+          foreach ( $main_menu as $item ){
+            switch ( $item->object ) {
+              case 'post':
+              case 'page':
+                $isActive = get_the_permalink( get_the_ID() ) == $item->url;
+                break;
+              case 'category':
+                $isActive = get_category_link( get_category_by_path( sprintf(
+                  '%s://%s%s',
+                  $_SERVER['HTTPS'] == 'on'?('https'):('http'),
+                  $_SERVER['HTTPS_HOST'],
+                  $_SERVER['REQUEST_URI']
+                ), false )->cat_ID ) == $item->url;
+                break;
+              case 'tag':
+                break;
+              default:
+                $isActive = false;
+                break;
+            }
 
             printf(
               '<li class="item %3$s %4$s">
@@ -177,83 +185,6 @@
       </div>
     </nav>
   </div>
-  <nav class="navbar navbar-expand-xl navbar-dark bg-white sticky-menu" hidden>
-    <div class="container">
-      <a href="<?php echo home_url(); ?>" class="logo mr-auto no-mobile">
-        <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
-      </a>
-      <span class="toggler-name no-mobile">MENU</span>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <!-- <span class="navbar-toggler-icon"></span> -->
-        <span class="circle"></span>
-        <span class="circle"></span>
-        <span class="circle"></span>
-      </button>
-      <div class="collapse navbar-collapse <?php echo getDevType(); ?>" id="navbarResponsive">
-        <ul class="navbar-nav mr-auto bg-white">
-          <?php
-            $limit = 11;
-            $toPrint = array();
-            foreach ( wp_get_nav_menu_items('glowne-menu') as $item ){
-              $isActive = false;
-              $currentLink = sprintf(
-                '%s://%s%s',
-                $_SERVER['REQUEST_SCHEME'],
-                $_SERVER['HTTP_HOST'],
-                $_SERVER['REQUEST_URI']
-              );
-
-              $isActive = $item->url == $currentLink;
-
-              ob_start();
-
-              echo "<!--";
-              print_r( $item );
-              var_dump( $currentLink );
-              echo "-->";
-
-              $info = ob_get_contents();
-              ob_end_clean();
-
-              ob_start();
-              printf(
-                '<li class="nav-item %3$s %4$s">
-                  %5$s
-                  <a class="nav-link red-link" href="%1$s">
-                    %2$s
-                  </a>
-                </li>',
-                $item->url,
-                $item->title,
-                $isActive?( 'marker' ):( '' ),
-                implode( ' ', $item->classes ),
-                $info
-              );
-
-              $toPrint[] = ob_get_contents();
-              ob_end_clean();
-            }
-            echo implode( "", array_slice( $toPrint, 0, $limit ) );
-          ?>
-          <?php if ( count( $toPrint ) > $limit ): ?>
-            <li class="more">
-              <div class="dots">
-                ...
-              </div>
-              <ul>
-                <?php
-                  echo implode( "", array_slice( $toPrint, $limit ) );
-                ?>
-              </ul>
-            </li>
-          <?php endif; ?>
-
-        </ul>
-      </div>
-
-    </div>
-  </nav>
   <?php
     $homeID = 40;
     $kolor_pasek = get_field( 'kolor_paska', $homeID );

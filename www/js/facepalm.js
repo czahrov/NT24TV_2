@@ -1,5 +1,5 @@
 $(function(){
-  const DBG = false;
+  const DBG = 1;
 
   // obsługa menu
   (function(menu, view, stack, more, dots ){
@@ -49,7 +49,7 @@ $(function(){
     // dostosowywanie menu przy zmianach rozdzielczości
     var resize_lock = false;
     $(window).resize((e)=>{
-      if (DBG) console.log({resize_lock_status: resize_lock});
+      // if (DBG) console.log({resize_lock_status: resize_lock});
       if( !resize_lock ){
         resize_lock = true;
         // if (DBG) console.log('resize_lock on!');
@@ -388,7 +388,8 @@ $(function(){
       let muted = _.find('.player').attr('data-muted') == 1;
       let isPlayed = false;
       const inView = function(){
-        let screen_start = $('html,body').prop('scrollTop') + $('nav.navbar').outerHeight(true);
+        // let screen_start = $('html,body').prop('scrollTop') + $('nav.navbar').outerHeight(true);
+        let screen_start = $('html,body').prop('scrollTop');
         let screen_end = $('html,body').prop('scrollTop') + window.innerHeight;
 
         if( video_end >= screen_start && video_start <= screen_end ){
@@ -473,12 +474,15 @@ $(function(){
         },
         playerReady: function(e){
           if (DBG) console.log('player.onReady()');
+
           if ( $('#post').length ) {
             _.triggerHandler('play');
             _.triggerHandler('mute');
           }
           else{
             if( autoplay ){
+              _.triggerHandler('play');
+
               if( muted ){
                 _.triggerHandler('mute');
               }
@@ -495,11 +499,12 @@ $(function(){
           $(window)
           .scroll(function(e){
             if( autoplay ){
-              if ( inView() && !isPlayed ) {
+              if ( inView() && !isPlayed ){
                 _.triggerHandler('play');
                 if(lastState > -1) isPlayed = true;
               }
-              if ( $('#post').length == 0 && !inView() && isPlayed ) {
+
+              if ( $('#post').length == 0 && !inView() && isPlayed ){
                 _.triggerHandler('pause');
                 isPlayed = false;
               }
@@ -557,7 +562,7 @@ $(function(){
         _.triggerHandler('unmute');
       });
 
-      // pływający odtwarzacz
+      // odpinanie i przypinanie odtwarzacza
       if( $('#post').length ){
         $(window).scroll(function(e){
           // sprawdzanie czy odtwarzacz jest w polu widzenia

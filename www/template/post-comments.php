@@ -23,7 +23,7 @@
                     ($req ? ' <span class="required">*</span>' : '')
                 ),
                 sprintf(
-                    '<input id="author" name="author" type="text" value="%s" size="30" maxlength="245" placeholder="Twój podpis*" pattern="(?=\S)." %s />',
+                    '<input id="author" name="author" type="text" value="%s" size="30" maxlength="245" placeholder="Twój podpis*" pattern="(?=\S).+" %s />',
                     esc_attr($commenter['comment_author']),
                     // $html_req
                     'required'

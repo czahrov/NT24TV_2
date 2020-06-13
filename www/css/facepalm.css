@@ -644,6 +644,10 @@ iframe.wp-embedded-content {
   font-size: 1.3rem;
 }
 
+[id] .link_post_small .cover_img {
+  background-color: #141c1f;
+}
+
 [id] .sidebar-list ul a {
   border-bottom: dashed 1px #ccc;
 }
@@ -1488,7 +1492,11 @@ footer.smartphone .foot-content .row .logo_menu {
   }
 }
 
-#wskrocie .sidebar .filmy-promocyjne .video-post {
+#wskrocie .sidebar .filmy-promocyjne .image {
+  background-color: #141c1f;
+}
+
+#wskrocie .sidebar .filmy-promocyjne .image .video-post {
   width: 100%;
   height: 100%;
   display: flex;

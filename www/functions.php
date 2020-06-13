@@ -665,7 +665,7 @@
 
     printf(
       '<a %8$s class="adbox %6$s" href="%1$s" target="%2$s" data-type="%4$s">
-        <img src="%3$s" alt="%7$s"/>
+        <img data-imglazy="%3$s" alt="%7$s"/>
       </a>',
       $href,
       $target,
@@ -918,7 +918,7 @@
                 <span>%s</span>
                 <div class="post_news_small">
                   <div class="mask-popular"></div>
-                  <div class="cover_img" style="background-image:url(%s);"></div>
+                  <div class="cover_img" data-bglazy="%s"></div>
                 </div>
               </div>
             </a>
@@ -959,7 +959,7 @@
             '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s" title="%6$s">
               <div class="big-post">
                 <div class="cover_img"></div>
-                <div class="post_news_big" style="background-image:url(%s)">
+                <div class="post_news_big" data-bglazy="%s"">
                   <div class="content">
                     <span> %s </span>
                   </div>
@@ -1004,7 +1004,7 @@
             '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s" title="%6$s">
               <div class="big-post">
                 <div class="cover_img"></div>
-                <div class="post_news_big" style="background-image:url(%s)">
+                <div class="post_news_big" data-bglazy="%s">
                   <div class="content">
                     <span> %s </span>
                   </div>
@@ -1028,7 +1028,7 @@
             <a href="%s" class="link_post_small" data-post-type="%s" title="%6$s">
               <div class="small-post">
                 <div class="post_news_small">
-                  <div class="cover_img" style="background-image:url(%s)"></div>
+                  <div class="cover_img" data-bglazy="%s"></div>
                 </div>
                 <div class="content">
                   <span> %s </span>
@@ -1052,7 +1052,7 @@
             <a href="%s" class="link_post_small" data-post-type="%s" title="%6$s">
               <div class="small-post">
                 <div class="post_news_small">
-                  <div class="cover_img" style="background-image:url(%s)"></div>
+                  <div class="cover_img" data-bglazy="%s"></div>
                 </div>
                 <div class="content">
                   <span> %s </span>
@@ -1075,7 +1075,7 @@
           '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
             <li>
               <div class="image-container">
-                <div class="image" style="background-image:url(%s)"></div>
+                <div class="image" data-bglazy="%s"></div>
               </div>
               <span>%s</span>
             </li>
@@ -1095,7 +1095,7 @@
           '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
             <li>
               <div class="image-container">
-                <div class="image" style="background-image:url(%s)"></div>
+                <div class="image" data-bglazy="%s"></div>
               </div>
               <span>%s</span>
             </li>
@@ -1113,7 +1113,7 @@
         printf(
           '<a href="%s" class="single %s" title="%s" data-post-type="%s" title="%3$s">
             <div class="image-container">
-              <div class="image" style="background-image:url(%s);">
+              <div class="image" data-bglazy="%s">
                 <div class="video-post">
                   <img src="%s/images/play.svg" alt="odtwórz film"/>
                 </div>
@@ -1136,7 +1136,7 @@
             <a href="%s" class="link_post_small" data-post-type="%s" title="%6$s">
               <div class="small-post">
                 <div class="post_news_small">
-                  <div class="cover_img" style="background-image:url(%s)"></div>
+                  <div class="cover_img" data-bglazy="%s"></div>
                 </div>
                 <span>%s</span>
               </div>

@@ -1,6 +1,54 @@
 $(function(){
   const DBG = 0;
 
+  // IntersectionObserver img lazy loading
+  (function( lazy_bgimg, lazy_img ){
+    let options = {
+      root: null,
+      rootMargin: '0px',
+      treshold: 0,
+    }
+    let watcher_bg = new IntersectionObserver( entries=>{
+      entries.forEach(entry=>{
+        if ( entry.isIntersecting && entry.intersectionRatio >= 0 ) {
+          let _ = $( entry.target );
+          img_url = _.attr('data-bglazy');
+          if( img_url == undefined ) return;
+          _.css({
+            backgroundImage: 'url('+img_url+')',
+          })
+          .attr('data-bglazy',null);
+          // console.log( _ );
+        }
+      });
+    });
+    let watcher_img = new IntersectionObserver( entries=>{
+      entries.forEach(entry=>{
+        if ( entry.isIntersecting && entry.intersectionRatio >= 0 ) {
+          let _ = $( entry.target );
+          img_url = _.attr('data-imglazy');
+          if( img_url == undefined ) return;
+          _
+          .attr({
+            'src': img_url,
+            'data-imglazy': null,
+          });
+          // console.log( _ );
+        }
+      });
+    });
+    lazy_bgimg.forEach( bgimg => {
+      watcher_bg.observe( bgimg );
+    });
+    lazy_img.forEach( img => {
+      watcher_img.observe( img );
+    });
+
+  })(
+    document.querySelectorAll('[data-bglazy]'),
+    document.querySelectorAll('[data-imglazy]')
+  );
+
   // obsługa menu
   (function(menu, view, stack, more, dots ){
     menu

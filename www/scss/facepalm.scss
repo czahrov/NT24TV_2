@@ -387,6 +387,7 @@ iframe.wp-embedded-content{
     .big-post{
 
       .post_news_big{
+        background-color: map-get( $color, 'black' );
 
         span{
           padding: 15px;

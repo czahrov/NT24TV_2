@@ -639,6 +639,10 @@ iframe.wp-embedded-content {
   font-size: 0.8rem;
 }
 
+[id] .link_post .big-post .post_news_big {
+  background-color: #141c1f;
+}
+
 [id] .link_post .big-post .post_news_big span {
   padding: 15px;
   font-size: 1.3rem;

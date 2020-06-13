@@ -42,12 +42,12 @@
             <div class="items row no-gutters">
               <!-- BIG POST -->
               <?php
-                printPost( array_splice( $posts, 0, 1 )[0], 'big', array( 'class'=> 'item' ) );
+                printPost( array_splice( $posts, 0, 1 )[0], 'big', array( 'img_size' => 'medium', 'class'=> 'item' ) );
               ?>
               <!-- MID POSTS -->
               <?php
                 foreach ( array_splice( $posts, 0, 24 ) as $num => $item ){
-                  printPost( $item, 'mid', array( 'class'=> 'item' ) );
+                  printPost( $item, 'mid', array( 'img_size' => 'thumbnail', 'class'=> 'item' ) );
                 }
               ?>
               <?php if ( $posts_num == $post_limit ): ?>

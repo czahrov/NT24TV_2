@@ -32,7 +32,7 @@
             $items = array_slice( $items, 0, $posts_limit );
           }
           foreach( array_splice( $items, 0, 12 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => 'item' ) );
+            printPost( $item, 'mid', array( 'img_size' => 'thumbnail', 'class' => 'item' ) );
           }
         ?>
         <button id="btn_more" class="col-12 fp-btn btn-more fw-bold position-relative" type="button" name="button" data-cmd="posts" data-category="<?php echo $category_chicago->slug; ?>">
@@ -66,7 +66,7 @@
           <!-- single post -->
           <?php
             foreach ( $items as $item ) {
-              printPost( $item, 'side' );
+              printPost( $item, 'side', array( 'img_size' => 'thumbnail' ) );
             }
           ?>
 

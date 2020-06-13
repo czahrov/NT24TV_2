@@ -3,7 +3,7 @@
   <footer class="bg-footer <?php echo getDevType(); ?>">
     <div class="foot-content">
       <div class="container">
-        <div class="row no-gutters padding flex-wrap justify-content-around">
+        <div class="row no-gutters padding flex-wrap justify-content-around justify-content-xl-start">
           <div class="logo_menu">
 
             <div class="logo mr-md-auto">

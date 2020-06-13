@@ -2,20 +2,12 @@
 <?php //get_header(); ?>
 <?php
   global $fp;
-  // $main_menu = wp_get_nav_menu_items('glowne-menu');
-  // print_r( $main_menu );
-  // print_r( array_map( function($item){
-  //   $ret = new stdClass();
-  //   $ret->title = $item->title;
-  //   $ret->url = $item->url;
-  //   $ret->permalink = get_the_permalink( $item->ID );
-  //   $ret->home = home_url();
-  //
-  //   return $ret;
-  // }, $main_menu ) );
-  // $category = get_category( 269 );
-  // print_r( $category );
-  // var_dump( get_category_link( 269 ) );
-  var_dump( get_category_by_path( 'https://nowytarg24.tv/kategoria/portal/przeglad-tygodniowy/', false ) );
+  $post_id = 113411;
+  // $timeNow = date_create()->getTimestamp();
+  $timePost_1 = date_create( get_the_date( 'Y-m-d H:i:s', $post_id ) )->getTimestamp();
+  $timePost_2 = get_post_datetime( $post_id )->getTimestamp();
+  var_dump( $timePost_1 );
+  var_dump( $timePost_2 );
+  var_dump( $timePost_1 - $timePost_2 );
 ?>
 <?php //get_footer(); ?>

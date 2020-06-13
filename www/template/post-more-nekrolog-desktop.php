@@ -13,14 +13,14 @@
       $items = get_posts(array(
         'numberposts'   => $post_limit,
         'exclude'       => array( get_the_ID() ),
-        'orderby'       => 'random',
-        'category'      => $category->cat_ID,
+        'orderby'       => 'date',
+        'cat'           => $category->cat_ID,
       ));
     ?>
     <!-- post -->
     <?php
       foreach ($items as $item) {
-        printPost( $item, 'mid', array( 'class'=> 'item' ) );
+        printPost( $item, 'mid', array( 'img_size' => 'thumbnail', 'class'=> 'item' ) );
       }
     ?>
     <?php if ( count($items) == $post_limit ): ?>

@@ -1,5 +1,5 @@
 $(function(){
-  const DBG = 1;
+  const DBG = 0;
 
   // obsługa menu
   (function(menu, view, stack, more, dots ){

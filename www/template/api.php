@@ -35,7 +35,7 @@
       $ret = array_map( function( $item ) use ($fp){
         $title = addslashes( $item->post_title ) . printTags( $item->ID, true, $isSpecialCategory );
         $short_title = $fp->cutText( addslashes( $item->post_title ), 10 ) . printTags( $item->ID, true, $isSpecialCategory );
-        $img = get_the_post_thumbnail_url( $item->ID, 'large' );
+        $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
         $thumb_field = get_post_field( 'thumb', $item );
         $thumb = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
         $nophoto = get_template_directory_uri() . '/images/no-photo2.png';
@@ -67,7 +67,7 @@
       $ret = array_map( function( $item ) use ( $fp ){
         $title = addslashes( $item->post_title ) . printTags( $item->ID );
         $short_title = $fp->cutText( addslashes( $item->post_title ), 10 ) . printTags( $item->ID, true, $isSpecialCategory );
-        $img = get_the_post_thumbnail_url( $item->ID, 'large' );
+        $img = get_the_post_thumbnail_url( $item->ID, 'medium' );
         $thumb = get_template_directory_uri() . "/joomla_import/" . get_post_field( 'thumb', $item );
         $url = get_permalink( $item->ID );
         return array(

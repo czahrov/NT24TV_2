@@ -36,13 +36,5 @@
 
   // ładowanie szablonów
   templateLoader( $files );
-  // array_map( function($arg){
-  //   $types = array( 'desktop', 'tablet', 'smartphone' );
-  //   $file_url = sprintf(
-  //     $arg,
-  //     getDevType()
-  //   );
-  //   get_template_part( $file_url );
-  // }, $files );
 ?>
 <?php get_footer(); ?>

@@ -476,6 +476,10 @@ iframe.wp-embedded-content{
 
       }
 
+      .big-post{
+        padding-bottom: 56.25%;
+      }
+
     }
 
   }
@@ -894,7 +898,8 @@ footer{
     display: flex;
     flex-direction: row;
     flex-grow: 1;
-    max-width: 100%;
+    width: 100%;
+    // max-width: 100%;
     align-items: center;
 
     .items{

@@ -684,6 +684,10 @@ iframe.wp-embedded-content {
   }
 }
 
+[id].tablet .link_post .big-post {
+  padding-bottom: 56.25%;
+}
+
 [id].desktop .title-sidebar {
   margin-left: 10px;
 }
@@ -937,7 +941,7 @@ footer.smartphone .foot-content .row .logo_menu {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  max-width: 100%;
+  width: 100%;
   align-items: center;
 }
 

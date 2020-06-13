@@ -20,7 +20,19 @@
     <!-- MID POSTS -->
     <?php
       foreach ( $found as $num => $item ){
-        printPost( $item, 'mid', array( 'class'=> 'item' ) );
+        switch ( getDevType() ) {
+          case 'desktop':
+            $img_size = 'medium';
+            break;
+          case 'tablet':
+          case 'smartphone':
+            $img_size = 'thumbnail';
+            break;
+          default:
+            $img_size = 'full';
+            break;
+        }
+        printPost( $item, 'mid', array( 'img_size' => $img_size, 'class'=> 'item' ) );
       }
     ?>
     <!-- /row-->

@@ -45,12 +45,12 @@
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big', array( 'class' => 'item no-padding' ) );
+          printPost( $items[0], 'big', array( 'img_size' => 'medium', 'class' => 'item no-padding' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => 'item' ) );
+            printPost( $item, 'mid', array( 'img_size' => 'thumbnail', 'class' => 'item' ) );
           }
         ?>
 
@@ -86,7 +86,7 @@
           <!-- single post -->
           <?php
             foreach ( $items as $item ) {
-              printPost( $item, 'side' );
+              printPost( $item, 'side', array( 'img_size' => 'thumbnail' ) );
             }
           ?>
 

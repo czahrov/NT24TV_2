@@ -45,12 +45,12 @@
           array_unshift( $items, $items_pined[0] );
           $items = array_slice( $items, 0, $posts_limit );
         }
-        printPost( array_splice( $items, 0, 1)[0], 'big', array( 'class' => '' ) );
+        printPost( array_splice( $items, 0, 1)[0], 'big', array( 'img_size' => 'thumbnail', 'class' => '' ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_splice( $items, 0, 4 ) as $item ){
-            printPost( $item, 'mid', array( 'class' => '' ) );
+            printPost( $item, 'mid', array( 'img_size' => 'thumbnail', 'class' => '' ) );
           }
         ?>
       </div>
@@ -90,7 +90,7 @@
           <!-- single post -->
           <?php
             foreach ( $items as $item ) {
-              printPost( $item, 'side' );
+              printPost( $item, 'side', array( 'img_size' => 'thumbnail' ) );
             }
           ?>
 

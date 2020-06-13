@@ -515,7 +515,8 @@
   // generuje oznaczenie wpisu "przed chwilą"
   function printFresh( $id = null, $icon = false ){
     $timeNow = date_create()->getTimestamp();
-    $timePost = date_create( get_the_date( 'Y-m-d H:i:s', $id ) )->getTimestamp();
+    // $timePost = date_create( get_the_date( 'Y-m-d H:i:s', $id ) )->getTimestamp();
+    $timePost = get_post_datetime( $id )->getTimestamp();
     $timeLimit = 1 * 60 * 60;
 
     if( $timeNow - $timePost <= $timeLimit ){
@@ -893,16 +894,18 @@
     }
 
     global $fp, $cat;
-    $img = get_the_post_thumbnail_url( $item->ID, array( 640, 480 ) );
     $thumb_field = get_post_field( 'thumb', $item );
     $thumb = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
     $data = array_merge( array(
-      'title'   => htmlentities($item->post_title),
-      'img'     => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo2.png" ) ),
-      'url'     => get_permalink( $item->ID ),
-      'format'  => get_post_format( $item ),
-      'class'   => '',
+      'title'     => htmlentities($item->post_title),
+      // 'img'       => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo2.png" ) ),
+      'url'       => get_permalink( $item->ID ),
+      'format'    => get_post_format( $item ),
+      'class'     => '',
+      'img_size'  => 'full',
     ), $args );
+    $img = get_the_post_thumbnail_url( $item->ID, $data['img_size'] );
+    $img = $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo2.png" ) );
 
     switch ( $type ) {
       case 'large':
@@ -925,7 +928,7 @@
           $type,
           $data['format'] !== false?("<div class='{$data['format']}-post'></div>"):(''),
           $data['title'],
-          $data['img']
+          $img
         );
         break;
       case 'big':
@@ -966,7 +969,7 @@
             $data['class'],
             $data['url'],
             $type,
-            $data['img'],
+            $img,
             $data['title'] . " " . printTags( $item->ID, true, false ),
             $data['title']
           );
@@ -1011,7 +1014,7 @@
             $data['class'],
             $data['url'],
             $type,
-            $data['img'],
+            $img,
             $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
             $data['title']
           );
@@ -1036,7 +1039,7 @@
           $data['class'],
           $data['url'],
           $type,
-          $data['img'],
+          $img,
           $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, true ),
           $data['title']
         );
@@ -1060,7 +1063,7 @@
           $data['class'],
           $data['url'],
           $type,
-          $data['img'],
+          $img,
           $fp->cutText( $data['title'], 10 ) . " " . printTags( $item->ID, true, false ),
           $data['title']
         );
@@ -1080,7 +1083,7 @@
           $data['class'],
           $data['url'],
           $type,
-          $data['img'],
+          $img,
           $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
           $data['title']
         );
@@ -1100,7 +1103,7 @@
           $data['class'],
           $data['url'],
           $type,
-          $data['img'],
+          $img,
           $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
           $data['title']
         );
@@ -1121,7 +1124,7 @@
           $data['class'],
           $data['title'],
           $type,
-          $data['img'],
+          $img,
           get_template_directory_uri()
         );
         break;
@@ -1142,7 +1145,7 @@
           $data['class'],
           $data['url'],
           $type,
-          $data['img'],
+          $img,
           $fp->cutText( $data['title'], 10 ) . " " . printTags( $item->ID, true, true ),
           $data['title']
         );

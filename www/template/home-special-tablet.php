@@ -48,12 +48,12 @@
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big-special', array( 'pasek' => $meta['pasek'][0] ) );
+          printPost( $items[0], 'big-special', array( 'img_size' => 'medium', 'pasek' => $meta['pasek'][0] ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 1 ) as $item ){
-            printPost( $item, 'mid-special', array( 'class' => '' ) );
+            printPost( $item, 'mid-special', array( 'img_size' => 'thumbnail', 'class' => '' ) );
           }
         ?>
       </div>
@@ -65,7 +65,7 @@
         <ul class="image-sidebar-section special">
           <?php
             foreach ( array_slice( $items, 2 ) as $item) {
-              printPost( $item, 'side-special' );
+              printPost( $item, 'side-special', array( 'img_size' => 'thumbnail' ) );
             }
           ?>
         </ul>

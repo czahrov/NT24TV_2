@@ -14,7 +14,7 @@
         print_r( $item );
         echo "--></div>";
       }
-      printPost( $item, 'mid' );
+      printPost( $item, 'mid', array( 'img_size' => 'thumbnail' ) );
     }
   ?>
 </div>

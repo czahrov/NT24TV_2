@@ -49,12 +49,12 @@ $items_pined = get_posts(array(
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big-special', array( 'class' => 'item no-padding', 'pasek' => $meta['pasek'][0] ) );
+          printPost( $items[0], 'big-special', array( 'img_size' => 'medium', 'class' => 'item no-padding', 'pasek' => $meta['pasek'][0] ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1 ) as $item ){
-            printPost( $item, 'mid-special', array( 'class' => 'item' ) );
+            printPost( $item, 'mid-special', array( 'img_size' => 'thumbnail', 'class' => 'item' ) );
           }
         ?>
 

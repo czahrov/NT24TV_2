@@ -14,7 +14,7 @@
             'cat'         => $category_bedzie_sie_dzialo->cat_ID,
           ) );
           foreach ($items as $item) {
-            printPost( $item, 'slider' );
+            printPost( $item, 'slider', array( 'img_size' => 'thumbnail' ) );
           }
         ?>
       </div>
@@ -47,7 +47,7 @@
             <!-- post -->
             <?php
               foreach ($items as $item) {
-                printPost( $item, 'slider' );
+                printPost( $item, 'slider', array( 'img_size' => 'thumbnail' ) );
               }
             ?>
 
@@ -86,7 +86,7 @@
           ));
 
           foreach ($items as $item) {
-            printPost( $item, 'side-big' );
+            printPost( $item, 'side-big', array( 'img_size' => 'medium' ) );
           }
         ?>
 

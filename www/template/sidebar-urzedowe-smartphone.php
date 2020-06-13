@@ -15,7 +15,7 @@
     <!-- single post -->
     <?php
       foreach ($items as $item) {
-        printPost( $item, 'side' );
+        printPost( $item, 'side', array( 'img_size' => 'thumbnail' ) );
       }
     ?>
 

@@ -1,31 +1,21 @@
+<?php
+  $category = get_category( 62 );
+?>
 <div id="nadchodzace" class="<?php echo getDevType(); ?> single-post sidebar-list padding-sm">
-  <a href="<?php echo get_category_link( get_category_by_slug( 'bedzie-sie-dzialo' )->cat_ID ); ?>">
-    <h5 class="title-sidebar">Będzie się działo</h5>
+  <a href="<?php echo get_category_link( $category->cat_ID ); ?>">
+    <h5 class="title-sidebar"><?php echo $category->name; ?></h5>
   </a>
   <ul class="image-sidebar-section padding no-padding-md">
     <?php
       $items = get_posts(array(
         'numberposts'   => 11,
-        'category_name' => 'bedzie-sie-dzialo',
+        'cat'           => $category->cat_ID,
       ));
     ?>
     <!-- single post -->
     <?php
       foreach ($items as $item) {
-        printf(
-          '<a href="%1$s">
-            <li>
-              <div class="image-container">
-                <div class="image img19" style="background-image:url(%3$s);"></div>
-              </div>
-              <span>%4$s %2$s</span>
-            </li>
-          </a>',
-          get_permalink( $item->ID ),
-          $item->post_title,
-          get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
-          printTags( $item->ID )
-        );
+        printPost( $item, 'side', array( 'img_size' => 'thumbnail' ) );
       }
     ?>
 

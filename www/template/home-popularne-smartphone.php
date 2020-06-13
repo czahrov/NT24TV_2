@@ -21,7 +21,7 @@
         <!-- single post -->
         <?php
           foreach ($items as $item) {
-            printPost( $item, 'large', array( 'class' => 'no-padding' ) );
+            printPost( $item, 'large', array( 'img_size' => 'medium', 'class' => 'no-padding' ) );
           }
           echo '<div class="">
             <div class="link_post_small" data-post-type="large" title="">

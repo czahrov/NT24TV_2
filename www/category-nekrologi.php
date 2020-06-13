@@ -23,7 +23,7 @@
             <!-- MID POSTS -->
             <?php
               foreach ( $posts as $num => $item ){
-                printPost( $item, 'mid', array( 'class'=> 'item' ) );
+                printPost( $item, 'mid', array( 'img_size' => 'thumbnail', 'class'=> 'item' ) );
               }
             ?>
             <?php if ( count($posts) == $post_limit ): ?>

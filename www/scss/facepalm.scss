@@ -223,15 +223,18 @@ a{
   align-items: flex-start;
   justify-content: center;
   // width: 100%;
+  max-width: 1300px;
 
   img{
     display: inline-block;
-    max-width: 100%;
+    // max-width: 100%;
     width: 100%;
+    // object-fit: contain;
+    // object-position: left;
 
     @media( min-width: 576px ){
-      width: initial;
-      max-height: 90vh;
+      // width: auto;
+      // max-height: 90vh;
     }
 
   }
@@ -364,7 +367,7 @@ iframe.wp-embedded-content{
       &.video{
 
         .big-post{
-          height: initial;
+          height: auto;
           padding: 0;
           margin: 0;
 
@@ -388,6 +391,7 @@ iframe.wp-embedded-content{
 
       .post_news_big{
         background-color: map-get( $color, 'black' );
+        background-position: top;
 
         span{
           padding: 15px;
@@ -404,6 +408,8 @@ iframe.wp-embedded-content{
 
     .cover_img{
       background-color: map-get( $color, 'black' );
+      background-position: top;
+
     }
 
   }
@@ -535,7 +541,7 @@ iframe.wp-embedded-content{
             }
 
             @media(min-width: map-get($break,'lg')){
-              font-size: 2rem;
+              // font-size: 2rem;
             }
 
           }
@@ -577,6 +583,11 @@ iframe.wp-embedded-content{
 
     [class^="link_post"]{
       padding-right: 10px;
+
+      & > .row{
+        height: 100%;
+      }
+
     }
 
   }
@@ -1042,6 +1053,26 @@ footer{
 
         .items{
           display: none;
+        }
+
+      }
+
+    }
+
+  }
+
+  &.smartphone{
+
+    nav{
+
+      .items{
+
+        .item{
+
+          a{
+            font-size: 0.8rem;
+          }
+
         }
 
       }
@@ -1635,7 +1666,7 @@ footer{
       height: 100% !important;
 
       img{
-        max-height: initial;
+        max-height: auto;
       }
 
     }
@@ -2196,8 +2227,8 @@ footer{
       top: 100%;
 
       li{
-        width: initial;
-        height: initial;
+        width: auto;
+        height: auto;
 
         button{
           padding: 0px;
@@ -2447,6 +2478,11 @@ footer{
 
     .zajawka{
       margin-bottom: 30px;
+
+      h1,h2,h3,h4,h5,h6{
+        line-height: 2em;
+      }
+
     }
 
   }
@@ -2748,6 +2784,7 @@ footer{
 }
 
 form.search-bar{
+  min-width: 25vw;
 
   .input-group{
 
@@ -2772,6 +2809,9 @@ form.search-bar{
     }
 
     .form-control{
+      padding: 10px 10px 10px 45px;
+      height: auto;
+      line-height: 0;
       border-radius: 50px;
     }
 

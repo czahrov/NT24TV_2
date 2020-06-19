@@ -499,7 +499,7 @@
 
   // generuje oznaczenie wpisu "pilne"
   function printImportant( $id = null, $icon = false ){
-    if( get_field( 'pilne', get_post()->ID ) == 1 ){
+    if( get_field( 'pilne', $id ) == 1 ){
       if ( $icon ) {
         return sprintf(
           '<img class="tag-icon" src="%s/images/important.svg"/ alt="Ważne" title="Ważna informacja">',
@@ -898,14 +898,14 @@
     $thumb = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
     $data = array_merge( array(
       'title'     => htmlentities($item->post_title),
-      // 'img'       => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo2.png" ) ),
+      // 'img'       => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo.png" ) ),
       'url'       => get_permalink( $item->ID ),
       'format'    => get_post_format( $item ),
       'class'     => '',
       'img_size'  => 'full',
     ), $args );
     $img = get_the_post_thumbnail_url( $item->ID, $data['img_size'] );
-    $img = $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo2.png" ) );
+    $img = $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo.png" ) );
 
     switch ( $type ) {
       case 'large':
@@ -959,7 +959,7 @@
             '<a class="link_post big col-12 col-md-8 %s" href="%s" data-post-type="%s" title="%6$s">
               <div class="big-post">
                 <div class="cover_img"></div>
-                <div class="post_news_big" data-bglazy="%s"">
+                <div class="post_news_big" data-bglazy="%s">
                   <div class="content">
                     <span> %s </span>
                   </div>

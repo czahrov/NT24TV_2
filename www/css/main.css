@@ -242,6 +242,7 @@ section.head-menu .head-items {
 }
 
 section.head-menu .head-items .logo img {
+  width: 100%;
   max-width: 12vw;
 }
 
@@ -609,39 +610,34 @@ ul.image-sidebar-section a .image-container .image {
   background-repeat: no-repeat;
 }
 
-.slider-arrows .prev {
+.slider-arrows button {
   background: transparent;
   border: 1px solid #e3e3e3;
   max-width: 60px;
-  max-height: 60px;
+  height: 60px;
   padding: 10px;
 }
 
-.slider-arrows .prev:hover {
+.slider-arrows button:hover {
   background-color: #e3e3e3;
   transition: 0.3s all;
 }
 
-.slider-arrows .prev img {
+.slider-arrows button img {
+  height: 100%;
+  width: 100%;
   max-width: 1.6rem;
+}
+
+.slider-arrows button.prev img {
   transform: rotate(180deg);
 }
 
-.slider-arrows .next {
-  background: transparent;
-  border: 1px solid #e3e3e3;
-  max-width: 60px;
-  max-height: 60px;
-  padding: 10px;
+.slider-arrows button.next {
   margin-left: -1px;
 }
 
-.slider-arrows .next:hover {
-  background-color: #e3e3e3;
-  transition: 0.3s all;
-}
-
-.slider-arrows .next img {
+.slider-arrows button.next img {
   max-width: 1.6rem;
 }
 
@@ -703,6 +699,7 @@ footer.bg-footer .foot-content {
 }
 
 footer.bg-footer .foot-content .logo img {
+  width: 100%;
   max-width: 12rem;
 }
 
@@ -816,6 +813,7 @@ footer.bg-footer .copy .copy-content {
 }
 
 .before-content .share_comment .social_share span img {
+  width: 100%;
   max-width: 3rem;
 }
 
@@ -890,6 +888,7 @@ footer.bg-footer .copy .copy-content {
   font-family: "open_sansregular";
   font-size: 1.3rem;
   line-height: 1.8;
+  line-height: 2em;
   margin-bottom: 0;
 }
 
@@ -902,8 +901,6 @@ footer.bg-footer .copy .copy-content {
 
 .content .zajawka p {
   font-family: "open_sansbold";
-  font-size: 1.3rem;
-  line-height: 1.8;
 }
 
 .komentarze .comments {

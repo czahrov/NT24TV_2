@@ -1,6 +1,6 @@
-<div id="urzedowe" class="<?php echo getDevType(); ?>">
+<div id="tasmy" class="<?php echo getDevType(); ?>">
   <?php
-    $category = get_category(70);
+    $category = get_category( 76 );
   ?>
   <a href="<?php echo get_category_link( $category->cat_ID ); ?>">
     <h5 class="title-sidebar line"><?php echo $category->name; ?></h5>

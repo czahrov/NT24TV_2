@@ -25,7 +25,7 @@
   <meta name="description" content="<?php echo bloginfo('description'); ?>">
   <meta name="author" content="">
   <link href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-  <title><?php wp_title( '|', true, 'right' ); echo bloginfo('name'); ?></title>
+  <title><?php wp_title(); ?></title>
   <link rel="preconnect" href="https://via.placeholder.com/">
   <?php
     // wp_enqueue_style( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, string $media = 'all' )
@@ -138,7 +138,7 @@
       </div>
     </div>
   </section>
-  <div id="main_menu" class="container">
+  <div id="main_menu" class="container <?php echo getDevType(); ?>">
     <a href="<?php echo home_url(); ?>" class="logo flex-grow-1 text-center d-xl-none">
       <img src="<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.svg" onerror="this.onerror=null; this.src='<?php echo get_template_directory_uri() . "/" ?>images/logo_nowy_targ.png'" alt="Logo Nowy Targ 24 tv">
     </a>
@@ -195,11 +195,11 @@
       <div class="label d-flex align-items-center">
         PILNE
       </div>
-      <div class="items d-flex">
+      <div class="items d-flex flex-shrink-0">
         <?php
           foreach ( getPilnePasek() as $post ) {
             printf(
-              '<div class="item d-flex text-center align-items-center justify-content-center">
+              '<div class="item d-flex text-center align-items-center justify-content-center flex-shrink-0">
                 <div class="separator">&diams;</div>
                 <a class="" href="%s">%s</a>
               </div>',

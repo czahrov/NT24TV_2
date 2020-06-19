@@ -1,6 +1,6 @@
 <?php
 global $cat;
-$posts_limit = 11;
+$posts_limit = 7;
 $meta = get_term_meta( $cat->term_id );
 $items = get_posts(array(
   'numberposts'   => $posts_limit,

@@ -2,29 +2,12 @@
   <h5 class="title-sidebar line">Najbardziej popularne</h5>
   <ul class="image-sidebar-section">
     <?php
-      $con = mysqli_connect( DB_HOST, DB_USER, DB_PASSWORD, DB_NAME );
+      $category = get_category( 112 );
       $posts_limit = 11;
-      $sql = "Select
-        nttv_posts.ID
-      From
-        nttv_post_views Inner Join
-        nttv_posts On nttv_posts.ID = nttv_post_views.id
-      Where
-        nttv_post_views.period = 'total' And
-        nttv_posts.post_type = 'post'
-      Order By
-        nttv_post_views.count Desc
-        Limit {$posts_limit}";
-      $query = mysqli_query( $con, $sql );
-      $res = mysqli_fetch_all( $query, MYSQLI_ASSOC );
-      $ids = array_map( function( $arg ){
-        return $arg['ID'];
-      }, $res );
-      mysqli_free_result( $res );
-      mysqli_close( $con );
-
       $items = get_posts(array(
-        'include' => $ids,
+        'include'     => $ids,
+        'cat'         => $category->cat_ID,
+        'numberposts' => $posts_limit,
       ));
     ?>
     <!-- single post -->

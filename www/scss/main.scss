@@ -257,6 +257,7 @@ section.head-menu {
 
     & .logo {
       & img {
+        width: 100%;
         max-width: 12vw;
       }
     }
@@ -763,41 +764,44 @@ ul.image-sidebar-section {
 }
 
 .slider-arrows {
-  & .prev {
+
+  button{
     background: transparent;
     border: 1px solid $grey;
     max-width: 60px;
-    max-height: 60px;
+    height: 60px;
     padding: 10px;
 
-    &:hover {
+    &:hover{
       background-color: $grey;
       transition: 0.3s all;
     }
 
-    & img {
-      max-width: 1.6rem;
-      transform: rotate(180deg);
-    }
-  }
-
-  & .next {
-    background: transparent;
-    border: 1px solid $grey;
-    max-width: 60px;
-    max-height: 60px;
-    padding: 10px;
-    margin-left: -1px;
-
-    &:hover {
-      background-color: $grey;
-      transition: 0.3s all;
-    }
-
-    & img {
+    img{
+      height: 100%;
+      width: 100%;
       max-width: 1.6rem;
     }
+
+    &.prev {
+
+      & img{
+        transform: rotate(180deg);
+
+      }
+
+    }
+
+    &.next {
+      margin-left: -1px;
+
+      & img {
+        max-width: 1.6rem;
+      }
+    }
+
   }
+
 }
 //filmy promocyjne
 .filmy-promocyjne {
@@ -871,6 +875,7 @@ footer.bg-footer {
 
     & .logo {
       & img {
+        width: 100%;
         max-width: 12rem;
       }
     }
@@ -987,6 +992,7 @@ footer.bg-footer {
         margin-right: 5px;
 
         & img {
+          width: 100%;
           max-width: 3rem;
         }
       }
@@ -1071,6 +1077,7 @@ footer.bg-footer {
     font-family: $font-regular;
     font-size: 1.3rem;
     line-height: 1.8;
+    line-height: 2em;
     margin-bottom: 0;
   }
 
@@ -1084,8 +1091,8 @@ footer.bg-footer {
   & .zajawka {
     & p {
       font-family: $font-bold;
-      font-size: 1.3rem;
-      line-height: 1.8;
+      // font-size: 1.3rem;
+      // line-height: 1.8;
     }
   }
 }

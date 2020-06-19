@@ -4,9 +4,23 @@
   </a>
   <ul class="image-sidebar-section">
     <?php
+      $date_now = date( 'Y-m-d H:i' );
       $items = get_posts(array(
         'numberposts'   => 17,
-        'category_name' => 'bedzie-sie-dzialo',
+        'cat'           => $category->cat_ID,
+        'meta_query'     => array(
+          'relation'  => 'AND',
+          array(
+            'key'     => 'event_start',
+            'value'   => $date_now,
+            'compare' => '<=',
+          ),
+          array(
+            'key'     => 'event_end',
+            'value'   => $date_now,
+            'compare' => '>=',
+          ),
+        ),
       ));
     ?>
     <!-- single post -->

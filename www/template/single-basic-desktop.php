@@ -118,7 +118,7 @@
         <?php echo printAd( 'v-l', false, array( 'class'=> 'padding justify-content-lg-start' ) ); ?>
       </div>
       <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
-        <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
+        <?php get_template_part('template/sidebar-popularne-desktop'); ?>
       </div>
     </div>
   </div>
@@ -141,7 +141,7 @@
         <?php echo printAd( 'v-l', false, array( 'class' => 'padding justify-content-lg-start' ) ); ?>
       </div>
       <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
-        <?php get_template_part('template/sidebar-popularne-desktop'); ?>
+        <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
       </div>
     </div>
     <!-- /.row -->

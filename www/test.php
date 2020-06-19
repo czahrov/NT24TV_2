@@ -1,13 +1,29 @@
 <?php /* Template Name: test */ ?>
 <?php //get_header(); ?>
 <?php
+  error_reporting( E_ALL );
   global $fp;
-  $post_id = 113411;
-  // $timeNow = date_create()->getTimestamp();
-  $timePost_1 = date_create( get_the_date( 'Y-m-d H:i:s', $post_id ) )->getTimestamp();
-  $timePost_2 = get_post_datetime( $post_id )->getTimestamp();
-  var_dump( $timePost_1 );
-  var_dump( $timePost_2 );
-  var_dump( $timePost_1 - $timePost_2 );
+  $date_now = date( 'Y-m-d H:i' );
+  var_dump( $date_now );
+  $category = get_category( 62 );
+  var_dump( $category );
+  $items = get_posts(array(
+    'numberposts'   => 11,
+    'cat'           => $category->cat_ID,
+    'meta_query'     => array(
+      'relation'  => 'AND',
+      array(
+        'key'     => 'event_start',
+        'value'   => $date_now,
+        'compare' => '<=',
+      ),
+      array(
+        'key'     => 'event_end',
+        'value'   => $date_now,
+        'compare' => '>=',
+      ),
+    ),
+  ));
+  var_dump( $items );
 ?>
 <?php //get_footer(); ?>

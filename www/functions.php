@@ -970,7 +970,7 @@
             $data['url'],
             $type,
             $img,
-            $data['title'] . " " . printTags( $item->ID, true, false ),
+            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
             $data['title']
           );
         }
@@ -1015,7 +1015,7 @@
             $data['url'],
             $type,
             $img,
-            $fp->cutText( $data['title'] ) . printTags( $item->ID, true, false ),
+            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
             $data['title']
           );
         }
@@ -1084,7 +1084,7 @@
           $data['url'],
           $type,
           $img,
-          $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
+          $data['title'] . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
@@ -1104,7 +1104,7 @@
           $data['url'],
           $type,
           $img,
-          $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
+          $data['title'] . printTags( $item->ID, true, false ),
           $data['title']
         );
         break;

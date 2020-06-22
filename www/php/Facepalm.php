@@ -250,7 +250,7 @@
     public function cutText( $text = "", $words = 6 ){
       preg_match( "~(\S+\s*){0,{$words}}~", $text, $match );
       $ret = $match[0];
-      if( strlen($text) > strlen($ret) ) $ret .= '(...)';
+      if( strlen($text) > strlen($ret) ) $ret .= '...';
       return $ret;
     }
 

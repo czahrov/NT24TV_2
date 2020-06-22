@@ -10,19 +10,19 @@
       <div class="before-content">
         <div class="author_date_tags">
           <?php
-            $segments = array(
-              get_the_date().' '.get_the_time(),
-              printImportant( get_the_id(), false ),
-              printFresh( get_the_id(), false ),
-              printHot( get_the_id(), false ),
-              getPostViews( get_post()->ID )
-            );
-            echo implode(
-              '<span class="separator"></span>',
-              array_filter( $segments, function( $item ){
-                return !empty( $item );
-              } )
-            );
+          $segments = array(
+            get_the_date().' '.get_the_time(),
+            printImportant( get_the_id(), false ),
+            printFresh( get_the_id(), false ),
+            printHot( get_the_id(), false ),
+            getPostViews( get_post()->ID )
+          );
+          echo implode(
+            '<span class="separator"></span>',
+            array_filter( $segments, function( $item ){
+              return !empty( $item );
+            } )
+          );
           ?>
         </div>
         <div class="share_comment row justify-content-between">
@@ -67,32 +67,32 @@
       <div class="content main padding no-padding-xl">
         <?php if ( !empty( ( $yt = get_post_field('youtube') ) ) ): ?>
           <?php
-            // echo $fp->genYoutubeVideo( $yt );
-            $fp->embed_video_for_post( get_post() );
+          // echo $fp->genYoutubeVideo( $yt );
+          $fp->embed_video_for_post( get_post() );
           ?>
         <?php endif; ?>
         <div class="zajawka">
           <?php
-            $excerpt =  get_the_excerpt( get_post() );
-            $lead =  get_field('lead');
-            echo empty( $lead )?( $excerpt ):( $lead );
+          $excerpt =  get_the_excerpt( get_post() );
+          $lead =  get_field('lead');
+          echo empty( $lead )?( $excerpt ):( $lead );
           ?>
         </div>
         <?php
-          if( empty( $yt ) ){
-            $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-            $thumb_field = get_post_field( 'thumb', get_the_ID() );
-            $thumb_alt = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
-            $img = $thumb !== false?( $thumb ):( !empty( $thumb_field )?( $thumb_alt ):( false ) );
+        if( empty( $yt ) ){
+          $thumb = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+          $thumb_field = get_post_field( 'thumb', get_the_ID() );
+          $thumb_alt = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
+          $img = $thumb !== false?( $thumb ):( !empty( $thumb_field )?( $thumb_alt ):( false ) );
 
-            if ( $img !== false ) {
-              printf(
-                '<img class="img-fluid" src="%s" alt="%s"/>',
-                $img,
-                $post->post_title
-              );
-            }
+          if ( $img !== false ) {
+            printf(
+            '<img class="img-fluid" src="%s" alt="%s"/>',
+            $img,
+            $post->post_title
+            );
           }
+        }
         ?>
         <?php the_content(); ?>
 
@@ -100,8 +100,8 @@
       <div class="after_content d-flex align-items-center">
         <span class="author fw-bold">
           <?php
-            // echo apply_filters( 'custom_author', get_the_author() );
-            echo get_the_author_meta('display_name');
+          // echo apply_filters( 'custom_author', get_the_author() );
+          echo get_the_author_meta('display_name');
           ?>
         </span>
         <span class='separator'></span>
@@ -110,15 +110,28 @@
         </span>
       </div>
       <!-- /content -->
+      <!-- comments -->
+      <div class="single-post">
+        <div class="row no-gutters komentarze">
+          <?php get_template_part("template/post-comments"); ?>
+        </div>
+        <?php get_template_part("template/post-more-desktop"); ?>
+      </div>
     </div>
     <!-- sidebar -->
     <!-- Sidebar Column -->
     <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters d-lg-block">
-      <div class="col-12 col-sm col-lg-12">
+      <div class="col-12 col-sm-5 col-md-4 col-lg-12">
         <?php echo printAd( 'v-l', false, array( 'class'=> 'padding justify-content-lg-start' ) ); ?>
       </div>
-      <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+      <div class="col-12 col-sm-7 col-md-8 col-lg-12">
         <?php get_template_part('template/sidebar-popularne-desktop'); ?>
+      </div>
+      <div class="col-12 col-sm-5 col-md-4 col-lg-12">
+        <?php echo printAd( 'v-l', false, array( 'class' => 'padding justify-content-lg-start' ) ); ?>
+      </div>
+      <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
+        <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
       </div>
     </div>
   </div>
@@ -126,25 +139,3 @@
 </div>
 <div class="clear-top"></div>
 <!-- Page Content -->
-<div class="container">
-  <div class="row no-gutters">
-    <!-- comments -->
-    <div class="col-12 col-lg-8 single-post">
-      <div class="row no-gutters komentarze">
-        <?php get_template_part("template/post-comments"); ?>
-      </div>
-      <?php get_template_part("template/post-more-desktop"); ?>
-    </div>
-    <!-- /col-8 -->
-    <div class="sidebar sidebar-list col-12 col-lg-4 row no-gutters d-lg-block">
-      <div class="col-12 col-sm col-lg-12">
-        <?php echo printAd( 'v-l', false, array( 'class' => 'padding justify-content-lg-start' ) ); ?>
-      </div>
-      <div class="position-sticky col-12 col-sm-7 col-md-8 col-lg-12">
-        <?php get_template_part('template/sidebar-nadchodzace-desktop'); ?>
-      </div>
-    </div>
-    <!-- /.row -->
-  </div>
-  <!-- /.container -->
-</div>

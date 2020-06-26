@@ -452,7 +452,6 @@ iframe.wp-embedded-content{
 
       span{
         line-height: 1.5em;
-        max-height: calc( 4.5em + 30px );
         overflow-y: hidden;
       }
 
@@ -1505,7 +1504,7 @@ footer{
       a{
 
         @media( orientation: portrait ){
-          &:nth-child(n+7){
+          &:nth-child(n+8){
             display: none;
           }
 
@@ -1577,7 +1576,25 @@ footer{
 #chicago{
 
   .image-sidebar-section{
-    // margin-top: 3rem;
+
+    a{
+
+      @media( orientation: portrait ){
+        &:nth-child(n+7){
+          display: none;
+        }
+
+      }
+
+      @media( orientation: landscape ){
+        &:nth-child(n+10){
+          display: none;
+        }
+
+      }
+
+    }
+
 
   }
 

@@ -81,7 +81,7 @@
         </a>
         <?php
           $items = get_posts( array(
-            'numberposts'    => 11,
+            'numberposts'    => 12,
             'cat'             => $category_kultura->cat_ID,
           ) );
         ?>

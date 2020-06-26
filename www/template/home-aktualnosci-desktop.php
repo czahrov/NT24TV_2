@@ -1,6 +1,6 @@
 <?php
   $category = get_category(56);
-  $posts_limit = 20;
+  $posts_limit = 23;
   $items = get_posts(array(
     'numberposts'   => $posts_limit,
     'cat'           => $category->cat_ID,

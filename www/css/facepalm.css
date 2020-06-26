@@ -657,7 +657,6 @@ iframe.wp-embedded-content {
 
 [id] .big-post .post_news_big span {
   line-height: 1.5em;
-  max-height: calc( 4.5em + 30px);
   overflow-y: hidden;
 }
 
@@ -1326,8 +1325,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #przeglad_tygodniowy.tablet .sidebar-list a:nth-child(n+7),
-  #przeglad_tygodniowy.tablet .image-sidebar-section a:nth-child(n+7) {
+  #przeglad_tygodniowy.tablet .sidebar-list a:nth-child(n+8),
+  #przeglad_tygodniowy.tablet .image-sidebar-section a:nth-child(n+8) {
     display: none;
   }
 }
@@ -1356,6 +1355,18 @@ footer.smartphone .foot-content .row .logo_menu {
 @media (orientation: landscape) {
   #sport.tablet .sidebar-list a:nth-child(n+8),
   #sport.tablet .image-sidebar-section a:nth-child(n+8) {
+    display: none;
+  }
+}
+
+@media (orientation: portrait) {
+  #chicago .image-sidebar-section a:nth-child(n+7) {
+    display: none;
+  }
+}
+
+@media (orientation: landscape) {
+  #chicago .image-sidebar-section a:nth-child(n+10) {
     display: none;
   }
 }

@@ -166,11 +166,12 @@ $(function(){
         let cmd = _.attr('data-cmd');
         let query_elements = {
           cmd: cmd,
-          category_name: category,
+          cat: category,
           from: from,
           to: to,
           q: search==null?(''):( search.slice(-1) ),
         };
+        console.log({query_elements:query_elements});
         let query_segments = new Array();
         $.each( query_elements, function( key, value ){
           let query_segment = key+"="+value;

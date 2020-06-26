@@ -5,7 +5,7 @@
   </a>
   <?php
   $items = get_posts(array(
-    'numberposts'     => 15,
+    'numberposts'     => 18,
     'cat'             => $category->cat_ID,
   ));
   ?>

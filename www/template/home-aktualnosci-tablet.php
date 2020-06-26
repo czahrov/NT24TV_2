@@ -1,7 +1,7 @@
 <?php
   $category = get_category(56);
   $items = get_posts(array(
-    'numberposts'   => 22,
+    'numberposts'   => 24,
     'cat'           => $category->term_id,
     'orderby'       => 'date',
     'order'         => 'DESC'

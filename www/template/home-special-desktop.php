@@ -1,6 +1,6 @@
 <?php
   global $cat;
-  $posts_limit = 6;
+  $posts_limit = 5;
   $meta = get_term_meta( $cat->term_id );
   $items = get_posts(array(
     'numberposts'   => $posts_limit,
@@ -47,12 +47,18 @@
             array_unshift( $items, $items_pined[0] );
             $items = array_slice( $items, 0, $posts_limit );
           }
-          printPost( $items[0], 'big-special', array( 'img_size' => 'medium', 'pasek' => $meta['pasek'][0] ) );
+          printPost( $items[0], 'big-special', array(
+            'pasek' => $meta['pasek'][0],
+            'img_size' => 'medium',
+          ) );
         ?>
         <!-- Mid post -->
         <?php
           foreach( array_slice( $items, 1, 1 ) as $item ){
-            printPost( $item, 'mid-special', array( 'img_size' => 'thumbnail' ) );
+            printPost( $item, 'mid-special', array(
+              'img_size' => 'thumbnail',
+              'title_limit' => 10,
+            ) );
           }
         ?>
       </div>

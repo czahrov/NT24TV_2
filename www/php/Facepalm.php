@@ -248,10 +248,16 @@
     }
 
     public function cutText( $text = "", $words = 6 ){
-      preg_match( "~(\S+\s*){0,{$words}}~", $text, $match );
-      $ret = $match[0];
-      if( strlen($text) > strlen($ret) ) $ret .= '...';
-      return $ret;
+      if ( $words ) {
+        preg_match( "~(\S+\s*){0,{$words}}~", $text, $match );
+        $ret = $match[0];
+        // if( strlen($text) > strlen($ret) ) $ret .= '...';
+        return $ret;
+      }
+      else {
+        return $text;
+      }
+
     }
 
     public function mobile_detect_ios_helper(){
@@ -272,6 +278,20 @@
       }
 
       return false;
+    }
+
+    public function get_youtube_thumbnail_url( $video_url = '', $img_size = 'default' ){
+      // video url: https://www.youtube.com/watch?v=hkUAZNDarRU
+      // share url: https://youtu.be/hkUAZNDarRU
+      // $extract_pattern = "~v=([^&\s]+)|youtu\.be\/(\w+)~";
+      $extract_pattern = "~(?:v\=|youtu\.be\/)([^&\s]+)~";
+      preg_match( $extract_pattern, $video_url, $match );
+      $video_id = end( $match );
+      $img_sizes = array(
+        'default' => 'hqdefault',
+        'full'    => 'maxresdefault',
+      );
+      return "https://i3.ytimg.com/vi/{$video_id}/{$img_sizes[$img_size]}.jpg";
     }
 
   }

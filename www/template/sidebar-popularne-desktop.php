@@ -3,7 +3,7 @@
   <ul class="image-sidebar-section">
     <?php
       $category = get_category( 112 );
-      $posts_limit = 11;
+      $posts_limit = 8;
       $items = get_posts(array(
         'include'     => $ids,
         'cat'         => $category->cat_ID,

@@ -784,77 +784,48 @@
   function getPilnePasek(){
     $homeID = get_page_by_title( 'home' )->ID;
     $limit = get_field( 'limit', $homeID );
-    $kategorie = get_field( 'kategoria', $homeID );
-    $tagi = get_field( 'tag', $homeID );
-    $args_basic = array(
-      'numberposts' => (int)$limit,
-      'oderby'      => 'date',
-      'order'       => 'DESC',
-    );
-
-    if ( !empty( $kategorie ) ) {
-      $kategorie__in = array_map( function( $kat ){ return $kat->term_id; }, $kategorie );
-      $args_kat = array_merge( $args_basic, array(
-        'category__in' => $kategorie__in,
-      ) );
-    }
-
-    if ( !empty( $tagi ) ) {
-      $tagi__in = array_map( function( $tag ){ return $tag->term_id; }, $tagi );
-      $args_tag = array_merge( $args_basic, array(
-        'tag__in' => $tagi__in,
-      ) );
-    }
-
-    $items = array_merge( get_posts( $args_kat ), get_posts( $args_tag ) );
-    usort( $items, function( $a, $b ){
-      if ( $a->post_date_gmt < $b->post_date_gmt ) {
-        return 1;
-      }
-      elseif( $a->post_date_gmt > $b->post_date_gmt ) {
-        return -1;
-      }
-      else{
-        return 0;
-      }
-
-    } );
-
-    return array_slice( $items, 0, $limit );
+    return get_posts(array(
+      'numberposts'   => $limit,
+      'meta_query'    => array(
+        'relation' => 'AND',
+        array(
+          'key'   => 'pilne',
+          'value' => '1',
+        ),
+      ),
+    ));
   }
 
   // zwraca tablicę wpisów do wyświetlenia w sekcji "zobacz również"
   function getPostMore( $args_user = array() ){
-    $args_basic = array(
-      'numberposts'   => 12,
-      'orderby'       => 'date',
-      'order'         => 'DESC',
-    );
-    $args = array_merge( $args_basic, $args_user );
-    $ret = array();
-    global $post_categories;
+    // $post_id = 11318;
+    $post_id = get_post()->ID;
+    $posts_limit = 12;
+    echo "<div hidden>{$post_id}</div>";
 
-    $tags_list = wp_get_post_tags( get_post()->ID );
-    if ( !empty( $tags_list ) ) {
-      $tags_posts = get_posts( array_merge( $args, array(
-        'tag__in'     => array_map( function( $t ){ return $t->term_id; }, $tags_list ),
-      ) ) );
+    $post_categories = wp_get_post_categories( $post_id, array(
+      'child_of' => 68,
+    ) );
+    // echo "POST_CATEGORIES" . PHP_EOL;
+    // print_r( $post_categories );
 
-      $ret = array_merge( $ret, $tags_posts );
+    $post_tags = wp_get_post_tags( $post_id );
+    // echo "POST_TAGS" . PHP_EOL;
+    // print_r( $post_tags );
+    $post_tags_list = array_map( function($tag){
+      return $tag->term_id;
+    }, $post_tags );
 
-    }
+    $similar_posts = get_posts(array(
+      'numberposts'   =>  $posts_limit,
+      'category__in'  =>  $post_categories,
+      'tag__in'       =>  $post_tags_list,
+      // 'orderby'       => 'rand',
+    ));
+    // echo "SIMILAR_POSTS" . PHP_EOL;
+    // print_r( $similar_posts );
 
-    if ( count( $ret ) < (int)$args['numberposts'] ) {
-      $posts = get_posts( array_merge( $args, array(
-        'category__in'  => $post_categories,
-        'numberposts'   => (int)$args['numberposts'] - count( $ret ),
-        'orderby'       => 'rand',
-      ) ) );
-
-      $ret = array_merge( $ret, $posts );
-    }
-
-    return $ret;
+    return $similar_posts;
   }
 
   // zwraca liczbę wyświetleń dla danego wpisu
@@ -897,22 +868,40 @@
     $thumb_field = get_post_field( 'thumb', $item );
     $thumb = get_template_directory_uri() . "/joomla_import/" . $thumb_field;
     $data = array_merge( array(
-      'title'     => htmlentities($item->post_title),
-      // 'img'       => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo.png" ) ),
-      'url'       => get_permalink( $item->ID ),
-      'format'    => get_post_format( $item ),
-      'class'     => '',
-      'img_size'  => 'full',
+      'title'       => htmlentities( $item->post_title ),
+      // 'img'         => $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo.png" ) ),
+      'url'         => get_permalink( $item->ID ),
+      'format'      => get_post_format( $item ),
+      'class'       => '',
+      'img_size'    => 'full',
+      'title_limit' => false,
     ), $args );
+    // skrócona wersja tytułu, wyświetlana w kafelkach na stronie
+    $short_title = $fp->cutText( $data['title'], $data['title_limit'] );
     $img = get_the_post_thumbnail_url( $item->ID, $data['img_size'] );
-    $img = $img !== false?( $img ):( !empty( $thumb_field )?( $thumb ):( get_template_directory_uri()."/images/no-photo.png" ) );
+    // brak zdefiniowanej miniaturki
+    if ( $img == false ){
+      // czy podano źródło youtube
+      if ( get_field( 'source', $item->ID ) == 'youtube' && !empty( get_field( 'youtube', $item->ID ) ) ) {
+        $img = $fp->get_youtube_thumbnail_url( get_field( 'youtube', $item->ID ) );
+      }
+      // czy istnieje stara miniaturka
+      elseif( !empty( $thumb_field ) ) {
+        $img = $thumb;
+      }
+      // brak zdjęcia
+      else{
+        $img = get_template_directory_uri()."/images/no-photo.png";
+      }
+
+    }
 
     switch ( $type ) {
       case 'large':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'large' );
         printf(
           '<div class="col-12 col-md-6 %s">
-            <a href="%s" class="link_post_small" data-post-type="%s" title="%5$s">
+            <a href="%s" class="link_post_small" data-post-type="%s" title="%s">
               <div class="small-post popular-post">
                 %s
                 <span>%s</span>
@@ -926,8 +915,9 @@
           $data['class'],
           $data['url'],
           $type,
-          $data['format'] !== false?("<div class='{$data['format']}-post'></div>"):(''),
           $data['title'],
+          $data['format'] !== false?("<div class='{$data['format']}-post'></div>"):(''),
+          $short_title,
           $img
         );
         break;
@@ -950,7 +940,7 @@
             $fp->embed_video_for_post( $item, array('class'=>''), true ),
             $data['url'],
             $data['title'],
-            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false )
+            $short_title." ".printTags( $item->ID, true, false )
           );
         }
         else{
@@ -970,7 +960,7 @@
             $data['url'],
             $type,
             $img,
-            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
+            $short_title." ".printTags( $item->ID, true, false ),
             $data['title']
           );
         }
@@ -995,7 +985,7 @@
             $data['url'],
             $data['pasek'],
             $data['title'],
-            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false )
+            $short_title." ".printTags( $item->ID, true, false )
           );
         }
         else{
@@ -1015,7 +1005,7 @@
             $data['url'],
             $type,
             $img,
-            $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, false ),
+            $short_title." ".printTags( $item->ID, true, false ),
             $data['title']
           );
         }
@@ -1040,7 +1030,7 @@
           $data['url'],
           $type,
           $img,
-          $fp->cutText( $data['title'], 10 ) . printTags( $item->ID, true, true ),
+          $short_title." ".printTags( $item->ID, true, true ),
           $data['title']
         );
         break;
@@ -1064,7 +1054,7 @@
           $data['url'],
           $type,
           $img,
-          $fp->cutText( $data['title'], 10 ) . " " . printTags( $item->ID, true, false ),
+          $short_title." ".printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
@@ -1084,7 +1074,7 @@
           $data['url'],
           $type,
           $img,
-          $data['title'] . printTags( $item->ID, true, false ),
+          $short_title." ".printTags( $item->ID, true, true ),
           $data['title']
         );
         break;
@@ -1104,14 +1094,14 @@
           $data['url'],
           $type,
           $img,
-          $data['title'] . printTags( $item->ID, true, false ),
+          $short_title." ".printTags( $item->ID, true, false ),
           $data['title']
         );
         break;
       case 'side-big':
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'medium' );
         printf(
-          '<a href="%s" class="single %s" title="%s" data-post-type="%s" title="%3$s">
+          '<a href="%s" class="single %s" data-post-type="%s" title="%s">
             <div class="image-container">
               <div class="image" data-bglazy="%s">
                 <div class="video-post">
@@ -1122,8 +1112,8 @@
           </a>',
           $data['url'],
           $data['class'],
-          $data['title'],
           $type,
+          $data['title'],
           $img,
           get_template_directory_uri()
         );
@@ -1146,7 +1136,7 @@
           $data['url'],
           $type,
           $img,
-          $fp->cutText( $data['title'], 10 ) . " " . printTags( $item->ID, true, true ),
+          $short_title." ".printTags( $item->ID, true, true ),
           $data['title']
         );
         break;

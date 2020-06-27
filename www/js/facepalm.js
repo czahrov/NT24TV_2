@@ -740,6 +740,12 @@ $(function(){
           }
         });
       }
+      else{
+        $(window).scroll(function(e){
+          video_start = _.offset().top;
+          video_end = video_start + _.outerHeight(true);
+        });
+      }
 
     });
 

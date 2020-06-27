@@ -664,18 +664,16 @@
     }
 
     printf(
-      '<a %8$s class="adbox %6$s" href="%1$s" target="%2$s" data-type="%4$s">
-        <img data-imglazy="%3$s" alt="%7$s"/>
+      '<a %s class="adbox %s" href="%s" target="%s" data-type="%s" title="%7$s">
+        <img data-imglazy="%s" alt="%s"/>
       </a>',
+      ($target == '_blank')?('rel="noopener"'):(''),
+      $args['class'],
       $href,
       $target,
-      $img,
       $type,
-      $ad->ID,
-      // ( $parse[0] == 'h' and in_array( $parse[1], array( 'l', 'm' ) ) )?( 'no-padding' ):( '' ),
-      $args['class'],
-      $ad->post_title,
-      ($target == '_blank')?('rel="noopener"'):('')
+      $img,
+      $ad->post_title
     );
 
   }
@@ -801,29 +799,15 @@
     // $post_id = 11318;
     $post_id = get_post()->ID;
     $posts_limit = 12;
-    echo "<div hidden>{$post_id}</div>";
-
     $post_categories = wp_get_post_categories( $post_id, array(
       'child_of' => 68,
     ) );
-    // echo "POST_CATEGORIES" . PHP_EOL;
-    // print_r( $post_categories );
-
-    $post_tags = wp_get_post_tags( $post_id );
-    // echo "POST_TAGS" . PHP_EOL;
-    // print_r( $post_tags );
-    $post_tags_list = array_map( function($tag){
-      return $tag->term_id;
-    }, $post_tags );
 
     $similar_posts = get_posts(array(
       'numberposts'   =>  $posts_limit,
-      'category__in'  =>  $post_categories,
-      'tag__in'       =>  $post_tags_list,
-      // 'orderby'       => 'rand',
+      'cat'  =>  array_slice( $post_categories, -1 ),
+      'exclude' => get_post()->ID,
     ));
-    // echo "SIMILAR_POSTS" . PHP_EOL;
-    // print_r( $similar_posts );
 
     return $similar_posts;
   }

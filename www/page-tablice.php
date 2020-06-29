@@ -85,7 +85,7 @@
             </div>
             <div class="col-xl-6 section_title tablice-tabela" id="cennik">
               <p>
-                <?php echo get_field('tablice-cennik-lewa'); ?>
+                <?php echo get_field('tablice-cennik-prawa'); ?>
               </p>
             </div>
           </div>

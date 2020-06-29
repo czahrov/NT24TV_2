@@ -700,10 +700,6 @@ iframe.wp-embedded-content {
   }
 }
 
-[id].tablet .link_post .big-post {
-  padding-bottom: 56.25%;
-}
-
 [id].desktop .title-sidebar {
   margin-left: 10px;
 }
@@ -1296,8 +1292,15 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #aktualnosci.tablet .sidebar-list a:nth-child(n+12),
-  #aktualnosci.tablet .image-sidebar-section a:nth-child(n+12) {
+  #aktualnosci.tablet .sidebar-list a:nth-child(n+10),
+  #aktualnosci.tablet .image-sidebar-section a:nth-child(n+10) {
+    display: none;
+  }
+}
+
+@media (orientation: landscape) {
+  #aktualnosci.tablet .sidebar-list a:nth-child(n+13),
+  #aktualnosci.tablet .image-sidebar-section a:nth-child(n+13) {
     display: none;
   }
 }
@@ -1346,8 +1349,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #sport.tablet .sidebar-list a:nth-child(n+7),
-  #sport.tablet .image-sidebar-section a:nth-child(n+7) {
+  #sport.tablet .sidebar-list a:nth-child(n+8),
+  #sport.tablet .image-sidebar-section a:nth-child(n+8) {
     display: none;
   }
 }
@@ -1834,11 +1837,13 @@ footer.smartphone .foot-content .row .logo_menu {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: transparent;
 }
 
 @media (min-width: 768px) {
   #post.nekrologi #more .mid_post .item .post_news_small {
     height: 400px;
+    padding: 0;
   }
 }
 

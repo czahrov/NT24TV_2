@@ -537,7 +537,7 @@ iframe.wp-embedded-content{
       }
 
       .big-post{
-        padding-bottom: 56.25%;
+        // padding-bottom: 56.25%;
       }
 
     }
@@ -1441,7 +1441,15 @@ footer{
 
         @media( orientation: portrait ){
 
-          &:nth-child(n+12){
+          &:nth-child(n+10){
+            display: none;
+          }
+
+        }
+
+        @media( orientation: landscape ){
+
+          &:nth-child(n+13){
             display: none;
           }
 
@@ -1554,7 +1562,7 @@ footer{
       a{
 
         @media( orientation: portrait ){
-          &:nth-child(n+7){
+          &:nth-child(n+8){
             display: none;
           }
         }
@@ -2390,12 +2398,14 @@ footer{
                 position: center;
                 repeat: no-repeat;
                 size: contain;
+                color: transparent;
               }
 
             }
 
             @media( min-width: map-get( $break, 'md') ){
               height: 400px;
+              padding: 0;
             }
 
           }

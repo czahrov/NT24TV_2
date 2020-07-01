@@ -75,7 +75,7 @@
     }
 
     // stare galerie importowane z joomli
-    $old_gallery_path = get_field( 'gallery_name' );
+    $old_gallery_path = get_field( 'gallery_name', get_post()->ID );
     if ( $old_gallery_path !== false ) {
       // $content .= $fp->printOldUGallery( fetch_old_gallery( $old_gallery_path ) );
       foreach ( fetch_old_gallery( $old_gallery_path ) as $img_url ) {
@@ -1160,10 +1160,8 @@
   }
 
   function fetch_old_gallery( $path_to_dir = "" ){
-    $abs_path_to_joomla = getcwd() . '/../web/nowytarg24.tv/wp-content/themes/NowyTargTV/joomla_import/';
-    // var_dump($abs_path_to_joomla);
+    $abs_path_to_joomla = getcwd() . '/wp-content/themes/NowyTargTV/joomla_import/';
     $rel_path_to_joomla = get_template_directory_uri() . '/joomla_import/' . $path_to_dir;
-    // var_dump($rel_path_to_joomla);
     $files = array_slice( scandir( $abs_path_to_joomla . $path_to_dir ), 2 );
     $files = array_filter( $files, function( $arg ){
       preg_match( '~(\d+x\d+)|(\.orig$)~', $arg, $found );
@@ -1188,6 +1186,13 @@
         $arg
       );
     }, $files );
+    // var_dump(array(
+    //   'cwd' => getcwd(),
+    //   '$path_to_dir' => $path_to_dir,
+    //   '$abs_path_to_joomla' => $abs_path_to_joomla,
+    //   '$rel_path_to_joomla' => $rel_path_to_joomla,
+    //   '$files' => $files,
+    // ));
 
     return $files;
   }

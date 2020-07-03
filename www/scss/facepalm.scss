@@ -358,9 +358,9 @@ iframe.wp-embedded-content{
 
   .image-sidebar-section{
 
-    a{
+    li{
 
-      li{
+      a{
 
         span{
           line-height: 1.5em;
@@ -461,26 +461,30 @@ iframe.wp-embedded-content{
 
   .sidebar-list{
 
-    ul a{
-      border-bottom: dashed 1px #ccc;
+    ul{
 
       li{
-        border: none;
-        // padding: 0.5rem 0;
-        padding: 0;
+        border-bottom: dashed 1px #ccc;
 
-        .image-container{
-          margin-right: 10px;
+        a{
+          border: none;
+          // padding: 0.5rem 0;
+          padding: 0;
+
+          .image-container{
+            margin-right: 10px;
+          }
+
+          span{
+            padding-left: 0;
+          }
+
         }
 
-        span{
-          padding-left: 0;
+        &:hover a{
+          // background-color: rgba(0,0,0,0.2);
         }
 
-      }
-
-      &:hover li{
-        // background-color: rgba(0,0,0,0.2);
       }
 
     }
@@ -591,9 +595,9 @@ iframe.wp-embedded-content{
 
     .image-sidebar-section{
 
-      a{
+      li{
 
-        li{
+        a{
 
           span{
             font-size: 1.1rem;
@@ -631,23 +635,36 @@ iframe.wp-embedded-content{
 
   &.special{
 
-    .sidebar-list ul a{
-      color: map-get($color,'white');
-      border-bottom: dashed 1px rgba( map-get($color,'white'), .55 );
+    .sidebar-list{
 
-      @media(max-width: map-get($break,'md')){
-        &:nth-child(n+4){
-          display: none;
+      ul{
+
+        li{
+          border-bottom: dashed 1px rgba( map-get($color,'white'), .55 );
+
+          a{
+            color: map-get($color,'white');
+
+          }
+
+          @media(max-width: map-get($break,'md')){
+            &:nth-child(n+4){
+              display: none;
+            }
+
+          }
+
+          @media(max-width: map-get($break,'lg')){
+            &:nth-child(n+5){
+              display: none;
+            }
+
+          }
+
         }
 
       }
 
-      @media(max-width: map-get($break,'lg')){
-        &:nth-child(n+5){
-          display: none;
-        }
-
-      }
 
     }
 
@@ -747,10 +764,10 @@ iframe.wp-embedded-content{
 
   &.alt{
 
-    a{
+    li{
+      // padding: 0.5rem 1rem;
 
-      li{
-        padding: 0.5rem 1rem;
+      a{
 
         .image-container{
           margin-right: 20px;
@@ -761,16 +778,13 @@ iframe.wp-embedded-content{
           padding-left: 0;
         }
 
+
       }
 
       &:nth-child(n+2){
 
-        li{
-
-          .image-container{
-            display: none;
-          }
-
+        .image-container{
+          display: none;
         }
 
       }
@@ -1416,7 +1430,7 @@ footer{
     .sidebar-list,
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media( orientation: portrait ){
 
@@ -1437,7 +1451,7 @@ footer{
     .sidebar-list,
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media( orientation: portrait ){
 
@@ -1482,7 +1496,7 @@ footer{
     .sidebar-list,
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media( orientation: portrait ){
           &:nth-child(n+10){
@@ -1509,7 +1523,7 @@ footer{
     .sidebar-list,
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media( orientation: portrait ){
           &:nth-child(n+8){
@@ -1540,7 +1554,7 @@ footer{
     .sidebar-list,
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media( orientation: portrait ){
           &:nth-child(n+8){
@@ -1559,7 +1573,7 @@ footer{
     .sidebar-list,
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media( orientation: portrait ){
           &:nth-child(n+8){
@@ -1585,7 +1599,7 @@ footer{
 
   .image-sidebar-section{
 
-    a{
+    li{
 
       @media( orientation: portrait ){
         &:nth-child(n+7){
@@ -1614,7 +1628,7 @@ footer{
 
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media(orientation: portrait){
           &:nth-child(n+10){
@@ -1632,7 +1646,7 @@ footer{
 
     .image-sidebar-section{
 
-      a{
+      li{
 
         @media(orientation: portrait){
           &:nth-child(n+9){
@@ -1934,7 +1948,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media(max-width: map-get($break,'lg')){
             &:nth-child(n+9){
@@ -1985,7 +1999,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           &:nth-child(n+9){
             display: none;
@@ -2053,7 +2067,7 @@ footer{
 
         ul{
 
-          a{
+          li{
 
             @media(max-width: map-get($break,'lg')) and ( orientation: portrait ){
               &:nth-child(n+7){
@@ -2087,7 +2101,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media(max-width: map-get($break,'lg')) and ( orientation: portrait ){
             &:nth-child(n+8){
@@ -2134,7 +2148,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media(max-width: map-get($break,'lg')) and ( orientation: landscape ){
             &:nth-child(n+5){
@@ -2458,7 +2472,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media(max-width: map-get($break,'lg')) and ( orientation: landscape ){
             &:nth-child(n+5){
@@ -2506,7 +2520,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media( orientation: portrait ){
             &:nth-child(n+7){
@@ -2584,7 +2598,7 @@ footer{
 
     ul{
 
-      a{
+      li{
 
         @media(max-width: map-get($break,'lg')){
           &:nth-child(n+8){
@@ -2697,7 +2711,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media(max-width: map-get($break,'lg')) and ( orientation: landscape ){
             &:nth-child(n+6){
@@ -2721,7 +2735,7 @@ footer{
 
       ul{
 
-        a{
+        li{
 
           @media(max-width: map-get($break,'lg')) and ( orientation: portrait ){
             &:nth-child(n+7){

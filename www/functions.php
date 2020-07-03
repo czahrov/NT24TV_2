@@ -1046,14 +1046,14 @@
         // $data['title'] .= " " . printTags( $item->ID, true, true );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
-            <li>
+          '<li>
+            <a class="%s" href="%s" data-post-type="%s" title="%6$s">
               <div class="image-container">
                 <div class="image" data-bglazy="%s"></div>
               </div>
               <span>%s</span>
-            </li>
-          </a>',
+            </a>
+          </li>',
           $data['class'],
           $data['url'],
           $type,
@@ -1066,14 +1066,14 @@
         // $data['title'] .= " " . printTags( $item->ID, true, false );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
-            <li>
+          '<li>
+            <a class="%s" href="%s" data-post-type="%s" title="%6$s">
               <div class="image-container">
                 <div class="image" data-bglazy="%s"></div>
               </div>
               <span>%s</span>
-            </li>
-          </a>',
+            </a>
+          </li>',
           $data['class'],
           $data['url'],
           $type,

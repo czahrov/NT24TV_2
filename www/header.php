@@ -27,13 +27,19 @@
   <link href="<?php echo get_template_directory_uri(); ?>/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
   <title><?php wp_title(); ?></title>
   <link rel="preconnect" href="https://via.placeholder.com/">
+  <link rel="preconnect" href="https://s.ytimg.com">
+  <link rel="preconnect" href="https://static.doubleclick.net">
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net">
+  <link rel="preconnect" href="https://yt3.ggpht.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="preconnect" href="https://www.gstatic.com">
   <?php
     // wp_enqueue_style( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, string $media = 'all' )
 
     // wp_enqueue_script( string $handle, string $src = '', array $deps = array(), string|bool|null $ver = false, bool $in_footer = false )
 
     $ver = time();
-    // $ver = false;
+    $ver = 202007031724;
 
     // fonty
     wp_enqueue_style( 'custom-fonts', get_template_directory_uri() . '/css/fonts.css', array(), $ver );

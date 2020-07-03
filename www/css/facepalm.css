@@ -610,7 +610,7 @@ iframe.wp-embedded-content {
   color: inherit;
 }
 
-[id] .image-sidebar-section a li span {
+[id] .image-sidebar-section li a span {
   line-height: 1.5em;
 }
 
@@ -660,20 +660,20 @@ iframe.wp-embedded-content {
   overflow-y: hidden;
 }
 
-[id] .sidebar-list ul a {
+[id] .sidebar-list ul li {
   border-bottom: dashed 1px #ccc;
 }
 
-[id] .sidebar-list ul a li {
+[id] .sidebar-list ul li a {
   border: none;
   padding: 0;
 }
 
-[id] .sidebar-list ul a li .image-container {
+[id] .sidebar-list ul li a .image-container {
   margin-right: 10px;
 }
 
-[id] .sidebar-list ul a li span {
+[id] .sidebar-list ul li a span {
   padding-left: 0;
 }
 
@@ -724,7 +724,7 @@ iframe.wp-embedded-content {
   }
 }
 
-[id].desktop .image-sidebar-section a li span {
+[id].desktop .image-sidebar-section li a span {
   font-size: 1.1rem;
 }
 
@@ -740,19 +740,22 @@ iframe.wp-embedded-content {
   height: 100%;
 }
 
-[id].special .sidebar-list ul a {
-  color: #fff;
+[id].special .sidebar-list ul li {
   border-bottom: dashed 1px rgba(255, 255, 255, 0.55);
 }
 
+[id].special .sidebar-list ul li a {
+  color: #fff;
+}
+
 @media (max-width: 768px) {
-  [id].special .sidebar-list ul a:nth-child(n+4) {
+  [id].special .sidebar-list ul li:nth-child(n+4) {
     display: none;
   }
 }
 
 @media (max-width: 992px) {
-  [id].special .sidebar-list ul a:nth-child(n+5) {
+  [id].special .sidebar-list ul li:nth-child(n+5) {
     display: none;
   }
 }
@@ -810,19 +813,15 @@ iframe.wp-embedded-content {
   }
 }
 
-.image-sidebar-section.alt a li {
-  padding: 0.5rem 1rem;
-}
-
-.image-sidebar-section.alt a li .image-container {
+.image-sidebar-section.alt li a .image-container {
   margin-right: 20px;
 }
 
-.image-sidebar-section.alt a li span {
+.image-sidebar-section.alt li a span {
   padding-left: 0;
 }
 
-.image-sidebar-section.alt a:nth-child(n+2) li .image-container {
+.image-sidebar-section.alt li:nth-child(n+2) .image-container {
   display: none;
 }
 
@@ -1285,22 +1284,22 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #aktualnosci.desktop .sidebar-list a:nth-child(n+11),
-  #aktualnosci.desktop .image-sidebar-section a:nth-child(n+11) {
+  #aktualnosci.desktop .sidebar-list li:nth-child(n+11),
+  #aktualnosci.desktop .image-sidebar-section li:nth-child(n+11) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #aktualnosci.tablet .sidebar-list a:nth-child(n+10),
-  #aktualnosci.tablet .image-sidebar-section a:nth-child(n+10) {
+  #aktualnosci.tablet .sidebar-list li:nth-child(n+10),
+  #aktualnosci.tablet .image-sidebar-section li:nth-child(n+10) {
     display: none;
   }
 }
 
 @media (orientation: landscape) {
-  #aktualnosci.tablet .sidebar-list a:nth-child(n+13),
-  #aktualnosci.tablet .image-sidebar-section a:nth-child(n+13) {
+  #aktualnosci.tablet .sidebar-list li:nth-child(n+13),
+  #aktualnosci.tablet .image-sidebar-section li:nth-child(n+13) {
     display: none;
   }
 }
@@ -1314,74 +1313,74 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #przeglad_tygodniowy.desktop .sidebar-list a:nth-child(n+10),
-  #przeglad_tygodniowy.desktop .image-sidebar-section a:nth-child(n+10) {
+  #przeglad_tygodniowy.desktop .sidebar-list li:nth-child(n+10),
+  #przeglad_tygodniowy.desktop .image-sidebar-section li:nth-child(n+10) {
     display: none;
   }
 }
 
 @media (orientation: landscape) {
-  #przeglad_tygodniowy.desktop .sidebar-list a:nth-child(n+18),
-  #przeglad_tygodniowy.desktop .image-sidebar-section a:nth-child(n+18) {
+  #przeglad_tygodniowy.desktop .sidebar-list li:nth-child(n+18),
+  #przeglad_tygodniowy.desktop .image-sidebar-section li:nth-child(n+18) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #przeglad_tygodniowy.tablet .sidebar-list a:nth-child(n+8),
-  #przeglad_tygodniowy.tablet .image-sidebar-section a:nth-child(n+8) {
+  #przeglad_tygodniowy.tablet .sidebar-list li:nth-child(n+8),
+  #przeglad_tygodniowy.tablet .image-sidebar-section li:nth-child(n+8) {
     display: none;
   }
 }
 
 @media (orientation: landscape) {
-  #przeglad_tygodniowy.tablet .sidebar-list a:nth-child(n+9),
-  #przeglad_tygodniowy.tablet .image-sidebar-section a:nth-child(n+9) {
+  #przeglad_tygodniowy.tablet .sidebar-list li:nth-child(n+9),
+  #przeglad_tygodniowy.tablet .image-sidebar-section li:nth-child(n+9) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #sport.desktop .sidebar-list a:nth-child(n+8),
-  #sport.desktop .image-sidebar-section a:nth-child(n+8) {
+  #sport.desktop .sidebar-list li:nth-child(n+8),
+  #sport.desktop .image-sidebar-section li:nth-child(n+8) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #sport.tablet .sidebar-list a:nth-child(n+8),
-  #sport.tablet .image-sidebar-section a:nth-child(n+8) {
+  #sport.tablet .sidebar-list li:nth-child(n+8),
+  #sport.tablet .image-sidebar-section li:nth-child(n+8) {
     display: none;
   }
 }
 
 @media (orientation: landscape) {
-  #sport.tablet .sidebar-list a:nth-child(n+8),
-  #sport.tablet .image-sidebar-section a:nth-child(n+8) {
+  #sport.tablet .sidebar-list li:nth-child(n+8),
+  #sport.tablet .image-sidebar-section li:nth-child(n+8) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #chicago .image-sidebar-section a:nth-child(n+7) {
+  #chicago .image-sidebar-section li:nth-child(n+7) {
     display: none;
   }
 }
 
 @media (orientation: landscape) {
-  #chicago .image-sidebar-section a:nth-child(n+10) {
+  #chicago .image-sidebar-section li:nth-child(n+10) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #chicago.tablet .image-sidebar-section a:nth-child(n+10) {
+  #chicago.tablet .image-sidebar-section li:nth-child(n+10) {
     display: none;
   }
 }
 
 @media (orientation: portrait) {
-  #chicago.desktop .image-sidebar-section a:nth-child(n+9) {
+  #chicago.desktop .image-sidebar-section li:nth-child(n+9) {
     display: none;
   }
 }
@@ -1566,8 +1565,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) {
-  #category.nekrologi .image-sidebar-section ul a:nth-child(n+9),
-  #category.nekrologi .sidebar-list ul a:nth-child(n+9) {
+  #category.nekrologi .image-sidebar-section ul li:nth-child(n+9),
+  #category.nekrologi .sidebar-list ul li:nth-child(n+9) {
     display: none;
   }
 }
@@ -1597,8 +1596,8 @@ footer.smartphone .foot-content .row .logo_menu {
   margin-right: 10px;
 }
 
-#category.galeria .image-sidebar-section ul a:nth-child(n+9),
-#category.galeria .sidebar-list ul a:nth-child(n+9) {
+#category.galeria .image-sidebar-section ul li:nth-child(n+9),
+#category.galeria .sidebar-list ul li:nth-child(n+9) {
   display: none;
 }
 
@@ -1623,8 +1622,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) and (orientation: portrait) {
-  #category.desktop:not(.nekrologi) .image-sidebar-section ul a:nth-child(n+7),
-  #category.desktop:not(.nekrologi) .sidebar-list ul a:nth-child(n+7) {
+  #category.desktop:not(.nekrologi) .image-sidebar-section ul li:nth-child(n+7),
+  #category.desktop:not(.nekrologi) .sidebar-list ul li:nth-child(n+7) {
     display: none;
   }
 }
@@ -1634,8 +1633,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) and (orientation: portrait) {
-  #category.tablet .image-sidebar-section ul a:nth-child(n+8),
-  #category.tablet .sidebar-list ul a:nth-child(n+8) {
+  #category.tablet .image-sidebar-section ul li:nth-child(n+8),
+  #category.tablet .sidebar-list ul li:nth-child(n+8) {
     display: none;
   }
 }
@@ -1650,8 +1649,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) and (orientation: landscape) {
-  #category.smartphone .image-sidebar-section ul a:nth-child(n+5),
-  #category.smartphone .sidebar-list ul a:nth-child(n+5) {
+  #category.smartphone .image-sidebar-section ul li:nth-child(n+5),
+  #category.smartphone .sidebar-list ul li:nth-child(n+5) {
     display: none;
   }
 }
@@ -1867,8 +1866,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) and (orientation: landscape) {
-  #post.smartphone .image-sidebar-section ul a:nth-child(n+5),
-  #post.smartphone .sidebar-list ul a:nth-child(n+5) {
+  #post.smartphone .image-sidebar-section ul li:nth-child(n+5),
+  #post.smartphone .sidebar-list ul li:nth-child(n+5) {
     display: none;
   }
 }
@@ -1880,8 +1879,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (orientation: portrait) {
-  #post.tablet .image-sidebar-section ul a:nth-child(n+7),
-  #post.tablet .sidebar-list ul a:nth-child(n+7) {
+  #post.tablet .image-sidebar-section ul li:nth-child(n+7),
+  #post.tablet .sidebar-list ul li:nth-child(n+7) {
     display: none;
   }
 }
@@ -1909,8 +1908,8 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) {
-  #tablice .image-sidebar-section ul a:nth-child(n+8),
-  #tablice .sidebar-list ul a:nth-child(n+8) {
+  #tablice .image-sidebar-section ul li:nth-child(n+8),
+  #tablice .sidebar-list ul li:nth-child(n+8) {
     display: none;
   }
 }
@@ -1980,22 +1979,22 @@ footer.smartphone .foot-content .row .logo_menu {
 }
 
 @media (max-width: 992px) and (orientation: landscape) {
-  #page.smartphone .image-sidebar-section ul a:nth-child(n+6),
-  #page.smartphone .sidebar-list ul a:nth-child(n+6) {
+  #page.smartphone .image-sidebar-section ul li:nth-child(n+6),
+  #page.smartphone .sidebar-list ul li:nth-child(n+6) {
     display: none;
   }
 }
 
 @media (max-width: 992px) and (orientation: portrait) {
-  #page.tablet .image-sidebar-section ul a:nth-child(n+7),
-  #page.tablet .sidebar-list ul a:nth-child(n+7) {
+  #page.tablet .image-sidebar-section ul li:nth-child(n+7),
+  #page.tablet .sidebar-list ul li:nth-child(n+7) {
     display: none;
   }
 }
 
 @media (min-width: 992px) and (orientation: landscape) {
-  #page.tablet .image-sidebar-section ul a:nth-child(n+9),
-  #page.tablet .sidebar-list ul a:nth-child(n+9) {
+  #page.tablet .image-sidebar-section ul li:nth-child(n+9),
+  #page.tablet .sidebar-list ul li:nth-child(n+9) {
     display: none;
   }
 }

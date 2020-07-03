@@ -460,27 +460,19 @@ h5.title-sidebar:before {
   padding: 0;
 }
 
-.sidebar-list ul a {
-  color: #141c1f;
-  font-family: "open_sanssemibold";
-  font-size: 1.3rem;
-  text-decoration: none;
-}
-
-.sidebar-list ul a li {
+.sidebar-list ul li {
   list-style: none;
-  padding: 1.5rem 20px;
   position: relative;
 }
 
-.sidebar-list ul a li .data {
+.sidebar-list ul li .data {
   display: block;
   margin-top: 2px;
   font-size: 1rem;
   color: #c6c4c4;
 }
 
-.sidebar-list ul a li .tag {
+.sidebar-list ul li .tag {
   color: #fff;
   font-family: "open_sansbold";
   font-size: 0.8rem;
@@ -491,7 +483,7 @@ h5.title-sidebar:before {
   border-radius: 2px;
 }
 
-.sidebar-list ul a li:after {
+.sidebar-list ul li:after {
   content: '';
   height: 1px;
   position: absolute;
@@ -502,7 +494,14 @@ h5.title-sidebar:before {
   transition: 0.3s;
 }
 
-.sidebar-list ul a:not(:last-child) li {
+.sidebar-list ul li a {
+  color: #141c1f;
+  font-family: "open_sanssemibold";
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.sidebar-list ul li:not(:last-child) a {
   border-bottom: 1px solid #e3e3e3;
 }
 
@@ -510,7 +509,7 @@ ul.image-sidebar-section {
   font-size: 0;
 }
 
-ul.image-sidebar-section a {
+ul.image-sidebar-section li {
   display: block;
   width: 100%;
   font-family: "open_sansregular";
@@ -519,27 +518,26 @@ ul.image-sidebar-section a {
   margin-bottom: 5px;
 }
 
-ul.image-sidebar-section a li {
+ul.image-sidebar-section li a {
   display: flex;
   align-items: flex-start;
-  padding: 1.5rem 0;
 }
 
-ul.image-sidebar-section a li span {
+ul.image-sidebar-section li a span {
   width: 100%;
   padding: 0;
   margin: 0;
   font-size: 13px;
 }
 
-ul.image-sidebar-section a .image-container {
+ul.image-sidebar-section li a .image-container {
   background-color: #141c1f;
   width: 40%;
   width: 10rem;
   position: relative;
 }
 
-ul.image-sidebar-section a .image-container .video-icon {
+ul.image-sidebar-section li a .image-container .video-icon {
   background-image: url("../images/play.svg");
   width: 40px;
   height: 40px;
@@ -553,7 +551,7 @@ ul.image-sidebar-section a .image-container .video-icon {
   z-index: 5;
 }
 
-ul.image-sidebar-section a .image-container .image {
+ul.image-sidebar-section li a .image-container .image {
   position: relative;
   padding-bottom: 56.25%;
   width: 100%;
@@ -1217,10 +1215,10 @@ footer.bg-footer .copy .copy-content {
     font-size: 1.1rem;
     padding: 1rem;
   }
-  .sidebar-list ul a {
+  .sidebar-list ul li {
     font-size: 1.1rem;
   }
-  .sidebar-list ul a li {
+  .sidebar-list ul li a {
     padding: 1.2rem 1rem;
     width: 100%;
   }
@@ -1429,10 +1427,10 @@ footer.bg-footer .copy .copy-content {
     font-size: 1.1rem;
     padding: 1rem;
   }
-  .sidebar-list ul a {
+  .sidebar-list ul li {
     font-size: 1.1rem;
   }
-  .sidebar-list ul a li {
+  .sidebar-list ul li a {
     padding: 1.2rem 1rem;
     width: 100%;
   }
@@ -1655,10 +1653,10 @@ footer.bg-footer .copy .copy-content {
     font-size: 1.1rem;
     font-family: "open_sansbold";
   }
-  .sidebar-list ul a {
+  .sidebar-list ul li {
     font-size: 1.1rem;
   }
-  .sidebar-list ul a li {
+  .sidebar-list ul li a {
     padding: 1.2rem 1rem;
     padding: 0.5rem 1rem;
     width: 100%;

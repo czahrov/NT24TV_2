@@ -226,7 +226,7 @@
           '<div id="video" class="%s %s">
             %s
             <div class="overlay fw-bold fc-white">
-              <img src="%s/images/mute.svg"/> Włącz dźwięk
+              <img src="%s/images/mute.svg"/ alt="Wyciszenie"> Włącz dźwięk
             </div>
           </div>',
           $video_type_name,

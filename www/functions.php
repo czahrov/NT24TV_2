@@ -1046,14 +1046,14 @@
         // $data['title'] .= " " . printTags( $item->ID, true, true );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
-            <li>
+          '<li>
+            <a class="%s" href="%s" data-post-type="%s" title="%6$s">
               <div class="image-container">
                 <div class="image" data-bglazy="%s"></div>
               </div>
               <span>%s</span>
-            </li>
-          </a>',
+            </a>
+          </li>',
           $data['class'],
           $data['url'],
           $type,
@@ -1066,14 +1066,14 @@
         // $data['title'] .= " " . printTags( $item->ID, true, false );
         // $data['img'] = get_the_post_thumbnail_url( $item->ID, 'thumbnail' );
         printf(
-          '<a class="%s" href="%s" data-post-type="%s" title="%6$s">
-            <li>
+          '<li>
+            <a class="%s" href="%s" data-post-type="%s" title="%6$s">
               <div class="image-container">
                 <div class="image" data-bglazy="%s"></div>
               </div>
               <span>%s</span>
-            </li>
-          </a>',
+            </a>
+          </li>',
           $data['class'],
           $data['url'],
           $type,
@@ -1160,16 +1160,18 @@
   }
 
   function fetch_old_gallery( $path_to_dir = "" ){
-    $abs_path_to_joomla = getcwd() . '/wp-content/themes/NowyTargTV/joomla_import/';
+    $abs_path_to_joomla = get_template_directory() . '/joomla_import/' . $path_to_dir;
     $rel_path_to_joomla = get_template_directory_uri() . '/joomla_import/' . $path_to_dir;
-    $files = array_slice( scandir( $abs_path_to_joomla . $path_to_dir ), 2 );
-    $files = array_filter( $files, function( $arg ){
+    $files = array_slice( scandir( $abs_path_to_joomla ), 2 );
+    $files = array_filter( $files, function( $arg ) use ($abs_path_to_joomla){
+      $file_path = "{$abs_path_to_joomla}/{$arg}";
+      // echo $file_path . PHP_EOL;
       preg_match( '~(\d+x\d+)|(\.orig$)~', $arg, $found );
       if ( !empty( $found[0] ) ) {
         return false;
       }
       else {
-        if( in_array( strtolower( pathinfo( $arg, PATHINFO_EXTENSION ) ), array( 'jpg', 'jpeg', 'png', 'bmp' ) ) ){
+        if( in_array( strtolower( pathinfo( $arg, PATHINFO_EXTENSION ) ), array( 'jpg', 'jpeg', 'png', 'bmp' ) ) && file_exists( $file_path ) ){
           return true;
         }
         else{

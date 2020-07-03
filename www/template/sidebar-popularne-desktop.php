@@ -12,21 +12,9 @@
     ?>
     <!-- single post -->
     <?php
-    foreach ($items as $item) {
-      printf(
-        '<a href="%1$s">
-          <li>
-            <div class="image-container">
-              <div class="image pop_1" style="background-image:url(%2$s)"></div>
-            </div>
-            <span>%3$s</span>
-          </li>
-        </a>',
-        get_permalink( $item),
-        get_the_post_thumbnail_url( $item->ID, 'thumbnail' ),
-        $item->post_title
-      );
-    }
+      foreach ($items as $item) {
+        printPost( $item, 'side');
+      }
     ?>
 
   </ul>

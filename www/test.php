@@ -3,16 +3,19 @@
 <?php
   global $fp;
   $path_to_dir = 'images/galerie/2017/2017.06.23.przywitanielata';
-  $abs_path_to_joomla = getcwd() . '/wp-content/themes/NowyTargTV/joomla_import/';
+
+  $abs_path_to_joomla = get_template_directory() . '/joomla_import/' . $path_to_dir;
   $rel_path_to_joomla = get_template_directory_uri() . '/joomla_import/' . $path_to_dir;
-  $files = array_slice( scandir( $abs_path_to_joomla . $path_to_dir ), 2 );
-  $files = array_filter( $files, function( $arg ){
+  $files = array_slice( scandir( $abs_path_to_joomla ), 2 );
+  $files = array_filter( $files, function( $arg ) use ($abs_path_to_joomla){
+    $file_path = "{$abs_path_to_joomla}/{$arg}";
+    // echo $file_path . PHP_EOL;
     preg_match( '~(\d+x\d+)|(\.orig$)~', $arg, $found );
     if ( !empty( $found[0] ) ) {
       return false;
     }
     else {
-      if( in_array( strtolower( pathinfo( $arg, PATHINFO_EXTENSION ) ), array( 'jpg', 'jpeg', 'png', 'bmp' ) ) ){
+      if( in_array( strtolower( pathinfo( $arg, PATHINFO_EXTENSION ) ), array( 'jpg', 'jpeg', 'png', 'bmp' ) ) && file_exists( $file_path ) ){
         return true;
       }
       else{

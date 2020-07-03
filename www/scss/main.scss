@@ -570,64 +570,55 @@ h5.title-sidebar:before {
     margin: 0;
     padding: 0;
 
-    & a {
-      color: $dark;
-      font-family: $font-semibold;
-      font-size: 1.3rem;
-      text-decoration: none;
+    li {
+      list-style: none;
+      position: relative;
 
-      & li {
-        list-style: none;
-        padding: 1.5rem 20px;
-        position: relative;
+      .data {
+        display: block;
+        margin-top: 2px;
+        font-size: 1rem;
+        color: $dark-grey;
+      }
 
-        & .data {
-          display: block;
-          margin-top: 2px;
-          font-size: 1rem;
-          color: $dark-grey;
-        }
+      .tag {
+        color: #fff;
+        font-family: $font-bold;
+        font-size: 0.8rem;
+        background-color: $red;
+        padding: 5px;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 2px;
+      }
 
-        & .tag {
-          color: #fff;
-          font-family: $font-bold;
-          font-size: 0.8rem;
-          background-color: $red;
-          padding: 5px;
-          text-transform: uppercase;
-          padding: 2px 7px;
-          border-radius: 2px;
-        }
+      &:after {
+        content: '';
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        background: $red;
+        transition: 0.3s;
+      }
 
-        &:after {
-          content: '';
-          height: 1px;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          background: $red;
-          transition: 0.3s;
-        }
+      a{
+        // padding: 1.5rem 20px;
+        color: $dark;
+        font-family: $font-semibold;
+        font-size: 1.3rem;
+        text-decoration: none;
       }
 
       &:not(:last-child){
 
-        li{
+        a{
           border-bottom: 1px solid $grey;
-
         }
 
       }
 
-      &:hover {
-        li {
-          // background-color: #fcfafa;
-          // &:hover:after {
-          //     width: 100%;
-          // }
-        }
-      }
     }
   }
 }
@@ -635,7 +626,7 @@ h5.title-sidebar:before {
 ul.image-sidebar-section {
   font-size: 0;
 
-  & a {
+  & li {
     display: block;
     width: 100%;
     font-family: $font-regular;
@@ -643,10 +634,10 @@ ul.image-sidebar-section {
     padding-bottom: 5px;
     margin-bottom: 5px;
 
-    & li {
+    & a {
       display: flex;
       align-items: flex-start;
-      padding: 1.5rem 0;
+      // padding: 1.5rem 0;
 
       & span {
         // padding-left: 20px;
@@ -656,39 +647,41 @@ ul.image-sidebar-section {
         // font-size: 0.9rem;
         font-size: 13px;
       }
-    }
 
-    & .image-container {
-      background-color: $dark;
-      // height: 5rem;
-      width: 40%;
-      width: 10rem;
-      position: relative;
+      & .image-container {
+        background-color: $dark;
+        // height: 5rem;
+        width: 40%;
+        width: 10rem;
+        position: relative;
 
-      & .video-icon {
-        background-image: url("../images/play.svg");
-        width: 40px;
-        height: 40px;
-        transform: scale(0.8);
-        margin: auto;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 5;
+        & .video-icon {
+          background-image: url("../images/play.svg");
+          width: 40px;
+          height: 40px;
+          transform: scale(0.8);
+          margin: auto;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          z-index: 5;
+        }
+
+        & .image {
+          position: relative;
+          padding-bottom: 56.25%;
+          width: 100%;
+          height: 100%;
+          height: 0;
+          background-position: center;
+          position: relative;
+          background-size: cover;
+        }
+
       }
 
-      & .image {
-        position: relative;
-        padding-bottom: 56.25%;
-        width: 100%;
-        height: 100%;
-        height: 0;
-        background-position: center;
-        position: relative;
-        background-size: cover;
-      }
     }
 
   }
@@ -1492,10 +1485,10 @@ footer.bg-footer {
 
   .sidebar-list {
     & ul {
-      & a {
+      & li {
         font-size: 1.1rem;
 
-        & li {
+        & a {
           padding: 1.2rem 1rem;
           width: 100%;
         }
@@ -1811,10 +1804,10 @@ footer.bg-footer {
 
   .sidebar-list {
     & ul {
-      & a {
+      & li {
         font-size: 1.1rem;
 
-        & li {
+        & a {
           padding: 1.2rem 1rem;
           width: 100%;
         }
@@ -2149,10 +2142,10 @@ footer.bg-footer {
 
   .sidebar-list {
     & ul {
-      & a {
+      & li {
         font-size: 1.1rem;
 
-        & li {
+        & a {
           padding: 1.2rem 1rem;
           padding: 0.5rem 1rem;
           width: 100%;
